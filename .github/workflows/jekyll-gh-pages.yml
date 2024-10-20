@@ -36,7 +36,7 @@ jobs:
           --health-timeout=5s
           --health-retries=5
         env:
-          POSTGRES_USER: admin123
+          POSTGRES_USER: admin
           POSTGRES_PASSWORD: admin123
           POSTGRES_DB: aquelalojadb
     steps:
