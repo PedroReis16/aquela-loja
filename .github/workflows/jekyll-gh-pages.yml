@@ -36,7 +36,7 @@ jobs:
           source: ./
           destination: ./_site
       - name: Copy custom index.html
-        run: cp ../aquela-loja/src/main/resources/templates/index.html ./_site/index.html
+        run: cp src/main/resources/templates/index.html ./_site/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
