@@ -4,6 +4,7 @@
 /* Import of page and widget styles */
 
 /* Pages */
+@import url("./page_styles/home.css");
 @import url("./page_styles/login.css");
 @import url("./page_styles/product_details.css");
 @import url("./page_styles/product_list.css");
