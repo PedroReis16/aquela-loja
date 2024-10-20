@@ -4,17 +4,17 @@
 /* Import of page and widget styles */
 
 /* Pages */
-@import url("styles/page_styles/login.css");
-@import url("styles/page_styles/product_details.css");
-@import url("styles/page_styles/product_list.css");
-@import url("styles/page_styles/wish_list.css");
+@import url("./page_styles/login.css");
+@import url("./page_styles/product_details.css");
+@import url("./page_styles/product_list.css");
+@import url("./page_styles/wish_list.css");
 
 /* Widgets */
-@import url("styles/widget_styles/footer.css");
-@import url("styles/widget_styles/header_departaments.css");
-@import url("styles/widget_styles/header.css");
-@import url("styles/widget_styles/loading.css");
-@import url("styles/widget_styles/product_card.css");
+@import url("./widget_styles/footer.css");
+@import url("./widget_styles/header_departaments.css");
+@import url("./widget_styles/header.css");
+@import url("./widget_styles/loading.css");
+@import url("./widget_styles/product_card.css");
 
 :root {
   --default-font: "Poppins", sans-serif;
