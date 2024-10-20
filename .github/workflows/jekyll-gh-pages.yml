@@ -35,6 +35,8 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Copy custom index.html
+        run: cp index.html _site/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
