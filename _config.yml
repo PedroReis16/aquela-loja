@@ -1,0 +1,15 @@
+# _config.yml
+title: "Meu Projeto"
+description: "Descrição do meu projeto"
+baseurl: "" # O URL base do seu site
+url: "https://pedroreis16.github.io/aquela-loja" # O URL do seu site
+
+# Inclua o arquivo index.html
+include:
+  - index.html
+
+# Exclua arquivos ou diretórios específicos (opcional)
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

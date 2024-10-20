@@ -35,8 +35,10 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Adjust permissions for _site directory
+        run: sudo chmod -R 777 ./_site
       - name: Copy custom index.html
-        run: sudo cp src/main/resources/templates/index.html ./_site/index.html
+        run: cp src/main/resources/templates/index.html ./_site/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
