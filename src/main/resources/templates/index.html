@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,23 +10,17 @@
     <title>Aquela Loja</title>
   </head>
   <body>
-    <!-- <header>
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/products_list">Products</a></li>
-        </ul>
-      </nav>
-    </header> -->
+    <header th:insert="~{widgets/header :: header}"></header>
+
     <main>
-      <h1>Welcome to Aquela Loja</h1>
+
+      <!-- <h1>Welcome to Aquela Loja</h1>
       <p>
-        This is a simple e-commerce application built with Spring Boot and
-        Thymeleaf.
-      </p>
+        Here you will find the best products for your home. We have a wide
+        variety of products for you to choose from.
+      </p> -->
     </main>
-    <!-- <footer>
-      <p>&copy; 2021 Aquela Loja</p>
-    </footer> -->
+
+    <footer th:insert="~{widgets/footer :: footer}"></footer>
   </body>
 </html>

@@ -9,6 +9,8 @@
 @import url("./page_styles/product_details.css");
 @import url("./page_styles/product_list.css");
 @import url("./page_styles/wish_list.css");
+@import url("./page_styles/shopping_cart.css");
+@import url("./page_styles/sign_up.css");
 
 /* Widgets */
 @import url("./widget_styles/footer.css");
@@ -30,4 +32,8 @@
   --dark-grey: #999999;
   --confirm: #14ae5c;
   --error: #b3261e;
+}
+
+main {
+  background: black;
 }
