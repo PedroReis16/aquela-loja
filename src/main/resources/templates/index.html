@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,13 +12,7 @@
   <body>
     <header th:insert="~{widgets/header :: header}"></header>
 
-    <main>
-
-      <!-- <h1>Welcome to Aquela Loja</h1>
-      <p>
-        Here you will find the best products for your home. We have a wide
-        variety of products for you to choose from.
-      </p> -->
+    <main th:replace="::content">
     </main>
 
     <footer th:insert="~{widgets/footer :: footer}"></footer>
