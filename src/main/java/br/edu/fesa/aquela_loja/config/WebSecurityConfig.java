@@ -8,14 +8,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/").permitAll()
-                .requestMatchers("/produtos").permitAll() 
+                .requestMatchers("/", "/produtos", "/styles/**").permitAll()
                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.defaultSuccessUrl("/", true))

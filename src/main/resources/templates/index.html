@@ -4,17 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../static/styles/reset.css" />
-    <link rel="stylesheet" href="../static/styles/style.css" />
+    <link
+      th:href="@{/styles/reset.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/styles/style.css}"
+      rel="stylesheet"
+    />
 
     <title>Aquela Loja</title>
   </head>
   <body>
-    <header th:insert="~{widgets/header :: header}"></header>
+    <!-- <header th:insert="~{widgets/header :: header}"></header>
 
     <main th:replace="::content">
     </main>
 
-    <footer th:insert="~{widgets/footer :: footer}"></footer>
+    <footer th:insert="~{widgets/footer :: footer}"></footer> -->
   </body>
 </html>

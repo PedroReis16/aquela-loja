@@ -9,12 +9,12 @@ public class IndexController {
 
     @GetMapping({"/", "/{page}"})
     public String loadPage(@PathVariable(required = false) String page) {
-        // Se a variável 'page' for nula, é a URL raiz ("/"), então carregue a página home
-        if (page == null || page.isEmpty()) {
-            return "pages/home :: content"; // retorna o arquivo home.html
-        }
-    
-        return "pages/"+ page+" :: content";
-    }
+        // // Se a variável 'page' for nula, é a URL raiz ("/"), então carregue a página home
+        // if (page == null || page.isEmpty()) {
+        //     return "pages/home :: content"; // retorna o arquivo home.html
+        // }
 
+        // return "pages/" + page + " :: content";
+        return "index";
+    }
 }
