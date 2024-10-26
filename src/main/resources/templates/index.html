@@ -4,23 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      th:href="@{/styles/reset.css}"
-      rel="stylesheet"
-    />
-    <link
-      th:href="@{/styles/style.css}"
-      rel="stylesheet"
-    />
+    <link th:href="@{/styles/reset.css}" rel="stylesheet" />
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
 
     <title>Aquela Loja</title>
   </head>
   <body>
-    <!-- <header th:insert="~{widgets/header :: header}"></header>
+    <header th:replace="~{fragments/header :: header}"></header>
 
-    <main th:replace="::content">
-    </main>
+    <main
+      class="main-content"
+      th:insert="~{${contentFragment} :: content}"
+    ></main>
 
-    <footer th:insert="~{widgets/footer :: footer}"></footer> -->
+    <!-- <footer th:replace="fragments/footer :: footer"></footer> -->
   </body>
 </html>

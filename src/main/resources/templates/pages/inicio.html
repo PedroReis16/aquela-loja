@@ -3,16 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="../static/styles/page_styles/home.css"
-      th:href="@{/styles/page_styles/home.css}"
-    />
+
+    <link th:href="@{/styles/page_styles/inicio.css}" rel="stylesheet" />
   </head>
+
   <body>
-    <main th:fragment="content">
-      <h1>Home</h1>
+    <div class="content" th:fragment="content">
       <p>Bem vindo a Aquela loja</p>
-    </main>
+    </div>
   </body>
 </html>

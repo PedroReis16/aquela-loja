@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <main th:fragment="content">
-        <h1>Home</h1>
-        <p>Página de produtos</p>
-      </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/styles/page_styles/produtos.css}" />
+  </head>
+  <body>
+    <div class="product-main" th:fragment="content">
+      <p>Página de produtos</p>
+    </div>
+  </body>
 </html>

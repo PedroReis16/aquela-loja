@@ -1,6 +1,7 @@
 package br.edu.fesa.aquela_loja.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -8,13 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IndexController {
 
     @GetMapping({"/", "/{page}"})
-    public String loadPage(@PathVariable(required = false) String page) {
-        // // Se a variável 'page' for nula, é a URL raiz ("/"), então carregue a página home
-        // if (page == null || page.isEmpty()) {
-        //     return "pages/home :: content"; // retorna o arquivo home.html
-        // }
+    public String loadPage(Model model, @PathVariable(required = false) String page) {
 
-        // return "pages/" + page + " :: content";
+        if (page == null || page.isEmpty() || !page.isEmpty() && "inicio".equals(page)) {
+            model.addAttribute("contentFragment", "pages/inicio");
+        } else {
+            model.addAttribute("contentFragment", "pages/" + page);
+        }
+
         return "index";
+
     }
+
 }
