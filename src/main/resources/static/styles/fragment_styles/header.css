@@ -15,6 +15,10 @@ body {
   height: 32px;
 }
 
+.logo {
+  height: 48px;
+}
+
 #menuToggle {
   display: none;
 }
