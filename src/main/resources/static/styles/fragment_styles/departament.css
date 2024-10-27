@@ -4,7 +4,7 @@
 }
 
 .dropbtn {
-  background-color: var(--secondary-color);
+  background-color: transparent;
   color: var(--white);
   font-family: var(--default-font);
   padding: 6px 16px;
@@ -53,21 +53,6 @@
 /* Mudar a cor do botão do dropdown ao passar o mouse */
 .dropdown:hover .dropbtn {
   background-color: var(--primary-color);
-}
-
-#menuToggle {
-  display: none;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  z-index: 10;
 }
 
 @media (max-width: 768px) {
