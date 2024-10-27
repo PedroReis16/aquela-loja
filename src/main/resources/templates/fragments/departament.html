@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      th:href="@{/styles/fragment_styles/departament.css}"
+    />
+  </head>
+  <body>
+    <div class="header-departaments" th:fragment="departaments">
+      <div class="dropdown" id="hardware">
+        <button class="dropbtn">Hardware</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Coolers</a>
+          <a class="departament-item" href="#">Disco Rígido</a>
+          <a class="departament-item" href="#">Drives</a>
+          <a class="departament-item" href="#">Fontes</a>
+          <a class="departament-item" href="#">Memória RAM</a>
+          <a class="departament-item" href="#">Placa de vídeo</a>
+          <a class="departament-item" href="#">Processadores</a>
+          <a class="departament-item" href="#">SSD</a>
+        </div>
+      </div>
+      <div class="dropdown" id="peripherals">
+        <button class="dropbtn">Periféricos</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Cabos e Adaptadores</a>
+          <a class="departament-item" href="#">Gabinetes</a>
+          <a class="departament-item" href="#">Headsets</a>
+          <a class="departament-item" href="#">Mesa digitalizadora</a>
+          <a class="departament-item" href="#">Mouse</a>
+          <a class="departament-item" href="#">Mouse Pad</a>
+          <a class="departament-item" href="#">Pen drive</a>
+          <a class="departament-item" href="#">Suportes</a>
+          <a class="departament-item" href="#">Teclado</a>
+          <a class="departament-item" href="#">Webcam e Videoconferência</a>
+        </div>
+      </div>
+      <div class="dropdown" id="computer">
+        <button class="dropbtn">Computadores</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Impressoras</a>
+          <a class="departament-item" href="#">Monitores</a>
+          <a class="departament-item" href="#">Notebooks</a>
+          <a class="departament-item" href="#">PC</a>
+          <a class="departament-item" href="#">Scanners</a>
+        </div>
+      </div>
+      <div class="dropdown" id="games">
+        <button class="dropbtn">Games</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Acessórios Gamer</a>
+          <a class="departament-item" href="#">Nintendo</a>
+          <a class="departament-item" href="#">Playstation</a>
+          <a class="departament-item" href="#">Portáteis</a>
+          <a class="departament-item" href="#">Simuladores</a>
+          <a class="departament-item" href="#">Xbox</a>
+        </div>
+      </div>
+      <div class="dropdown" id="televisions">
+        <button class="dropbtn">Televisores</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Acessórios para TVs</a>
+          <a class="departament-item" href="#">Smart TV</a>
+          <a class="departament-item" href="#">TV 4K</a>
+          <a class="departament-item" href="#">TV 8K</a>
+          <a class="departament-item" href="#">TV LED</a>
+        </div>
+      </div>
+      <div class="dropdown" id="audio">
+        <button class="dropbtn">Áudio</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Aparelhos de som</a>
+          <a class="departament-item" href="#">Assistente virtual</a>
+          <a class="departament-item" href="#">Caixa de som</a>
+          <a class="departament-item" href="#">DJ</a>
+          <a class="departament-item" href="#">DVD e Blu-Ray</a>
+          <a class="departament-item" href="#">Fone de ouvido</a>
+          <a class="departament-item" href="#">Home Theater e Soundbar</a>
+          <a class="departament-item" href="#">Microfone</a>
+          <a class="departament-item" href="#">Rádio</a>
+        </div>
+      </div>
+      <div class="dropdown" id="home-appliances">
+        <button class="dropbtn">Eletrodomésticos</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Bebedouro e Purificador</a>
+          <a class="departament-item" href="#">Coifas e Depuradores</a>
+          <a class="departament-item" href="#">Cooktop</a>
+          <a class="departament-item" href="#">Fogões</a>
+          <a class="departament-item" href="#">Fornos</a>
+          <a class="departament-item" href="#">Geladeiras</a>
+        </div>
+      </div>
+      <div class="dropdown" id="electrical-appliances">
+        <button class="dropbtn">Eletroportáteis</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Aspirador de pó</a>
+          <a class="departament-item" href="#">Batedeira</a>
+          <a class="departament-item" href="#">Cafeteiras</a>
+          <a class="departament-item" href="#">Faca elétrica</a>
+          <a class="departament-item" href="#">Fatiador e Moedor</a>
+          <a class="departament-item" href="#">Ferro de passar</a>
+          <a class="departament-item" href="#">Iluminação</a>
+          <a class="departament-item" href="#">Liquidificador e Processador</a>
+          <a class="departament-item" href="#">Panela Elétrica</a>
+          <a class="departament-item" href="#">Vaporizador e Higienizador</a>
+        </div>
+      </div>
+      <div class="dropdown" id="self-care">
+        <button class="dropbtn">Cuidados Pessoais</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Barbearia</a>
+          <a class="departament-item" href="#">Cabelos</a>
+          <a class="departament-item" href="#">Estética</a>
+          <a class="departament-item" href="#">Massageadores</a>
+          <a class="departament-item" href="#">Saúde</a>
+        </div>
+      </div>
+      <div class="dropdown" id="security">
+        <button class="dropbtn">Segurança</button>
+        <div class="dropdown-content">
+          <a class="departament-item" href="#">Alarmes e Sensores</a>
+          <a class="departament-item" href="#">Câmera de segurança</a>
+          <a class="departament-item" href="#">Cofres</a>
+          <a class="departament-item" href="#">Fechaduras</a>
+          <a class="departament-item" href="#">Gravador</a>
+          <a class="departament-item" href="#">Iluminação</a>
+          <a class="departament-item" href="#">Suporte e Acessórios</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

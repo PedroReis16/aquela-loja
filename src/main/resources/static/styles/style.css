@@ -20,6 +20,7 @@
   --primary-color: #0ee0e1;
   --price-color: #e75800;
   --secondary-color: #0043b0;
+  --dark-blue: #002f7a;
   --gray: #d9d9d9;
   --dark-grey: #999999;
   --confirm: #14ae5c;
@@ -28,4 +29,19 @@
 
 main {
   padding: 16px;
+}
+
+/* Estiliza o scroll da página */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--dark-grey);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--dark-blue);
 }

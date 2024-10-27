@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/styles/fragment_styles/side-menu.css}" />
+  </head>
+  <body>
+    <div class="side-menu" id="sideMenu" th:fragment="sideMenu">
+      <div class="side-menu-title">
+        <h3 id="menuTitle">Departamentos</h3>
+        <p id="closeBtn"></p>
+      </div>
+
+      <ul>
+        <li class="menu-item">
+          <span class="item-title">Hardware</span>
+          <ul class="submenu">
+            <li><a class="departament-item" href="#">Coolers</a></li>
+            <li><a class="departament-item" href="#">Disco Rígido</a></li>
+            <li><a class="departament-item" href="#">Drives</a></li>
+            <li><a class="departament-item" href="#">Fontes</a></li>
+            <li><a class="departament-item" href="#">Memória RAM</a></li>
+            <li><a class="departament-item" href="#">Placa de vídeo</a></li>
+            <li><a class="departament-item" href="#">Processadores</a></li>
+            <li><a class="departament-item" href="#">SSD</a></li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Periféricos</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Cabos e Adaptadores</a>
+            </li>
+            <li><a class="departament-item" href="#">Gabinetes</a></li>
+            <li><a class="departament-item" href="#">Headsets</a></li>
+            <li>
+              <a class="departament-item" href="#">Mesa digitalizadora</a>
+            </li>
+            <li><a class="departament-item" href="#">Mouse</a></li>
+            <li><a class="departament-item" href="#">Mouse Pad</a></li>
+            <li><a class="departament-item" href="#">Pen drive</a></li>
+            <li><a class="departament-item" href="#">Suportes</a></li>
+            <li><a class="departament-item" href="#">Teclado</a></li>
+            <li>
+              <a class="departament-item" href="#">Webcam e Videoconferência</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Computadores</span>
+          <ul class="submenu">
+            <li><a class="departament-item" href="#">Impressoras</a></li>
+            <li><a class="departament-item" href="#">Monitores</a></li>
+            <li><a class="departament-item" href="#">Notebooks</a></li>
+            <li><a class="departament-item" href="#">PC</a></li>
+            <li><a class="departament-item" href="#">Scanners</a></li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Games</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Acessórios Gamer</a>
+            </li>
+            <li><a class="departament-item" href="#">Nintendo</a></li>
+            <li><a class="departament-item" href="#">Playstation</a></li>
+            <li><a class="departament-item" href="#">Portáteis</a></li>
+            <li><a class="departament-item" href="#">Simuladores</a></li>
+            <li><a class="departament-item" href="#">Xbox</a></li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Televisores</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Acessórios para TVs</a>
+            </li>
+            <li><a class="departament-item" href="#">Smart TV</a></li>
+            <li><a class="departament-item" href="#">TV 4K</a></li>
+            <li><a class="departament-item" href="#">TV 8K</a></li>
+            <li><a class="departament-item" href="#">TV LED</a></li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Áudio</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Aparelhos de som</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Assistente virtual</a>
+            </li>
+            <li><a class="departament-item" href="#">Caixa de som</a></li>
+            <li><a class="departament-item" href="#">DJ</a></li>
+            <li><a class="departament-item" href="#">DVD e Blu-Ray</a></li>
+            <li><a class="departament-item" href="#">Fone de ouvido</a></li>
+            <li>
+              <a class="departament-item" href="#">Home Theater e Soundbar</a>
+            </li>
+            <li><a class="departament-item" href="#">Microfone</a></li>
+            <li><a class="departament-item" href="#">Rádio</a></li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Eletrodomésticos</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Bebedouro e Purificador</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Coifas e Depuradores</a>
+            </li>
+            <li><a class="departament-item" href="#">Cooktop</a></li>
+            <li><a class="departament-item" href="#">Fogões</a></li>
+            <li><a class="departament-item" href="#">Fornos</a></li>
+            <li><a class="departament-item" href="#">Geladeiras</a></li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Eletroportáteis</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Aspirador de pó</a>
+            </li>
+            <li><a class="departament-item" href="#">Batedeira</a></li>
+            <li><a class="departament-item" href="#">Cafeteiras</a></li>
+            <li><a class="departament-item" href="#">Faca elétrica</a></li>
+            <li>
+              <a class="departament-item" href="#">Fatiador e Moedor</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Ferro de passar</a>
+            </li>
+            <li><a class="departament-item" href="#">Iluminação</a></li>
+            <li>
+              <a class="departament-item" href="#"
+                >Liquidificador e Processador</a
+              >
+            </li>
+            <li>
+              <a class="departament-item" href="#">Panela Elétrica</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#"
+                >Vaporizador e Higienizador</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Cuidados Pessoais</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Barbearia</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Cabelos</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Estética</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Massageadores</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Saúde</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="item-title">Segurança</span>
+          <ul class="submenu">
+            <li>
+              <a class="departament-item" href="#">Alarmes e Sensores</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Câmera de segurança</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Cofres</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Fechaduras</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Gravador</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Iluminação</a>
+            </li>
+            <li>
+              <a class="departament-item" href="#">Suporte e Acessórios</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="header-script" th:fragment="sideMenuScript">
+      <script th:src="@{/js/fragments_scripts/side-menu.js}"></script>
+    </div>
+  </body>
+</html>

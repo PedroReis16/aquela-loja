@@ -1,0 +1,89 @@
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #333;
+  color: white;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  display: grid;
+  grid-template-rows: 64px auto;
+}
+
+.side-menu-title {
+  display: flex;
+  margin: 16px 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#menuTitle {
+  font-size: 24px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+#closeBtn {
+  margin: 2px 0 0 0;
+  background-color: transparent;
+}
+
+#closeBtn::before {
+  content: "\00d7";
+  font-size: 24px;
+  color: var(--dark-gray);
+  border: none;
+  cursor: pointer;
+}
+
+.item-title {
+  margin: 8px 8px;
+  height: 32px;
+}
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu li {
+  padding: 8px 0px;
+}
+
+.submenu {
+  max-height: 0; /* Esconde a sublista */
+  overflow: hidden; /* Esconde o conteúdo que excede o limite */
+  transition: max-height 0.3s ease;
+  background-color: var(--dark-blue);
+}
+
+.submenu.show {
+  max-height: 300px; /* Define um valor máximo quando a sublista está visível */
+}
+
+.submenu.show {
+  display: block; /* Mostra a sublista quando a classe "show" é adicionada */
+}
+
+.side-menu.open .overlay {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .side-menu.active {
+    transform: translateX(0);
+  }
+
+  .departament-item {
+    text-align: left;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+}
