@@ -6,22 +6,10 @@
 /* Pages */
 @import url("./page_styles/inicio.css");
 @import url("./page_styles/produtos.css");
-/* 
-@import url("./page_styles/login.css");
-@import url("./page_styles/product_details.css");
-@import url("./page_styles/product_list.css");
-@import url("./page_styles/wish_list.css");
-@import url("./page_styles/shopping_cart.css");
-@import url("./page_styles/sign_up.css");
 
 /* Widgets */
 @import url("./fragment_styles/header.css");
 @import url("./fragment_styles/footer.css");
-/*
-@import url("./widget_styles/footer.css");
-@import url("./widget_styles/header_departaments.css");
-@import url("./widget_styles/loading.css");
-@import url("./widget_styles/product_card.css"); */
 
 :root {
   --default-font: "Poppins", sans-serif;
@@ -36,4 +24,8 @@
   --dark-grey: #999999;
   --confirm: #14ae5c;
   --error: #b3261e;
+}
+
+main {
+  padding: 16px;
 }
