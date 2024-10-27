@@ -10,15 +10,25 @@ body {
 }
 
 .main-header {
-  display: block;
+  display: grid;
   padding: 16px;
   height: 32px;
+  grid-template-columns: 100px 1fr 100px;
 }
 
+.logo-container {
+  padding-left: 52px;
+}
 .logo {
   height: 48px;
 }
 
 #menuToggle {
   display: none;
+}
+
+@media (max-width: 768px) {
+  #menuToggle {
+    display: block;
+  }
 }
