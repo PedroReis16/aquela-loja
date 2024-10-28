@@ -35,7 +35,7 @@ public class User extends BaseEntity {
     @Convert(converter = CryptoConverter.class)
     private String cpf;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserWallet> wallet;
 
     @OneToMany(mappedBy = "user")

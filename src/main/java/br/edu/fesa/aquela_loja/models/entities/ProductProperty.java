@@ -2,8 +2,8 @@ package br.edu.fesa.aquela_loja.models.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,18 +12,20 @@ import jakarta.persistence.Table;
 public class ProductProperty extends BaseEntity {
 
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    @OneToMany(mappedBy = "products")
+    @ManyToOne
+    @JoinColumn(name = "property_reference_code")
     private Property property;
 
-    private Object value;
+    private String value;
 
-    public Object getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

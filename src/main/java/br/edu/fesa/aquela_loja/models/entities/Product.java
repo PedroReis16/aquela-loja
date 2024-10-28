@@ -6,6 +6,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -30,15 +31,16 @@ public class Product extends BaseEntity {
     private String brand;
 
     @ManyToOne
+    @JoinColumn(name = "category_reference_code")
     private Category category;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImage> images;
 
     @ManyToMany(mappedBy = "products")
-    private List<User> wish_list;
+    private List<User> wishList;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductProperty> properties;
 
     public Product() {
@@ -106,6 +108,6 @@ public class Product extends BaseEntity {
     }
 
     public List<User> getWishList() {
-        return wish_list;
+        return wishList;
     }
 }
