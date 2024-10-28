@@ -2,33 +2,29 @@ package br.edu.fesa.aquela_loja.models.entities;
 
 import java.util.List;
 
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Index;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "properties", indexes = {
-    @Index(name = "idx_property_name", columnList = "name")})
-@AttributeOverride(name = "id", column = @Column(name = "property_id"))
+    @Index(name = "idx_property_name", columnList = "name"),
+    @Index(name = "idx_property_reference_code", columnList = "referenceCode")})
 public class Property extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(unique = true)
+
+    private Long referenceCode;
 
     private String description;
 
-    @ManyToMany(mappedBy = "properties")
+    @ManyToOne
     private List<ProductProperty> products;
 
     public Long getPropertyId() {
-        return id;
+        return referenceCode;
     }
 
     public String getDescription() {

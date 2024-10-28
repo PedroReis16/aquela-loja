@@ -3,6 +3,7 @@ package br.edu.fesa.aquela_loja.models.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +14,7 @@ public class ProductProperty extends BaseEntity {
     @ManyToOne
     private Product product;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "products")
     private Property property;
 
     private Object value;

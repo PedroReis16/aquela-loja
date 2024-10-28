@@ -35,10 +35,10 @@ public class Product extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ProductImage> images;
 
-    @ManyToMany(mappedBy = "wish_list")
+    @ManyToMany(mappedBy = "products")
     private List<User> wish_list;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product")
     private List<ProductProperty> properties;
 
     public Product() {

@@ -2,39 +2,34 @@ package br.edu.fesa.aquela_loja.models.entities;
 
 import java.util.List;
 
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Index;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "categories", indexes = {
-    @Index(name = "category_id_index", columnList = "id")
+    @Index(name = "category_id_index", columnList = "id"),
+    @Index(name = "category_reference_code_index", columnList = "referenceCode")
 })
-@AttributeOverride(name = "id", column = @Column(name = "category_id"))
 public class Category extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    @Column(unique = true)
+    private final Long referenceCode;
 
     private String description;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "category")
     private List<Product> product;
 
     public Category(Long id, String description) {
-        this.id = id;
+        this.referenceCode = id;
         this.description = description;
     }
 
     public Long getIdLong() {
-        return id;
+        return referenceCode;
     }
 
     public String getDescription() {
