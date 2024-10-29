@@ -19,6 +19,8 @@ body {
 }
 .logo {
   height: 48px;
+  align-self: center;
+  margin: 12px 0px 0px 0px;
 }
 
 .search-container {

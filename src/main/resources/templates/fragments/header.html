@@ -10,7 +10,9 @@
     <div class="header" th:fragment="header">
       <div class="main-header">
         <div class="logo-container">
-          <img th:src="@{/images/logo.png}" alt="" class="logo" />
+          <a href="/" class="logo-link">
+            <img th:src="@{/images/logo.png}" alt="" class="logo" />
+          </a>
         </div>
         <div class="search-container">
           <input
@@ -20,7 +22,9 @@
             placeholder="Pesquisar..."
           />
           <button id="searchButton">
-            <span class="material-symbols-outlined search-button-icon"> search </span>
+            <span class="material-symbols-outlined search-button-icon">
+              search
+            </span>
           </button>
         </div>
         <div class="user-container">
