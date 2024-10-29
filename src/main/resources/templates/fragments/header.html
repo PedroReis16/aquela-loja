@@ -10,9 +10,13 @@
     <div class="header" th:fragment="header">
       <div class="main-header">
         <div class="logo-container">
+          <button id="menuToggle" class="menu-toggle">Botão</button>
           <a href="/" class="logo-link">
             <img th:src="@{/images/logo.png}" alt="" class="logo" />
           </a>
+          <div class="cart-container">
+            <a href="" class="cart-icon"></a>
+          </div>
         </div>
         <div class="search-container">
           <input
@@ -21,20 +25,15 @@
             class="search-input"
             placeholder="Pesquisar..."
           />
-          <button id="searchButton">
-            <span class="material-symbols-outlined search-button-icon">
-              search
-            </span>
-          </button>
+          <button id="searchButton"></button>
         </div>
         <div class="user-container">
-          <a><img th:src="@{/images/robo-avatar.png}" id="userAvatar"/></a>
+          <a><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
         </div>
         <div class="action-pages">
-          <div class="wish-list">☰</div>
-          <div class="cart">☰</div>
+          <!-- <div class="wish-list">☰</div>
+          <div class="cart">☰</div> -->
         </div>
-        <button id="menuToggle" class="menu-toggle">☰</button>
       </div>
 
       <div
