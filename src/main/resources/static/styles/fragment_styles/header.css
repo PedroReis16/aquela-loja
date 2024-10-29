@@ -50,7 +50,6 @@ body {
 }
 
 #searchButton {
-
   background: transparent;
   outline: none;
   border: none;
@@ -67,8 +66,17 @@ body {
 }
 
 .user-container {
-  display: block;
+  display: flex;
+  align-content: center;
+  height: auto;
+  margin: 12px 0px 0px 0px;
 }
+
+#userAvatar{
+  height: 48px;
+  
+}
+
 #menuToggle {
   display: none;
 }
