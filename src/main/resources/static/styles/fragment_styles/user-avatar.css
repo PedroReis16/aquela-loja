@@ -1,0 +1,10 @@
+.user-avatar {
+  display: flex;
+  align-content: center;
+  height: auto;
+  margin: 12px 0px 0px 0px;
+}
+
+#userAvatar {
+  height: 48px;
+}

@@ -1,5 +1,8 @@
 @import url("./side-menu.css");
 @import url("./departament.css");
+@import url("./shopping-cart.css");
+@import url("./search-bar.css");
+@import url("./user-avatar.css");
 
 body {
   font-family: var(--default-font);
@@ -7,15 +10,14 @@ body {
 
 .header {
   background-color: var(--black);
+  padding: 0px 16px;
 }
 
 .main-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 32px;
   justify-content: space-between;
-}
-
-.logo-container {
-  padding-left: 52px;
 }
 
 #menuToggle {
@@ -39,85 +41,29 @@ body {
   margin: 12px 0px 0px 0px;
 }
 
-.cart-container {
+#logoCart {
   display: none;
 }
 
-.cart-icon {
-  text-decoration: none;
-  margin: 8px 0px 0px 16px;
-  height: auto;
-  align-self: center;
-  cursor: pointer;
+.action-pages {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin: 0px 16px 0px 0px;
 }
 
-.cart-icon::before {
-  content: "\e8cc";
+.favorite-icon::before {
+  content: "\e87d";
   font-family: var(--material-icons);
   color: var(--white);
   font-size: 28px;
-}
-
-.search-container {
-  display: grid;
-  grid-template-columns: 88% 12%;
-  justify-self: center;
-  align-content: center;
-  background-color: var(--white);
-  height: 40px;
-  margin: 16px 32px 16px 32px;
-  border-radius: 8px;
-  width: 95%;
-}
-
-#searchBar {
-  height: 100%;
-  border: none;
-  width: 100%;
-  outline: none;
-  margin: 0px 8px;
-  font-family: var(--default-font);
-  caret-color: var(--primary-color);
-}
-#seachBar::placeholder {
-  color: var(--dark-gray);
-  font-family: var(--default-font);
-}
-
-#searchButton {
-  background: transparent;
-  outline: none;
-  border: none;
-  width: 32px;
-  cursor: pointer;
-  justify-self: end;
-  margin: 0px 8px;
-  padding: 2px 0px 0px 0px;
-}
-
-#searchButton::before {
-  content: "\e8b6";
-  color: var(--gray);
-  font-size: 24px;
-  font-family: var(--material-icons);
-}
-
-.user-container {
-  display: flex;
-  align-content: center;
-  height: auto;
-  margin: 12px 0px 0px 0px;
-}
-
-#userAvatar {
-  height: 48px;
 }
 
 @media (max-width: 768px) {
   .main-header {
     display: block;
     height: 124px;
-    padding: 8px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
   }
 
   #menuToggle {
@@ -132,22 +78,11 @@ body {
     padding: 0px 0px 0px 8px;
   }
 
-  .cart-container {
+  #logoCart {
     display: block;
-    align-content: center;
-    width: auto;
-    margin: 8px 16px 0px 0px;
   }
 
-  .cart-icon ::before {
-    content: "\e8cc";
-    color: var(--white);
-  }
-
-  .search-container {
-    margin: 8px 0px 0px 0px;
-  }
-
+  .action-pages,
   .user-container {
     display: none;
   }

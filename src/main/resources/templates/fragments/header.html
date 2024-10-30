@@ -11,28 +11,28 @@
       <div class="main-header">
         <div class="logo-container">
           <button id="menuToggle" class="menu-toggle">Botão</button>
+
           <a href="/" class="logo-link">
             <img th:src="@{/images/logo.png}" alt="" class="logo" />
           </a>
-          <div class="cart-container">
-            <a href="" class="cart-icon"></a>
-          </div>
+
+          <div
+            id="logoCart"
+            th:insert="~{fragments/shopping-cart::shoppingCart}"
+          ></div>
         </div>
-        <div class="search-container">
-          <input
-            id="searchBar"
-            type="text"
-            class="search-input"
-            placeholder="Pesquisar..."
-          />
-          <button id="searchButton"></button>
-        </div>
-        <div class="user-container">
-          <a><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
-        </div>
+
+        <div th:insert="~{fragments/search-bar::searchBar}"></div>
+
         <div class="action-pages">
-          <!-- <div class="wish-list">☰</div>
-          <div class="cart">☰</div> -->
+          <div th:insert="~{fragments/user-avatar::userAvatar}"></div>
+
+          <a href="#" class="favorite-icon"></a>
+
+          <div
+            id="normalCart"
+            th:insert="~{fragments/shopping-cart::shoppingCart}"
+          ></div>
         </div>
       </div>
 

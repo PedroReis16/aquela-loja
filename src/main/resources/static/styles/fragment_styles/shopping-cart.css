@@ -1,0 +1,40 @@
+.cart-container {
+  position: relative;
+  display: inline-block;
+  height: auto;
+  width: auto;
+}
+
+.cart-icon {
+  position: relative;
+  display: inline-block;
+  margin: 8px 0px 0px 16px;
+  height: auto;
+  align-self: center;
+  cursor: pointer;
+}
+
+.cart-icon::before {
+  content: "\e8cc";
+  font-family: var(--material-icons);
+  color: var(--white);
+  font-size: 28px;
+}
+
+.item-count {
+  position: absolute;
+  top: 0%;
+  right: -20px;
+  background-color: var(--primary-color);
+  color: var(--black);
+  font-family: var(--default-font);
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  align-content: center;
+}
+
+#count {
+  text-align: center;
+  font-size: 10px;
+}

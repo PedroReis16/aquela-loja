@@ -33,6 +33,10 @@ main {
   padding: 16px;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Estiliza o scroll da página */
 ::-webkit-scrollbar {
   width: 8px;
