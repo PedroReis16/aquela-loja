@@ -22,17 +22,6 @@ body {
 
 #menuToggle {
   display: none;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: 26px;
-}
-
-#menuToggle::before {
-  content: "\e5d2";
-  font-family: var(--material-icons);
-  color: var(--white);
-  font-size: 28px;
 }
 
 .logo {
@@ -52,11 +41,21 @@ body {
   margin: 0px 16px 0px 0px;
 }
 
+.favorite-icon {
+  margin: 24px 24px 0px 256px;
+}
+
 .favorite-icon::before {
   content: "\e87d";
   font-family: var(--material-icons);
   color: var(--white);
   font-size: 28px;
+}
+
+.normal-cart {
+  width: auto;
+  height: auto;
+  margin: 32px 0px 0px 0px;
 }
 
 @media (max-width: 768px) {
@@ -68,7 +67,17 @@ body {
 
   #menuToggle {
     display: block;
-    margin: 0px 0px 0px 0px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 24px 0px 0px 0px;
+  }
+
+  #menuToggle::before {
+    content: "\e5d2";
+    font-family: var(--material-icons);
+    color: var(--white);
+    font-size: 28px;
   }
 
   .logo-container {

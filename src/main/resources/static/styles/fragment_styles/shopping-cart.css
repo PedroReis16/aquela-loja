@@ -3,6 +3,8 @@
   display: inline-block;
   height: auto;
   width: auto;
+  top: 16px;
+  right: 16px;
 }
 
 .cart-icon {
@@ -23,8 +25,8 @@
 
 .item-count {
   position: absolute;
-  top: 0%;
-  right: -20px;
+  bottom: 85%;
+  left: 40px;
   background-color: var(--primary-color);
   color: var(--black);
   font-family: var(--default-font);
@@ -32,6 +34,7 @@
   height: 16px;
   border-radius: 16px;
   align-content: center;
+  display: none;
 }
 
 #count {
