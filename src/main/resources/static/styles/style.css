@@ -9,7 +9,7 @@
 @import url("./page_styles/produtos.css");
 
 /* Widgets */
-@import url("./fragment_styles/header.css");
+@import url("./fragment_styles/header_styles/header.css");
 @import url("./fragment_styles/footer.css");
 
 :root {
