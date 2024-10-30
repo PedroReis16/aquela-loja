@@ -14,7 +14,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/produtos", "/fragments/**", "/styles/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/fragments/**", "/styles/**", "/js/**", "/images/**").permitAll() //Essa parmissão liberar o acesso livre aos diretórios de recursos
+                .requestMatchers("/", "/produtos").permitAll()
                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.defaultSuccessUrl("/", true))
