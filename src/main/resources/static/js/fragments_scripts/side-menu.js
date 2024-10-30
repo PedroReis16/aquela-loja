@@ -1,3 +1,10 @@
+const menuBtn = document.querySelector('#menuToggle');
+
+const sideMenu = document.querySelector('#sideMenu');
+
+menuBtn.addEventListener('click', () => {
+    sideMenu.classList.toggle('active');
+});
 
 const menuItems = document.querySelectorAll('.side-menu > ul > li');
 
