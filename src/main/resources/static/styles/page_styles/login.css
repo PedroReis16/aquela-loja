@@ -1,0 +1,62 @@
+.login-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.login-card {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  text-align: center;
+}
+
+#loginLogo{
+    width: 72px;
+    height: 80px;
+}
+
+
+.floating-label {
+    position: relative;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estiliza o campo de entrada */
+.floating-label input {
+    width: 100%;
+    padding: 10px;
+    padding-top: 20px; /* Espaço extra para a label */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Estiliza a label */
+.floating-label label {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    font-size: 16px;
+    color: #666;
+    pointer-events: none; /* Desativa cliques na label */
+    transition: all 0.2s ease;
+}
+
+/* Quando o campo está focado ou preenchido, a label "flutua" */
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 8px;
+    font-size: 12px;
+    color: #007BFF;
+    background: white;
+    padding: 0 4px;
+}

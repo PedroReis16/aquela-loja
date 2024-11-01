@@ -33,6 +33,7 @@
 
 main {
   padding: 16px;
+  background-color: var(--page-background);
 }
 
 a {

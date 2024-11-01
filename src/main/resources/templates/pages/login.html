@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div class="login-background" th:fragment="content"><p>Login</p></div>
+    <div class="login-content" th:fragment="content">
+      <div class="login-card">
+        <img th:src="@{/images/logo-black.png}" id="loginLogo" alt="" />
+
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Email</label>
+        </div>
+
+        <div class="floating-label">
+          <input type="password" id="passwordInput" placeholder=" " required />
+          <label for="passwordInput">Senha</label>
+          <button type="button" class="toggle-password">👁️</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-script" th:fragment="contentScript">
+      <script th:src="@{/js/page_scripts/login.js}"></script>
+    </div>
   </body>
 </html>
