@@ -8,6 +8,7 @@
 @import url("./page_styles/inicio.css");
 @import url("./page_styles/produtos.css");
 @import url("./page_styles/carrinho.css");
+@import url("./page_styles/login.css");
 
 /* Widgets */
 @import url("./fragment_styles/header_styles/header.css");

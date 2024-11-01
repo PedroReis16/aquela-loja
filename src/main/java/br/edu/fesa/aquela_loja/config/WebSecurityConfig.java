@@ -18,7 +18,10 @@ public class WebSecurityConfig {
                 .requestMatchers("/", "/produtos", "/carrinho").permitAll()
                 .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.defaultSuccessUrl("/", true))
+                .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/", true))
                 .logout(logout -> logout.logoutSuccessUrl("/"))
                 .build();
     }
