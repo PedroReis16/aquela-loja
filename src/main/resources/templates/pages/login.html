@@ -6,7 +6,7 @@
   </head>
   <body>
     <div class="login-content" th:fragment="content">
-      <div class="login-card">
+      <form class="login-card" th:action="@{/login}" method="post">
         <img th:src="@{/images/logo-black.png}" id="loginLogo" alt="" />
 
         <div class="input-container">
@@ -14,7 +14,12 @@
           <div class="email-container">
             <i class="input-icon" id="emailIcon"> </i>
             <div class="input-text">
-              <input type="text" name="" id="emailInput" class="text-input" />
+              <input
+                type="text"
+                name="username"
+                id="emailInput"
+                class="text-input"
+              />
             </div>
           </div>
         </div>
@@ -26,7 +31,7 @@
             <div class="input-text">
               <input
                 type="password"
-                name=""
+                name="password"
                 id="passwordInput"
                 class="text-input"
               />
@@ -35,16 +40,16 @@
           </div>
         </div>
 
-        <button type="button" id="loginBtn">
+        <button type="submit" id="loginBtn">
           <i></i>
           <p></p>
         </button>
         <p id="forgotMyPassword"><a href="#">Esqueci minha senha</a></p>
-        <p id="signUp">É novo por aqui?<a id="signUpLink" href="#">Crie sua conta</a></p>
-      </div>
+        <p id="signUp">
+          É novo por aqui?<a id="signUpLink" href="#">Crie sua conta</a>
+        </p>
+      </form>
     </div>
-    <div class="content-script" th:fragment="contentScript">
-      <script th:src="@{/js/page_scripts/login.js}"></script>
-    </div>
+    
   </body>
 </html>

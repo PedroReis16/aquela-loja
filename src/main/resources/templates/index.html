@@ -21,7 +21,9 @@
 
     <!-- <footer th:replace="fragments/footer :: footer"></footer> -->
 
-    <div th:replace="~{fragments/header :: headerScript}"></div>
-    <div th:insert="~{${contentFragment} :: contentScript}"></div>
+    <div
+      th:replace="~{fragments/header_fragments/header :: headerScript}"
+    ></div>
+    <!-- <div th:insert="~{${contentFragment} :: contentScript}"></div> -->
   </body>
 </html>

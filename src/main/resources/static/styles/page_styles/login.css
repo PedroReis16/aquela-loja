@@ -29,7 +29,7 @@
 .email-container,
 .password-container {
   display: grid;
-  grid-template-columns: 32px 1fr;
+  grid-template-columns: 32px 1fr 56px;
   margin: 16px 0px 24px 0px;
   width: 100%;
   border: 1px solid var(--dark-gray);
@@ -39,9 +39,6 @@
   align-items: center;
 }
 
-.password-container {
-  grid-template-columns: 32px 1fr 32px;
-}
 
 .text-input {
   width: 100%;
