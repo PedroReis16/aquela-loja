@@ -9,19 +9,33 @@
       <div class="login-card">
         <img th:src="@{/images/logo-black.png}" id="loginLogo" alt="" />
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Email</label>
+        <div class="input-container">
+          <h3 class="input-title"><label for="emailInput">Email:</label></h3>
+          <div class="email-container">
+            <i class="input-icon" id="emailIcon"> </i>
+            <div class="input-text">
+              <input type="text" name="" id="emailInput" class="text-input" />
+            </div>
+          </div>
         </div>
+        <div class="input-container">
+          <h3 class="input-title"><label for="passwordInput">Senha:</label></h3>
 
-        <div class="floating-label">
-          <input type="password" id="passwordInput" placeholder=" " required />
-          <label for="passwordInput">Senha</label>
-          <button type="button" class="toggle-password">👁️</button>
+          <div class="password-container">
+            <i class="input-icon" id="passwordIcon"></i>
+            <div class="input-text">
+              <input
+                type="password"
+                name=""
+                id="passwordInput"
+                class="text-input"
+              />
+            </div>
+            <button type="button" id="visibilityBtn"></button>
+          </div>
         </div>
       </div>
     </div>
-
     <div class="content-script" th:fragment="contentScript">
       <script th:src="@{/js/page_scripts/login.js}"></script>
     </div>

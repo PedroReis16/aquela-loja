@@ -26,7 +26,7 @@
   --secondary-color: #0043b0;
   --dark-blue: #002f7a;
   --gray: #d9d9d9;
-  --dark-grey: #999999;
+  --dark-gray: #999999;
   --confirm: #14ae5c;
   --error: #b3261e;
 }
@@ -47,7 +47,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--dark-grey);
+  background-color: var(--dark-gray);
   border-radius: 4px;
 }
 

@@ -15,48 +15,68 @@
   text-align: center;
 }
 
-#loginLogo{
-    width: 72px;
-    height: 80px;
+#loginLogo {
+  width: 72px;
+  height: 80px;
+}
+.input-container h3{
+    text-align: left;
+    font-family: var(--default-font);
+    color: var(--dark-gray);
+}
+
+.email-container,
+.password-container {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  margin: 16px 0px 24px 0px;
+  width: 100%;
+  border: 1px solid var(--dark-gray);
+  border-radius: 8px;
+  height: 40px;
+  padding: 4px;
+  align-items: center;
+}
+
+.password-container {
+  grid-template-columns: 32px 1fr 32px;
 }
 
 
-.floating-label {
-    position: relative;
-    margin: 20px 0;
-    font-family: Arial, sans-serif;
+.text-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: var(--black);
+  font-family: var(--secondary-font);
+  height: 100%;
+  text-align: center;
 }
 
-/* Estiliza o campo de entrada */
-.floating-label input {
-    width: 100%;
-    padding: 10px;
-    padding-top: 20px; /* Espaço extra para a label */
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+#emailIcon::before {
+  content: "\e7fd";
+  font-family: var(--material-icons);
+  color: var(--gray);
+  font-size: 24px;
+}
+
+#passwordIcon::before {
+  content: "\e897";
+  font-family: var(--material-icons);
+  color: var(--gray);
+  font-size: 24px;
+}
+
+#visibilityBtn{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
     outline: none;
-    box-sizing: border-box;
 }
-
-/* Estiliza a label */
-.floating-label label {
-    position: absolute;
-    top: 12px;
-    left: 10px;
-    font-size: 16px;
-    color: #666;
-    pointer-events: none; /* Desativa cliques na label */
-    transition: all 0.2s ease;
-}
-
-/* Quando o campo está focado ou preenchido, a label "flutua" */
-.floating-label input:focus + label,
-.floating-label input:not(:placeholder-shown) + label {
-    top: -10px;
-    left: 8px;
-    font-size: 12px;
-    color: #007BFF;
-    background: white;
-    padding: 0 4px;
+#visibilityBtn::before {
+  content: "\e8f4";
+  font-family: var(--material-icons);
+  color: var(--gray);
+  font-size: 24px;
 }
