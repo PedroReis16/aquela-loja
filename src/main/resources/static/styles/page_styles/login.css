@@ -19,10 +19,10 @@
   width: 72px;
   height: 80px;
 }
-.input-container h3{
-    text-align: left;
-    font-family: var(--default-font);
-    color: var(--dark-gray);
+.input-container h3 {
+  text-align: left;
+  font-family: var(--default-font);
+  color: var(--dark-gray);
 }
 
 .email-container,
@@ -41,7 +41,6 @@
 .password-container {
   grid-template-columns: 32px 1fr 32px;
 }
-
 
 .text-input {
   width: 100%;
@@ -68,15 +67,85 @@
   font-size: 24px;
 }
 
-#visibilityBtn{
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    outline: none;
+#visibilityBtn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 #visibilityBtn::before {
   content: "\e8f4";
   font-family: var(--material-icons);
   color: var(--gray);
   font-size: 24px;
+}
+
+#loginBtn {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-family: var(--default-font);
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  width: 50%;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginBtn:hover {
+  background-color: var(--primary-color-hover);
+  transition: all 0.6s;
+}
+
+#loginBtn i::before {
+  content: "\ea77";
+  font-family: var(--material-icons);
+  font-size: 24px;
+  margin-right: 8px;
+  align-self: center;
+  margin: 8px 8px 0px 0px;
+}
+
+#loginBtn p::before {
+  content: "Entrar";
+  font-family: var(--default-font);
+  font-size: 16px;
+  margin: 0px 0px 8px 0px;
+}
+
+#forgotMyPassword {
+  font-size: 14px;
+  margin: 16px 0px;
+}
+
+#forgotMyPassword a {
+  color: var(--gray);
+  font-family: var(--secondary-font);
+}
+
+#forgotMyPassword a:hover {
+  text-decoration: underline;
+  
+}
+
+#signUp{
+    font-family: var(--secondary-font);
+    font-size: 14px;
+}
+
+#signUp a {
+  color: var(--primary-color);
+
+  text-decoration: none;
+  margin: 0px 0px 0px 4px;
+}
+
+#signUp a:hover {
+
+  text-decoration: underline;
 }
