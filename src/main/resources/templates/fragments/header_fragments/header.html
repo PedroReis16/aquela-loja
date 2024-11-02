@@ -22,15 +22,19 @@
           <div
             id="logoCart"
             th:insert="~{fragments/header_fragments/shopping-cart::shoppingCart}"
+           
           ></div>
         </div>
 
         <div
+          class="search-bar"
           th:insert="~{fragments/header_fragments/search-bar::searchBar}"
         ></div>
 
         <div class="action-pages">
-          <div th:insert="~{fragments/header_fragments/user-avatar::userAvatar}"></div>
+          <div
+            th:insert="~{fragments/header_fragments/user-avatar::userAvatar}"
+          ></div>
 
           <a href="#" class="favorite-icon"></a>
 
@@ -51,7 +55,9 @@
 
     <div class="header-script" th:fragment="headerScript">
       <script th:src="@{/js/fragments_scripts/header.js}"></script>
-      <div th:insert="~{/fragments/header_fragments/side-menu::sideMenuScript}"></div>
+      <div
+        th:insert="~{/fragments/header_fragments/side-menu::sideMenuScript}"
+      ></div>
     </div>
   </body>
 </html>
