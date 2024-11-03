@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const departaments = document.querySelector(".departaments");
     const actionPages = document.querySelector(".action-pages");
 
-    if (currentPath == '/login') {
+    if (currentPath == '/login' || currentPath == '/cadastro') {
         menuToggle.style.display = "none";
         logoCart.style.display = "none";
         logo[0].style.width = "100%";

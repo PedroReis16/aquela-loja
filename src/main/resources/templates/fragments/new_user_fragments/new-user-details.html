@@ -7,46 +7,49 @@
   </head>
   <body>
     <div class="step-1-content" th:fragment="content">
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Nome Completo</label>
-      </div>
+      <h2 id="step-details-title" class="step-title">Criar Conta</h2>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">CPF</label>
-      </div>
+      <form action="@{/new-user-address}" method="post" id="userDetailsForm">
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Nome Completo</label>
+        </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Genero</label>
-      </div>
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">CPF</label>
+        </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Data de nascimento</label>
-      </div>
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Genero</label>
+        </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Celular</label>
-      </div>
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Data de nascimento</label>
+        </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Email</label>
-      </div>
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Celular</label>
+        </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Crie sua senha</label>
-      </div>
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Email</label>
+        </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Confirme sua senha</label>
-      </div>
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Crie sua senha</label>
+        </div>
 
+        <div class="floating-label">
+          <input type="text" id="input1" placeholder=" " required />
+          <label for="input1">Confirme sua senha</label>
+        </div>
+      </form>
     </div>
   </body>
 </html>
