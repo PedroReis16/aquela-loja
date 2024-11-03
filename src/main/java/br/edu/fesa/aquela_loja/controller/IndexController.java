@@ -21,4 +21,10 @@ public class IndexController {
 
     }
 
+    @GetMapping({"/usuario/{page}"})
+    public String loadUserPages(Model model, @PathVariable String page) {
+        model.addAttribute("contentFragment", "pages/user_pages/" + page);
+        return "index";
+    }
+
 }
