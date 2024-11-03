@@ -7,7 +7,10 @@
   </head>
   <body>
     <div class="step-2-content" th:fragment="content">
-      <h2 id="step-address-title" class="step-title">Adicionar endereço</h2>
+      <div class="step-header">
+        <button type="button" id="stepHeaderBack"></button>
+        <h2 id="step-address-title" class="step-title">Adicionar endereço</h2>
+      </div>
 
       <form action="@{/new-user-card}" method="post" id="userAddressForm">
         <div class="cep-container">

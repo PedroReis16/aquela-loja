@@ -234,3 +234,49 @@ confirmPasswordInputBtn.addEventListener('click', () => {
 
 // Initial check to disable the submit button if the form is not valid
 updateSubmitButtonState();
+
+submitButton.addEventListener('click', function (event) {
+    event.preventDefault(); // Evita o comportamento padrão do formulário
+
+    // Captura os valores dos campos do formulário
+    const name = inputs.name.element.value;
+    const document = inputs.document.element.value;
+    const gender = inputs.gender.element.value;
+    const birthDate = inputs.birthDate.element.value;
+    const phone = inputs.phone.element.value;
+    const email = inputs.email.element.value;
+    const password = inputs.password.element.value;
+    const confirmPassword = inputs.confirmPassword.element.value;
+
+    // Monta o objeto com os valores capturados
+    const userDetails = {
+        name: name,
+        document: document,
+        gender: gender,
+        birthDate: birthDate,
+        phone: phone,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword
+    };
+
+    console.log(userDetails);
+
+    // Envia a requisição HTTP
+    fetch('/new-user-address', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userDetails)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Faça algo com a resposta, se necessário
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Trate o erro, se necessário
+        });
+});

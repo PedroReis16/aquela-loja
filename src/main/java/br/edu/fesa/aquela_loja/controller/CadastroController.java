@@ -31,7 +31,6 @@ public class CadastroController {
 
     @PostMapping("/new-user-card")
     public String setUserAddress(@ModelAttribute("user") NewUserDTO user, @RequestBody UserAddressDTO userAddress) {
-
         // user.setAddress(userAddress);
         return "user-card";
     }
