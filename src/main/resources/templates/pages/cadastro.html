@@ -6,16 +6,16 @@
   </head>
   <body>
     <div class="new-user-content" th:fragment="content">
-      <div
+      <!-- <div
         class="new-user-step"
         id="new-user-step-1"
         th:insert="~{fragments/new_user_fragments/new-user-details::content}"
-      ></div>
-      <!-- <div
+      ></div> -->
+      <div
         class="new-user-step"
         id="new-user-step-2"
         th:insert="~{fragments/new_user_fragments/new-user-address::content}"
-      ></div> -->
+      ></div>
       <!--<div
         class="new-user-step"
         id="new-user-step-3"
@@ -26,6 +26,9 @@
     <div th:fragment="contentScript">
       <script
         th:src="@{/js/fragments_scripts/new_user_scripts/new-user-details-script.js}"
+      ></script>
+      <script
+        th:src="@{/js/fragments_scripts/new_user_scripts/new-user-address-script.js}"
       ></script>
     </div>
   </body>

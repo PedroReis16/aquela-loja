@@ -8,45 +8,91 @@
   <body>
     <div class="step-2-content" th:fragment="content">
       <h2 id="step-address-title" class="step-title">Adicionar endereço</h2>
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">CEP</label>
+
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input type="text" id="CEPInput" placeholder="CEP" required />
+          <label for="CEPInput"></label>
+        </div>
+        <p id="CEPInputErrorMessage" class="error-message"></p>
       </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Rua</label>
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input
+            type="text"
+            id="addressInput"
+            placeholder="Endereço"
+            required
+          />
+          <label for="addressInput"></label>
+        </div>
       </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Bairro</label>
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input type="text" id="numberInput" placeholder="Número" required />
+          <label for="numberInput"></label>
+        </div>
       </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Cidade</label>
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input
+            type="text"
+            id="complementInput"
+            placeholder="Complemento"
+            required
+          />
+          <label for="complementInput"></label>
+        </div>
       </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Estado</label>
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input
+            type="text"
+            id="neighborhoodInput"
+            placeholder="Bairro"
+            required
+          />
+          <label for="neighborhoodInput"></label>
+        </div>
       </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Numero</label>
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input type="text" id="cityInput" placeholder="Cidade" required />
+          <label for="cityInput"></label>
+        </div>
       </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Complemento</label>
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input type="text" id="stateInput" placeholder="Estado" required />
+          <label for="stateInput"></label>
+        </div>
       </div>
 
-      <div class="floating-label">
-        <input type="text" id="input1" placeholder=" " required />
-        <label for="input1">Ponto de referencia</label>
+      <div class="person-name-container">
+        <div class="input-label">
+          <i id="personIcon"></i>
+          <input type="text" id="countryInput" placeholder="País" required />
+          <label for="countryInput"></label>
+        </div>
       </div>
     </div>
+
+    <button type="submit" class="continue-btn" id="detailsContinueBtn">
+      <p>Continuar</p>
+      <i></i>
+    </button>
   </body>
 </html>
