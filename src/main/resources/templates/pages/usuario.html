@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="normal-user-content" th:fragment="content">
-      <div class="user-card" id="userOverviewCard">
+      <section class="user-card" id="userOverviewCard">
         <img th:src="@{/images/robo-avatar.png}" alt="" id="userProfilePic" />
         <div class="user-details">
           <div class="user-info">
@@ -16,37 +16,40 @@
           </div>
 
           <a id="editProfileBtn" href="/usuario/meus-dados">
-            <span></span> Editar Dados
+            <span></span>
+            <p>Editar dados</p>
           </a>
         </div>
-      </div>
+      </section>
 
-      <div class="widgets-container">
+      <section class="widgets-container">
         <h2 id="pageWidgetTitle"><i></i>Atalhos</h2>
 
         <div class="widget-cards-container">
-          <a href="/usuario/meus-dados">
-            <div class="user-card widget-card" id="editProfileCard">
-              <i></i>
-              <div class="widget-card-content">
-                <p class="card-title">Meus Dados</p>
-                <p class="card-description">
-                  Atualize suas informações pessoais,<br />
-                  edite ou cadastre um endereço
-                </p>
+            <a href="/usuario/meus-dados">
+              <div class="user-card widget-card" id="editProfileCard">
+                <i></i>
+                <div class="widget-card-content">
+                  <p class="card-title">Meus Dados</p>
+                  <p class="card-description">
+                    Atualize suas informações pessoais,<br />
+                    edite ou cadastre um endereço
+                  </p>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
 
-          <a href="/usuario/meus-pedidos">
-            <div class="user-card widget-card" id="ordersCard">
-              <i></i>
-              <div class="widget-card-content">
-                <p class="card-title">Meus Pedidos</p>
-                <p class="card-description">Acompanhe todos os seus pedidos</p>
+            <a href="/usuario/meus-pedidos">
+              <div class="user-card widget-card" id="ordersCard">
+                <i></i>
+                <div class="widget-card-content">
+                  <p class="card-title">Meus Pedidos</p>
+                  <p class="card-description">
+                    Acompanhe todos os seus pedidos
+                  </p>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
 
           <a href="/usuario/meus-cartoes">
             <div class="user-card widget-card" id="walletCard">
@@ -67,7 +70,7 @@
             </div>
           </a>
         </div>
-      </div>
+      </section>
     </div>
   </body>
 </html>
