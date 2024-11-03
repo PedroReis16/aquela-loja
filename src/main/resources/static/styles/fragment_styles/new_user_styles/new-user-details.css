@@ -8,14 +8,89 @@
   gap: 16px;
 }
 
-#detailsContinueBtn {
-  justify-self: center;
+.custom-select {
+  width: 100%;
+  height: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
 }
 
-.error-message {
-  color: red;
-  margin: 4px 8px;
+.custom-select:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.custom-select-wrapper {
+  position: relative;
+}
+
+.custom-select-wrapper::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
   font-size: 12px;
+  color: #777;
+  pointer-events: none;
+}
+
+#personIcon::before,
+#documentIcon::before,
+#birthIcon::before,
+#phoneIcon::before,
+#emailIcon::before,
+#genderIcon::before,
+.visibility-control::before,
+.password-icon::before {
+  font-family: var(--material-icons);
+  color: var(--gray);
+  font-size: 24px;
+}
+
+/* Declarações individuais para o conteúdo de cada ícone */
+#personIcon::before {
+  content: "\e7fd";
+}
+#documentIcon::before {
+  content: "\ea67";
+}
+#genderIcon::before {
+  content: "\e58d";
+}
+#birthIcon::before {
+  content: "\ebcc";
+}
+#phoneIcon::before {
+  content: "\e0b0";
+}
+#emailIcon::before {
+  content: "\e158";
+}
+.password-icon::before {
+  content: "\e897";
+}
+
+.visibility-control {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.visibility-control::before {
+  content: "\e8f5";
+}
+
+#detailsContinueBtn {
+  justify-self: center;
 }
 
 @media (max-width: 768px) {

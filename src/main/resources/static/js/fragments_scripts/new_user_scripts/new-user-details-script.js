@@ -70,6 +70,8 @@ const inputs = {
         }
     }
 };
+const passwordInputBtn = document.getElementById('passwordBtn');
+const confirmPasswordInputBtn = document.getElementById('confirmPasswordBtn');
 
 const submitButton = document.getElementById('detailsContinueBtn');
 
@@ -159,6 +161,7 @@ function handleBlur(event, inputConfig) {
 
     if (value === "") {
         inputConfig.errorMessage.textContent = inputConfig.errorMessages.empty;
+        inputConfig.errorMessage.classList.remove('hidden');
         updateSubmitButtonState();
         return;
     }
@@ -166,11 +169,13 @@ function handleBlur(event, inputConfig) {
     const validationResult = inputConfig.validate(value);
     if (validationResult !== true) {
         inputConfig.errorMessage.textContent = inputConfig.errorMessages[validationResult] || inputConfig.errorMessages.invalid;
+        inputConfig.errorMessage.classList.remove('hidden');
         updateSubmitButtonState();
         return;
     }
 
     inputConfig.errorMessage.textContent = "";
+    inputConfig.errorMessage.classList.add('hidden')
     updateSubmitButtonState();
 }
 
@@ -212,6 +217,19 @@ Object.values(inputs).forEach(inputConfig => {
             inputConfig.element.addEventListener('input', (event) => handleInput(event, inputConfig));
         }
     }
+});
+
+
+passwordInputBtn.addEventListener('click', () => {
+    const passwordInput = inputs.password.element;
+    const passwordType = passwordInput.type;
+    passwordInput.type = passwordType === 'password' ? 'text' : 'password';
+});
+
+confirmPasswordInputBtn.addEventListener('click', () => {
+    const confirmPasswordInput = inputs.confirmPassword.element;
+    const confirmPasswordType = confirmPasswordInput.type;
+    confirmPasswordInput.type = confirmPasswordType === 'password' ? 'text' : 'password';
 });
 
 // Initial check to disable the submit button if the form is not valid

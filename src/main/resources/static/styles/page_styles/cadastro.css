@@ -11,60 +11,53 @@
   margin: 0px 0px 48px 0px;
 }
 
-.floating-label {
+.input-label {
   position: relative;
   margin: 0px 0;
   font-family: Arial, sans-serif;
-}
-/* Estiliza o campo de entrada */
-.floating-label input {
-  width: 100%;
-  padding: 10px;
-  padding-top: 20px; /* Espaço extra para a label */
-  font-size: 16px;
+  display: grid;
+  grid-template-columns: 32px 1fr 48px;
+  align-content: center;
+  background-color: var(--white);
   border: 1px solid var(--gray);
   border-radius: 4px;
   outline: none;
   box-sizing: border-box;
-}
-/* Estiliza a label */
-.floating-label label {
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  font-size: 16px;
-  color: var(--dark-gray);
-  pointer-events: none; /* Desativa cliques na label */
-  transition: all 0.2s ease;
+  height: 56px;
 }
 
-.floating-label select {
+.input-label > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estiliza o campo de entrada */
+.input-label input {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: white;
-  appearance: none;
+  border: none;
+  outline: none;
 }
 
-/* Quando o campo está focado ou preenchido, a label "flutua" */
-.floating-label input:focus + label,
-.floating-label input:not(:placeholder-shown) + label {
-  top: -10px;
-  left: 8px;
-  font-size: 12px;
-  color: var(--primary-color);
-  background: var(--white);
-  padding: 0 4px;
+.error-message {
+  color: red;
+  margin: 4px 8px;
+  font-size: 14px;
+  font-family: var(--secondary-font);
 }
 
-.floating-label select:focus + label,
-.floating-label select:not(:placeholder-shown) + label {
-  top: -20px;
-  left: 10px;
-  font-size: 12px;
-  color: #333;
+.error-message.hidden i::before {
+  content: none;
+}
+
+.error-message i::before {
+  margin-right: 8px;
+  vertical-align: middle;
+  content: "\e002";
+  font-family: var(--material-icons);
+  font-size: 14px;
 }
 
 .continue-btn {

@@ -11,77 +11,113 @@
 
       <form action="@{/new-user-address}" method="post" id="userDetailsForm">
         <div class="person-name-container">
-          <div class="floating-label">
-            <input type="text" id="nameInput" placeholder=" " required />
-            <label for="nameInput">Nome Completo</label>
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input
+              type="text"
+              id="nameInput"
+              placeholder="Nome Completo"
+              required
+            />
+            <label for="nameInput"></label>
           </div>
           <p id="personNameErrorMessage" class="error-message"></p>
         </div>
 
         <div class="document-container">
-          <div class="floating-label">
+          <div class="input-label">
+            <i id="documentIcon"></i>
             <input
               type="text"
               id="documentInput"
               inputmode="numeric"
               maxlength="14"
-              placeholder=" "
+              placeholder="CPF"
               required
             />
-            <label for="documentInput">CPF</label>
           </div>
           <p id="documentErrorMessage" class="error-message"></p>
         </div>
 
         <div class="gender-container">
-          <div class="floating-label">
-            <input type="text" id="genderInput" placeholder=" " required />
-            <label for="genderInput">Genero</label>
+          <div class="input-label">
+            <i id="genderIcon"></i>
+            <select id="genderSelect" class="custom-select">
+              <option value="Male">Masculino</option>
+              <option value="Female">Feminino</option>
+              <option value="Other">Outro</option>
+            </select>
           </div>
           <p id="genderErrorMessage" class="error-message"></p>
         </div>
 
         <div class="birth-date-container">
-          <div class="floating-label">
-            <input type="text" id="birthDateInput" placeholder=" " required />
-            <label for="birthDateInput">Data de nascimento</label>
+          <div class="input-label">
+            <i id="birthIcon"></i>
+            <input
+              type="text"
+              id="birthDateInput"
+              placeholder="Data de nascimento"
+              required
+            />
           </div>
           <p id="birthDateErrorMessage" class="error-message"></p>
         </div>
 
         <div class="phone-container">
-          <div class="floating-label">
-            <input type="text" id="phoneInput" placeholder=" " required />
-            <label for="phoneInput">Telefone</label>
+          <div class="input-label">
+            <i id="phoneIcon"></i>
+            <input
+              type="text"
+              id="phoneInput"
+              placeholder="Telefone"
+              required
+            />
           </div>
           <p id="phoneErrorMessage" class="error-message"></p>
         </div>
 
         <div class="details-email-container">
-          <div class="floating-label">
-            <input type="text" id="emailInput" placeholder=" " required />
-            <label for="emailInput">Email</label>
+          <div class="input-label">
+            <i id="emailIcon"></i>
+            <input type="text" id="emailInput" placeholder="Email" required />
           </div>
           <p id="emailErrorMessage" class="error-message"></p>
         </div>
 
         <div class="details-password-container">
-          <div class="floating-label">
-            <input type="text" id="passwordInput" placeholder=" " required />
-            <label for="passwordInput">Senha</label>
+          <div class="input-label">
+            <i class="password-icon"></i>
+            <input
+              type="password"
+              id="passwordInput"
+              placeholder="Senha"
+              required
+            />
+            <button
+              type="button"
+              class="visibility-control"
+              id="passwordBtn"
+            ></button>
           </div>
           <p id="passwordErrorMessage" class="error-message"></p>
         </div>
 
         <div class="details-confirm-password-container">
-          <div class="floating-label">
+          <div class="input-label">
+            <i class="password-icon"></i>
             <input
-              type="text"
+              type="password"
               id="confirmPasswordInput"
-              placeholder=" "
+              placeholder="Confirmar Senha"
               required
             />
-            <label for="confirmPasswordInput">Confirmar Senha</label>
+
+            <button
+              type="button"
+              class="visibility-control"
+              id="confirmPasswordBtn"
+            ></button>
           </div>
           <p id="confirmPasswordErrorMessage" class="error-message"></p>
         </div>
