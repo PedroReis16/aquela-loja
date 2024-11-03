@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <section id="user-details-edit-container" th:fragment="content">
+        <h3><i></i>Dados básicos</h3>
+
+        <div class="person-name-container">
+            <div class="input-label">
+                <i id="personIcon"></i>
+                <input type="text" id="nameInput" placeholder="Nome Completo" required />
+                <label for="nameInput"></label>
+            </div>
+            <p id="personNameErrorMessage" class="error-message"></p>
+        </div>
+
+        <div class="person-name-container">
+            <div class="input-label">
+                <i id="personIcon"></i>
+                <input type="text" id="nameInput" placeholder="Telefone" required />
+                <label for="nameInput"></label>
+            </div>
+            <p id="personNameErrorMessage" class="error-message"></p>
+        </div>
+
+        <div class="gender-container">
+            <div class="input-label">
+                <i id="genderIcon"></i>
+                <select id="genderSelect" class="custom-select">
+                    <option value="Male">Masculino</option>
+                    <option value="Female">Feminino</option>
+                    <option value="Other">Outro</option>
+                </select>
+            </div>
+            <p id="genderErrorMessage" class="error-message"></p>
+        </div>
+
+        <div class="person-name-container">
+            <div class="input-label">
+                <i id="personIcon"></i>
+                <input type="text" id="nameInput" placeholder="Email" required />
+                <label for="nameInput"></label>
+            </div>
+            <p id="personNameErrorMessage" class="error-message"></p>
+        </div>
+
+        <div class="person-name-container">
+            <div class="input-label">
+                <i id="personIcon"></i>
+                <input type="text" id="nameInput" placeholder="CPF" required />
+                <label for="nameInput"></label>
+            </div>
+            <p id="personNameErrorMessage" class="error-message"></p>
+        </div>
+
+        <div class="person-name-container">
+            <div class="input-label">
+                <i id="personIcon"></i>
+                <input type="text" id="nameInput" placeholder="Data de nascimento" required />
+                <label for="nameInput"></label>
+            </div>
+            <p id="personNameErrorMessage" class="error-message"></p>
+        </div>
+
+
+        <div class="details-action-buttons">
+            <button type="button" id="deleteUserAccount">Excluir Conta</button>
+            <button type="submit" id="saveUserDetails">Salvar Alterações</button>
+        </div>
+    </section>
+</body>
+
+</html>

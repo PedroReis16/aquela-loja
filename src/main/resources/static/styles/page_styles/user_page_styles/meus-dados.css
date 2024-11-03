@@ -1,0 +1,10 @@
+@import url("../user_page_styles/favoritos.css");
+@import url("../user_page_styles/meus-cartoes.css");
+@import url("../user_page_styles/meus-dados.css");
+@import url("../user_page_styles/meus-pedidos.css");
+
+.editable-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}

@@ -8,17 +8,19 @@
 </head>
 
 <body>
-  <div class="user-details-edit-content" th:fragment="content">
+  <section class="user-details-edit-content" th:fragment="content">
 
     <h2 id="contentTitle"><span></span>Meus Dados</h2>
-    
-    <div class="user-profile-edit">
 
-    </div>
-    <div class="user-address-edit">
+    <div class="editable-items">
+      <div th:replace="~{/fragments/user_fragments/user_details_fragments/user-details-edit::content}">
 
+      </div>
+      <div th:insert="~{/fragments/user_fragments/user_details_fragments/user-address-list::content}">
+
+      </div>
     </div>
-  </div>
+  </section>
 </body>
 
 </html>
