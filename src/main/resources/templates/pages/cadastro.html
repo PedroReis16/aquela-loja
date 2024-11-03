@@ -22,5 +22,11 @@
         th:insert="~{fragments/new_user_fragments/new-user-card::content}"
       ></div> -->
     </div>
+
+    <div th:fragment="contentScript">
+      <script
+        th:src="@{/js/fragments_scripts/new_user_scripts/new-user-details-script.js}"
+      ></script>
+    </div>
   </body>
 </html>

@@ -10,44 +10,80 @@
       <h2 id="step-details-title" class="step-title">Criar Conta</h2>
 
       <form action="@{/new-user-address}" method="post" id="userDetailsForm">
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Nome Completo</label>
+        <div class="person-name-container">
+          <div class="floating-label">
+            <input type="text" id="nameInput" placeholder=" " required />
+            <label for="nameInput">Nome Completo</label>
+          </div>
+          <p id="personNameErrorMessage" class="error-message"></p>
         </div>
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">CPF</label>
+        <div class="document-container">
+          <div class="floating-label">
+            <input
+              type="text"
+              id="documentInput"
+              inputmode="numeric"
+              maxlength="14"
+              placeholder=" "
+              required
+            />
+            <label for="documentInput">CPF</label>
+          </div>
+          <p id="documentErrorMessage" class="error-message"></p>
         </div>
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Genero</label>
+        <div class="gender-container">
+          <div class="floating-label">
+            <input type="text" id="genderInput" placeholder=" " required />
+            <label for="genderInput">Genero</label>
+          </div>
+          <p id="genderErrorMessage" class="error-message"></p>
         </div>
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Data de nascimento</label>
+        <div class="birth-date-container">
+          <div class="floating-label">
+            <input type="text" id="birthDateInput" placeholder=" " required />
+            <label for="birthDateInput">Data de nascimento</label>
+          </div>
+          <p id="birthDateErrorMessage" class="error-message"></p>
         </div>
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Celular</label>
+        <div class="phone-container">
+          <div class="floating-label">
+            <input type="text" id="phoneInput" placeholder=" " required />
+            <label for="phoneInput">Telefone</label>
+          </div>
+          <p id="phoneErrorMessage" class="error-message"></p>
         </div>
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Email</label>
+        <div class="details-email-container">
+          <div class="floating-label">
+            <input type="text" id="emailInput" placeholder=" " required />
+            <label for="emailInput">Email</label>
+          </div>
+          <p id="emailErrorMessage" class="error-message"></p>
         </div>
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Crie sua senha</label>
+        <div class="details-password-container">
+          <div class="floating-label">
+            <input type="text" id="passwordInput" placeholder=" " required />
+            <label for="passwordInput">Senha</label>
+          </div>
+          <p id="passwordErrorMessage" class="error-message"></p>
         </div>
 
-        <div class="floating-label">
-          <input type="text" id="input1" placeholder=" " required />
-          <label for="input1">Confirme sua senha</label>
+        <div class="details-confirm-password-container">
+          <div class="floating-label">
+            <input
+              type="text"
+              id="confirmPasswordInput"
+              placeholder=" "
+              required
+            />
+            <label for="confirmPasswordInput">Confirmar Senha</label>
+          </div>
+          <p id="confirmPasswordErrorMessage" class="error-message"></p>
         </div>
       </form>
       <button type="submit" class="continue-btn" id="detailsContinueBtn">

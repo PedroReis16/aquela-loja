@@ -11,6 +11,13 @@
 #detailsContinueBtn {
   justify-self: center;
 }
+
+.error-message {
+  color: red;
+  margin: 4px 8px;
+  font-size: 12px;
+}
+
 @media (max-width: 768px) {
   #userDetailsForm {
     grid-template-columns: 1fr;
