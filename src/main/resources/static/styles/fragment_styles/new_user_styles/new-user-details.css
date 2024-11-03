@@ -1,5 +1,5 @@
 .step-1-content {
-  margin: 10%;
+  margin: 5% 10%;
 }
 
 #userDetailsForm {
@@ -8,6 +8,9 @@
   gap: 16px;
 }
 
+#detailsContinueBtn {
+  justify-self: center;
+}
 @media (max-width: 768px) {
   #userDetailsForm {
     grid-template-columns: 1fr;
