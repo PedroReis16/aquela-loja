@@ -91,6 +91,10 @@
   background-color: var(--gray);
   color: var(--dark-gray);
 }
+.continue-btn:disabled:hover {
+  background-color: var(--gray);
+  color: var(--dark-gray);
+}
 
 .continue-btn:hover {
   background-color: var(--primary-color-hover);

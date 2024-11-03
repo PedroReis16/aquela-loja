@@ -9,90 +9,109 @@
     <div class="step-2-content" th:fragment="content">
       <h2 id="step-address-title" class="step-title">Adicionar endereço</h2>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input type="text" id="CEPInput" placeholder="CEP" required />
-          <label for="CEPInput"></label>
+      <form action="@{/new-user-card}" method="post" id="userAddressForm">
+        <div class="cep-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input type="text" id="CEPInput" placeholder="CEP" required />
+          </div>
+          <p id="CEPInputErrorMessage" class="error-message"></p>
         </div>
-        <p id="CEPInputErrorMessage" class="error-message"></p>
-      </div>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input
-            type="text"
-            id="addressInput"
-            placeholder="Endereço"
-            required
-          />
-          <label for="addressInput"></label>
+        <div class="identifier-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input
+              type="text"
+              id="addressIdentifierInput"
+              placeholder="Identificação"
+              required
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input type="text" id="numberInput" placeholder="Número" required />
-          <label for="numberInput"></label>
+        <div class="address-input-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input
+              type="text"
+              id="addressInput"
+              placeholder="Endereço"
+              required
+              readonly
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input
-            type="text"
-            id="complementInput"
-            placeholder="Complemento"
-            required
-          />
-          <label for="complementInput"></label>
+        <div class="number-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input type="text" id="numberInput" placeholder="Número" required />
+          </div>
         </div>
-      </div>
+        <div class="neighborhood-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input
+              type="text"
+              id="neighborhoodInput"
+              placeholder="Bairro"
+              required
+              readonly
+            />
+          </div>
+        </div>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input
-            type="text"
-            id="neighborhoodInput"
-            placeholder="Bairro"
-            required
-          />
-          <label for="neighborhoodInput"></label>
+        <div class="city-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input
+              type="text"
+              id="cityInput"
+              placeholder="Cidade"
+              required
+              readonly
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input type="text" id="cityInput" placeholder="Cidade" required />
-          <label for="cityInput"></label>
+        <div class="state-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input
+              type="text"
+              id="stateInput"
+              placeholder="Estado"
+              required
+              readonly
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input type="text" id="stateInput" placeholder="Estado" required />
-          <label for="stateInput"></label>
+        <div class="complement-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input type="text" id="complementInput" placeholder="Complemento" />
+          </div>
         </div>
-      </div>
 
-      <div class="person-name-container">
-        <div class="input-label">
-          <i id="personIcon"></i>
-          <input type="text" id="countryInput" placeholder="País" required />
-          <label for="countryInput"></label>
+        <div class="reference-container">
+          <div class="input-label">
+            <i id="personIcon"></i>
+            <input type="text" id="referenceInput" placeholder="Referência" />
+          </div>
         </div>
-      </div>
+      </form>
+
+      <button
+        type="submit"
+        class="continue-btn"
+        id="addressContinueBtn"
+        disabled
+      >
+        <p>Continuar</p>
+        <i></i>
+      </button>
     </div>
-
-    <button type="submit" class="continue-btn" id="detailsContinueBtn">
-      <p>Continuar</p>
-      <i></i>
-    </button>
   </body>
 </html>

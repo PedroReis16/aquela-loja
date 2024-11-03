@@ -1,0 +1,61 @@
+.step-2-content {
+  margin: 5% 10%;
+  justify-content: center;
+}
+
+#userAddressForm {
+  display: grid;
+  grid-template-areas:
+    "cep identifier identifier "
+    "street street number"
+    "neighborhood city state "
+    "complement complement complement "
+    "reference reference reference";
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+.cep-container {
+  grid-area: cep;
+}
+.identifier-container {
+  grid-area: identifier;
+}
+.address-input-container {
+  grid-area: street;
+}
+.number-container {
+  grid-area: number;
+}
+.complement-container {
+  grid-area: complement;
+}
+.neighborhood-container {
+  grid-area: neighborhood;
+}
+.city-container {
+  grid-area: city;
+}
+.state-container {
+  grid-area: state;
+}
+.reference-container {
+  grid-area: reference;
+}
+
+#addressContinueBtn {
+  max-width: 200px;
+  justify-self: center;
+}
+
+@media (max-width: 768px) {
+  #userAddressForm {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+    justify-content: center;
+  }
+  #addressContinueBtn {
+    width: 100%;
+  }
+}

@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('userAddressForm');
+    const submitButton = document.getElementById("addressContinueBtn");
+    const inputs = form.querySelectorAll("input[required]:not([readonly])");
+
     document.getElementById('CEPInput').addEventListener('blur', function () {
         var cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
 
@@ -7,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     if (!data.erro) {
-                        // Supondo que a API retorna os campos: logradouro, bairro, cidade, estado
+                        
                         document.getElementById('addressInput').value = data.logradouro;
                         document.getElementById('neighborhoodInput').value = data.bairro;
-                        document.getElementById('cityInput').value = data.localidade; // Note that the correct field is 'localidade'
-                        document.getElementById('stateInput').value = data.uf; // Note that the correct field is 'uf'
+                        document.getElementById('cityInput').value = data.localidade; 
+                        document.getElementById('stateInput').value = data.uf; 
 
                         console.log(data);
                     } else {
@@ -21,17 +25,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(() => {
                     alert('Erro ao buscar o CEP. Por favor, tente novamente mais tarde.');
                 });
-        } else {
-            alert('Por favor, insira um CEP válido.');
         }
+
+        function checkFormValidity() {
+            let allFilled = true;
+            inputs.forEach((input) => {
+                if (!input.value.trim()) {
+                    allFilled = false;
+                }
+            });
+            submitButton.disabled = !allFilled;
+        }
+
+        inputs.forEach((input) => {
+            input.addEventListener("input", checkFormValidity);
+        });
+
+        checkFormValidity();
     });
 
-    // Adicione a lógica para o envio do formulário conforme necessário
-    document.getElementById('addressForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Evitar envio padrão
 
-        // Aqui você pode processar o formulário conforme necessário
-        console.log('Formulário enviado com os dados:', new FormData(this));
-        // Execute sua lógica de envio de formulário
-    });
 });
