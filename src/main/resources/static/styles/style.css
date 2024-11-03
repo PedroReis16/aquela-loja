@@ -10,6 +10,7 @@
 @import url("./page_styles/carrinho.css");
 @import url("./page_styles/login.css");
 @import url("./page_styles/cadastro.css");
+@import url("./page_styles/usuario.css");
 
 /* Widgets */
 @import url("./fragment_styles/header_styles/header.css");
