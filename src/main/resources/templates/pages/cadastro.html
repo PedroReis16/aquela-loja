@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <div class="new-user-content" th:fragment="content">
-      <div
-        class="new-user-step"
-        id="new-user-step-1"
-        th:insert="~{fragments/new_user_fragments/new-user-details::content}"
-      ></div>
-      <div
-        class="new-user-step"
-        id="new-user-step-2"
-        th:insert="~{fragments/new_user_fragments/new-user-address::content}"
-      ></div>
-      <!--<div
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <div class="new-user-content" th:fragment="content">
+    <div class="new-user-step" id="new-user-step-1"
+      th:insert="~{fragments/user_fragments/new_user_fragments/new-user-details::content}"></div>
+    <div class="new-user-step" id="new-user-step-2"
+      th:insert="~{fragments/user_fragments/new_user_fragments/new-user-address::content}"></div>
+    <!--<div
         class="new-user-step"
         id="new-user-step-3"
         th:insert="~{fragments/new_user_fragments/new-user-card::content}"
       ></div> -->
-    </div>
+  </div>
 
-    <div th:fragment="contentScript">
-      <script
-        th:src="@{/js/fragments_scripts/new_user_scripts/new-user-details-script.js}"
-      ></script>
-      <script
-        th:src="@{/js/fragments_scripts/new_user_scripts/new-user-address-script.js}"
-      ></script>
-    </div>
-  </body>
+  <div th:fragment="contentScript">
+    <script th:src="@{/js/fragments_scripts/user_scripts/new_user_scripts/new-user-details-script.js}"></script>
+    <script th:src="@{/js/fragments_scripts/user_scripts/new_user_scripts/new-user-address-script.js}"></script>
+  </div>
+</body>
+
 </html>
