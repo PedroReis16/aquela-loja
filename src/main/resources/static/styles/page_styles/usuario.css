@@ -85,8 +85,82 @@
 }
 
 .widgets-container {
+  width: 100%;
+  margin: 32px 0;
+}
+
+#pageWidgetTitle {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--default-font);
+  color: var(--black);
+}
+
+#pageWidgetTitle > i::before {
+  content: "\e1bd";
+  font-family: var(--material-icons);
+  color: var(--primary-color);
+  margin-right: 8px;
+  position: relative;
+  top: 4px;
+}
+
+.widget-cards-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
   width: 100%;
+  margin: 16px 32px;
+}
+
+.widget-card {
+  display: flex;
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 64px;
+}
+
+.widget-card i {
+  font-family: var(--material-icons);
+  font-size: 48px;
+  color: var(--primary-color);
+}
+
+#editProfileCard i::before {
+  content: "\e7fd";
+}
+
+#ordersCard i::before {
+  content: "\e558";
+}
+
+#walletCard i::before {
+  content: "\f8ff";
+}
+
+#wishListCard i::before {
+  content: "\e87d";
+}
+
+.widget-card-content {
+  margin: 0px 0px 0px 8px;
+}
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px 0px 8px 0px;
+  font-family: var(--default-font);
+  color: var(--black);
+}
+
+.card-description {
+  font-size: 14px;
+  margin: 0px;
+  font-family: var(--secondary-font);
+  color: var(--dark-gray);
 }
