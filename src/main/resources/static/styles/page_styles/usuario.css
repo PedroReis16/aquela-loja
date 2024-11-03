@@ -1,5 +1,9 @@
 .normal-user-content {
-  margin: 64px 5%;
+  margin: 64px 5% 64px 3%;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .normal-user-content a {
   text-decoration: none;
@@ -8,21 +12,74 @@
 .user-card {
   display: flex;
   background-color: var(--white);
+  border-radius: 8px;
+  padding: 8px 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #userOverviewCard {
   width: 100%;
 }
+
 .user-details {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-#editProfileButton {
+.user-info {
+  margin: 0 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px 0px 8px 0px;
+}
+
+.user-info p {
+  font-size: 16px;
+  margin: 0px;
+}
+
+.user-info p > span::before {
+  content: "\e158";
+  font-family: var(--material-icons);
+  color: var(--primary-color);
+  position: relative;
+  top: 2px;
+  margin-right: 8px;
+}
+
+#editProfileBtn {
   background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  font-family: var(--default-font);
+  text-align: center;
+  text-decoration: none;
+  align-content: center;
+  height: 32px;
+  align-self: center;
 }
 
-#editProfileButton:hover {
+#editProfileBtn span::before {
+  content: "\e3c9";
+  font-family: var(--material-icons);
+  color: var(--white);
+  margin: 6px 4px 0px 0px;
+  position: relative;
+  top: 2px;
+}
+
+#editProfileBtn:hover {
   background-color: var(--primary-color-hover);
   transition: all 0.6s;
 }
@@ -31,4 +88,5 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
+  width: 100%;
 }

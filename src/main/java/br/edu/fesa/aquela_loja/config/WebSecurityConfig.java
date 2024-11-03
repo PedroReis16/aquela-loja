@@ -15,7 +15,8 @@ public class WebSecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/fragments/**", "/styles/**", "/js/**", "/images/**").permitAll() //Essa parmissão liberar o acesso livre aos diretórios de recursos
-                .requestMatchers("/","/cadastro", "/produtos", "/carrinho").permitAll()
+                .requestMatchers("/", "/cadastro", "/produtos", "/carrinho").permitAll()
+                .requestMatchers("/usuario", "/usuario/**").permitAll()
                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
