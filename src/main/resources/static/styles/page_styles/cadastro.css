@@ -1,0 +1,40 @@
+@import url("../fragment_styles/new_user_styles/new-user-details.css");
+@import url("../fragment_styles/new_user_styles/new-user-address.css");
+@import url("../fragment_styles/new_user_styles/new-user-card.css");
+
+.floating-label {
+  position: relative;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+/* Estiliza o campo de entrada */
+.floating-label input {
+  width: 100%;
+  padding: 10px;
+  padding-top: 20px; /* Espaço extra para a label */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+}
+/* Estiliza a label */
+.floating-label label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  font-size: 16px;
+  color: #666;
+  pointer-events: none; /* Desativa cliques na label */
+  transition: all 0.2s ease;
+}
+/* Quando o campo está focado ou preenchido, a label "flutua" */
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: #007bff;
+  background: white;
+  padding: 0 4px;
+}
