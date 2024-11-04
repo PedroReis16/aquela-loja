@@ -10,6 +10,30 @@
   justify-content: space-between;
 }
 
+#userDetailsEditTitle {
+  font-family: var(--default-font);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+#userDetailsEditTitle > i::before {
+  content: "\ea67";
+  font-family: var(--material-icons);
+  position: relative;
+  top: 4px;
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+.content-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-field-container{
+    margin: 4px 0;
+}
+
 .details-action-buttons {
   width: 100%;
   display: flex;
