@@ -1,10 +1,10 @@
 package br.edu.fesa.aquela_loja.controller;
 
+import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
+import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.fesa.aquela_loja.models.DTOs.NewUserDTO;
 import br.edu.fesa.aquela_loja.models.DTOs.UserAddressDTO;
@@ -14,6 +14,9 @@ import br.edu.fesa.aquela_loja.models.DTOs.UserDetailsDTO;
 @Controller
 @SessionAttributes("user")
 public class CadastroController {
+
+    @Autowired
+    private IAppUserRepository appUserRepository;
 
     @ModelAttribute("user")
     public NewUserDTO newUser() {
@@ -41,6 +44,14 @@ public class CadastroController {
         if (userCard != null) {
             //Tratar o novo usuário
         }
+
+        AppUserModel userModel = AppUserModel.builder()
+                .username(user.getName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .build();
+
+        appUserRepository.save(userModel);
 
         return "/";
     }

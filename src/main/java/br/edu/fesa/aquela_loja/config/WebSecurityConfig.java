@@ -1,9 +1,15 @@
 package br.edu.fesa.aquela_loja.config;
 
+import br.edu.fesa.aquela_loja.service.AppUserService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,14 +20,24 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class WebSecurityConfig {
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager userDetailsService = new InMemoryUserDetailsManager();
-//
-//        return null;
-//    }
+    @Autowired
+    private final AppUserService appUserService;
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return appUserService;
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(appUserService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
 
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
@@ -32,6 +48,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.ignoringRequestMatchers(toH2Console()).disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .headers(httpSecurityHeadersConfigurer -> {
                     httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
                 })
@@ -42,11 +59,11 @@ public class WebSecurityConfig {
                         .requestMatchers("/usuario", "/usuario/**").permitAll()
                         .requestMatchers("/h2-console").permitAll()
                         .requestMatchers(toH2Console()).permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/login").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
+                        .loginPage("/login").permitAll()
                         .defaultSuccessUrl("/", true))
                 .logout(logout -> logout.logoutSuccessUrl("/"))
                 .build();
