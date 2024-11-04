@@ -4,7 +4,23 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  min-height: 70vh;
+  min-height: 64vh;
+}
+
+#contentTitle {
+  font-family: var(--default-font);
+  font-size: 22px;
+  margin: 0px 0px 16px 16px;
+  font-weight: bold;
+}
+
+#contentTitle > i::before {
+  content: "\e1bd";
+  font-family: var(--material-icons);
+  position: relative;
+  top: 4px;
+  color: var(--primary-color);
+  margin-right: 8px;
 }
 
 @media (max-width: 768px) {
