@@ -11,6 +11,10 @@
 @import url("./page_styles/login.css");
 @import url("./page_styles/cadastro.css");
 @import url("./page_styles/usuario.css");
+@import url("./page_styles/user_page_styles/favoritos.css");
+@import url("./page_styles/user_page_styles/meus-cartoes.css");
+@import url("./page_styles/user_page_styles/meus-dados.css");
+@import url("./page_styles/user_page_styles/meus-pedidos.css");
 
 /* Widgets */
 @import url("./fragment_styles/header_styles/header.css");

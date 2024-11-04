@@ -1,10 +1,14 @@
-@import url("../user_page_styles/favoritos.css");
-@import url("../user_page_styles/meus-cartoes.css");
-@import url("../user_page_styles/meus-dados.css");
-@import url("../user_page_styles/meus-pedidos.css");
+@import url("../../fragment_styles/user_styles/user_details_styles/user-details-edit.css");
 
 .editable-items {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 12px;
+  min-height: 70vh;
+}
+
+@media (max-width: 768px) {
+  .editable-items {
+    grid-template-columns: 1fr;
+  }
 }
