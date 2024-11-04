@@ -14,16 +14,12 @@
       th:replace="~{fragments/header_fragments/header :: header}"
     ></header>
 
-    <main
-      class="main-content"
-      th:insert="~{${contentFragment} :: content}"
-    ></main>
 
     <!-- <footer th:replace="fragments/footer :: footer"></footer> -->
 
     <div
       th:replace="~{fragments/header_fragments/header :: headerScript}"
     ></div>
-    <div th:insert="~{${contentFragment} :: contentScript}"></div>
+<!--    <div th:insert="~{${contentFragment} :: contentScript}"></div>-->
   </body>
 </html>
