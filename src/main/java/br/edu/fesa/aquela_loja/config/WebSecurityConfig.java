@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -57,6 +58,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/fragments/**", "/styles/**", "/js/**", "/images/**").permitAll() //Essa parmissão liberar o acesso livre aos diretórios de recursos
                         .requestMatchers("/", "/cadastro", "/produtos", "/carrinho").permitAll()
                         .requestMatchers("/usuario", "/usuario/**").permitAll()
+                        .requestMatchers("/cadastrar", "/user/registration").permitAll()
                         .requestMatchers("/h2-console").permitAll()
                         .requestMatchers(toH2Console()).permitAll()
                         .requestMatchers("/login").permitAll()
@@ -66,6 +68,7 @@ public class WebSecurityConfig {
                         .loginPage("/login").permitAll()
                         .defaultSuccessUrl("/", true))
                 .logout(logout -> logout.logoutSuccessUrl("/"))
+                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 }

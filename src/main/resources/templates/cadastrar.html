@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <!-- Adicionando o link para o Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+
+        .registration-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .registration-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .registration-container .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-register {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="registration-container">
+    <h2>Cadastro de Usuário</h2>
+    <form action="#" th:action="@{/user/registration}" th:object="${registrationDto}" method="post">
+        <!-- Campo Nome -->
+        <div class="form-group">
+            <label for="username">Nome Completo</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Digite seu nome completo" required>
+        </div>
+
+        <!-- Campo Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Digite seu email" required>
+        </div>
+
+        <!-- Campo Senha -->
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Digite sua senha" required>
+        </div>
+
+        <!-- Campo CEP -->
+        <div class="form-group">
+            <label for="cep">CEP</label>
+            <input type="text" class="form-control" id="cep" th:field="*{cep}" placeholder="Digite seu CEP" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-register">Cadastrar</button>
+    </form>
+</div>
+
+<!-- Adicionando o script do Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

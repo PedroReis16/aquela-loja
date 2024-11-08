@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "wallet")
 @Entity
 @NoArgsConstructor
-public class WalletModel {
+public class PaymentCardModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,4 +15,8 @@ public class WalletModel {
     private String type;
 
     private String number;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private AppUserModel appUser;
 }

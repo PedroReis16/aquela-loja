@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -8,21 +8,21 @@
     <link th:href="@{/styles/style.css}" rel="stylesheet" />
 
     <title>Aquela Loja</title>
-  </head>
-  <body>
-    <header
-      th:replace="~{fragments/header_fragments/header :: header}"
-    ></header>
+</head>
+<body>
+<header
+        th:replace="~{fragments/header_fragments/header :: header}"
+></header>
 
-    <main>
-    <a href="/secure/home"><button>LOGIN</button></a>
-    </main>
+<main>
+    <h1>LOGADO!</h1>>
+</main>
 
-    <!-- <footer th:replace="fragments/footer :: footer"></footer> -->
+<!-- <footer th:replace="fragments/footer :: footer"></footer> -->
 
-    <div
-      th:replace="~{fragments/header_fragments/header :: headerScript}"
-    ></div>
+<div
+        th:replace="~{fragments/header_fragments/header :: headerScript}"
+></div>
 <!--    <div th:insert="~{${contentFragment} :: contentScript}"></div>-->
-  </body>
+</body>
 </html>

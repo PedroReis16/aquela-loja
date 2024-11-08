@@ -1,6 +1,5 @@
 package br.edu.fesa.aquela_loja.service;
 
-import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
 import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -16,10 +15,10 @@ public class AppUserService implements UserDetailsService {
     private IAppUserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var optUser = repository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        var optUser = repository.findByEmail(email);
 
-        System.out.println("Usuário capturado: " +username);
+        System.out.println("Usuário capturado: " + email);
 
         if (optUser.isPresent()) {
             var user = optUser.get();
@@ -28,7 +27,7 @@ public class AppUserService implements UserDetailsService {
                     .password(user.getPassword())
                     .build();
         } else {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(email);
         }
     }
 }

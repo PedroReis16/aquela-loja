@@ -1,10 +1,9 @@
 package br.edu.fesa.aquela_loja.models.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,4 +22,10 @@ public class AppUserModel {
     private String email;
 
     private String password;
+
+    @OneToMany(mappedBy = "appUser",cascade = CascadeType.ALL)
+    private List<AddressModel> address;
+
+    @OneToMany(mappedBy = "appUser",cascade = CascadeType.ALL)
+    private List<PaymentCardModel> wallet;
 }
