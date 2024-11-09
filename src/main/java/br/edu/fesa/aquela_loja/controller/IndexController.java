@@ -17,36 +17,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class IndexController {
 
-    
+    @GetMapping({"/", "/{page}"})
+    public String loadPage(Model model, @PathVariable(required = false) String page) {
 
-//    @GetMapping({"/", "/{page}"})
-//    public String loadPage(Model model, @PathVariable(required = false) String page) {
-//
-//        if (page == null || page.isEmpty() || !page.isEmpty() && "inicio".equals(page)) {
-//            model.addAttribute("contentFragment", "pages/inicio");
-//        } else {
-//            model.addAttribute("contentFragment", "pages/" + page);
-//        }
-//
-//        return "index";
-//
-//    }
-    @GetMapping("/")
-    public String index() {
-        return "index";
+        if (page == null || page.isEmpty() || !page.isEmpty() && "inicio".equals(page)) {
+            return "index";
+        } else {
+            return "pages/" + page;
+        }
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
+    // @GetMapping("/")
+    // public String index() {
+    //     return "index";
+    // }
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
     @GetMapping("/cadastrar")
     public String cadastrar(RegistrationDto registrationDto) {
         return "cadastrar";
     }
-
-    
 
     @GetMapping("/seguro/home")
     public String homesegura() {
@@ -55,8 +47,7 @@ public class IndexController {
 
     @GetMapping({"/usuario/{page}"})
     public String loadUserPages(Model model, @PathVariable String page) {
-        model.addAttribute("contentFragment", "pages/user_pages/" + page);
-        return "index";
+        return "pages/user_pages/" + page;
     }
 
 }
