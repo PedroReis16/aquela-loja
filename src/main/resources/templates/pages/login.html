@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html xmls:th="https://www.thymeleaf.org">
+<html xmls:th="https://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml"
+  xmlns:xmls="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link th:href="@{/styles/reset.css}" rel="stylesheet" />
+  <link th:href="@{/styles/style.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -38,11 +42,10 @@
       </button>
       <p id="forgotMyPassword"><a href="#">Esqueci minha senha</a></p>
       <p id="signUp">
-        É novo por aqui?<a id="signUpLink" href="cadastro">Crie sua conta</a>
+        É novo por aqui?<a id="signUpLink" href="/cadastro">Crie sua conta</a>
       </p>
     </form>
   </div>
-  <div th:fragment="contentScript"></div>
 </body>
 
 </html>

@@ -1,77 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="normal-user-content" th:fragment="content">
-      <section class="user-card" id="userOverviewCard">
-        <img th:src="@{/images/robo-avatar.png}" alt="" id="userProfilePic" />
-        <div class="user-details">
-          <div class="user-info">
-            <h3 id="userName">Bem vindo, Fulano de tal</h3>
-            <p id="userEmail"><span></span>fulanodetal@gmail.com</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <link th:href="@{/styles/reset.css}" rel="stylesheet" />
+  <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="normal-user-content" th:fragment="content">
+    <section class="user-card" id="userOverviewCard">
+      <img th:src="@{/images/robo-avatar.png}" alt="" id="userProfilePic" />
+      <div class="user-details">
+        <div class="user-info">
+          <h3 id="userName">Bem vindo, Fulano de tal</h3>
+          <p id="userEmail"><span></span>fulanodetal@gmail.com</p>
+        </div>
+
+        <a id="editProfileBtn" href="/usuario/meus-dados">
+          <span></span>
+          <p>Editar dados</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="widgets-container">
+      <h2 id="pageWidgetTitle"><i></i>Atalhos</h2>
+
+      <div class="widget-cards-container">
+        <a href="/usuario/meus-dados">
+          <div class="user-card widget-card" id="editProfileCard">
+            <i></i>
+            <div class="widget-card-content">
+              <p class="card-title">Meus Dados</p>
+              <p class="card-description">
+                Atualize suas informações pessoais,<br />
+                edite ou cadastre um endereço
+              </p>
+            </div>
           </div>
+        </a>
 
-          <a id="editProfileBtn" href="/usuario/meus-dados">
-            <span></span>
-            <p>Editar dados</p>
-          </a>
-        </div>
-      </section>
-
-      <section class="widgets-container">
-        <h2 id="pageWidgetTitle"><i></i>Atalhos</h2>
-
-        <div class="widget-cards-container">
-            <a href="/usuario/meus-dados">
-              <div class="user-card widget-card" id="editProfileCard">
-                <i></i>
-                <div class="widget-card-content">
-                  <p class="card-title">Meus Dados</p>
-                  <p class="card-description">
-                    Atualize suas informações pessoais,<br />
-                    edite ou cadastre um endereço
-                  </p>
-                </div>
-              </div>
-            </a>
-
-            <a href="/usuario/meus-pedidos">
-              <div class="user-card widget-card" id="ordersCard">
-                <i></i>
-                <div class="widget-card-content">
-                  <p class="card-title">Meus Pedidos</p>
-                  <p class="card-description">
-                    Acompanhe todos os seus pedidos
-                  </p>
-                </div>
-              </div>
-            </a>
-
-          <a href="/usuario/meus-cartoes">
-            <div class="user-card widget-card" id="walletCard">
-              <i></i>
-              <div class="widget-card-content">
-                <p class="card-title">Carteira</p>
-                <p class="card-description">Gerencie seus cartões</p>
-              </div>
+        <a href="/usuario/meus-pedidos">
+          <div class="user-card widget-card" id="ordersCard">
+            <i></i>
+            <div class="widget-card-content">
+              <p class="card-title">Meus Pedidos</p>
+              <p class="card-description">
+                Acompanhe todos os seus pedidos
+              </p>
             </div>
-          </a>
-          <a href="/usuario/favoritos">
-            <div class="user-card widget-card" id="wishListCard">
-              <i></i>
-              <div class="widget-card-content">
-                <p class="card-title">Favoritos</p>
-                <p class="card-description">Consulte seus produtos desejados</p>
-              </div>
+          </div>
+        </a>
+
+        <a href="/usuario/meus-cartoes">
+          <div class="user-card widget-card" id="walletCard">
+            <i></i>
+            <div class="widget-card-content">
+              <p class="card-title">Carteira</p>
+              <p class="card-description">Gerencie seus cartões</p>
             </div>
-          </a>
-        </div>
-      </section>
-    </div>
-    <div th:fragment="contentScript"></div>
-  </body>
+          </div>
+        </a>
+        <a href="/usuario/favoritos">
+          <div class="user-card widget-card" id="wishListCard">
+            <i></i>
+            <div class="widget-card-content">
+              <p class="card-title">Favoritos</p>
+              <p class="card-description">Consulte seus produtos desejados</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
+</body>
+
 </html>
