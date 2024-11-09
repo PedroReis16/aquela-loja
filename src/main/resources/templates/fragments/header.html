@@ -17,7 +17,7 @@
           <img th:src="@{/images/logo.png}" alt="" class="logo" />
         </a>
 
-        <div id="logoCart" class="cart-container" th:fragment="shoppingCart">
+        <div id="logoCart" class="cart-container">
           <div class="item-count">
             <p id="count">1</p>
           </div>
@@ -25,13 +25,13 @@
         </div>
       </div>
 
-      <div class="search-container" th:fragment="searchBar">
+      <div class="search-container">
         <input id="searchBar" type="text" class="search-input" placeholder="Pesquisar..." />
         <button id="searchButton"></button>
       </div>
 
       <div class="action-pages">
-        <div class="user-avatar" th:fragment="userAvatar">
+        <div class="user-avatar">
           <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
           <p>
             <span class="emphasis-text"><a href="/signin" id="login">Entre</a></span>
@@ -40,7 +40,7 @@
           </p>
         </div>
 
-        <div id="normalCart" class="cart-container" th:fragment="shoppingCart">
+        <div id="normalCart" class="cart-container">
           <div class="item-count">
             <p id="count">1</p>
           </div>
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="header-departaments" th:fragment="departaments">
+    <div class="header-departaments">
       <div class="dropdown" id="hardware">
         <button class="dropbtn">Hardware</button>
         <div class="dropdown-content">
@@ -136,7 +136,7 @@
       </div>
     </div>
 
-    <div class="side-menu" id="sideMenu" th:fragment="sideMenu">
+    <div class="side-menu" id="sideMenu">
       <div class="side-menu-title">
         <h3 id="menuTitle">Departamentos</h3>
         <p id="closeBtn"></p>
@@ -253,7 +253,7 @@
 
 
 
-  <div class="header-script" th:fragment="headerScript">
+  <div class="header-script">
     <script th:src="@{/js/fragments_scripts/header.js}"></script>
     <script th:src="@{/js/fragments_scripts/side-menu.js}"></script>
   </div>

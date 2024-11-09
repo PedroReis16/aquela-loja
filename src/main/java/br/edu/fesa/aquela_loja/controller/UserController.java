@@ -14,7 +14,7 @@ import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
 
 @Controller
 @SessionAttributes("user")
-public class CadastroController {
+public class UserController {
 
     @Autowired
     private IAppUserRepository appUserRepository;
@@ -54,4 +54,6 @@ public class CadastroController {
         addressRepository.save(addressModel);
         return "redirect:/";
     }
+
+    
 }
