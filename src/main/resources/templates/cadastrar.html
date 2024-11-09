@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
-    <!-- Adicionando o link para o Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body,
@@ -20,38 +19,25 @@
 
         .registration-container {
             width: 100%;
+            max-width: 500px;
             padding: 30px;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .form {
-            display: flex;
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .btn-next,
+        .btn-back {
             width: 100%;
-        }
-
-        .registration-container h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .registration-container .form-group label {
-            font-weight: bold;
-        }
-
-        .btn-register {
-            width: 100%;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -59,127 +45,124 @@
 <body>
     <div class="registration-container">
         <h2>Cadastro de Usuário</h2>
-        <form class="form" action="#" th:action="@{/user/registration}" th:object="${registrationDto}" method="post">
-            <!-- Campo Nome -->
-            <div class="form-group">
-                <label for="username">Nome Completo</label>
-                <input type="text" class="form-control" id="username" th:field="*{username}"
-                    placeholder="Digite seu nome completo" required>
+        <form id="registrationForm" action="#" th:action="@{/user/registration}" th:object="${registrationDto}"
+            method="post">
+
+            <!-- Primeira Etapa: Informações do Usuário -->
+            <div id="userInfo" class="form-section active">
+                <div class="form-group">
+                    <label for="username">Nome Completo</label>
+                    <input type="text" class="form-control" id="username" th:field="*{username}"
+                        placeholder="Digite seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="document">CPF</label>
+                    <input type="text" class="form-control" id="document" th:field="*{document}"
+                        placeholder="Digite seu CPF" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gênero</label>
+                    <input type="text" class="form-control" id="gender" th:field="*{gender}"
+                        placeholder="Digite seu gênero" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="birthdate" th:field="*{birthdate}" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="text" class="form-control" id="phone" th:field="*{phone}"
+                        placeholder="Digite seu telefone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}"
+                        placeholder="Digite seu email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}"
+                        placeholder="Digite sua senha" required>
+                </div>
+                <button type="button" class="btn btn-primary btn-next" id="nextButton">Next</button>
             </div>
 
-            <!-- Campo CPF -->
-            <div class="form-group">
-                <label for="document">CPF</label>
-                <input type="text" class="form-control" id="document" th:field="*{document}"
-                    placeholder="Digite seu nome completo" required>
+            <!-- Segunda Etapa: Informações de Endereço -->
+            <div id="addressInfo" class="form-section">
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" class="form-control" id="cep" th:field="*{cep}" placeholder="Digite seu CEP"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="street">Endereço</label>
+                    <input type="text" class="form-control" id="street" th:field="*{street}"
+                        placeholder="Digite seu endereço" required>
+                </div>
+                <div class="form-group">
+                    <label for="number">Número</label>
+                    <input type="text" class="form-control" id="number" th:field="*{number}"
+                        placeholder="Digite o número" required>
+                </div>
+                <div class="form-group">
+                    <label for="neighborhood">Bairro</label>
+                    <input type="text" class="form-control" id="neighborhood" th:field="*{neighborhood}" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">Cidade</label>
+                    <input type="text" class="form-control" id="city" th:field="*{city}" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">Estado</label>
+                    <input type="text" class="form-control" id="state" th:field="*{state}" required>
+                </div>
+                <button type="button" class="btn btn-secondary btn-back" id="backButton">Back</button>
+                <button type="submit" class="btn btn-primary btn-register">Cadastrar</button>
             </div>
-
-            <!-- Campo Genero -->
-            <div class="form-group">
-                <label for="gender">Genero</label>
-                <input type="text" class="form-control" id="gender" th:field="*{gender}"
-                    placeholder="Digite seu nome completo" required>
-            </div>
-
-            <!-- Campo Data de nascimento -->
-            <div class="form-group">
-                <label for="birthdate">Data de nascimento</label>
-                <input type="text" class="form-control" id="birthdate" th:field="*{birthdate}"
-                    placeholder="Digite seu nome completo" required>
-            </div>
-
-            <!-- Campo Telefone -->
-            <div class="form-group">
-                <label for="phone">Telefone</label>
-                <input type="text" class="form-control" id="phone" th:field="*{phone}"
-                    placeholder="Digite seu nome completo" required>
-            </div>
-
-            <!-- Campo Email -->
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Digite seu email"
-                    required>
-            </div>
-
-            <!-- Campo Senha -->
-            <div class="form-group">
-                <label for="password">Senha</label>
-                <input type="password" class="form-control" id="password" th:field="*{password}"
-                    placeholder="Digite sua senha" required>
-            </div>
-
-            <!-- Campo CEP -->
-            <div class="form-group">
-                <label for="cep">CEP</label>
-                <input type="text" class="form-control" id="cep" th:field="*{cep}" placeholder="Digite seu CEP"
-                    required>
-            </div>
-
-            <!-- Campo Identificação -->
-            <div class="form-group">
-                <label for="addressIdentification">Identificação</label>
-                <input type="text" class="form-control" id="addressIdentification" th:field="*{addressIdentification}"
-                    placeholder="Digite seu CEP" required>
-            </div>
-
-            <!-- Campo Logradouro -->
-            <div class="form-group">
-                <label for="street">Endereço</label>
-                <input type="text" class="form-control" id="street" th:field="*{street}" placeholder="Digite seu CEP"
-                    required>
-            </div>
-
-            <!-- Campo Numero -->
-            <div class="form-group">
-                <label for="number">Número</label>
-                <input type="text" class="form-control" id="number" th:field="*{number}" placeholder="Digite seu CEP"
-                    required>
-            </div>
-
-            <!-- Campo Bairro -->
-            <div class="form-group">
-                <label for="neighborhood">Bairro</label>
-                <input type="text" class="form-control" id="neighborhood" th:field="*{neighborhood}"
-                    placeholder="Digite seu CEP" required>
-            </div>
-
-            <!-- Campo Cidade -->
-            <div class="form-group">
-                <label for="city">Cidade</label>
-                <input type="text" class="form-control" id="city" th:field="*{city}" placeholder="Digite seu CEP"
-                    required>
-            </div>
-
-            <!-- Campo Estado -->
-            <div class="form-group">
-                <label for="state">Estado</label>
-                <input type="text" class="form-control" id="state" th:field="*{state}" placeholder="Digite seu CEP"
-                    required>
-            </div>
-
-            <!-- Campo Complemento -->
-            <div class="form-group">
-                <label for="complement">Complemento</label>
-                <input type="text" class="form-control" id="complement" th:field="*{complement}"
-                    placeholder="Digite seu CEP" required>
-            </div>
-
-            <!-- Campo Referencia -->
-            <div class="form-group">
-                <label for="reference">Referência</label>
-                <input type="text" class="form-control" id="reference" th:field="*{reference}"
-                    placeholder="Digite seu CEP" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-register">Cadastrar</button>
         </form>
     </div>
 
-    <!-- Adicionando o script do Bootstrap -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nextButton = document.getElementById("nextButton");
+            const backButton = document.getElementById("backButton");
+            const userInfo = document.getElementById("userInfo");
+            const addressInfo = document.getElementById("addressInfo");
+
+            // Função para validar se todos os campos da primeira etapa estão preenchidos
+            function validateFirstStep() {
+                const inputs = userInfo.querySelectorAll("input[required]");
+                for (let input of inputs) {
+                    if (!input.value) {
+                        input.focus();
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // Evento do botão Next
+            nextButton.addEventListener("click", function () {
+                if (validateFirstStep()) {
+                    userInfo.classList.remove("active");
+                    addressInfo.classList.add("active");
+                } else {
+                    alert("Por favor, preencha todos os campos da primeira etapa.");
+                }
+            });
+
+            // Evento do botão Back
+            backButton.addEventListener("click", function () {
+                userInfo.classList.add("active");
+                addressInfo.classList.remove("active");
+            });
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
+
 
 </html>
