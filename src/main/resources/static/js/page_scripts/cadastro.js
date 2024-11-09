@@ -63,6 +63,12 @@ inputCEP.addEventListener('blur', async function (e) {
                 document.querySelector('input[placeholder="Cidade"]').value = data.localidade;
                 document.querySelector('input[placeholder="Estado"]').value = data.uf;
             }
+            else {
+                document.querySelector('input[placeholder="Endereço"]').value =
+                document.querySelector('input[placeholder="Bairro"]').value =
+                document.querySelector('input[placeholder="Cidade"]').value =
+                document.querySelector('input[placeholder="Estado"]').value = '';
+            }
         } catch (error) {
             console.error('Erro ao buscar CEP:', error);
         }
