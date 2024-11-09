@@ -54,19 +54,18 @@ public class WebSecurityConfig {
                     httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
                 })
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/fragments/**", "/styles/**", "/js/**", "/images/**").permitAll() //Essa parmissão liberar o acesso livre aos diretórios de recursos
-                        .requestMatchers("/", "/cadastro", "/produtos", "/carrinho").permitAll()
-                        .requestMatchers("/usuario", "/usuario/**").permitAll()
-                        .requestMatchers("/cadastrar", "/user/registration").permitAll()
-                        .requestMatchers("/h2-console").permitAll()
-                        .requestMatchers(toH2Console()).permitAll()
-                        .requestMatchers("/login").permitAll()
-                        .anyRequest().authenticated()
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/fragments/**", "/styles/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/", "/produtos", "/carrinho").permitAll()
+                .requestMatchers("/cadastro", "/user/registration").permitAll()
+                .requestMatchers("/h2-console").permitAll()
+                .requestMatchers(toH2Console()).permitAll()
+                .requestMatchers("/login").permitAll()
+                .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login").permitAll()
-                        .defaultSuccessUrl("/", true))
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/", true))
                 .logout(logout -> logout.logoutSuccessUrl("/"))
                 .httpBasic(Customizer.withDefaults())
                 .build();

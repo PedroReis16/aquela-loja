@@ -3,6 +3,7 @@ package br.edu.fesa.aquela_loja.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -11,6 +12,10 @@ import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
 import br.edu.fesa.aquela_loja.repository.IAddressRepository;
 import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 @SessionAttributes("user")
@@ -50,10 +55,25 @@ public class UserController {
                 .reference(registrationDto.getReference())
                 .appUser(appUser)
                 .build();
+
         appUserRepository.save(appUser);
         addressRepository.save(addressModel);
         return "redirect:/";
     }
 
+    @GetMapping(value = "/usuario")
+    public String getMethodName(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
+        String userName = auth.getName();
+        Object useremail = auth.getCredentials();
+
+        //  AppUserModel currentUser = appUserRepository.findByEmail(currentUserEmail).get();
+
+        model.addAttribute("username", userName);
+        // model.addAttribute("email", useremail);
+
+        return "pages/user_pages/usuario";
+    }
     
 }

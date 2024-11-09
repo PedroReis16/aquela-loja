@@ -19,8 +19,9 @@
         <img th:src="@{/images/robo-avatar.png}" alt="" id="userProfilePic" />
         <div class="user-details">
           <div class="user-info">
-            <h3 id="userName">Bem vindo, Fulano de tal</h3>
-            <p id="userEmail"><span></span>fulanodetal@gmail.com</p>
+            <h3 id="userName">Bem vindo, <span th:text="${username}"></span>
+            </h3>
+            <p id="userEmail"><i></i><span th:text="${useremail}"></span></p>
           </div>
 
           <a id="editProfileBtn" href="/usuario/meus-dados">

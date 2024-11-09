@@ -41,7 +41,7 @@
   margin: 0px;
 }
 
-.user-info p > span::before {
+.user-info p > i::before {
   content: "\e158";
   font-family: var(--material-icons);
   color: var(--primary-color);
