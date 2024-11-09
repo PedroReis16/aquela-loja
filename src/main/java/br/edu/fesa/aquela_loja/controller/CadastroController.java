@@ -1,14 +1,16 @@
 package br.edu.fesa.aquela_loja.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import br.edu.fesa.aquela_loja.controller.dto.RegistrationDto;
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
 import br.edu.fesa.aquela_loja.repository.IAddressRepository;
 import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
 @Controller
 @SessionAttributes("user")
@@ -29,7 +31,7 @@ public class CadastroController {
         AppUserModel appUser = AppUserModel.builder()
                 .username(registrationDto.getUsername())
                 .document(registrationDto.getDocument())
-                // .gender(registrationDto.getGender())
+                .gender(registrationDto.getGender())
                 .birthdate(registrationDto.getBirthdate())
                 .phone(registrationDto.getPhone())
                 .email(registrationDto.getEmail())
@@ -48,10 +50,8 @@ public class CadastroController {
                 .reference(registrationDto.getReference())
                 .appUser(appUser)
                 .build();
-
         appUserRepository.save(appUser);
         addressRepository.save(addressModel);
-
         return "redirect:/";
     }
 }

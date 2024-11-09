@@ -12,104 +12,191 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="cadastro-container">
         <form id="formCadastro" th:action="@{/user/registration}" th:object="${registrationDto}" method="post">
             <!-- Etapa 1: Criar Conta -->
             <div class="form-step active" id="step1">
-                <h1>Criar Conta</h1>
-                <div class="input-group">
-                    <input type="text" name="nomeCompleto" placeholder="Nome Completo" th:field="*{username}" required>
-                </div>
+                <h1 class="cadastro-title">Criar Conta</h1>
+                <div class="form-content">
 
-                <!-- <div class="input-group">
-                    <select name="genero" th:field="*{gender}" required>
-                        <option value="">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="O">Outro</option>
-                    </select>
-                </div> -->
-
-                <div class="input-group">
-                    <input type="tel" name="telefone" placeholder="Telefone" th:field="*{phone}" required>
-                </div>
-
-                <div class="input-group">
-                    <input type="text" name="cpf" placeholder="CPF" th:field="*{document}" required>
-                </div>
-
-                <div class="input-group">
-                    <input type="date" name="dataNascimento" placeholder="Data de nascimento" th:field="*{birthdate}"
-                        required>
-                </div>
-
-                <div class="input-group">
-                    <input type="email" name="email" placeholder="Email" th:field="*{email}" required>
-                </div>
-
-                <div class="input-group">
-                    <div class="password-input">
-                        <input type="password" name="senha" placeholder="Senha" required>
-                        <span class="toggle-password">👁️</span>
+                    <div class="person-name-container">
+                        <div class="input-label">
+                            <i id="personIcon"></i>
+                            <input type="text" name="nomeCompleto" placeholder="Nome Completo" th:field="*{username}"
+                                required>
+                            <label for="nomeCompleto"></label>
+                        </div>
+                        <p id="personNameErrorMessage" class="error-message"></p>
                     </div>
-                </div>
 
-                <div class="input-group">
-                    <div class="password-input">
-                        <input type="password" name="confirmarSenha" placeholder="Confirmar Senha"
-                            th:field="*{password}" required>
-                        <span class="toggle-password">👁️</span>
+                    <div class="document-container">
+                        <div class="input-label">
+                            <i id="documentIcon"></i>
+                            <input type="tel" name="cpf" placeholder="CPF" th:field="*{document}" maxlength="14"
+                                required>
+                            <label for="cpf"></label>
+                        </div>
+                        <p id="DocumentErrorMessage" class="error-message"></p>
                     </div>
+
+                    <div class="gender-container">
+                        <div class="input-label">
+                            <i id="genderIcon"></i>
+                            <select id="genderSelect" class="custom-select" th:field="*{gender}">
+                                <option value="Male">Masculino</option>
+                                <option value="Female">Feminino</option>
+                                <option value="Other">Outro</option>
+                            </select>
+                        </div>
+                        <p id="genderErrorMessage" class="error-message"></p>
+                    </div>
+
+                    <div class="phone-container">
+                        <div class="input-label">
+                            <i id="phoneIcon"></i>
+                            <input type="tel" name="telefone" placeholder="Telefone" th:field="*{phone}" required>
+                            <label for="telefone"></label>
+                        </div>
+                        <p id="PhoneErrorMessage" class="error-message"></p>
+                    </div>
+
+                    <div class="birthdate-container">
+                        <div class="input-label">
+                            <i id="birthIcon"></i>
+                            <input type="date" name="dataNascimento" placeholder="Data de nascimento"
+                                th:field="*{birthdate}" required>
+                            <label for="dataNascimento"></label>
+                        </div>
+                        <p id="BirthdateErrorMessage" class="error-message"></p>
+                    </div>
+
+                    <div class="details-email-container">
+                        <div class="input-label">
+                            <i id="emailIcon"></i>
+                            <input type="email" id="emailInput" placeholder="Email" th:field="*{email}" required />
+                        </div>
+                        <p id="emailErrorMessage" class="error-message"></p>
+                    </div>
+
+                    <div class="details-password-container">
+                        <div class="input-label">
+                            <i class="password-icon"></i>
+                            <input type="password" id="passwordInput" placeholder="Senha" required />
+                            <button type="button" class="visibility-control" id="passwordBtn"></button>
+                        </div>
+                        <p id="passwordErrorMessage" class="error-message"></p>
+                    </div>
+
+                    <div class="details-confirm-password-container">
+                        <div class="input-label">
+                            <i class="password-icon"></i>
+                            <input type="password" id="confirmPasswordInput" placeholder="Confirmar Senha"
+                                th:field="*{password}" required />
+
+                            <button type="button" class="visibility-control" id="confirmPasswordBtn"></button>
+                        </div>
+                        <p id="confirmPasswordErrorMessage" class="error-message"></p>
+                    </div>
+
                 </div>
 
-                <button type="button" class="btn-continuar" onclick="nextStep()">Continuar →</button>
+                <button type="button" class="confirm-button cadastro-btn" onclick="nextStep()">
+                    <p>Continuar<i></i></p>
+                </button>
             </div>
 
             <!-- Etapa 2: Adicionar endereço -->
             <div class="form-step" id="step2">
-                <div class="endereco-header" onclick="prevStep()">
-                    ← Adicionar endereço
+                <p class="endereco-header cadastro-title" onclick="prevStep()"> <i></i>Adicionar endereço</p>
+
+                <div id="userAddressForm">
+
+                    <div class="cep-container">
+                        <div class="input-label">
+                            <i id="cepIcon"></i>
+                            <input type="text" name="cep" placeholder="CEP" th:field="*{cep}" required>
+                            <label for="cep"></label>
+                        </div>
+                        <p id="CEPInputErrorMessage" class="error-message"></p>
+                    </div>
+                    <div class="identifier-container">
+                        <div class="input-label">
+                            <i id="idIcon"></i>
+                            <input type="text" name="identificacao" placeholder="Identificação"
+                                th:field="*{addressIdentification}" required>
+                            <label for="identificacao"></label>
+                        </div>
+                        <p id="identificationInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="address-input-container">
+                        <div class="input-label">
+                            <i id="streetIcon"></i>
+                            <input type="text" name="endereco" placeholder="Endereço" th:field="*{street}" readonly
+                                required>
+                            <label for="endereco"></label>
+                        </div>
+                        <p id="addressInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="number-container">
+                        <div class="input-label">
+                            <i id="numberIcon"></i>
+                            <input type="number" name="numero" placeholder="Número" th:field="*{number}" required>
+                            <label for="numero"></label>
+                        </div>
+                        <p id="numberInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="neighborhood-container">
+                        <div class="input-label">
+                            <i id="neighborhoodIcon"></i>
+                            <input type="text" name="bairro" placeholder="Bairro" th:field="*{neighborhood}" readonly
+                                required>
+                            <label for="bairro"></label>
+                        </div>
+                        <p id="neighborhoodInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="city-container">
+                        <div class="input-label">
+                            <i id="cityIcon"></i>
+                            <input type="text" name="cidade" placeholder="Cidade" th:field="*{city}" readonly required>
+                            <label for="cidade"></label>
+                        </div>
+                        <p id="cityInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="state-container">
+                        <div class="input-label">
+                            <i id="stateIcon"></i>
+                            <input type="text" name="estado" placeholder="Estado" th:field="*{state}" readonly required>
+                            <label for="estado"></label>
+                        </div>
+                        <p id="stateInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="complement-container">
+                        <div class="input-label">
+                            <i id="complementIcon"></i>
+                            <input type="text" name="complemento" placeholder="Complemento" th:field="*{complement}">
+                            <label for="complemento"></label>
+                        </div>
+                        <p id="complementInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="reference-container">
+                        <div class="input-label">
+                            <i id="referenceIcon"></i>
+                            <input type="text" name="referencia" placeholder="Referência" th:field="*{reference}">
+                            <label for="referencia"></label>
+                        </div>
+                        <p id="referenceInputError" class="error-message"></p>
+                    </div>
+
                 </div>
 
-                <div class="endereco-grid">
-                    <div class="input-group">
-                        <input type="text" name="cep" placeholder="CEP" th:field="*{cep}" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" name="identificacao" placeholder="Identificação"
-                            th:field="*{addressIdentification}" required>
-                    </div>
-                </div>
-
-                <div class="endereco-grid">
-                    <div class="input-group">
-                        <input type="text" name="endereco" placeholder="Endereço" th:field="*{street}" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" name="numero" placeholder="Número" th:field="*{number}" required>
-                    </div>
-                </div>
-
-                <div class="endereco-grid-3">
-                    <div class="input-group">
-                        <input type="text" name="bairro" placeholder="Bairro" th:field="*{neighborhood}" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" name="cidade" placeholder="Cidade" th:field="*{city}" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" name="estado" placeholder="Estado" th:field="*{state}" required>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <input type="text" name="complemento" placeholder="Complemento" th:field="*{complement}">
-                </div>
-
-                <div class="input-group">
-                    <input type="text" name="referencia" placeholder="Referência" th:field="*{reference}">
-                </div>
-
-                <button type="submit" class="btn-salvar">Salvar</button>
+                <button type="submit" class="confirm-button cadastro-btn">Salvar</button>
             </div>
         </form>
     </div>

@@ -61,3 +61,77 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--dark-blue);
 }
+
+/* Estilização dos inputs de texto */
+.input-label {
+  position: relative;
+  margin: 0px 0;
+  font-family: Arial, sans-serif;
+  display: grid;
+  grid-template-columns: 32px 1fr 48px;
+  align-content: center;
+  background-color: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+  height: 56px;
+}
+
+.input-label input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.input-label > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilização dos botões de confirmação */
+.confirm-button {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-family: var(--default-font);
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  cursor: pointer;
+  margin: 24px 0px 0px 0px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  vertical-align: middle;
+}
+
+.confirm-button i::before {
+  content: "\e5c8";
+  font-family: var(--material-icons);
+  margin-right: 8px;
+  margin-left: 8px;
+  margin-top: 8px;
+  font-size: 16px;
+  position: relative;
+  top: 2px;
+}
+
+.confirm-button:disabled {
+  background-color: var(--gray);
+  color: var(--dark-gray);
+}
+.confirm-button:disabled:hover {
+  background-color: var(--gray);
+  color: var(--dark-gray);
+}
+
+.confirm-button:hover {
+  background-color: var(--primary-color-hover);
+  transition: all 0.6s;
+}
