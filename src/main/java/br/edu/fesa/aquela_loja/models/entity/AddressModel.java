@@ -18,6 +18,22 @@ public class AddressModel {
 
     private String cep;
 
+    private String addressIdentification;
+
+    private String street;
+
+    private String number;
+
+    private String neighborhood;
+
+    private String city;
+
+    private String state;
+
+    private String complement;
+
+    private String reference;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private AppUserModel appUser;

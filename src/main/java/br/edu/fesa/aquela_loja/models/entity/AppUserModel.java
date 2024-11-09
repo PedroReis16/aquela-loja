@@ -19,6 +19,14 @@ public class AppUserModel {
 
     private String username;
 
+    private String document;
+
+    private String gender;
+
+    private String birthdate;
+
+    private String phone;
+
     private String email;
 
     private String password;

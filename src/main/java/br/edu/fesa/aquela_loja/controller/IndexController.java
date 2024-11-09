@@ -38,7 +38,6 @@ public class IndexController {
 //        return "index";
 //
 //    }
-
     @GetMapping("/")
     public String index() {
         return "index";
@@ -56,14 +55,27 @@ public class IndexController {
 
     @PostMapping(value = "/user/registration")
     public String registration(RegistrationDto registrationDto) {
+
         AppUserModel appUser = AppUserModel.builder()
                 .username(registrationDto.getUsername())
-                .password(passwordEncoder.encode(registrationDto.getPassword()))
+                .document(registrationDto.getDocument())
+                .gender(registrationDto.getGender())
+                .birthdate(registrationDto.getBirthdate())
+                .phone(registrationDto.getPhone())
                 .email(registrationDto.getEmail())
+                .password(passwordEncoder.encode(registrationDto.getPassword()))
                 .build();
 
         AddressModel addressModel = AddressModel.builder()
                 .cep(registrationDto.getCep())
+                .addressIdentification(registrationDto.getAddressIdentification())
+                .street(registrationDto.getStreet())
+                .number(registrationDto.getNumber())
+                .neighborhood(registrationDto.getNeighborhood())
+                .city(registrationDto.getCity())
+                .state(registrationDto.getState())
+                .complement(registrationDto.getComplement())
+                .reference(registrationDto.getReference())
                 .appUser(appUser)
                 .build();
 
@@ -72,6 +84,7 @@ public class IndexController {
 
         return "redirect:/";
     }
+
     @GetMapping("/seguro/home")
     public String homesegura() {
         return "homeSegura";
