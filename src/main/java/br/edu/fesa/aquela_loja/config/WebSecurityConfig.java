@@ -1,8 +1,7 @@
 package br.edu.fesa.aquela_loja.config;
 
-import br.edu.fesa.aquela_loja.service.AppUserService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,10 +13,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+import br.edu.fesa.aquela_loja.service.AppUserService;
+import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
@@ -54,14 +53,21 @@ public class WebSecurityConfig {
                     httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
                 })
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/fragments/**", "/styles/**", "/js/**", "/images/**").permitAll()
-                .requestMatchers("/", "/produtos", "/carrinho").permitAll()
-                .requestMatchers("/cadastro", "/user/registration").permitAll()
-                .requestMatchers("/h2-console").permitAll()
-                .requestMatchers(toH2Console()).permitAll()
-                .requestMatchers("/login").permitAll()
-                .anyRequest().authenticated()
+                // //Autenticação das páginas de administrador e usuário
+                // .requestMatchers("/administrador/**").hasRole(ADMIN.name())
+                // .requestMatchers("/usuario/**").hasAnyRole(USER.name(), ADMIN.name())
+                // //Autenticação das rotas de administrador
+                // .requestMatchers(GET, "/admin/**").hasAuthority(ADMIN_READ.name())
+                // .requestMatchers(POST, "/admin/**").hasAuthority(ADMIN_CREATE.name())
+                // .requestMatchers(PUT, "/admin/**").hasAuthority(ADMIN_UPDATE.name())
+                // .requestMatchers(DELETE, "/admin/**").hasAuthority(ADMIN_DELETE.name())
+                // //Autenticação das rotas de usuário
+                // .requestMatchers("/user/registration").permitAll()
+                // .requestMatchers(GET, "/user/**").hasAnyAuthority(USER_READ.name(), ADMIN_READ.name())
+                // .requestMatchers(POST, "/user/**").hasAnyAuthority(USER_CREATE.name(), ADMIN_CREATE.name())
+                // .requestMatchers(PUT, "/user/**").hasAnyAuthority(ADMIN_UPDATE.name())
+                // .requestMatchers(DELETE, "/user/**").hasAnyAuthority(ADMIN_DELETE.name())
+                .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                 .loginPage("/login").permitAll()

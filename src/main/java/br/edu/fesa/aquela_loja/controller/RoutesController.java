@@ -5,18 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import br.edu.fesa.aquela_loja.controller.dto.RegistrationDto;
+import br.edu.fesa.aquela_loja.models.dto.RegistrationDto;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RoutesController {
-     @GetMapping({"/", "/{page}"})
-    public String loadPage(Model model, @PathVariable(required = false) String page) {
 
-        if (page == null || page.isEmpty() || !page.isEmpty() && "inicio".equals(page)) {
-            return "pages/index";
-        } else {
-            return "pages/" + page;
-        }
+    @GetMapping({"/", "/inicio", "/home"})
+    public String loadPage(Model model, @PathVariable(required = false) String page) {
+        return "pages/index";
     }
 
     @GetMapping("/login")
@@ -33,4 +30,10 @@ public class RoutesController {
     public String loadUserPages(Model model, @PathVariable String page) {
         return "pages/user_pages/" + page;
     }
+
+    @GetMapping("/administrador")
+    public String getMethodName(@RequestParam String param) {
+        return "pages/admin_pages/admin";
+    }
+
 }

@@ -1,5 +1,7 @@
-package br.edu.fesa.aquela_loja.controller.dto;
+package br.edu.fesa.aquela_loja.models.dto;
 
+import br.edu.fesa.aquela_loja.models.enums.Role;
+import static br.edu.fesa.aquela_loja.models.enums.Role.USER;
 import lombok.Data;
 
 @Data
@@ -28,4 +30,6 @@ public class RegistrationDto {
     private String state;
     private String complement;
     private String reference;
+
+    private Role role = USER;
 }

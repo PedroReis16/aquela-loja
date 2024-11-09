@@ -3,7 +3,13 @@ package br.edu.fesa.aquela_loja.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import br.edu.fesa.aquela_loja.models.enums.Role;
 
 @Entity
 @Getter
@@ -11,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AppUserModel {
+public class AppUserModel implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +37,18 @@ public class AppUserModel {
 
     private String password;
 
-    @OneToMany(mappedBy = "appUser",cascade = CascadeType.ALL)
+    private Role role;
+
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<AddressModel> address;
 
-    @OneToMany(mappedBy = "appUser",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<PaymentCardModel> wallet;
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getAuthorities();
+    }
 }

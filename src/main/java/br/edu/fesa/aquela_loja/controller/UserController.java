@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import br.edu.fesa.aquela_loja.controller.dto.RegistrationDto;
+import br.edu.fesa.aquela_loja.models.dto.RegistrationDto;
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
 import br.edu.fesa.aquela_loja.repository.IAddressRepository;
@@ -41,6 +41,7 @@ public class UserController {
                 .phone(registrationDto.getPhone())
                 .email(registrationDto.getEmail())
                 .password(passwordEncoder.encode(registrationDto.getPassword()))
+                .role(registrationDto.getRole())
                 .build();
 
         AddressModel addressModel = AddressModel.builder()
