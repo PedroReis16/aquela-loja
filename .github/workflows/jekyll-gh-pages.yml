@@ -25,31 +25,12 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:15-alpine
-        ports:
-          - "5432:5432"
-        options: >-
-          --health-cmd="pg_isready"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-        env:
-          POSTGRES_USER: admin
-          POSTGRES_PASSWORD: admin1234
-          POSTGRES_DB: lojadb
-          POSTGRES_PORT: 5432
-        volumes:
-          - postgres_data:/var/lib/postgresql/data
-          
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Wait for PostgreSQL
-        run: until pg_isready -h localhost -p 5432; do sleep 1; done
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
@@ -57,10 +38,6 @@ jobs:
           destination: ./_site
       - name: Adjust permissions for _site directory
         run: sudo chmod -R 777 ./_site
-      - name: Copy custom index.html
-        run: cp src/main/resources/templates/index.html ./_site/index.html
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
 
   # Deployment job
   deploy:
