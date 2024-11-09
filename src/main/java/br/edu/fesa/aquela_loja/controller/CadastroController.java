@@ -29,7 +29,7 @@ public class CadastroController {
         AppUserModel appUser = AppUserModel.builder()
                 .username(registrationDto.getUsername())
                 .document(registrationDto.getDocument())
-                .gender(registrationDto.getGender())
+                // .gender(registrationDto.getGender())
                 .birthdate(registrationDto.getBirthdate())
                 .phone(registrationDto.getPhone())
                 .email(registrationDto.getEmail())

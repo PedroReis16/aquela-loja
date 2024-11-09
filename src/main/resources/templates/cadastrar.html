@@ -1,168 +1,322 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Usuário</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Criar Conta</title>
     <style>
-        body,
-        html {
-            height: 100%;
+        * {
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
             background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
         }
 
-        .registration-container {
+        .container {
             width: 100%;
-            max-width: 500px;
-            padding: 30px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
         }
 
-        .form-section {
+        h1 {
+            color: #0066ff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-step {
             display: none;
         }
 
-        .form-section.active {
+        .form-step.active {
             display: block;
         }
 
-        .btn-next,
-        .btn-back {
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input,
+        .input-group select {
             width: 100%;
-            margin-top: 10px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+            background-color: white;
+        }
+
+        .input-group input::placeholder {
+            color: #999;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #0066ff;
+        }
+
+        .password-input {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+        }
+
+        .endereco-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: #0066ff;
+            cursor: pointer;
+        }
+
+        .endereco-header i {
+            margin-right: 10px;
+        }
+
+        .btn-continuar {
+            background-color: #00e5ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            width: fit-content;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .btn-salvar {
+            background-color: #e0e0e0;
+            color: #666;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            width: fit-content;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .endereco-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .endereco-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="registration-container">
-        <h2>Cadastro de Usuário</h2>
-        <form id="registrationForm" action="#" th:action="@{/user/registration}" th:object="${registrationDto}"
-            method="post">
+    <div class="container">
+        <form id="formCadastro" th:action="@{/user/registration}" th:object="${registrationDto}" method="post">
+            <!-- Etapa 1: Criar Conta -->
+            <div class="form-step active" id="step1">
+                <h1>Criar Conta</h1>
+                <div class="input-group">
+                    <input type="text" name="nomeCompleto" placeholder="Nome Completo" th:field="*{username}" required>
+                </div>
 
-            <!-- Primeira Etapa: Informações do Usuário -->
-            <div id="userInfo" class="form-section active">
-                <div class="form-group">
-                    <label for="username">Nome Completo</label>
-                    <input type="text" class="form-control" id="username" th:field="*{username}"
-                        placeholder="Digite seu nome completo" required>
-                </div>
-                <div class="form-group">
-                    <label for="document">CPF</label>
-                    <input type="text" class="form-control" id="document" th:field="*{document}"
-                        placeholder="Digite seu CPF" required>
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gênero</label>
-                    <input type="text" class="form-control" id="gender" th:field="*{gender}"
-                        placeholder="Digite seu gênero" required>
-                </div>
-                <div class="form-group">
-                    <label for="birthdate">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="birthdate" th:field="*{birthdate}" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Telefone</label>
-                    <input type="text" class="form-control" id="phone" th:field="*{phone}"
-                        placeholder="Digite seu telefone" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}"
-                        placeholder="Digite seu email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" class="form-control" id="password" th:field="*{password}"
-                        placeholder="Digite sua senha" required>
-                </div>
-                <button type="button" class="btn btn-primary btn-next" id="nextButton">Next</button>
-            </div>
+                <!-- <div class="input-group">
+                    <select name="genero" th:field="*{gender}" required>
+                        <option value="">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="O">Outro</option>
+                    </select>
+                </div> -->
 
-            <!-- Segunda Etapa: Informações de Endereço -->
-            <div id="addressInfo" class="form-section">
-                <div class="form-group">
-                    <label for="cep">CEP</label>
-                    <input type="text" class="form-control" id="cep" th:field="*{cep}" placeholder="Digite seu CEP"
+                <div class="input-group">
+                    <input type="tel" name="telefone" placeholder="Telefone" th:field="*{phone}" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="cpf" placeholder="CPF" th:field="*{document}" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="date" name="dataNascimento" placeholder="Data de nascimento" th:field="*{birthdate}"
                         required>
                 </div>
-                <div class="form-group">
-                    <label for="street">Endereço</label>
-                    <input type="text" class="form-control" id="street" th:field="*{street}"
-                        placeholder="Digite seu endereço" required>
+
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email" th:field="*{email}" required>
                 </div>
-                <div class="form-group">
-                    <label for="number">Número</label>
-                    <input type="text" class="form-control" id="number" th:field="*{number}"
-                        placeholder="Digite o número" required>
+
+                <div class="input-group">
+                    <div class="password-input">
+                        <input type="password" name="senha" placeholder="Senha" required>
+                        <span class="toggle-password">👁️</span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="neighborhood">Bairro</label>
-                    <input type="text" class="form-control" id="neighborhood" th:field="*{neighborhood}" required>
+
+                <div class="input-group">
+                    <div class="password-input">
+                        <input type="password" name="confirmarSenha" placeholder="Confirmar Senha"
+                            th:field="*{password}" required>
+                        <span class="toggle-password">👁️</span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="city">Cidade</label>
-                    <input type="text" class="form-control" id="city" th:field="*{city}" required>
+
+                <button type="button" class="btn-continuar" onclick="nextStep()">Continuar →</button>
+            </div>
+
+            <!-- Etapa 2: Adicionar endereço -->
+            <div class="form-step" id="step2">
+                <div class="endereco-header" onclick="prevStep()">
+                    ← Adicionar endereço
                 </div>
-                <div class="form-group">
-                    <label for="state">Estado</label>
-                    <input type="text" class="form-control" id="state" th:field="*{state}" required>
+
+                <div class="endereco-grid">
+                    <div class="input-group">
+                        <input type="text" name="cep" placeholder="CEP" th:field="*{cep}" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="identificacao" placeholder="Identificação"
+                            th:field="*{addressIdentification}" required>
+                    </div>
                 </div>
-                <button type="button" class="btn btn-secondary btn-back" id="backButton">Back</button>
-                <button type="submit" class="btn btn-primary btn-register">Cadastrar</button>
+
+                <div class="endereco-grid">
+                    <div class="input-group">
+                        <input type="text" name="endereco" placeholder="Endereço" th:field="*{street}" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="numero" placeholder="Número" th:field="*{number}" required>
+                    </div>
+                </div>
+
+                <div class="endereco-grid-3">
+                    <div class="input-group">
+                        <input type="text" name="bairro" placeholder="Bairro" th:field="*{neighborhood}" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="cidade" placeholder="Cidade" th:field="*{city}" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="estado" placeholder="Estado" th:field="*{state}" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="complemento" placeholder="Complemento" th:field="*{complement}">
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="referencia" placeholder="Referência" th:field="*{reference}">
+                </div>
+
+                <button type="submit" class="btn-salvar">Salvar</button>
             </div>
         </form>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const nextButton = document.getElementById("nextButton");
-            const backButton = document.getElementById("backButton");
-            const userInfo = document.getElementById("userInfo");
-            const addressInfo = document.getElementById("addressInfo");
+        // Controle de navegação entre etapas
+        function nextStep() {
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+        }
 
-            // Função para validar se todos os campos da primeira etapa estão preenchidos
-            function validateFirstStep() {
-                const inputs = userInfo.querySelectorAll("input[required]");
-                for (let input of inputs) {
-                    if (!input.value) {
-                        input.focus();
-                        return false;
-                    }
-                }
-                return true;
-            }
+        function prevStep() {
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+        }
 
-            // Evento do botão Next
-            nextButton.addEventListener("click", function () {
-                if (validateFirstStep()) {
-                    userInfo.classList.remove("active");
-                    addressInfo.classList.add("active");
-                } else {
-                    alert("Por favor, preencha todos os campos da primeira etapa.");
-                }
-            });
-
-            // Evento do botão Back
-            backButton.addEventListener("click", function () {
-                userInfo.classList.add("active");
-                addressInfo.classList.remove("active");
+        // Toggle de visibilidade da senha
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function () {
+                const input = this.previousElementSibling;
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
             });
         });
+
+        // Máscaras para os campos
+        const inputCPF = document.querySelector('input[placeholder="CPF"]');
+        inputCPF.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+
+        const inputTelefone = document.querySelector('input[placeholder="Telefone"]');
+        inputTelefone.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+
+        const inputCEP = document.querySelector('input[placeholder="CEP"]');
+        inputCEP.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 8) {
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+
+        // Busca de CEP
+        inputCEP.addEventListener('blur', async function (e) {
+            const cep = e.target.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                try {
+                    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                    const data = await response.json();
+
+                    if (!data.erro) {
+                        document.querySelector('input[placeholder="Endereço"]').value = data.logradouro;
+                        document.querySelector('input[placeholder="Bairro"]').value = data.bairro;
+                        document.querySelector('input[placeholder="Cidade"]').value = data.localidade;
+                        document.querySelector('input[placeholder="Estado"]').value = data.uf;
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar CEP:', error);
+                }
+            }
+        });
+
+        // Submissão do formulário
+        document.getElementById('formEndereco').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Aqui você pode adicionar a lógica para enviar os dados para o servidor
+            alert('Cadastro realizado com sucesso!');
+        });
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
-
 
 </html>
