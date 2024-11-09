@@ -17,37 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class IndexController {
 
-    @GetMapping({"/", "/{page}"})
-    public String loadPage(Model model, @PathVariable(required = false) String page) {
-
-        if (page == null || page.isEmpty() || !page.isEmpty() && "inicio".equals(page)) {
-            return "index";
-        } else {
-            return "pages/" + page;
-        }
-    }
-
-    // @GetMapping("/")
-    // public String index() {
-    //     return "index";
-    // }
-    // @GetMapping("/login")
-    // public String login() {
-    //     return "login";
-    // }
-    @GetMapping("/cadastrar")
-    public String cadastrar(RegistrationDto registrationDto) {
-        return "cadastrar";
-    }
-
-    @GetMapping("/seguro/home")
-    public String homesegura() {
-        return "homeSegura";
-    }
-
-    @GetMapping({"/usuario/{page}"})
-    public String loadUserPages(Model model, @PathVariable String page) {
-        return "pages/user_pages/" + page;
-    }
+   
 
 }
