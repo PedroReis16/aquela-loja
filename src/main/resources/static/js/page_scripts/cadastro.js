@@ -68,10 +68,3 @@ inputCEP.addEventListener('blur', async function (e) {
         }
     }
 });
-
-// Submissão do formulário
-document.getElementById('formEndereco').addEventListener('submit', function (e) {
-    e.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar os dados para o servidor
-    alert('Cadastro realizado com sucesso!');
-});
