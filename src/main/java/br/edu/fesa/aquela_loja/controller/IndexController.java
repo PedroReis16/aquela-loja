@@ -17,14 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private IAppUserRepository appUserRepository;
-
-    @Autowired
-    private IAddressRepository addressRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    
 
 //    @GetMapping({"/", "/{page}"})
 //    public String loadPage(Model model, @PathVariable(required = false) String page) {
@@ -53,37 +46,7 @@ public class IndexController {
         return "cadastrar";
     }
 
-    @PostMapping(value = "/user/registration")
-    public String registration(RegistrationDto registrationDto) {
-
-        AppUserModel appUser = AppUserModel.builder()
-                .username(registrationDto.getUsername())
-                .document(registrationDto.getDocument())
-                .gender(registrationDto.getGender())
-                .birthdate(registrationDto.getBirthdate())
-                .phone(registrationDto.getPhone())
-                .email(registrationDto.getEmail())
-                .password(passwordEncoder.encode(registrationDto.getPassword()))
-                .build();
-
-        AddressModel addressModel = AddressModel.builder()
-                .cep(registrationDto.getCep())
-                .addressIdentification(registrationDto.getAddressIdentification())
-                .street(registrationDto.getStreet())
-                .number(registrationDto.getNumber())
-                .neighborhood(registrationDto.getNeighborhood())
-                .city(registrationDto.getCity())
-                .state(registrationDto.getState())
-                .complement(registrationDto.getComplement())
-                .reference(registrationDto.getReference())
-                .appUser(appUser)
-                .build();
-
-        appUserRepository.save(appUser);
-        addressRepository.save(addressModel);
-
-        return "redirect:/";
-    }
+    
 
     @GetMapping("/seguro/home")
     public String homesegura() {
