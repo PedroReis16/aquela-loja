@@ -11,6 +11,7 @@ import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_DELETE;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_READ;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_UPDATE;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_CREATE;
+import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_DELETE;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_READ;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_UPDATE;
 import lombok.Getter;
@@ -20,9 +21,9 @@ import lombok.RequiredArgsConstructor;
 public enum Role {
 
     //Usuário somente tem a permissão de usuário
-    USER(Set.of(USER_READ, USER_CREATE, USER_UPDATE)),
+    USER(Set.of(USER_READ, USER_CREATE, USER_UPDATE, USER_DELETE)),
     //Admin permissão de usuário e administrador
-    ADMIN(Set.of(USER_READ, USER_CREATE, USER_UPDATE, ADMIN_READ, ADMIN_CREATE, ADMIN_UPDATE, ADMIN_DELETE));
+    ADMIN(Set.of(USER_READ, USER_CREATE, USER_UPDATE, USER_DELETE, ADMIN_READ, ADMIN_CREATE, ADMIN_UPDATE, ADMIN_DELETE));
 
     @Getter
     private final Set<Permission> permissions;

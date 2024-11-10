@@ -13,8 +13,8 @@ public enum Permission {
     //Admin Permissions
     USER_READ("user:read"),
     USER_CREATE("user:create"),
-    USER_UPDATE("user:write"); 
-    
+    USER_UPDATE("user:write"),
+    USER_DELETE("user:delete");
 
     @Getter
     private final String permission;
