@@ -135,3 +135,18 @@ a {
   background-color: var(--primary-color-hover);
   transition: all 0.6s;
 }
+
+.cancel-btn {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+  font-family: var(--default-font);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.cancel-btn:hover {
+  color: var(--primary-color-hover);
+  text-decoration: underline;
+}
