@@ -38,8 +38,14 @@ public class RoutesController {
     //     return "pages/user_pages/" + page;
     // }
     @GetMapping("/administrador")
-    public String getMethodName() {
+    public String getAdminPage() {
         return "pages/admin_pages/admin";
     }
+
+    @GetMapping("/user-address")
+    public String getAddressPage() {
+        return "pages/user-address";
+    }
+    
 
 }

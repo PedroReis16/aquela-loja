@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Endereços</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .add-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-button:hover {
+            background-color: #45a049;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .address-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 20px;
+        }
+
+        .address-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .address-summary {
+            margin-bottom: 10px;
+        }
+
+        .address-summary h3 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .address-summary p {
+            color: #666;
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .address-details {
+            margin-bottom: 20px;
+        }
+
+        .address-details p {
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .address-details label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .edit-button,
+        .delete-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .edit-button {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        .save-button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cancel-button {
+            padding: 8px 16px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .confirmation-modal .modal-content {
+            max-width: 400px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Meus Endereços</h1>
+            <button class="add-button" onclick="openAddressModal()">Adicionar Endereço</button>
+        </div>
+
+        <div id="addresses-container" class="cards-container">
+            <!-- Cards serão inseridos aqui via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes do Endereço -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalhes do Endereço</h2>
+                <button class="close-button" onclick="closeDetailsModal()">&times;</button>
+            </div>
+            <div id="address-details" class="address-details">
+                <!-- Detalhes do endereço serão inseridos aqui -->
+            </div>
+            <div class="modal-actions">
+                <button class="edit-button" onclick="editAddress()">Editar</button>
+                <button class="delete-button" onclick="deleteAddress()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="edit-modal-title">Adicionar Endereço</h2>
+                <button class="close-button" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="address-form" onsubmit="saveAddress(event)">
+                <input type="hidden" id="address-id">
+                <div class="form-group">
+                    <label for="street">Rua</label>
+                    <input type="text" id="street" required>
+                </div>
+                <div class="form-group">
+                    <label for="number">Número</label>
+                    <input type="text" id="number" required>
+                </div>
+                <div class="form-group">
+                    <label for="neighborhood">Bairro</label>
+                    <input type="text" id="neighborhood" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">Cidade</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">Estado</label>
+                    <input type="text" id="state" required maxlength="2">
+                </div>
+                <div class="form-group">
+                    <label for="zipcode">CEP</label>
+                    <input type="text" id="zipcode" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-button" onclick="closeEditModal()">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmation-modal" class="modal confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão</h2>
+                <button class="close-button" onclick="closeConfirmationModal()">&times;</button>
+            </div>
+            <p>Tem certeza que deseja excluir este endereço?</p>
+            <div class="modal-actions">
+                <button class="cancel-button" onclick="closeConfirmationModal()">Cancelar</button>
+                <button class="delete-button" onclick="confirmDelete()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let addresses = [
+            {
+                id: 1,
+                street: 'Rua das Flores',
+                number: '123',
+                neighborhood: 'Centro',
+                city: 'São Paulo',
+                state: 'SP',
+                zipcode: '01001-000'
+            }
+        ];
+        let currentAddressId = null;
+
+        // Função para renderizar os cards de endereços
+        function renderAddresses() {
+            const container = document.getElementById('addresses-container');
+
+            if (addresses.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>Nenhum endereço cadastrado</h3>
+                        <p>Clique no botão "Adicionar Endereço" para começar</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = addresses.map(address => `
+                <div class="address-card" onclick="showAddressDetails(${address.id})">
+                    <div class="address-summary">
+                        <h3>${address.street}, ${address.number}</h3>
+                        <p>${address.neighborhood}</p>
+                        <p>${address.city} - ${address.state}</p>
+                        <p>CEP: ${address.zipcode}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Função para mostrar detalhes do endereço
+        function showAddressDetails(id) {
+            const address = addresses.find(a => a.id === id);
+            if (!address) return;
+
+            currentAddressId = id;
+            const detailsContent = document.getElementById('address-details');
+            detailsContent.innerHTML = `
+                <p><label>Rua:</label> ${address.street}</p>
+                <p><label>Número:</label> ${address.number}</p>
+                <p><label>Bairro:</label> ${address.neighborhood}</p>
+                <p><label>Cidade:</label> ${address.city}</p>
+                <p><label>Estado:</label> ${address.state}</p>
+                <p><label>CEP:</label> ${address.zipcode}</p>
+            `;
+
+            document.getElementById('details-modal').style.display = 'block';
+        }
+
+        // Funções do modal de edição
+        function openAddressModal(addressId = null) {
+            const modal = document.getElementById('edit-modal');
+            const modalTitle = document.getElementById('edit-modal-title');
+            const form = document.getElementById('address-form');
+
+            if (addressId) {
+                const address = addresses.find(a => a.id === addressId);
+                if (address) {
+                    modalTitle.textContent = 'Editar Endereço';
+                    document.getElementById('address-id').value = address.id;
+                    document.getElementById('street').value = address.street;
+                    document.getElementById('number').value = address.number;
+                    document.getElementById('neighborhood').value = address.neighborhood;
+                    document.getElementById('city').value = address.city;
+                    document.getElementById('state').value = address.state;
+                    document.getElementById('zipcode').value = address.zipcode;
+                }
+            } else {
+                modalTitle.textContent = 'Adicionar Endereço';
+                form.reset();
+                document.getElementById('address-id').value = '';
+            }
+
+            closeDetailsModal();
+            modal.style.display = 'block';
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('edit-modal');
+            modal.style.display = 'none';
+        }
+
+        function closeDetailsModal() {
+            const modal = document.getElementById('details-modal');
+            modal.style.display = 'none';
+            currentAddressId = null;
+        }
+
+        function saveAddress(event) {
+            event.preventDefault();
+
+            const addressId = document.getElementById('address-id').value;
+            const address = {
+                street: document.getElementById('street').value,
+                number: document.getElementById('number').value,
+                neighborhood: document.getElementById('neighborhood').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zipcode: document.getElementById('zipcode').value
+            };
+
+            if (addressId) {
+                // Editando endereço existente
+                const index = addresses.findIndex(a => a.id === parseInt(addressId));
+                if (index !== -1) {
+                    addresses[index] = { ...addresses[index], ...address };
+                }
+            } else {
+                // Adicionando novo endereço
+                const newId = addresses.length > 0 ? Math.max(...addresses.map(a => a.id)) + 1 : 1;
+                addresses.push({ id: newId, ...address });
+            }
+
+            renderAddresses();
+            closeEditModal();
+        }
+
+        // Funções de edição
+        function editAddress() {
+            if (currentAddressId) {
+                openAddressModal(currentAddressId);
+            }
+        }
+
+        // Funções de exclusão
+        function deleteAddress() {
+            if (addresses.length <= 1) {
+                alert('Não é possível excluir o último endereço.');
+                return;
+            }
+
+            document.getElementById('confirmation-modal').style.display = 'block';
+        }
+
+        function closeConfirmationModal() {
+            const modal = document.getElementById('confirmation-modal');
+            modal.style.display = 'none';
+        }
+
+        function confirmDelete() {
+            if (currentAddressId !== null) {
+                addresses = addresses.filter(a => a.id !== currentAddressId);
+                renderAddresses();
+                closeConfirmationModal();
+                closeDetailsModal();
+            }
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAddresses();
+        });
+
+        // Fechar modais quando clicar fora deles
+        window.onclick = function (event) {
+            const detailsModal = document.getElementById('details-modal');
+            const editModal = document.getElementById('edit-modal');
+            const confirmationModal = document.getElementById('confirmation-modal');
+
+            if (event.target === detailsModal) {
+                closeDetailsModal();
+            }
+            if (event.target === editModal) {
+                closeEditModal();
+            }
+            if (event.target === confirmationModal) {
+                closeConfirmationModal();
+            }
+        };
+    </script>
+</body>
+
+</html>
