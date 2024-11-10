@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
-import br.edu.fesa.aquela_loja.models.dto.UpdateUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UpdatedUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
@@ -69,7 +69,14 @@ public class IUserService {
         return user;
     }
 
-    public void updateUser(Long userId, UpdateUserDto updatedUser) {
+    public void updateUser(UserDto updatedUser) {
+        AppUserModel savedUser = appUserRepository.findByDocument(updatedUser.getDocument()).get();
 
+        savedUser.setUsername(updatedUser.getUserName());
+        savedUser.setEmail(updatedUser.getEmail());
+        savedUser.setGender(updatedUser.getGender());
+        savedUser.setPhone(updatedUser.getPhone());
+
+        appUserRepository.save(savedUser);
     }
 }

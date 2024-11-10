@@ -6,19 +6,20 @@ import lombok.Data;
 @Data
 public class UserDto {
     private Long id;
-    private String username;
+    private String userName;
     private String document;
     private String gender;
-    private String birthdate;
+    private String birthDate;
     private String phone;
     private String email;
 
     public UserDto(){}
 
     public UserDto(AppUserModel appUser){
-        this.username = appUser.getUsername();
+        this.id = appUser.getUserId();
+        this.userName = appUser.getUsername();
         this.document = appUser.getDocument();
-        this.birthdate = appUser.getBirthdate();
+        this.birthDate = appUser.getBirthdate();
         this.phone = appUser.getPhone();
         this.email = appUser.getEmail();
         this.gender = appUser.getGender();

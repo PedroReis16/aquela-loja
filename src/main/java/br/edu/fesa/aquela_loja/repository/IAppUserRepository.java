@@ -10,8 +10,9 @@ import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
 @Repository
 public interface IAppUserRepository extends JpaRepository<AppUserModel, Long> {
 
-    Optional<AppUserModel> findByUserId(Long userId);
+    Optional<AppUserModel> findByDocument(String document);
 
     Optional<AppUserModel> findByEmail(String email);
+
 
 }

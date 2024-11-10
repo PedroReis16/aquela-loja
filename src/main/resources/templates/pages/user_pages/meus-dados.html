@@ -17,14 +17,14 @@
     <h2 id="contentTitle"><i></i>Meus Dados</h2>
 
     <div class="editable-items">
-      <form id="user-details-edit-container" th:fragment="content">
+      <form id="user-details-edit-container" th:action="@{/user/edit}" th:object="${updatedUser}" method="post">
         <h3 id="userDetailsEditTitle"><i></i>Dados básicos</h3>
 
         <div class="content-container">
           <div class="person-name-container edit-field-container">
             <div class="input-label">
               <i id="personIcon"></i>
-              <input type="text" id="nameInput" placeholder="Nome Completo" required />
+              <input type="text" id="nameInput" placeholder="Nome Completo" th:field="*{userName}" required />
               <label for="nameInput"></label>
             </div>
             <p id="personNameErrorMessage" class="error-message"></p>
@@ -33,7 +33,7 @@
           <div class="person-name-container edit-field-container">
             <div class="input-label">
               <i id="phoneIcon"></i>
-              <input type="text" id="nameInput" placeholder="Telefone" required />
+              <input type="text" id="nameInput" placeholder="Telefone" th:field="*{phone}" required />
               <label for="nameInput"></label>
             </div>
             <p id="personNameErrorMessage" class="error-message"></p>
@@ -42,7 +42,7 @@
           <div class="gender-container edit-field-container">
             <div class="input-label">
               <i id="genderIcon"></i>
-              <select id="genderSelect" class="custom-select">
+              <select id="genderSelect" class="custom-select" th:field="*{gender}">
                 <option value="Male">Masculino</option>
                 <option value="Female">Feminino</option>
                 <option value="Other">Outro</option>
@@ -54,7 +54,7 @@
           <div class="person-name-container edit-field-container">
             <div class="input-label">
               <i id="emailIcon"></i>
-              <input type="text" id="nameInput" placeholder="Email" required />
+              <input type="text" id="nameInput" placeholder="Email" th:field="*{email}" required />
               <label for="nameInput"></label>
             </div>
             <p id="personNameErrorMessage" class="error-message"></p>
@@ -63,7 +63,7 @@
           <div class="person-name-container edit-field-container">
             <div class="input-label">
               <i id="documentIcon"></i>
-              <input type="text" id="nameInput" placeholder="CPF" required />
+              <input type="text" id="nameInput" placeholder="CPF" th:field="*{document}" readonly />
               <label for="nameInput"></label>
             </div>
             <p id="personNameErrorMessage" class="error-message"></p>
@@ -72,7 +72,7 @@
           <div class="person-name-container edit-field-container">
             <div class="input-label">
               <i id="personIcon"></i>
-              <input type="text" id="nameInput" placeholder="Data de nascimento" required />
+              <input type="text" id="nameInput" placeholder="Data de nascimento" th:field="*{birthDate}" readonly />
               <label for="nameInput"></label>
             </div>
             <p id="personNameErrorMessage" class="error-message"></p>

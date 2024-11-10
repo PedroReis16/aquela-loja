@@ -4,14 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
-import br.edu.fesa.aquela_loja.models.dto.UpdateUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.service.IUserService;
 
@@ -34,23 +31,28 @@ public class UserController {
 
         UserDto user = userService.getAuthenticatedUser();
 
-        model.addAttribute("userName", user.getUsername());
+        model.addAttribute("userName", user.getUserName());
         model.addAttribute("userEmail", user.getEmail());
 
         return "pages/user_pages/usuario";
     }
 
-    @PutMapping("/user/{id}")
-    public String putMethodName(@PathVariable Long id, @RequestBody UpdateUserDto entity) {
+    @GetMapping(value = "/usuario/meus-dados")
+    public String editUserDetails(Model model) {
 
-        userService.updateUser(id, entity);
+        UserDto user = userService.getAuthenticatedUser();
 
+        // model.addAttribute("user", user);
+        model.addAttribute("updatedUser", user);
         return "pages/user_pages/meus-dados";
     }
 
-    @GetMapping(value = "/usuario/meus-dados")
-    public String editUserDetails(Model model) {
-        return "pages/user_pages/meus-dados";
+    @PostMapping(value = "/user/edit")
+    public String putMethodName(@ModelAttribute UserDto updatedUser) {
+
+        userService.updateUser( updatedUser);
+
+        return "redirect:/pages/user_pages/meus-dados";
     }
 
     @GetMapping("/usuario/meus-pedidos")
