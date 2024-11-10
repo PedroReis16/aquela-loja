@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -34,5 +35,9 @@ public class ProductService {
         productRepository.save(product);
 
         imageService.generateFileModel(img, product);
+    }
+
+    public List<ProductModel> findAll() {
+        return productRepository.findAll();
     }
 }
