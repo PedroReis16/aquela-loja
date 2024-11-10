@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
-import br.edu.fesa.aquela_loja.service.IUserService;
+import br.edu.fesa.aquela_loja.service.UserService;
 
 @Controller
 @SessionAttributes("user")
 public class UserController {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @PostMapping(value = "/user/registration")
     public String registration(NewUserDto newUserDto) {

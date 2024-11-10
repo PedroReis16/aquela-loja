@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
-import br.edu.fesa.aquela_loja.models.dto.UpdatedUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
@@ -17,7 +16,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class IUserService {
+public class UserService {
 
     @Autowired
     private IAppUserRepository appUserRepository;
