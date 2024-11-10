@@ -1,7 +1,5 @@
 package br.edu.fesa.aquela_loja;
 
-import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
+import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
 import br.edu.fesa.aquela_loja.repository.IAddressRepository;
 import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
 
@@ -30,6 +29,7 @@ public class AquelaLojaApplication {
                     .gender("Other")
                     .birthdate("01/01/2000")
                     .document("123.456.789-00")
+                    .phone("11 99999-9999")
                     .role(ADMIN)
                     .build();
 
