@@ -1,28 +1,375 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link th:href="@{/styles/reset.css}" rel="stylesheet" />
-    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Aquela Loja</title>
-  </head>
-  <body>
-    <header
-      th:replace="~{fragments/header :: header}"
-    ></header>
+  <link th:href="@{/styles/reset.css}" rel="stylesheet" />
+  <link th:href="@{/styles/style.css}" rel="stylesheet" />
 
-    <main>
-    <a href="/secure/home"><button>LOGIN</button></a>
-    </main>
+  <title>Aquela Loja</title>
 
-    <!-- <footer th:replace="fragments/footer :: footer"></footer> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-    <div
-      th:replace="~{fragments/header :: headerScript}"
-    ></div>
-<!--    <div th:insert="~{${contentFragment} :: contentScript}"></div>-->
-  </body>
+    /* Header */
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Carrossel de Promoções */
+    .promo-carousel {
+      position: relative;
+      max-width: 1200px;
+      margin: 2rem auto;
+      overflow: hidden;
+    }
+
+    .promo-carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .promo-carousel-item {
+      min-width: 100%;
+      height: 400px;
+    }
+
+    .promo-carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Carrossel de Produtos */
+    .products-section {
+      max-width: 1200px;
+      margin: 2rem auto;
+    }
+
+    .products-carousel {
+      position: relative;
+      overflow: hidden;
+      padding: 0 3rem;
+    }
+
+    .products-carousel-inner {
+      display: flex;
+      gap: 1rem;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card {
+      min-width: 250px;
+      flex-shrink: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-size: 1.2rem;
+      color: #2ecc71;
+      font-weight: bold;
+    }
+
+    .product-button {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      background: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .product-button:hover {
+      background: #27ae60;
+    }
+
+    /* Controles dos Carrosséis */
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 1rem;
+      cursor: pointer;
+      border: none;
+      z-index: 10;
+    }
+
+    .carousel-prev {
+      left: 0;
+    }
+
+    .carousel-next {
+      right: 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 2rem 0;
+      color: #333;
+    }
+
+    /* Categoria Tabs */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-tab {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #f0f0f0;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .category-tab.active {
+      background: #2ecc71;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <header th:replace="~{fragments/header :: header}"></header>
+
+  <!-- Carrossel de Promoções -->
+  <div class="promo-carousel">
+    <div class="promo-carousel-inner">
+      <div class="promo-carousel-item">
+        <img src="/api/placeholder/1200/400" alt="Promoção 1">
+      </div>
+      <div class="promo-carousel-item">
+        <img src="/api/placeholder/1200/400" alt="Promoção 2">
+      </div>
+      <div class="promo-carousel-item">
+        <img src="/api/placeholder/1200/400" alt="Promoção 3">
+      </div>
+    </div>
+    <button class="carousel-control carousel-prev" id="promo-prev">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-control carousel-next" id="promo-next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Seção de Produtos -->
+  <section class="products-section">
+    <h2 class="section-title">Produtos em Destaque</h2>
+    <div class="category-tabs">
+      <button class="category-tab active">Todos</button>
+      <button class="category-tab">Eletrônicos</button>
+      <button class="category-tab">Moda</button>
+      <button class="category-tab">Casa</button>
+    </div>
+    <div class="products-carousel">
+      <div class="products-carousel-inner">
+        <!-- 8 produtos no carrossel -->
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 1" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Smartphone XYZ</h3>
+            <p class="product-price">R$ 1.999,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 2" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Notebook ABC</h3>
+            <p class="product-price">R$ 3.499,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 3" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Tênis Esportivo</h3>
+            <p class="product-price">R$ 299,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 4" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Câmera Digital</h3>
+            <p class="product-price">R$ 2.499,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 5" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Smart TV 55"</h3>
+            <p class="product-price">R$ 3.999,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 6" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Fone Bluetooth</h3>
+            <p class="product-price">R$ 199,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 7" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Relógio Smart</h3>
+            <p class="product-price">R$ 899,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/api/placeholder/250/200" alt="Produto 8" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Tablet Pro</h3>
+            <p class="product-price">R$ 2.699,90</p>
+            <button class="product-button">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control carousel-prev" id="products-prev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-control carousel-next" id="products-next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
+  
+  <div th:replace="~{fragments/header :: headerScript}"></div>
+  <script>
+    // Função genérica para controlar carrosséis
+    function setupCarousel(carouselInner, prevBtn, nextBtn, itemWidth, itemsToShow = 1) {
+      let currentIndex = 0;
+      const items = carouselInner.children;
+      const maxIndex = Math.max(0, items.length - itemsToShow);
+
+      function updateCarousel() {
+        const offset = itemWidth * currentIndex;
+        carouselInner.style.transform = `translateX(-${offset}px)`;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        currentIndex = Math.max(currentIndex - 1, 0);
+        updateCarousel();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = Math.min(currentIndex + 1, maxIndex);
+        updateCarousel();
+      });
+
+      return updateCarousel;
+    }
+
+    // Configurar carrossel de promoções
+    const promoCarousel = setupCarousel(
+      document.querySelector('.promo-carousel-inner'),
+      document.querySelector('#promo-prev'),
+      document.querySelector('#promo-next'),
+      document.querySelector('.promo-carousel-item').offsetWidth
+    );
+
+    // Configurar carrossel de produtos (4 itens visíveis por vez)
+    const productsCarousel = setupCarousel(
+      document.querySelector('.products-carousel-inner'),
+      document.querySelector('#products-prev'),
+      document.querySelector('#products-next'),
+      250 + 16, // largura do card + gap
+      4
+    );
+
+    // Autoplay do carrossel de promoções
+    setInterval(() => {
+      const promoInner = document.querySelector('.promo-carousel-inner');
+      const items = promoInner.children;
+      let currentIndex = parseInt(promoInner.style.transform.replace(/[^0-9-]/g, '')) || 0;
+      currentIndex = (Math.abs(currentIndex) / items[0].offsetWidth + 1) % items.length;
+      promoInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }, 5000);
+
+    // Interatividade das tabs de categoria
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    categoryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        categoryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        // Aqui você pode adicionar lógica para filtrar os produtos por categoria
+      });
+    });
+  </script>
+</body>
+
 </html>
+<!-- </head> -->
+<!-- <body>
+    
+
+    
+   </body> -->
+
+<!-- </html> -->
