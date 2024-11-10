@@ -1,80 +1,65 @@
 package br.edu.fesa.aquela_loja.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import br.edu.fesa.aquela_loja.models.dto.RegistrationDto;
-import br.edu.fesa.aquela_loja.models.entity.AddressModel;
-import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
-import br.edu.fesa.aquela_loja.repository.IAddressRepository;
-import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UpdateUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UserDto;
+import br.edu.fesa.aquela_loja.service.IUserService;
 
 @Controller
 @SessionAttributes("user")
 public class UserController {
 
     @Autowired
-    private IAppUserRepository appUserRepository;
-
-    @Autowired
-    private IAddressRepository addressRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private IUserService userService;
 
     @PostMapping(value = "/user/registration")
-    public String registration(RegistrationDto registrationDto) {
+    public String registration(NewUserDto newUserDto) {
+        userService.createNewUser(newUserDto);
 
-        AppUserModel appUser = AppUserModel.builder()
-                .username(registrationDto.getUsername())
-                .document(registrationDto.getDocument())
-                .gender(registrationDto.getGender())
-                .birthdate(registrationDto.getBirthdate())
-                .phone(registrationDto.getPhone())
-                .email(registrationDto.getEmail())
-                .password(passwordEncoder.encode(registrationDto.getPassword()))
-                .role(registrationDto.getRole())
-                .build();
-
-        AddressModel addressModel = AddressModel.builder()
-                .cep(registrationDto.getCep())
-                .addressIdentification(registrationDto.getAddressIdentification())
-                .street(registrationDto.getStreet())
-                .number(registrationDto.getNumber())
-                .neighborhood(registrationDto.getNeighborhood())
-                .city(registrationDto.getCity())
-                .state(registrationDto.getState())
-                .complement(registrationDto.getComplement())
-                .reference(registrationDto.getReference())
-                .appUser(appUser)
-                .build();
-
-        appUserRepository.save(appUser);
-        addressRepository.save(addressModel);
         return "redirect:/";
     }
 
     @GetMapping(value = "/usuario")
-    public String getMethodName(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        
-        String userName = auth.getName();
-        var obj = auth.getAuthorities();
-        Object useremail = auth.getCredentials();
+    public String getUserName(Model model) {
 
-        //  AppUserModel currentUser = appUserRepository.findByEmail(currentUserEmail).get();
+        UserDto user = userService.getAuthenticatedUser();
 
-        model.addAttribute("username", userName);
-        // model.addAttribute("email", useremail);
+        model.addAttribute("userName", user.getUsername());
+        model.addAttribute("userEmail", user.getEmail());
 
         return "pages/user_pages/usuario";
     }
-    
+
+    @PutMapping("/user/{id}")
+    public String putMethodName(@PathVariable Long id, @RequestBody UpdateUserDto entity) {
+
+        userService.updateUser(id, entity);
+
+        return "pages/user_pages/meus-dados";
+    }
+
+    @GetMapping(value = "/usuario/meus-dados")
+    public String editUserDetails(Model model) {
+        return "pages/user_pages/meus-dados";
+    }
+
+    @GetMapping("/usuario/meus-pedidos")
+    public String getUserOrders(Model model) {
+        return "pages/user_pages/meus-pedidos";
+    }
+
+    @GetMapping("/usuario/meus-cartoes")
+    public String getUserCard(Model model) {
+        return "pages/user_pages/meus-cartoes";
+    }
 }

@@ -13,7 +13,7 @@
 
 <body>
     <div class="cadastro-container">
-        <form id="formCadastro" th:action="@{/user/registration}" th:object="${registrationDto}" method="post">
+        <form id="formCadastro" th:action="@{/user/registration}" th:object="${newUserDto}" method="post">
             <!-- Etapa 1: Criar Conta -->
             <div class="form-step active" id="step1">
                 <h1 class="cadastro-title">Criar Conta</h1>

@@ -6,9 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import br.edu.fesa.aquela_loja.models.dto.RegistrationDto;
+import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 
 @Controller
 public class RoutesController {
@@ -30,17 +29,16 @@ public class RoutesController {
     }
 
     @GetMapping("/cadastro")
-    public String cadastrar(RegistrationDto registrationDto) {
+    public String cadastrar(NewUserDto newUserDto) {
         return "pages/cadastro";
     }
 
-    @GetMapping({"/usuario/{page}"})
-    public String loadUserPages(Model model, @PathVariable String page) {
-        return "pages/user_pages/" + page;
-    }
-
+    // @GetMapping({"/usuario/{page}"})
+    // public String loadUserPages(Model model, @PathVariable String page) {
+    //     return "pages/user_pages/" + page;
+    // }
     @GetMapping("/administrador")
-    public String getMethodName(@RequestParam String param) {
+    public String getMethodName() {
         return "pages/admin_pages/admin";
     }
 

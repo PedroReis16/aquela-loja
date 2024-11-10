@@ -24,7 +24,7 @@ public class AppUserService implements UserDetailsService {
         if (optUser.isPresent()) {
             var user = optUser.get();
             return User.builder()
-                    .username(user.getUsername())
+                    .username(user.getEmail())
                     .roles(user.getRole().name())
                     .password(user.getPassword())
                     .build();
