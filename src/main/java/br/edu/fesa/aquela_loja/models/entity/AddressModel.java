@@ -34,6 +34,8 @@ public class AddressModel {
 
     private String reference;
 
+    private Boolean isDefault;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private AppUserModel appUser;

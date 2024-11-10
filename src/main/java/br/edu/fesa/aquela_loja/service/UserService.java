@@ -49,6 +49,7 @@ public class UserService {
                 .state(newUser.getState())
                 .complement(newUser.getComplement())
                 .reference(newUser.getReference())
+                .isDefault(true)
                 .appUser(appUser)
                 .build();
 

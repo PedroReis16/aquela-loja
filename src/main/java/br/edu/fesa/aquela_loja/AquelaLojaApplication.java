@@ -43,6 +43,7 @@ public class AquelaLojaApplication {
                     .state("SP")
                     .complement("Casa")
                     .reference("Próximo ao mercado")
+                    .isDefault(true)
                     .appUser(admin)
                     .build();
 
