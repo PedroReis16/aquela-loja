@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @SessionAttributes("user")
@@ -50,9 +53,30 @@ public class UserController {
     @PostMapping(value = "/user/edit")
     public String putMethodName(@ModelAttribute UserDto updatedUser) {
 
-        userService.updateUser( updatedUser);
+        userService.updateUser(updatedUser);
 
         return "redirect:/pages/user_pages/meus-dados";
+    }
+
+    @GetMapping(value = "user/delete")
+    public String deleteUser(HttpServletRequest request, HttpServletResponse response) {
+        userService.deleteUser();
+
+        // Invalida a sessão
+        request.getSession().invalidate();
+
+        // Remove todos os cookies
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                cookie.setValue("");
+                cookie.setPath("/");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
+
+        return "redirect:/";
     }
 
     @GetMapping("/usuario/meus-pedidos")

@@ -93,9 +93,21 @@
 
     </div>
 
+    <div class="dialog-container">
+      <dialog id="confirmDialog">
+        <p>Tem certeza que deseja excluir sua conta?</p>
+        <button id="confirmDelete">Sim</button>
+        <button id="cancelDelete">Não</button>
+      </dialog>
+    </div>
+
   </main>
 
   <div th:replace="~{fragments/header :: headerScript}"></div>
+  <!-- Script -->
+  <script th:src="@{/js/page_scripts/meus-dados.js}">
+
+  </script>
 </body>
 
 </html>

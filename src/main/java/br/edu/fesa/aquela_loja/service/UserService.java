@@ -78,4 +78,12 @@ public class UserService {
 
         appUserRepository.save(savedUser);
     }
+
+    public void deleteUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+
+        appUserRepository.delete(appUser);
+    }
 }
