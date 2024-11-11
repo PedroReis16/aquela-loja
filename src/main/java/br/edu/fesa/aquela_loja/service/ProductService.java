@@ -7,6 +7,7 @@ import br.edu.fesa.aquela_loja.repository.IProductImageRepository;
 import br.edu.fesa.aquela_loja.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class ProductService {
     @Autowired
     private ImageService imageService;
 
+    @Transactional
     public void createNewProduct(final ProductRegDto pDto, final MultipartFile img) throws IOException {
 
         ProductModel product = ProductModel.builder()
@@ -32,12 +34,15 @@ public class ProductService {
                 .description(pDto.getDescription())
                 .build();
 
-        productRepository.save(product);
+        var imgSaved = imageService.generateFileModel(img);
+        product.setImg(imgSaved);
 
-        imageService.generateFileModel(img, product);
+        productRepository.save(product);
     }
 
     public List<ProductModel> findAll() {
-        return productRepository.findAll();
+        List<ProductModel> productModels = productRepository.findAll();
+//        productModels.forEach(ProductModel::loadBase64Imagem);
+        return productModels;
     }
 }

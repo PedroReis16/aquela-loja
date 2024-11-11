@@ -37,7 +37,7 @@ public class ProductController {
                 .toList();
         model.addAttribute("products", sortedProducts);
 
-        return "/pages/product-list";
+        return "pages/product-list";
     }
 
     @PostMapping("/product/registration")
@@ -49,6 +49,6 @@ public class ProductController {
             redirectAttributes.addFlashAttribute("message", "Falha ao carregar imagem");
         }
 
-        return "/pages/product-list";
+        return "redirect:/listProducts";
     }
 }

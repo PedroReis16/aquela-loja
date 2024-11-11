@@ -3,6 +3,8 @@ package br.edu.fesa.aquela_loja.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Base64;
+
 @Entity
 @Getter
 @Setter
@@ -22,7 +24,8 @@ public class ProductImageModel {
 
     private String type;
 
-    @ManyToOne
-    @JoinColumn(name = "ProductId")
+//    @ManyToOne
+//    @JoinColumn(name = "ProductId")
+    @OneToOne(mappedBy = "img")
     private ProductModel product;
 }
