@@ -2,7 +2,6 @@ package br.edu.fesa.aquela_loja.controller;
 
 import br.edu.fesa.aquela_loja.models.dto.ProductRegDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
-import br.edu.fesa.aquela_loja.service.ImageService;
 import br.edu.fesa.aquela_loja.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class ProductController {
@@ -29,13 +27,17 @@ public class ProductController {
     }
 
     @GetMapping("/listProducts")
-    public String listAllProducts(ModelMap model) {
+    public String listAllProducts(ModelMap model, @RequestParam(required = false) String showRegNotification) {
         List<ProductModel> products = productService.findAll();
 
         List<ProductModel> sortedProducts = products.stream()
                 .sorted((produdc1, product2) -> produdc1.getName().compareTo(product2.getName()))
                 .toList();
         model.addAttribute("products", sortedProducts);
+
+        if("true".equals(showRegNotification)) {
+            model.addAttribute("showRegNotification", true);
+        }
 
         return "pages/product-list";
     }
@@ -45,6 +47,7 @@ public class ProductController {
 
         try {
             productService.createNewProduct(productRegDto, file);
+            redirectAttributes.addAttribute("showRegNotification", true);
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("message", "Falha ao carregar imagem");
         }
