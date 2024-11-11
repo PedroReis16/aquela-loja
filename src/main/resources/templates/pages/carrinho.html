@@ -1,16 +1,357 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carrinho</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      background-color: #eee;
+      margin: 0 5px;
+      border-radius: 5px;
+    }
+
+    .step.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .step-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      min-height: 400px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .payment-method {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .payment-method.selected {
+      border-color: #4CAF50;
+      background-color: #f0f9f0;
+    }
+
+    .address-selection {
+      margin: 20px 0;
+    }
+
+    .address-card {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    .address-card.selected {
+      border-color: #4CAF50;
+      background-color: #f0f9f0;
+    }
+
+    .order-summary {
+      margin-top: 20px;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-  <h1 th:fragment="content">Carrinho de usuário</h1>
+  <div class="container">
+    <div class="steps">
+      <div class="step active" id="step1">1. Carrinho</div>
+      <div class="step" id="step2">2. Pagamento</div>
+      <div class="step" id="step3">3. Confirmação</div>
+      <div class="step" id="step4">4. Finalização</div>
+    </div>
 
-  <div th:fragment="contentScript"></div>
+    <!-- Etapa 1: Carrinho -->
+    <div class="step-content" id="cart-step">
+      <h2>Seu Carrinho</h2>
+      <div id="cart-items">
+        <!-- Items serão inseridos via JavaScript -->
+      </div>
+
+      <div class="address-selection">
+        <h3>Endereço de Entrega</h3>
+        <div class="address-card selected">
+          <h4>Casa</h4>
+          <p>Rua Exemplo, 123</p>
+          <p>São Paulo - SP</p>
+        </div>
+        <div class="address-card">
+          <h4>Trabalho</h4>
+          <p>Av. Exemplo, 456</p>
+          <p>São Paulo - SP</p>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="btn" onclick="nextStep()">Próximo</button>
+      </div>
+    </div>
+
+    <!-- Etapa 2: Pagamento -->
+    <div class="step-content hidden" id="payment-step">
+      <h2>Forma de Pagamento</h2>
+      <div class="payment-methods">
+        <div class="payment-method" onclick="selectPayment(this)">
+          <h4>Cartão de Crédito</h4>
+          <p>**** **** **** 1234</p>
+        </div>
+        <div class="payment-method" onclick="selectPayment(this)">
+          <h4>PIX</h4>
+          <p>Pagamento instantâneo</p>
+        </div>
+        <div class="payment-method" onclick="selectPayment(this)">
+          <h4>Boleto</h4>
+          <p>Vencimento em 3 dias úteis</p>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="btn" onclick="previousStep()">Voltar</button>
+        <button class="btn" onclick="nextStep()">Próximo</button>
+      </div>
+    </div>
+
+    <!-- Etapa 3: Confirmação -->
+    <div class="step-content hidden" id="confirmation-step">
+      <h2>Confirmação do Pedido</h2>
+      <div class="order-summary">
+        <h3>Resumo do Pedido</h3>
+        <div id="order-items">
+          <!-- Items serão inseridos via JavaScript -->
+        </div>
+        <div id="order-total"></div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="btn" onclick="previousStep()">Voltar</button>
+        <button class="btn" onclick="nextStep()">Confirmar Pedido</button>
+      </div>
+    </div>
+
+    <!-- Etapa 4: Finalização -->
+    <div class="step-content hidden" id="success-step">
+      <h2>Pedido Finalizado com Sucesso!</h2>
+      <p>Obrigado pela sua compra!</p>
+      <div class="navigation-buttons">
+        <button class="btn" onclick="goToHome()">Voltar para Home</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dados de exemplo
+    const cartItems = [
+      { id: 1, name: "Produto 1", price: 99.99, quantity: 1, image: "/api/placeholder/80/80" },
+      { id: 2, name: "Produto 2", price: 149.99, quantity: 1, image: "/api/placeholder/80/80" }
+    ];
+
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    // Inicialização
+    window.onload = function () {
+      renderCart();
+      updateOrderSummary();
+    };
+
+    // Renderiza os itens do carrinho
+    function renderCart() {
+      const cartContainer = document.getElementById('cart-items');
+      cartContainer.innerHTML = cartItems.map(item => `
+                <div class="cart-item" data-id="${item.id}">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h3>${item.name}</h3>
+                        <p>R$ ${item.price.toFixed(2)}</p>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button onclick="removeItem(${item.id})">Remover</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    // Atualiza o resumo do pedido
+    function updateOrderSummary() {
+      const orderItems = document.getElementById('order-items');
+      const orderTotal = document.getElementById('order-total');
+      const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      orderItems.innerHTML = cartItems.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h3>${item.name}</h3>
+                        <p>Quantidade: ${item.quantity}</p>
+                        <p>R$ ${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                </div>
+            `).join('');
+
+      orderTotal.innerHTML = `<h3>Total: R$ ${total.toFixed(2)}</h3>`;
+    }
+
+    // Atualiza a quantidade de um item
+    function updateQuantity(itemId, change) {
+      const item = cartItems.find(item => item.id === itemId);
+      if (item) {
+        item.quantity = Math.max(1, item.quantity + change);
+        renderCart();
+        updateOrderSummary();
+      }
+    }
+
+    // Remove um item do carrinho
+    function removeItem(itemId) {
+      const index = cartItems.findIndex(item => item.id === itemId);
+      if (index > -1) {
+        cartItems.splice(index, 1);
+        renderCart();
+        updateOrderSummary();
+      }
+    }
+
+    // Seleciona um método de pagamento
+    function selectPayment(element) {
+      document.querySelectorAll('.payment-method').forEach(el => {
+        el.classList.remove('selected');
+      });
+      element.classList.add('selected');
+    }
+
+    // Navegação entre etapas
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        document.getElementById(`step${currentStep + 1}`).classList.add('active');
+
+        const currentContent = document.querySelector(`.step-content:not(.hidden)`);
+        currentContent.classList.add('hidden');
+
+        currentStep++;
+        const nextContent = document.querySelector(`#${getStepId(currentStep)}`);
+        nextContent.classList.remove('hidden');
+      }
+    }
+
+    function previousStep() {
+      if (currentStep > 1) {
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        document.getElementById(`step${currentStep - 1}`).classList.add('active');
+
+        const currentContent = document.querySelector(`.step-content:not(.hidden)`);
+        currentContent.classList.add('hidden');
+
+        currentStep--;
+        const previousContent = document.querySelector(`#${getStepId(currentStep)}`);
+        previousContent.classList.remove('hidden');
+      }
+    }
+
+    function getStepId(step) {
+      const steps = {
+        1: 'cart-step',
+        2: 'payment-step',
+        3: 'confirmation-step',
+        4: 'success-step'
+      };
+      return steps[step];
+    }
+
+    function goToHome() {
+      alert('Redirecionando para a Home...');
+      // Aqui você pode adicionar o redirecionamento real
+      // window.location.href = '/';
+    }
+  </script>
 </body>
 
 </html>

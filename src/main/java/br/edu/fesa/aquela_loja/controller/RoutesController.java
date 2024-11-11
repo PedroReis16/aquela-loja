@@ -33,6 +33,11 @@ public class RoutesController {
         return "pages/cadastro";
     }
 
+    @GetMapping("/carrinho")
+    public String getMethodName() {
+        return "pages/carrinho";
+    }
+
     // @GetMapping({"/usuario/{page}"})
     // public String loadUserPages(Model model, @PathVariable String page) {
     //     return "pages/user_pages/" + page;
@@ -46,6 +51,5 @@ public class RoutesController {
     public String getAddressPage() {
         return "pages/user-address";
     }
-    
 
 }

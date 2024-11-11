@@ -90,7 +90,6 @@ public class UserService {
 
         appUserRepository.delete(appUser);
 
-        
         // Invalida a sessão
         request.getSession().invalidate();
 
