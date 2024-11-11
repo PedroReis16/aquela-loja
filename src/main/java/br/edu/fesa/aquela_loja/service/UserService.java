@@ -12,6 +12,9 @@ import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
 import br.edu.fesa.aquela_loja.repository.IAddressRepository;
 import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -80,11 +83,26 @@ public class UserService {
         appUserRepository.save(savedUser);
     }
 
-    public void deleteUser() {
+    public void deleteUser(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
 
         appUserRepository.delete(appUser);
+
+        
+        // Invalida a sessão
+        request.getSession().invalidate();
+
+        // Remove todos os cookies
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                cookie.setValue("");
+                cookie.setPath("/");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
     }
 }

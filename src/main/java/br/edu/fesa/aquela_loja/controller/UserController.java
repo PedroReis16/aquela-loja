@@ -60,21 +60,8 @@ public class UserController {
 
     @GetMapping(value = "user/delete")
     public String deleteUser(HttpServletRequest request, HttpServletResponse response) {
-        userService.deleteUser();
+        userService.deleteUser(request, response);
 
-        // Invalida a sessão
-        request.getSession().invalidate();
-
-        // Remove todos os cookies
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                cookie.setValue("");
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-        }
 
         return "redirect:/";
     }

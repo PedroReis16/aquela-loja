@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8" />
@@ -32,12 +32,39 @@
 
       <div class="action-pages">
         <div class="user-avatar">
-          <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
-          <p>
-            <span class="emphasis-text"><a href="/login" id="login">Entre</a></span>
-            ou<br />
-            <span class="emphasis-text"><a href="/cadastro" id="signUp">Cadastre-se</a></span>
-          </p>
+          <div sec:authorize="isAuthenticated()">
+            <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
+            <p>
+              <span class="emphasis-text">Olá, <span th:text="${#authentication.name}">Usuário</span></span>
+              <br />
+              <span class="emphasis-text"><a href="/logout" id="logout">Sair</a></span>
+            </p>
+          </div>
+          <div sec:authorize="!isAuthenticated()">
+            <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
+            <p>
+              <span class="emphasis-text"><a href="/login" id="login">Entre</a></span>
+              ou<br />
+              <span class="emphasis-text"><a href="/cadastro" id="signUp">Cadastre-se</a></span>
+            </p>
+          </div>
+
+          <!-- <sec:authorize="isAuthenticated()">
+            <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
+            <p>
+              <span class="emphasis-text">Olá, <span th:text="${#authentication.name}">Usuário</span></span>
+              <br />
+              <span class="emphasis-text"><a href="/logout" id="logout">Sair</a></span>
+            </p>
+          </sec:authorize=>
+          <sec:authorize="!isAuthenticated()">
+            <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
+            <p>
+              <span class="emphasis-text"><a href="/login" id="login">Entre</a></span>
+              ou<br />
+              <span class="emphasis-text"><a href="/cadastro" id="signUp">Cadastre-se</a></span>
+            </p>
+          </sec:authorize=> -->
         </div>
 
         <div id="normalCart" class="cart-container">
