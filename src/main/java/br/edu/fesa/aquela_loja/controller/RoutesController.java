@@ -30,6 +30,13 @@ public class RoutesController {
 
     @GetMapping("/cadastro")
     public String cadastrar(NewUserDto newUserDto) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+
+        if (!userName.contains("anonymousUser")) {
+            return "redirect:/";
+        }
+
         return "pages/cadastro";
     }
 

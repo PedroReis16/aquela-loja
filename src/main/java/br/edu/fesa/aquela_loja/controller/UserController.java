@@ -55,7 +55,7 @@ public class UserController {
 
         userService.updateUser(updatedUser);
 
-        return "redirect:/pages/user_pages/meus-dados";
+        return "redirect:/usuario/meus-dados";
     }
 
     @GetMapping(value = "user/delete")
