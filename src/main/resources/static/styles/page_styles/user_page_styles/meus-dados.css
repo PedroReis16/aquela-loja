@@ -157,6 +157,9 @@
 #addressEditTitle ::before {
   content: "\e55f";
 }
+.address-list::-webkit-scrollbar {
+  display: none;
+}
 
 .address-list {
   max-height: 480px;
