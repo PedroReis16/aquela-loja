@@ -9,7 +9,7 @@ body {
 
 .main-header {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 2fr 1fr;
   column-gap: 32px;
   justify-content: space-between;
 }
@@ -107,6 +107,10 @@ body {
   text-decoration: underline;
 }
 
+#userRedirect{
+  color: var(--white);
+  text-decoration: none;
+}
 /* Carrinho do usuário */
 #logoCart {
   display: none;
