@@ -1,5 +1,7 @@
 package br.edu.fesa.aquela_loja.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,9 +25,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/user/registration")
-    public String registration(HttpServletRequest request,NewUserDto newUserDto) {
+    public String registration(HttpServletRequest request, NewUserDto newUserDto) {
         userService.createNewUser(newUserDto);
-        userService.authWithHttpServletRequest(request,newUserDto.getEmail(),newUserDto.getPassword());
+        userService.authWithHttpServletRequest(request, newUserDto.getEmail(), newUserDto.getPassword());
         //  String username, String password
         return "redirect:/";
     }
@@ -44,9 +47,11 @@ public class UserController {
     public String editUserDetails(Model model) {
 
         UserDto user = userService.getAuthenticatedUser();
-
-        // model.addAttribute("user", user);
+        List<UserAddressDto> userAddress = userService.getUserAddress();
+        
         model.addAttribute("updatedUser", user);
+        model.addAttribute("userAddress", userAddress);
+        
         return "pages/user_pages/meus-dados";
     }
 
@@ -61,7 +66,6 @@ public class UserController {
     @GetMapping(value = "user/delete")
     public String deleteUser(HttpServletRequest request, HttpServletResponse response) {
         userService.deleteUser(request, response);
-
 
         return "redirect:/";
     }

@@ -16,11 +16,11 @@
   <main class="user-details-edit-content">
     <h2 id="contentTitle"><i></i>Meus Dados</h2>
 
-    <!-- Card para edição dos detalhes pessoais -->
     <div class="editable-items">
+      <!-- Card para edição dos detalhes pessoais -->
       <section class="user-details-edit-container">
         <form id="userDetailsForm" th:action="@{/user/edit}" th:object="${updatedUser}" method="post">
-          <h3 id="userDetailsEditTitle"><i></i>Dados básicos</h3>
+          <h3 class="edit-details-title" id="detailsEditTitle"><i></i>Dados básicos</h3>
 
           <div class="details-container">
             <div class="person-name-container edit-field-container">
@@ -90,12 +90,36 @@
         </form>
       </section>
 
-      <section class="user-address-container">
-        <p>Lista para editar os endereços do usuário</p>
+      <!-- Card para edição dos endereços -->
+      <section class="user-details-edit-container">
+        <h3 class="edit-details-title" id="addressEdit Title"><i></i>Meus Endereços</h3>
+
+        <div class="address-list">
+          <th:block th:each="address : ${userAddress}">
+            <div class="address-card">
+              <div class="card-content">
+                <h3 th:text="${address.addressIdentification}"></h3>
+                <p th:text="${address.street}"></p>
+                <p th:text="${address.numberString}"></p>
+                <p th:text="${address.details}"></p>
+                <p th:text="${address.reference}"></p>
+              </div>
+              
+              <div class="card-actions">
+                <button type="button" class="edit-address-btn">Editar</button>
+              </div>
+            </div>
+          </th:block>
+
+        </div>
+
+        <button type="button" id="newAddressBtn">Cadastrar novo endereço</button>
       </section>
 
     </div>
 
+
+    <!-- Dialog para confirmar a exclusão da conta -->
     <div class="dialog-container">
       <dialog id="confirmDialog">
         <div id="dialogAccountHeader">

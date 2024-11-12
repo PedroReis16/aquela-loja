@@ -1,5 +1,8 @@
 package br.edu.fesa.aquela_loja.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -7,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
@@ -110,8 +114,24 @@ public class UserService {
         try {
             request.login(username, password);
         } catch (ServletException e) {
-            
+
         }
     }
-    
+
+    public List<UserAddressDto> getUserAddress() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+
+        List<AddressModel> userAddresses = addressRepository.findByAppUser(appUser).get();
+        List<UserAddressDto> result = new ArrayList<>();
+
+        for (AddressModel address : userAddresses) {
+            UserAddressDto userAddress = new UserAddressDto(address);
+            result.add(userAddress);
+        }
+
+        return result;
+    }
+
 }

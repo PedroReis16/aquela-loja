@@ -35,14 +35,7 @@
   min-height: 90%;
 }
 
-/* Campo de detalhes do usuário */
-#userDetailsForm {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-#userDetailsEditTitle {
+.edit-details-title {
   font-family: var(--default-font);
   font-size: 20px;
   font-weight: 500;
@@ -50,21 +43,30 @@
   margin-bottom: 16px;
 }
 
-#userDetailsEditTitle > i::before {
-  content: "\ea67";
+.edit-details-title > i::before {
   font-family: var(--material-icons);
   position: relative;
   top: 4px;
   color: var(--primary-color);
   margin-right: 8px;
 }
+
+/* Campo de detalhes do usuário */
+#userDetailsForm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .details-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex: 1;
 }
-
+#detailsEditTitle ::before {
+  content: "\ea67";
+}
 .edit-field-container {
   margin: 4px 0;
 }
@@ -149,6 +151,38 @@
   align-self: end;
   position: relative;
   bottom: 8px;
+}
+
+/* Listagem endereço de usuário */
+#addressEditTitle ::before {
+  content: "\e55f";
+}
+
+.address-list {
+  max-height: 480px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.address-card {
+  display: grid;
+  grid-template-columns: 1fr 32px;
+  padding: 16px;
+  margin-bottom: 4px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  height: 100%;
+}
+
+.address-list {
+  height: 100%;
+  display: flex;
+  align-content: flex-start;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {
