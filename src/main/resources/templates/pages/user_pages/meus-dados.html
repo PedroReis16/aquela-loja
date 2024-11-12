@@ -16,76 +16,79 @@
   <main class="user-details-edit-content">
     <h2 id="contentTitle"><i></i>Meus Dados</h2>
 
+    <!-- Card para edição dos detalhes pessoais -->
     <div class="editable-items">
-      <form id="user-details-edit-container" th:action="@{/user/edit}" th:object="${updatedUser}" method="post">
-        <h3 id="userDetailsEditTitle"><i></i>Dados básicos</h3>
+      <section class="user-details-edit-container">
+        <form id="userDetailsForm" th:action="@{/user/edit}" th:object="${updatedUser}" method="post">
+          <h3 id="userDetailsEditTitle"><i></i>Dados básicos</h3>
 
-        <div class="content-container">
-          <div class="person-name-container edit-field-container">
-            <div class="input-label">
-              <i id="personIcon"></i>
-              <input type="text" id="nameInput" placeholder="Nome Completo" th:field="*{userName}" required />
-              <label for="nameInput"></label>
+          <div class="details-container">
+            <div class="person-name-container edit-field-container">
+              <div class="input-label">
+                <i id="personIcon"></i>
+                <input type="text" id="nameInput" placeholder="Nome Completo" th:field="*{userName}" required />
+                <label for="nameInput"></label>
+              </div>
+              <p id="personNameErrorMessage" class="error-message"></p>
             </div>
-            <p id="personNameErrorMessage" class="error-message"></p>
+
+            <div class="person-name-container edit-field-container">
+              <div class="input-label">
+                <i id="phoneIcon"></i>
+                <input type="text" id="nameInput" placeholder="Telefone" th:field="*{phone}" required />
+                <label for="nameInput"></label>
+              </div>
+              <p id="personNameErrorMessage" class="error-message"></p>
+            </div>
+
+            <div class="gender-container edit-field-container">
+              <div class="input-label">
+                <i id="genderIcon"></i>
+                <select id="genderSelect" class="custom-select" th:field="*{gender}">
+                  <option value="Male">Masculino</option>
+                  <option value="Female">Feminino</option>
+                  <option value="Other">Outro</option>
+                </select>
+              </div>
+              <p id="genderErrorMessage" class="error-message"></p>
+            </div>
+
+            <div class="person-name-container edit-field-container">
+              <div class="input-label">
+                <i id="emailIcon"></i>
+                <input type="text" id="nameInput" placeholder="Email" th:field="*{email}" required />
+                <label for="nameInput"></label>
+              </div>
+              <p id="personNameErrorMessage" class="error-message"></p>
+            </div>
+
+            <div class="person-name-container edit-field-container">
+              <div class="input-label">
+                <i id="documentIcon"></i>
+                <input type="text" id="nameInput" placeholder="CPF" th:field="*{document}" readonly />
+                <label for="nameInput"></label>
+              </div>
+              <p id="personNameErrorMessage" class="error-message"></p>
+            </div>
+
+            <div class="person-name-container edit-field-container">
+              <div class="input-label">
+                <i id="personIcon"></i>
+                <input type="text" id="nameInput" placeholder="Data de nascimento" th:field="*{birthDate}" readonly />
+                <label for="nameInput"></label>
+              </div>
+              <p id="personNameErrorMessage" class="error-message"></p>
+            </div>
           </div>
 
-          <div class="person-name-container edit-field-container">
-            <div class="input-label">
-              <i id="phoneIcon"></i>
-              <input type="text" id="nameInput" placeholder="Telefone" th:field="*{phone}" required />
-              <label for="nameInput"></label>
-            </div>
-            <p id="personNameErrorMessage" class="error-message"></p>
+          <div class="details-action-buttons">
+            <div></div>
+            <button type="button" id="deleteUserAccount" class="cancel-btn">Excluir Conta</button>
+            <button type="submit" id="saveUserDetails">Salvar Alterações</button>
+            <div></div>
           </div>
-
-          <div class="gender-container edit-field-container">
-            <div class="input-label">
-              <i id="genderIcon"></i>
-              <select id="genderSelect" class="custom-select" th:field="*{gender}">
-                <option value="Male">Masculino</option>
-                <option value="Female">Feminino</option>
-                <option value="Other">Outro</option>
-              </select>
-            </div>
-            <p id="genderErrorMessage" class="error-message"></p>
-          </div>
-
-          <div class="person-name-container edit-field-container">
-            <div class="input-label">
-              <i id="emailIcon"></i>
-              <input type="text" id="nameInput" placeholder="Email" th:field="*{email}" required />
-              <label for="nameInput"></label>
-            </div>
-            <p id="personNameErrorMessage" class="error-message"></p>
-          </div>
-
-          <div class="person-name-container edit-field-container">
-            <div class="input-label">
-              <i id="documentIcon"></i>
-              <input type="text" id="nameInput" placeholder="CPF" th:field="*{document}" readonly />
-              <label for="nameInput"></label>
-            </div>
-            <p id="personNameErrorMessage" class="error-message"></p>
-          </div>
-
-          <div class="person-name-container edit-field-container">
-            <div class="input-label">
-              <i id="personIcon"></i>
-              <input type="text" id="nameInput" placeholder="Data de nascimento" th:field="*{birthDate}" readonly />
-              <label for="nameInput"></label>
-            </div>
-            <p id="personNameErrorMessage" class="error-message"></p>
-          </div>
-        </div>
-
-        <div class="details-action-buttons">
-          <div></div>
-          <button type="button" id="deleteUserAccount" class="cancel-btn">Excluir Conta</button>
-          <button type="submit" id="saveUserDetails">Salvar Alterações</button>
-          <div></div>
-        </div>
-      </form>
+        </form>
+      </section>
 
       <section class="user-address-container">
         <p>Lista para editar os endereços do usuário</p>

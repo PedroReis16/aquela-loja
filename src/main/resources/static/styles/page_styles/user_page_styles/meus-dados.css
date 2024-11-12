@@ -23,17 +23,23 @@
   margin-right: 8px;
 }
 
-/* Campo de detalhes do usuário */
-#user-details-edit-container {
+.user-details-edit-container {
   padding: 16px;
   background-color: var(--white);
-  height: 100%;
   border-radius: 8px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   margin: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 90%;
+}
+
+/* Campo de detalhes do usuário */
+#userDetailsForm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 #userDetailsEditTitle {
@@ -41,6 +47,7 @@
   font-size: 20px;
   font-weight: 500;
   color: var(--black);
+  margin-bottom: 16px;
 }
 
 #userDetailsEditTitle > i::before {
@@ -51,9 +58,11 @@
   color: var(--primary-color);
   margin-right: 8px;
 }
-.content-container {
+.details-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  flex: 1;
 }
 
 .edit-field-container {
@@ -64,9 +73,8 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  align-content: center;
 }
-
-
 
 #saveUserDetails {
   background-color: var(--primary-color);
@@ -136,7 +144,7 @@
   margin-top: 16px;
 }
 
-#cancelDelete{
+#cancelDelete {
   height: 32px;
   align-self: end;
   position: relative;
