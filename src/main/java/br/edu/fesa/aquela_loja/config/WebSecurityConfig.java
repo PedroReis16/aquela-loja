@@ -23,10 +23,6 @@ import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_CREATE;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_DELETE;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_READ;
 import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_UPDATE;
-import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_CREATE;
-import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_DELETE;
-import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_READ;
-import static br.edu.fesa.aquela_loja.models.enums.Permission.USER_UPDATE;
 import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
 import static br.edu.fesa.aquela_loja.models.enums.Role.USER;
 import br.edu.fesa.aquela_loja.service.AppUserService;
@@ -78,10 +74,10 @@ public class WebSecurityConfig {
                 //Autenticação das rotas de usuário
                 .requestMatchers("/user/registration").permitAll()
                 .requestMatchers("/user/delete").permitAll()
-                .requestMatchers(GET, "/user/**").hasAnyAuthority(USER_READ.name(), ADMIN_READ.name())
-                .requestMatchers(POST, "/user/**").hasAnyAuthority(USER_CREATE.name(), ADMIN_CREATE.name())
-                .requestMatchers(PUT, "/user/**").hasAnyAuthority(USER_UPDATE.name(), ADMIN_UPDATE.name())
-                .requestMatchers(DELETE, "/user/**").hasAnyAuthority(USER_DELETE.name(), ADMIN_DELETE.name())
+                .requestMatchers(GET, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
+                .requestMatchers(POST, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
+                .requestMatchers(PUT, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
+                .requestMatchers(DELETE, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
                 .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
