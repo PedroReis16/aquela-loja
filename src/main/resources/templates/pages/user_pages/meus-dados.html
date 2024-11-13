@@ -8,6 +8,7 @@
 
   <link th:href="@{/styles/reset.css}" rel="stylesheet" />
   <link th:href="@{/styles/style.css}" rel="stylesheet" />
+  <script th:src="@{/js/components/editable-address-card.js}" defer></script>
 </head>
 
 <body>
@@ -96,19 +97,14 @@
 
         <div class="address-list">
           <th:block th:each="address : ${userAddress}">
-            <div class="address-card">
-              <div class="card-content">
-                <h3 th:text="${address.addressIdentification}"></h3>
-                <p th:text="${address.street}"></p>
-                <p th:text="${address.numberString}"></p>
-                <p th:text="${address.details}"></p>
-                <p th:text="${address.reference}"></p>
-              </div>
-              
-              <div class="card-actions">
-                <button type="button" class="edit-address-btn">Editar</button>
-              </div>
-            </div>
+            <editable-address-card 
+            th:attr="address-identification=${address.addressIdentification}, 
+            street=${address.street}, 
+            number-string=${address.numberString}, 
+            details=${address.details}, 
+            reference=${address.reference}">
+            </editable-address-card>
+
           </th:block>
 
         </div>
