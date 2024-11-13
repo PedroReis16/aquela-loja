@@ -1,3 +1,6 @@
+import { validateUsername, validateCPF, validatePhone, validateBirthdate, validateEmail, validatePassword } from './helpers/validators.js';
+import { showErrorMessage, hideErrorMessage } from './helpers/masks.js';
+
 function nextStep() {
     document.getElementById('step1').classList.remove('active');
     document.getElementById('step2').classList.add('active');
@@ -65,9 +68,9 @@ inputCEP.addEventListener('blur', async function (e) {
             }
             else {
                 document.querySelector('input[placeholder="Endereço"]').value =
-                document.querySelector('input[placeholder="Bairro"]').value =
-                document.querySelector('input[placeholder="Cidade"]').value =
-                document.querySelector('input[placeholder="Estado"]').value = '';
+                    document.querySelector('input[placeholder="Bairro"]').value =
+                    document.querySelector('input[placeholder="Cidade"]').value =
+                    document.querySelector('input[placeholder="Estado"]').value = '';
             }
         } catch (error) {
             console.error('Erro ao buscar CEP:', error);
