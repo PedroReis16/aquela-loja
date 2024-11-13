@@ -1,7 +1,3 @@
-@import url("../fragment_styles/user_styles/new_user_styles/new-user-details.css");
-@import url("../fragment_styles/user_styles/new_user_styles/new-user-address.css");
-@import url("../fragment_styles/user_styles/new_user_styles/new-user-card.css");
-
 .cadastro-container {
   display: flex;
   flex-direction: column;
