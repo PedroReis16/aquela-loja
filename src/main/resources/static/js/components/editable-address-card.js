@@ -1,10 +1,27 @@
 class EditableAddressCard extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `
-            <style>
-                .address-card {
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        const content = `
+            <div class="address-card">
+                <div class="card-content">
+                    <h3 id="address-identification"></h3>
+                    <p id="street"></p>
+                    <p id="number-string"></p>
+                    <p id="details"></p>
+                    <p id="reference"></p>
+                </div>
+                <div class="card-actions">
+                    <button type="button" class="edit-address-btn">Editar</button>
+                </div>
+            </div>
+        `;
+
+        const style = document.createElement('style');
+
+        style.textContent = `
+            .address-card {
                     border: 1px solid #ccc;
                     padding: 16px;
                     margin: 8px 0;
@@ -24,21 +41,10 @@ class EditableAddressCard extends HTMLElement {
                     padding: 8px 16px;
                     border-radius: 4px;
                     cursor: pointer;
-                }
-            </style>
-            <div class="address-card">
-                <div class="card-content">
-                    <h3 id="address-identification"></h3>
-                    <p id="street"></p>
-                    <p id="number-string"></p>
-                    <p id="details"></p>
-                    <p id="reference"></p>
-                </div>
-                <div class="card-actions">
-                    <button type="button" class="edit-address-btn">Editar</button>
-                </div>
-            </div>
-        `;
+                }`;
+
+        shadow.appendChild(style);
+        shadow.innerHTML += content;
     }
 
     static get observedAttributes() {
