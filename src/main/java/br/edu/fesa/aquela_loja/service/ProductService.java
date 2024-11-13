@@ -5,6 +5,7 @@ import br.edu.fesa.aquela_loja.models.entity.ProductImageModel;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.repository.IProductImageRepository;
 import br.edu.fesa.aquela_loja.repository.IProductRepository;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -41,8 +43,23 @@ public class ProductService {
     }
 
     public List<ProductModel> findAll() {
-        List<ProductModel> productModels = productRepository.findAll();
-//        productModels.forEach(ProductModel::loadBase64Imagem);
-        return productModels;
+        return productRepository.findAll();
+    }
+
+    public ProductModel findById(final String id) {
+        return productRepository.findById(Long.parseLong(id)).orElse(new ProductModel());
+    }
+
+    public void update(final ProductModel product, final MultipartFile img) throws IOException {
+        imageService.update(product, img);
+        productRepository.save(product);
+    }
+
+    public boolean exists(String pName) {
+        return productRepository.existsByName(pName);
+    }
+
+    public void fillImage(ProductModel product) {
+        imageService.fillImage(product);
     }
 }

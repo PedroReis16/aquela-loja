@@ -84,8 +84,13 @@ public class WebSecurityConfig {
                 .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/", true))
                 .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/").permitAll())
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/").permitAll()
+                    .logoutSuccessUrl("/login?logout=true") // Redireciona após o logout
+                    .invalidateHttpSession(true)     // Garante que a sessão seja invalidada
+                    .clearAuthentication(true)       // Limpa a autenticação
+                    .deleteCookies("JSESSIONID")     // Apaga o cookie JSESSIONID
+                    .permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }

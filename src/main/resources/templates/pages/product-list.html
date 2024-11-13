@@ -65,6 +65,33 @@
                 notification.remove();
             }, 5000);
         }
+
+         function mostrarNotificacaoUpdate() {
+            var notification = document.createElement('div');
+            notification.innerHTML = 'Produto Atualizado com Sucesso!';
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '20px';
+            notification.style.backgroundColor = '#4CAF50';
+            notification.style.color = 'white';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            notification.style.transition = 'opacity 0.3s ease-in-out';
+            notification.style.zIndex = '1000';
+
+            notification.style.fontSize = '18px';        // Aumenta o tamanho da fonte
+            notification.style.width = '300px';          // Define uma largura maior
+            notification.style.textAlign = 'center';
+
+            // Adicionar o elemento de notificação ao corpo da página
+            document.body.appendChild(notification);
+
+            // Remover a notificação após 5 segundos
+            setTimeout(function() {
+                notification.remove();
+            }, 5000);
+        }
     </script>
 </head>
 <body>
@@ -75,10 +102,16 @@
     </script>
 </div>
 
+<div th:if="${showUptNotification}">
+    <script type="text/javascript">
+        mostrarNotificacaoUpdate(); // Chama a função para mostrar a notificação
+    </script>
+</div>
+
 <div class="container">
     <h1>Lista de Produtos</h1>
     <div class="d-flex justify-content-between mb-3">
-        <a href="/regProduct" class="btn btn-primary">Inserir</a>
+        <a href="/product/form" class="btn btn-primary">Inserir</a>
         <a href="#" th:href="@{/}" class="btn btn-info">Principal</a>
     </div>
     <table class="table table-bordered">
@@ -104,7 +137,7 @@
             <td th:text="${product.brand}"></td>
             <td th:text="${product.category.displayName}"></td>
             <td>
-                <a th:href="@{/hotelaria-fesa/product/editar/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Editar</a>
             </td>
             <td>
                 <a th:href="@{/hotelaria-fesa/product/remover/{id}(id=${product.id})}" class="btn btn-danger btn-sm">Remover</a>

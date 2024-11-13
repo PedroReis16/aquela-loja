@@ -6,9 +6,7 @@ import br.edu.fesa.aquela_loja.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -16,18 +14,19 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/regProduct")
+    @GetMapping("/form")
     public String regProductForm(ProductRegDto productRegDto) {
         return "pages/product-form";
     }
 
-    @GetMapping("/listProducts")
-    public String listAllProducts(ModelMap model, @RequestParam(required = false) String showRegNotification) {
+    @GetMapping("/list-all")
+    public String listAllProducts(ModelMap model, @RequestParam(required = false) String showRegNotification, @RequestParam(required = false) String showUptNotification) {
         List<ProductModel> products = productService.findAll();
 
         List<ProductModel> sortedProducts = products.stream()
@@ -39,19 +38,56 @@ public class ProductController {
             model.addAttribute("showRegNotification", true);
         }
 
+        if("true".equals(showUptNotification)) {
+            model.addAttribute("showUptNotification", true);
+        }
+
         return "pages/product-list";
     }
 
-    @PostMapping("/product/registration")
-    public String registringProduct(ProductRegDto productRegDto, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable String id, ModelMap model) {
+        model.addAttribute("product", productService.findById(id));
+        return "pages/product-edit";
+    }
+
+    @PostMapping("/registration")
+    public String registringProduct(ProductRegDto productRegDto, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap model) {
 
         try {
+            if (productService.exists(productRegDto.getPName().trim())) {
+                model.addAttribute("productRegDto", productRegDto);
+                model.addAttribute("nameError",true);
+
+                return "pages/product-form";
+            }
+
             productService.createNewProduct(productRegDto, file);
             redirectAttributes.addAttribute("showRegNotification", true);
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("message", "Falha ao carregar imagem");
         }
 
-        return "redirect:/listProducts";
+        return "redirect:/product/list-all";
+    }
+
+    @PostMapping("/update")
+    public String updateProduct(@ModelAttribute ProductModel product, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap model) {
+        try {
+            if (productService.exists(product.getName().trim())) {
+                productService.fillImage(product);
+                model.addAttribute("product", product);
+                model.addAttribute("nameError",true);
+
+                return "pages/product-edit";
+            }
+
+            productService.update(product, file);
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("message", "Falha ao atualizar produto");
+        }
+        redirectAttributes.addAttribute("showUptNotification", true);
+
+        return "redirect:/product/list-all";
     }
 }

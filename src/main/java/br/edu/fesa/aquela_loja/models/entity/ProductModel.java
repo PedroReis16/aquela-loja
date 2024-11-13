@@ -23,6 +23,7 @@ public class ProductModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     private BigDecimal price;
@@ -41,14 +42,6 @@ public class ProductModel {
     @JoinColumn(name = "image", referencedColumnName = "id")
     private ProductImageModel img;
 
-//    @Transient
-//    private String imageBase64;
-//
-//    @PrePersist
-//    @PostLoad
-//    public void loadBase64Imagem() {
-//        this.imageBase64 = Base64.getEncoder().encodeToString(img.getData());
-//    }
 
     public String getImageBase64() {
         if (img != null && img.getData() != null) {
