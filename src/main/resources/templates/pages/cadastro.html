@@ -100,14 +100,14 @@
 
                 </div>
 
-                <button type="button" class="confirm-button cadastro-btn" onclick="nextStep()">
+                <button type="button" class="confirm-button cadastro-btn" id="nextStepBtn">
                     <p>Continuar<i></i></p>
                 </button>
             </div>
 
             <!-- Etapa 2: Adicionar endereço -->
             <div class="form-step" id="step2">
-                <p class="endereco-header cadastro-title" onclick="prevStep()"> <i></i>Adicionar endereço</p>
+                <p class="endereco-header cadastro-title" id="previousStepBtn"> <i></i>Adicionar endereço</p>
 
                 <div id="userAddressForm">
 
@@ -201,7 +201,7 @@
         </form>
     </div>
 
-    <script th:src="@{/js/page_scripts/cadastro.js}"></script>
+    <script type="module" th:src="@{/js/page_scripts/cadastro.js}"></script>
 </body>
 
 </html>

@@ -1,11 +1,11 @@
 //Validação de nome de usuário
-function validateUsername(username) {
+export function validateUsername(username) {
     const words = input.trim().split(/\s+/);
     return words.length === 2 && words[0].length > 0 && words[1].length > 0;
 }
 
 //Validação de CPF
-function validateCPF(cpf) {
+export function validateCPF(cpf) {
     cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
         return false; // Verifica se o CPF tem 11 dígitos ou se todos os dígitos são iguais
@@ -41,7 +41,7 @@ function validateCPF(cpf) {
 }
 
 //Validação de telefone
-function validatePhone(phone) {
+export function validatePhone(phone) {
     phone = phone.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
     if (phone.length === 10 || phone.length === 11) {
         const regex = /^[1-9]{2}[2-9][0-9]{7,8}$/;
@@ -52,7 +52,7 @@ function validatePhone(phone) {
 
 
 //Validação de data de nascimento
-function validateBirthdate(birthdate) {
+export function validateBirthdate(birthdate) {
     const date = new Date(birthdate);
     const today = new Date();
     const minAge = 16;
@@ -75,23 +75,14 @@ function validateBirthdate(birthdate) {
 
 //Validação de email
 
-function validateEmail(email) {
+export function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
 //Validação de senha
-function validatePassword(password) {
+export function validatePassword(password) {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
 }
 
-
-export {
-    validateUsername,
-    validateCPF,
-    validatePhone,
-    validateBirthdate,
-    validateEmail,
-    validatePassword
-};

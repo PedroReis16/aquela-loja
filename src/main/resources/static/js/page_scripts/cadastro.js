@@ -1,15 +1,18 @@
-import { validateUsername, validateCPF, validatePhone, validateBirthdate, validateEmail, validatePassword } from './helpers/validators.js';
-import { showErrorMessage, hideErrorMessage } from './helpers/masks.js';
+import { validateUsername, validateCPF, validatePhone, validateBirthdate, validateEmail, validatePassword } from '../helpers/validators.js';
+import { maskCPF, maskCEP, maskPhone } from '../helpers/masks.js';
 
-function nextStep() {
+const nextStepBtn = document.getElementById('nextStepBtn');
+nextStepBtn.addEventListener('click', function (e) {
     document.getElementById('step1').classList.remove('active');
     document.getElementById('step2').classList.add('active');
-}
+});
 
-function prevStep() {
+const previousStepBtn = document.getElementById('previousStepBtn');
+previousStepBtn.addEventListener('click', function (e) {
     document.getElementById('step2').classList.remove('active');
     document.getElementById('step1').classList.add('active');
-}
+});
+
 
 // Toggle de visibilidade da senha
 document.querySelectorAll('.toggle-password').forEach(button => {
@@ -24,23 +27,17 @@ document.querySelectorAll('.toggle-password').forEach(button => {
 // Máscaras para os campos
 const inputCPF = document.querySelector('input[placeholder="CPF"]');
 inputCPF.addEventListener('input', function (e) {
-    let value = e.target.value.replace(/\D/g, '');
-    if (value.length <= 11) {
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-        e.target.value = value;
-    }
+    let value = e.target.value;
+    e.target.value = maskCPF(value);
 });
 
 const inputTelefone = document.querySelector('input[placeholder="Telefone"]');
 inputTelefone.addEventListener('input', function (e) {
-    let value = e.target.value.replace(/\D/g, '');
-    if (value.length <= 11) {
-        value = value.replace(/(\d{2})(\d)/, '($1) $2');
-        value = value.replace(/(\d{5})(\d)/, '$1-$2');
-        e.target.value = value;
-    }
+    if (e.target.value.length > 15)
+        e.target.value = e.target.value.substring(0, 15);
+
+    let value = e.target.value;
+    e.target.value = maskPhone(value);
 });
 
 const inputCEP = document.querySelector('input[placeholder="CEP"]');
