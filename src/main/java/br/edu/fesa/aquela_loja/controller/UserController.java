@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
@@ -48,10 +49,11 @@ public class UserController {
 
         UserDto user = userService.getAuthenticatedUser();
         List<UserAddressDto> userAddress = userService.getUserAddress();
-        
+
         model.addAttribute("updatedUser", user);
         model.addAttribute("userAddress", userAddress);
-        
+        model.addAttribute("newUserAddress", new NewUserAddressDto());
+
         return "pages/user_pages/meus-dados";
     }
 
@@ -68,6 +70,13 @@ public class UserController {
         userService.deleteUser(request, response);
 
         return "redirect:/";
+    }
+
+    @PostMapping("/user/new-address")
+    public String postMethodName(@ModelAttribute("newUserAddress") NewUserAddressDto newUserAddress) {
+        userService.addNewAddress(newUserAddress);
+
+        return "redirect:/usuario/meus-dados";
     }
 
     @GetMapping("/usuario/meus-pedidos")

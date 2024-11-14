@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
@@ -132,6 +133,28 @@ public class UserService {
         }
 
         return result;
+    }
+
+    public void addNewAddress(NewUserAddressDto newUserAddress) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+
+        AddressModel addressModel = AddressModel.builder()
+                .cep(newUserAddress.getCep())
+                .addressIdentification(newUserAddress.getAddressIdentification())
+                .street(newUserAddress.getStreet())
+                .number(newUserAddress.getNumber())
+                .neighborhood(newUserAddress.getNeighborhood())
+                .city(newUserAddress.getCity())
+                .state(newUserAddress.getState())
+                .complement(newUserAddress.getComplement())
+                .reference(newUserAddress.getReference())
+                .isDefault(false)
+                .appUser(appUser)
+                .build();
+
+        addressRepository.save(addressModel);
     }
 
 }
