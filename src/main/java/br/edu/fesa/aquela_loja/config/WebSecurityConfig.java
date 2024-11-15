@@ -4,10 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpMethod.PUT;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -19,10 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_CREATE;
-import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_DELETE;
-import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_READ;
-import static br.edu.fesa.aquela_loja.models.enums.Permission.ADMIN_UPDATE;
 import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
 import static br.edu.fesa.aquela_loja.models.enums.Role.USER;
 import br.edu.fesa.aquela_loja.service.AppUserService;
@@ -67,30 +59,24 @@ public class WebSecurityConfig {
                 .requestMatchers("/administrador/**").hasRole(ADMIN.name())
                 .requestMatchers("/usuario/**").hasAnyRole(USER.name(), ADMIN.name())
                 //Autenticação das rotas de administrador
-                .requestMatchers(GET, "/admin/**").hasAuthority(ADMIN_READ.name())
-                .requestMatchers(POST, "/admin/**").hasAuthority(ADMIN_CREATE.name())
-                .requestMatchers(PUT, "/admin/**").hasAuthority(ADMIN_UPDATE.name())
-                .requestMatchers(DELETE, "/admin/**").hasAuthority(ADMIN_DELETE.name())
+                .requestMatchers("/admin/**").hasRole(ADMIN.name())
                 //Autenticação das rotas de usuário
                 .requestMatchers("/user/registration").permitAll()
                 .requestMatchers("/user/delete").permitAll()
-                .requestMatchers(GET, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
-                .requestMatchers(POST, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
-                .requestMatchers(PUT, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
-                .requestMatchers(DELETE, "/user/**").hasAnyRole(USER.name(), ADMIN.name())
+                .requestMatchers("/user/**").hasAnyRole(USER.name(), ADMIN.name())
                 .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                 .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/", true))
                 .logout(logout -> logout
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/").permitAll()
-                    .logoutSuccessUrl("/login?logout=true") // Redireciona após o logout
-                    .invalidateHttpSession(true)     // Garante que a sessão seja invalidada
-                    .clearAuthentication(true)       // Limpa a autenticação
-                    .deleteCookies("JSESSIONID")     // Apaga o cookie JSESSIONID
-                    .permitAll())
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/").permitAll()
+                .logoutSuccessUrl("/login?logout=true") // Redireciona após o logout
+                .invalidateHttpSession(true) // Garante que a sessão seja invalidada
+                .clearAuthentication(true) // Limpa a autenticação
+                .deleteCookies("JSESSIONID") // Apaga o cookie JSESSIONID
+                .permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
