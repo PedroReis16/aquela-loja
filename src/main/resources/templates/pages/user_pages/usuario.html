@@ -82,6 +82,18 @@
             </a>
           </div>
 
+          <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/product/list-all">
+              <div class="user-card widget-card" id="productList">
+                <i></i>
+                <div class="widget-card-content">
+                  <p class="card-title">Resultados</p>
+                  <p class="card-description">Observe como anda suas vendas</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
         </div>
       </section>
     </div>
