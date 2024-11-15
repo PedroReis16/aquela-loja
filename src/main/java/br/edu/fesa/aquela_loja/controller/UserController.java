@@ -110,4 +110,9 @@ public class UserController {
 
         return "pages/user_pages/meus-cartoes";
     }
+    @GetMapping("/usuario/meus-cartoes/novo")
+    public String getMethodName() {
+        return "pages/user_pages/novo-cartao";
+    }
+    
 }

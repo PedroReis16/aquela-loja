@@ -8,46 +8,7 @@
 
   <link rel="stylesheet" th:href="@{/styles/reset.css}">
   <link rel="stylesheet" th:href="@{/styles/style.css}">
-  <style>
-    .credit-card {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
 
-    .credit-card .card-brand {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .credit-card .card-name {
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-
-    .credit-card .card-number {
-      margin-bottom: 16px;
-    }
-
-    .credit-card .manage-btn {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 16px;
-      cursor: pointer;
-    }
-
-    .credit-card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-gap: 16px;
-    }
-  </style>
 </head>
 
 <body>
@@ -58,7 +19,7 @@
     <div class="card-container">
       <div class="card-header">
         <h1>Meus cartões</h1>
-        <a href="/meus-cartoes/novo" class="btn">Adicionar cartão</a>
+        <a href="meus-cartoes/novo">Adicionar cartão</a>
       </div>
 
       <div class="cards-list">
@@ -77,51 +38,7 @@
 
 
   <div th:replace="~{fragments/header :: headerScript}"></div>
-  <script>
-    const creditCards = [
-      {
-        id: 1,
-        brand: 'Visa',
-        name: 'John Doe Visa',
-        number: '1234'
-      },
-      {
-        id: 2,
-        brand: 'Mastercard',
-        name: 'Jane Smith Mastercard',
-        number: '5678'
-      },
-      {
-        id: 3,
-        brand: 'American Express',
-        name: 'Bob Johnson Amex',
-        number: '9012'
-      }
-    ];
 
-    const creditCardGrid = document.getElementById('credit-card-grid');
-
-    creditCards.forEach(card => {
-      const cardElement = document.createElement('div');
-      cardElement.classList.add('credit-card');
-
-      cardElement.innerHTML = `
-        <div class="card-brand">${card.brand}</div>
-        <div class="card-name">${card.name}</div>
-        <div class="card-number">**** **** **** ${card.number}</div>
-        <button class="manage-btn">Manage</button>
-      `;
-
-      creditCardGrid.appendChild(cardElement);
-    });
-  </script>
 </body>
-
-
-<!-- <body>
-
-  
-
-</body> -->
 
 </html>
