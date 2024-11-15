@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout</title>
+
+  <link rel="stylesheet" th:href="@{/styles/reset.css}">
+  <link rel="stylesheet" th:href="@{/styles/style.css}">
   <style>
     * {
       margin: 0;
@@ -138,91 +141,97 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="steps">
-      <div class="step active" id="step1">1. Carrinho</div>
-      <div class="step" id="step2">2. Pagamento</div>
-      <div class="step" id="step3">3. Confirmação</div>
-      <div class="step" id="step4">4. Finalização</div>
-    </div>
+  <header th:replace="~{fragments/header :: header}"></header>
 
-    <!-- Etapa 1: Carrinho -->
-    <div class="step-content" id="cart-step">
-      <h2>Seu Carrinho</h2>
-      <div id="cart-items">
-        <!-- Items serão inseridos via JavaScript -->
+  <main>
+    <div class="container">
+      <div class="steps">
+        <div class="step active" id="step1">1. Carrinho</div>
+        <div class="step" id="step2">2. Pagamento</div>
+        <div class="step" id="step3">3. Confirmação</div>
+        <div class="step" id="step4">4. Finalização</div>
       </div>
 
-      <div class="address-selection">
-        <h3>Endereço de Entrega</h3>
-        <div class="address-card selected">
-          <h4>Casa</h4>
-          <p>Rua Exemplo, 123</p>
-          <p>São Paulo - SP</p>
-        </div>
-        <div class="address-card">
-          <h4>Trabalho</h4>
-          <p>Av. Exemplo, 456</p>
-          <p>São Paulo - SP</p>
-        </div>
-      </div>
-
-      <div class="navigation-buttons">
-        <button class="btn" onclick="nextStep()">Próximo</button>
-      </div>
-    </div>
-
-    <!-- Etapa 2: Pagamento -->
-    <div class="step-content hidden" id="payment-step">
-      <h2>Forma de Pagamento</h2>
-      <div class="payment-methods">
-        <div class="payment-method" onclick="selectPayment(this)">
-          <h4>Cartão de Crédito</h4>
-          <p>**** **** **** 1234</p>
-        </div>
-        <div class="payment-method" onclick="selectPayment(this)">
-          <h4>PIX</h4>
-          <p>Pagamento instantâneo</p>
-        </div>
-        <div class="payment-method" onclick="selectPayment(this)">
-          <h4>Boleto</h4>
-          <p>Vencimento em 3 dias úteis</p>
-        </div>
-      </div>
-
-      <div class="navigation-buttons">
-        <button class="btn" onclick="previousStep()">Voltar</button>
-        <button class="btn" onclick="nextStep()">Próximo</button>
-      </div>
-    </div>
-
-    <!-- Etapa 3: Confirmação -->
-    <div class="step-content hidden" id="confirmation-step">
-      <h2>Confirmação do Pedido</h2>
-      <div class="order-summary">
-        <h3>Resumo do Pedido</h3>
-        <div id="order-items">
+      <!-- Etapa 1: Carrinho -->
+      <div class="step-content" id="cart-step">
+        <h2>Seu Carrinho</h2>
+        <div id="cart-items">
           <!-- Items serão inseridos via JavaScript -->
         </div>
-        <div id="order-total"></div>
+
+        <div class="address-selection">
+          <h3>Endereço de Entrega</h3>
+          <div class="address-card selected">
+            <h4>Casa</h4>
+            <p>Rua Exemplo, 123</p>
+            <p>São Paulo - SP</p>
+          </div>
+          <div class="address-card">
+            <h4>Trabalho</h4>
+            <p>Av. Exemplo, 456</p>
+            <p>São Paulo - SP</p>
+          </div>
+        </div>
+
+        <div class="navigation-buttons">
+          <button class="btn" onclick="nextStep()">Próximo</button>
+        </div>
       </div>
 
-      <div class="navigation-buttons">
-        <button class="btn" onclick="previousStep()">Voltar</button>
-        <button class="btn" onclick="nextStep()">Confirmar Pedido</button>
+      <!-- Etapa 2: Pagamento -->
+      <div class="step-content hidden" id="payment-step">
+        <h2>Forma de Pagamento</h2>
+        <div class="payment-methods">
+          <div class="payment-method" onclick="selectPayment(this)">
+            <h4>Cartão de Crédito</h4>
+            <p>**** **** **** 1234</p>
+          </div>
+          <div class="payment-method" onclick="selectPayment(this)">
+            <h4>PIX</h4>
+            <p>Pagamento instantâneo</p>
+          </div>
+          <div class="payment-method" onclick="selectPayment(this)">
+            <h4>Boleto</h4>
+            <p>Vencimento em 3 dias úteis</p>
+          </div>
+        </div>
+
+        <div class="navigation-buttons">
+          <button class="btn" onclick="previousStep()">Voltar</button>
+          <button class="btn" onclick="nextStep()">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 3: Confirmação -->
+      <div class="step-content hidden" id="confirmation-step">
+        <h2>Confirmação do Pedido</h2>
+        <div class="order-summary">
+          <h3>Resumo do Pedido</h3>
+          <div id="order-items">
+            <!-- Items serão inseridos via JavaScript -->
+          </div>
+          <div id="order-total"></div>
+        </div>
+
+        <div class="navigation-buttons">
+          <button class="btn" onclick="previousStep()">Voltar</button>
+          <button class="btn" onclick="nextStep()">Confirmar Pedido</button>
+        </div>
+      </div>
+
+      <!-- Etapa 4: Finalização -->
+      <div class="step-content hidden" id="success-step">
+        <h2>Pedido Finalizado com Sucesso!</h2>
+        <p>Obrigado pela sua compra!</p>
+        <div class="navigation-buttons">
+          <button class="btn" onclick="goToHome()">Voltar para Home</button>
+        </div>
       </div>
     </div>
 
-    <!-- Etapa 4: Finalização -->
-    <div class="step-content hidden" id="success-step">
-      <h2>Pedido Finalizado com Sucesso!</h2>
-      <p>Obrigado pela sua compra!</p>
-      <div class="navigation-buttons">
-        <button class="btn" onclick="goToHome()">Voltar para Home</button>
-      </div>
-    </div>
-  </div>
+  </main>
 
+  <div th:replace="~{fragments/header :: headerScript}"></div>
   <script>
     // Dados de exemplo
     const cartItems = [
