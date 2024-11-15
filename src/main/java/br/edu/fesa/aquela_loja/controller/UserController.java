@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UpdateUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -103,6 +106,39 @@ public class UserController {
 
     @GetMapping("/usuario/meus-cartoes")
     public String getUserCard(Model model) {
+        List<UserCardDto> cards = userService.getUserCard();
+
+        model.addAttribute("userCards", cards);
+
         return "pages/user_pages/meus-cartoes";
+    }
+
+    @GetMapping("/usuario/meus-cartoes/novo")
+    public String getMethodName(Model model) {
+
+        model.addAttribute("newCard", new NewUserCardDto());
+        return "pages/user_pages/novo-cartao";
+    }
+
+    @PostMapping("/user/new-card")
+    public String newUserCard(@ModelAttribute("newUserAddress") NewUserCardDto newCard) {
+        userService.addNewCard(newCard);
+
+        return "redirect:/usuario/meus-cartoes";
+    }
+
+    @PostMapping("user/update-card/{id}")
+    public String updateUserCard(@PathVariable Long id, @RequestBody UpdateUserCardDto updatedCard) {
+        userService.updateUserCard(id, updatedCard);
+
+        return "redirect:/usuario/meus-cartoes";
+    }
+
+    @PostMapping("user/delete-card/{id}")
+    public String deleteUserCard(@PathVariable Long id) {
+
+        userService.deleteUserCard(id);
+
+        return "redirect:/usuario/meus-cartoes";
     }
 }

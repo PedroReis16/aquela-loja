@@ -10,13 +10,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UpdateUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
+import br.edu.fesa.aquela_loja.models.entity.PaymentCardModel;
 import br.edu.fesa.aquela_loja.repository.IAddressRepository;
 import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import br.edu.fesa.aquela_loja.repository.IPaymentCardRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,6 +40,9 @@ public class UserService {
 
     @Autowired
     private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private final IPaymentCardRepository paymentCardRepository;
 
     public void createNewUser(NewUserDto newUser) {
         AppUserModel appUser = AppUserModel.builder()
@@ -177,6 +185,52 @@ public class UserService {
     public void deleteUserAddress(Long id) {
         //TODO: Colocar uma validação que não permita deletar o endereço caso ele seja o único disponível
         addressRepository.deleteById(id);
+    }
+
+    public List<UserCardDto> getUserCard() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+
+        List<PaymentCardModel> userCards = paymentCardRepository.findByAppUser(appUser).get();
+
+        List<UserCardDto> result = new ArrayList<>();
+
+        for (PaymentCardModel card : userCards) {
+            UserCardDto userCard = new UserCardDto(card);
+            result.add(userCard);
+        }
+
+        return result;
+    }
+
+    public void addNewCard(NewUserCardDto newCard) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+
+        PaymentCardModel card = PaymentCardModel.builder()
+                .holderName(newCard.getHolderName())
+                .number(newCard.getNumber())
+                .expirationDate(newCard.getExpirationDate())
+                .cvv(newCard.getCvv())
+                .appUser(appUser)
+                .build();
+
+        paymentCardRepository.save(card);
+    }
+
+    public void deleteUserCard(Long id) {
+        paymentCardRepository.deleteById(id);
+    }
+
+    public void updateUserCard(Long id, UpdateUserCardDto updatedCard) {
+        PaymentCardModel card = paymentCardRepository.findById(id).get();
+
+        card.setHolderName(updatedCard.getHolderName());
+        card.setNumber(updatedCard.getExpirationDate());
+
+        paymentCardRepository.save(card);
     }
 
 }

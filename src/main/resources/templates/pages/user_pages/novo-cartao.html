@@ -1,192 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Formulário de Cartão de Crédito</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f2f5;
-            padding: 20px;
-        }
-
-        .container {
-            width: 850px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .card-container {
-            perspective: 1000px;
-            height: 200px;
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            position: relative;
-            width: 340px;
-            height: 200px;
-            margin: 0 auto;
-            border-radius: 15px;
-            padding: 20px;
-            transform-style: preserve-3d;
-            transition: transform 0.8s;
-            cursor: pointer;
-            background: linear-gradient(45deg, #1a1a1a, #3d3d3d);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-        }
-
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .card-front,
-        .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            top: 0;
-            left: 0;
-            padding: 20px;
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-        }
-
-        .card-logo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            height: 40px;
-            color: white;
-            font-size: 24px;
-        }
-
-        .card-chip {
-            width: 50px;
-            height: 40px;
-            background: #bdbdbd;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .card-number {
-            font-size: 24px;
-            color: white;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .card-holder {
-            color: white;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .card-expiry {
-            color: white;
-            font-size: 14px;
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-        }
-
-        .card-strip {
-            background: #000;
-            height: 40px;
-            margin: 20px 0;
-        }
-
-        .card-cvv {
-            background: white;
-            height: 40px;
-            text-align: right;
-            padding: 10px;
-            border-radius: 4px;
-        }
-
-        .form {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #2196f3;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #2196f3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #1976d2;
-        }
-
-        .error {
-            border-color: #f44336;
-        }
-
-        .error-message {
-            color: #f44336;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/styles/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
 
 <body>
@@ -209,26 +29,26 @@
             </div>
         </div>
 
-        <form class="form" id="creditCardForm">
+        <form class="form" th:action="@{/user/new-card}" th:object="${newCard}" method="post" id="creditCardForm">
             <div class="form-group">
                 <label for="number">Número do Cartão</label>
-                <input type="text" id="number" maxlength="19" placeholder="1234 5678 9012 3456">
+                <input type="text" id="number" maxlength="19" placeholder="1234 5678 9012 3456" th:field="*{number}">
             </div>
 
             <div class="form-group">
                 <label for="name">Nome do Titular</label>
-                <input type="text" id="name" placeholder="Nome como está no cartão">
+                <input type="text" id="name" placeholder="Nome como está no cartão" th:field="*{holderName}">
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="expiry">Validade</label>
-                    <input type="text" id="expiry" maxlength="5" placeholder="MM/AA">
+                    <input type="text" id="expiry" maxlength="5" placeholder="MM/AA" th:field="*{expirationDate}">
                 </div>
 
                 <div class="form-group">
                     <label for="cvv">CVV</label>
-                    <input type="text" id="cvv" maxlength="3" placeholder="123">
+                    <input type="text" id="cvv" maxlength="3" placeholder="123" th:field="*{cvv}">
                 </div>
             </div>
 
@@ -236,93 +56,7 @@
         </form>
     </div>
 
-    <script>
-        // Elementos do DOM
-        const card = document.querySelector('.card');
-        const cardNumber = document.getElementById('cardNumber');
-        const cardName = document.getElementById('cardName');
-        const cardExpiry = document.getElementById('cardExpiry');
-        const cardCvv = document.getElementById('cardCvv');
-        const cardBrand = document.getElementById('cardBrand');
-
-        // Inputs do formulário
-        const numberInput = document.getElementById('number');
-        const nameInput = document.getElementById('name');
-        const expiryInput = document.getElementById('expiry');
-        const cvvInput = document.getElementById('cvv');
-        const form = document.getElementById('creditCardForm');
-
-        // Padrões de bandeiras de cartão
-        const cardPatterns = {
-            visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
-            mastercard: /^5[1-5][0-9]{14}$/,
-            amex: /^3[47][0-9]{13}$/,
-            elo: /^((((636368)|(438935)|(504175)|(451416)|(636297))[0-9]{10})|((5067)|(4576)|(4011))[0-9]{12})$/,
-            hipercard: /^(606282\d{10}(\d{3})?)|(3841\d{15})$/,
-        };
-
-        // Função para formatar número do cartão
-        function formatCardNumber(value) {
-            const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
-            const onlyNumbers = value.replace(/[^\d]/g, '');
-
-            return onlyNumbers.replace(regex, (regex, $1, $2, $3, $4) =>
-                [$1, $2, $3, $4].filter(group => !!group).join(' ')
-            );
-        }
-
-        // Função para detectar bandeira do cartão
-        function detectCardBrand(number) {
-            const cleanNumber = number.replace(/\D/g, '');
-
-            if (cardPatterns.visa.test(cleanNumber)) return '💳 VISA';
-            if (cardPatterns.mastercard.test(cleanNumber)) return '💳 MASTERCARD';
-            if (cardPatterns.amex.test(cleanNumber)) return '💳 AMEX';
-            if (cardPatterns.elo.test(cleanNumber)) return '💳 ELO';
-            if (cardPatterns.hipercard.test(cleanNumber)) return '💳 HIPERCARD';
-
-            return '💳';
-        }
-
-        // Event Listeners
-        numberInput.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            e.target.value = formatCardNumber(value);
-            cardNumber.textContent = e.target.value || '•••• •••• •••• ••••';
-            cardBrand.textContent = detectCardBrand(value);
-        });
-
-        nameInput.addEventListener('input', (e) => {
-            cardName.textContent = e.target.value.toUpperCase() || 'NOME DO TITULAR';
-        });
-
-        expiryInput.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.slice(0, 2) + '/' + value.slice(2);
-            }
-            e.target.value = value;
-            cardExpiry.textContent = value || 'MM/AA';
-        });
-
-        cvvInput.addEventListener('focus', () => {
-            card.classList.add('flipped');
-        });
-
-        cvvInput.addEventListener('blur', () => {
-            card.classList.remove('flipped');
-        });
-
-        cvvInput.addEventListener('input', (e) => {
-            cardCvv.textContent = e.target.value || '•••';
-        });
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Aqui você pode adicionar a lógica para enviar os dados do cartão
-            alert('Cartão cadastrado com sucesso!');
-        });
-    </script>
+    <script th:src="@{/js/page_scripts/novo-cartao.js}"></script>
 </body>
 
 </html>
