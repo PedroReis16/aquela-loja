@@ -5,12 +5,15 @@ import br.edu.fesa.aquela_loja.models.entity.ProductImageModel;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.repository.IProductImageRepository;
 import br.edu.fesa.aquela_loja.repository.IProductRepository;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -21,6 +24,7 @@ public class ProductService {
     @Autowired
     private ImageService imageService;
 
+    @Transactional
     public void createNewProduct(final ProductRegDto pDto, final MultipartFile img) throws IOException {
 
         ProductModel product = ProductModel.builder()
@@ -32,12 +36,30 @@ public class ProductService {
                 .description(pDto.getDescription())
                 .build();
 
-        productRepository.save(product);
+        var imgSaved = imageService.generateFileModel(img);
+        product.setImg(imgSaved);
 
-        imageService.generateFileModel(img, product);
+        productRepository.save(product);
     }
 
     public List<ProductModel> findAll() {
         return productRepository.findAll();
+    }
+
+    public ProductModel findById(final String id) {
+        return productRepository.findById(Long.parseLong(id)).orElse(new ProductModel());
+    }
+
+    public void update(final ProductModel product, final MultipartFile img) throws IOException {
+        imageService.update(product, img);
+        productRepository.save(product);
+    }
+
+    public boolean exists(String pName) {
+        return productRepository.existsByName(pName);
+    }
+
+    public void fillImage(ProductModel product) {
+        imageService.fillImage(product);
     }
 }
