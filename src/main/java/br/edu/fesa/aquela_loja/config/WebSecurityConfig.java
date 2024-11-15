@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
 import static br.edu.fesa.aquela_loja.models.enums.Role.USER;
@@ -68,11 +69,11 @@ public class WebSecurityConfig {
                 )
                 .formLogin(form -> form
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/", true))
+                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler()) 
+                )
                 .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/").permitAll()
-                .logoutSuccessUrl("/login?logout=true") // Redireciona após o logout
                 .invalidateHttpSession(true) // Garante que a sessão seja invalidada
                 .clearAuthentication(true) // Limpa a autenticação
                 .deleteCookies("JSESSIONID") // Apaga o cookie JSESSIONID
