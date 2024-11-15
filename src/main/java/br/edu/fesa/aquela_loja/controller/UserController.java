@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -84,6 +85,13 @@ public class UserController {
     @PostMapping("/user/update-address")
     public ResponseEntity<Void> updateUserAddress(@RequestBody UserAddressDto updatedAddress) {
         userService.updateUserAddress(updatedAddress);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/user/delete-address/{id}")
+    public ResponseEntity<Void> deleteUserAddress(@PathVariable Long id) {
+        userService.deleteUserAddress(id);
 
         return ResponseEntity.ok().build();
     }

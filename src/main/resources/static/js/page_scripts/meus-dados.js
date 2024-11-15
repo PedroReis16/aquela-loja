@@ -116,6 +116,16 @@ addressCard.forEach(card => {
             });
 
         });
+
+        addressForm.querySelector("#deleteAddress").addEventListener('click', function () {
+            fetch(`/user/delete-address/${result.id}`, {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            });
+        });
     });
 });
 

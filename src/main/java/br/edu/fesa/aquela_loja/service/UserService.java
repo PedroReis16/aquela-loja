@@ -28,13 +28,13 @@ import lombok.AllArgsConstructor;
 public class UserService {
 
     @Autowired
-    private IAppUserRepository appUserRepository;
+    private final IAppUserRepository appUserRepository;
 
     @Autowired
-    private IAddressRepository addressRepository;
+    private final IAddressRepository addressRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public void createNewUser(NewUserDto newUser) {
         AppUserModel appUser = AppUserModel.builder()
@@ -172,6 +172,11 @@ public class UserService {
         addressModel.setIsDefault(userAddressDto.isDefault());
 
         addressRepository.save(addressModel);
+    }
+
+    public void deleteUserAddress(Long id) {
+        //TODO: Colocar uma validação que não permita deletar o endereço caso ele seja o único disponível
+        addressRepository.deleteById(id);
     }
 
 }
