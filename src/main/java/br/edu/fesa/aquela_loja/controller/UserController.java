@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
@@ -110,9 +111,18 @@ public class UserController {
 
         return "pages/user_pages/meus-cartoes";
     }
+
     @GetMapping("/usuario/meus-cartoes/novo")
-    public String getMethodName() {
+    public String getMethodName(Model model) {
+
+        model.addAttribute("newCard", new NewUserCardDto());
         return "pages/user_pages/novo-cartao";
     }
-    
+
+    @PostMapping("/user/new-card")
+    public String postMethodName(@ModelAttribute("newUserAddress") NewUserCardDto newCard) {
+        userService.addNewCard(newCard);
+
+        return "redirect:/usuario/meus-cartoes";
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
@@ -200,6 +201,22 @@ public class UserService {
         }
 
         return result;
+    }
+
+    public void addNewCard(NewUserCardDto newCard) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+
+        PaymentCardModel card = PaymentCardModel.builder()
+                .holderName(newCard.getHolderName())
+                .number(newCard.getNumber())
+                .expirationDate(newCard.getExpirationDate())
+                .cvv(newCard.getCvv())
+                .appUser(appUser)
+                .build();
+
+        paymentCardRepository.save(card);
     }
 
 }

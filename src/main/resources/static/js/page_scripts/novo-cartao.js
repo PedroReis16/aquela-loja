@@ -77,9 +77,3 @@ cvvInput.addEventListener('blur', () => {
 cvvInput.addEventListener('input', (e) => {
     cardCvv.textContent = e.target.value || '•••';
 });
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar os dados do cartão
-    alert('Cartão cadastrado com sucesso!');
-});
