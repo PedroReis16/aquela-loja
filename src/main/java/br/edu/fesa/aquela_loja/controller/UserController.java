@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -103,6 +104,10 @@ public class UserController {
 
     @GetMapping("/usuario/meus-cartoes")
     public String getUserCard(Model model) {
+        List<UserCardDto> cards = userService.getUserCard();
+
+        model.addAttribute("userCards", cards);
+
         return "pages/user_pages/meus-cartoes";
     }
 }

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URLConnection;
 import java.util.Base64;
-import java.util.List;
 
 @Entity
 @Getter
