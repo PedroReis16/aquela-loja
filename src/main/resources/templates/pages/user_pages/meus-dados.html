@@ -97,12 +97,18 @@
 
         <div class="address-list">
           <th:block th:each="address : ${userAddress}">
-            <editable-address-card th:attr="address-identification=${address.addressIdentification}, 
-            street=${address.street}, 
-            number-string=${address.numberString}, 
-            details=${address.details}, 
-            reference=${address.reference}">
-            </editable-address-card>
+            <div class="address-card" th:data-address="${address}">
+              <div class="card-content">
+                <h3 id="address-identification" th:text="${address.addressIdentification}"></h3>
+                <p id="street" th:text="${address.street}"></p>
+                <p id="number-string" th:text="${address.numberString}"></p>
+                <p id="details" th:text="${address.details}"></p>
+                <p id="reference" th:text="${address.reference}"></p>
+              </div>
+              <div class="card-actions">
+                <button type="button" class="edit-address-btn">Editar</button>
+              </div>
+            </div>
 
           </th:block>
 
@@ -146,7 +152,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="cepIcon"></i>
-                <input type="text" placeholder="CEP" th:field="*{cep}" required />
+                <input type="text" id="editCEP" placeholder="CEP" th:field="*{cep}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -154,7 +160,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="idIcon"></i>
-                <input type="text" placeholder="Identificação" th:field="*{addressIdentification}" required />
+                <input type="text" id="editAddressId" placeholder="Identificação" th:field="*{addressIdentification}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -162,7 +168,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="streetIcon"></i>
-                <input type="text" placeholder="Endereço" th:field="*{street}" required />
+                <input type="text" id="editStreet" placeholder="Endereço" th:field="*{street}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -170,7 +176,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="numberIcon"></i>
-                <input type="text" placeholder="Número" th:field="*{number}" required />
+                <input type="text" id="editNumber" placeholder="Número" th:field="*{number}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -178,7 +184,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="neighborhoodIcon"></i>
-                <input type="text" placeholder="Bairro" th:field="*{neighborhood}" required />
+                <input type="text" id="editNeighborhood" placeholder="Bairro" th:field="*{neighborhood}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -186,7 +192,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="cityIcon"></i>
-                <input type="text" placeholder="Cidade" th:field="*{city}" required />
+                <input type="text" id="editCity" placeholder="Cidade" th:field="*{city}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -194,7 +200,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="stateIcon"></i>
-                <input type="text" placeholder="Estado" th:field="*{state}" required />
+                <input type="text" id="editState" placeholder="Estado" th:field="*{state}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -202,7 +208,7 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="complementIcon"></i>
-                <input type="text" placeholder="Complemento" th:field="*{complement}" required />
+                <input type="text" id="editComplement" placeholder="Complemento" th:field="*{complement}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
@@ -210,11 +216,11 @@
             <div class="address-form-container">
               <div class="input-label">
                 <i id="referenceIcon"></i>
-                <input type="text" placeholder="Referência" th:field="*{reference}" required />
+                <input type="text" id="editReference" placeholder="Referência" th:field="*{reference}" required />
                 <label for="cepInput"></label>
               </div>
               <p id="cepErrorMessage" class="error-message"></p>
-            </div> 
+            </div>
           </div>
 
           <div class="address-form-buttons">

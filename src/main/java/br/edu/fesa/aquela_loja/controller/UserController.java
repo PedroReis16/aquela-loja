@@ -3,11 +3,13 @@ package br.edu.fesa.aquela_loja.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
@@ -73,10 +75,17 @@ public class UserController {
     }
 
     @PostMapping("/user/new-address")
-    public String postMethodName(@ModelAttribute("newUserAddress") NewUserAddressDto newUserAddress) {
+    public String newUserAddress(@ModelAttribute("newUserAddress") NewUserAddressDto newUserAddress) {
         userService.addNewAddress(newUserAddress);
 
         return "redirect:/usuario/meus-dados";
+    }
+
+    @PostMapping("/user/update-address")
+    public ResponseEntity<Void> updateUserAddress(@RequestBody UserAddressDto updatedAddress) {
+        userService.updateUserAddress(updatedAddress);
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/usuario/meus-pedidos")

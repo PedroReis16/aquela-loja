@@ -157,4 +157,21 @@ public class UserService {
         addressRepository.save(addressModel);
     }
 
+    public void updateUserAddress(UserAddressDto userAddressDto) {
+        AddressModel addressModel = addressRepository.findById(userAddressDto.getId()).get();
+
+        addressModel.setCep(userAddressDto.getCep());
+        addressModel.setAddressIdentification(userAddressDto.getAddressIdentification());
+        addressModel.setStreet(userAddressDto.getStreet());
+        addressModel.setNumber(userAddressDto.getNumber());
+        addressModel.setNeighborhood(userAddressDto.getNeighborhood());
+        addressModel.setCity(userAddressDto.getCity());
+        addressModel.setState(userAddressDto.getState());
+        addressModel.setComplement(userAddressDto.getComplement());
+        addressModel.setReference(userAddressDto.getReference());
+        addressModel.setIsDefault(userAddressDto.isDefault());
+
+        addressRepository.save(addressModel);
+    }
+
 }
