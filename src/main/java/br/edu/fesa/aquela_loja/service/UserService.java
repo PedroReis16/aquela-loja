@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UpdateUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
@@ -215,6 +216,19 @@ public class UserService {
                 .cvv(newCard.getCvv())
                 .appUser(appUser)
                 .build();
+
+        paymentCardRepository.save(card);
+    }
+
+    public void deleteUserCard(Long id) {
+        paymentCardRepository.deleteById(id);
+    }
+
+    public void updateUserCard(Long id, UpdateUserCardDto updatedCard) {
+        PaymentCardModel card = paymentCardRepository.findById(id).get();
+
+        card.setHolderName(updatedCard.getHolderName());
+        card.setNumber(updatedCard.getExpirationDate());
 
         paymentCardRepository.save(card);
     }

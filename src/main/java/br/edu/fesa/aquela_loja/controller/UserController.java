@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.UpdateUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
 import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
@@ -120,8 +121,23 @@ public class UserController {
     }
 
     @PostMapping("/user/new-card")
-    public String postMethodName(@ModelAttribute("newUserAddress") NewUserCardDto newCard) {
+    public String newUserCard(@ModelAttribute("newUserAddress") NewUserCardDto newCard) {
         userService.addNewCard(newCard);
+
+        return "redirect:/usuario/meus-cartoes";
+    }
+
+    @PostMapping("user/update-card/{id}")
+    public String updateUserCard(@PathVariable Long id, @RequestBody UpdateUserCardDto updatedCard) {
+        userService.updateUserCard(id, updatedCard);
+
+        return "redirect:/usuario/meus-cartoes";
+    }
+
+    @PostMapping("user/delete-card/{id}")
+    public String deleteUserCard(@PathVariable Long id) {
+
+        userService.deleteUserCard(id);
 
         return "redirect:/usuario/meus-cartoes";
     }

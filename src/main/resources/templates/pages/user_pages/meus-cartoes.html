@@ -24,21 +24,48 @@
 
       <div class="cards-list">
         <th:block th:each="card : ${userCards}">
-          <div class="user-card">
+          <div class="user-card" th:data-card="${card}">
             <div class="card-brand" th:text="${card.holderName}"></div>
             <div class="card-number">**** **** **** <span th:text="${card.number}"></span></div>
-            <a href="/meus-cartoes/editar" class="manage-btn">Editar</a>
+            <button type="button" class="manage-btn">Editar</button>
           </div>
 
         </th:block>
       </div>
     </div>
+
+
+    <!-- Dialog para confirmar a exclusão da conta -->
+    <div class="dialog-container">
+      <dialog id="editCardDialog">
+        <form id="editCardForm">
+          <div id="dialogEditCardHeader">
+            <h3>Editar forma de pagamento</h3>
+            <button class="close-dialog-btn"><i></i></button>
+          </div>
+
+          <label for="holderName">Nome do titular</label>
+          <input type="text" id="holderName" name="holderName" required />
+
+          <label for="expirationDate">Nome do titular</label>
+          <input type="text" id="expirationDate" name="expirationDate" required />
+
+          <div class="dialog-confirm-btns">
+            <button type="button" id="deleteCardBtn">Remover da carteira</button>
+            <div class="edit-card-actions">
+              <button class="cancel-btn close-dialog-btn">Cancelar</button>
+              <button type="submit" class="confirm-button" id="saveCardBtn">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </dialog>
+    </div>
+
+
   </main>
 
-
-
   <div th:replace="~{fragments/header :: headerScript}"></div>
-
+  <script th:src="@{/js/page_scripts/meus-cartoes.js}"></script>
 </body>
 
 </html>
