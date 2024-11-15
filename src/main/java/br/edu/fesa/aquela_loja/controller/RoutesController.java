@@ -1,19 +1,31 @@
 package br.edu.fesa.aquela_loja.controller;
 
+import br.edu.fesa.aquela_loja.models.entity.ProductModel;
+import br.edu.fesa.aquela_loja.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 
+import java.util.List;
+
 @Controller
 public class RoutesController {
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping({"/", "/inicio", "/home"})
-    public String loadPage(Model model, @PathVariable(required = false) String page) {
+    public String loadPage(ModelMap model, @PathVariable(required = false) String page) {
+        List<ProductModel> products = productService.findAll();
+        model.addAttribute("products", products);
+
         return "pages/index";
     }
 

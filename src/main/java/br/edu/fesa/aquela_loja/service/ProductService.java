@@ -59,4 +59,8 @@ public class ProductService {
     public void fillImage(ProductModel product) {
         imageService.fillImage(product);
     }
+
+    public void deleteById(Long pId) {
+        productRepository.deleteById(pId);
+    }
 }
