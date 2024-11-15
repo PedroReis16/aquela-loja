@@ -4,14 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Minha carteira</title>
+
+  <link rel="stylesheet" th:href="@{/styles/reset.css}">
+  <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
 
 <body>
+  <header th:replace="~{fragments/header :: header}"></header>
+
   <div class="user-card-edit-content" th:fragment="content">
     <p>Editar cartões de usuário</p>
   </div>
-  <div th:fragment="contentScript"></div>
+
+  <div th:replace="~{fragments/header :: headerScript}"></div>
 </body>
 
 </html>
