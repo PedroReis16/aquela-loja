@@ -1,0 +1,25 @@
+/* Avatar do usuário */
+.user-avatar {
+  display: flex;
+  align-content: center;
+  height: auto;
+  margin: 12px 0px 0px 0px;
+}
+
+.user-avatar p {
+  color: var(--white);
+  font-size: 14px;
+  font-family: var(--primary-font);
+  margin: 8px 0px 0px 8px;
+  font-weight: 200;
+}
+
+#userAvatar {
+  height: 48px;
+}
+
+.emphasis-text a {
+  color: var(--white);
+  font-family: var(--primary-font);
+  font-weight: 400;
+}

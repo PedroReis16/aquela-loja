@@ -19,6 +19,10 @@
 /* Widgets */
 @import url("./fragment_styles/header.css");
 @import url("./fragment_styles/footer.css");
+@import url("./fragment_styles/departaments.css");
+@import url("./fragment_styles/search-bar.css");
+@import url("./fragment_styles/user-avatar.css");
+@import url("./fragment_styles/shopping-cart.css");
 
 :root {
   --default-font: "Poppins", sans-serif;
