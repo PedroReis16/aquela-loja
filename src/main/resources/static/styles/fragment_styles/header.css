@@ -82,13 +82,17 @@
     right: 0;
     z-index: 1000;
     background-color: black;
-    max-width: 100vw;
-    box-sizing: border-box;
+
+    max-width: 100%;
   }
 
   #menuContainer.fullscreen {
     height: calc(100vh - 124px);
     overflow: auto;
+  }
+
+  .no-scroll {
+    overflow: hidden;
   }
 
   #menuContainer.fullscreen + .user-auth-actions,
@@ -97,10 +101,9 @@
   }
 
   .mobile-user-avatar {
-    width: 100%;
-    padding: 16px;
     display: flex;
     align-items: center;
+    margin: 16px;
   }
   .mobile-user-avatar img {
     width: 80px;
