@@ -129,25 +129,6 @@
 
 /* Estiliza o campo de entrada */
 
-.error-message {
-  color: red;
-  margin: 4px 8px;
-  font-size: 14px;
-  font-family: var(--secondary-font);
-}
-
-.error-message.hidden i::before {
-  content: none;
-}
-
-.error-message i::before {
-  margin-right: 8px;
-  vertical-align: middle;
-  content: "\e002";
-  font-family: var(--material-icons);
-  font-size: 14px;
-}
-
 .visibility-control {
   background-color: transparent;
   border: none;

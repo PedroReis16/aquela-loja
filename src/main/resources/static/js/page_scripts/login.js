@@ -1,13 +1,19 @@
+const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
-const toggleButton = document.querySelector(".toggle-password");
+const loginBtn = document.getElementById("loginBtn");
 
-toggleButton.addEventListener("click", () => {
-    console.log("Teste");
-    // if (passwordInput.type === "password") {
-    //     passwordInput.type = "text";
-    //     toggleButton.textContent = "🙈"; // Altera o ícone para "ocultar"
-    // } else {
-    //     passwordInput.type = "password";
-    //     toggleButton.textContent = "👁️"; // Altera o ícone para "visualizar"
-    // }
+document.addEventListener("DOMContentLoaded", function () {
+    //Verificando se as credenciais estão preenchidas
+    function checkInputs() {
+        const isEmailFilled = emailInput.value.trim() !== "";
+        const isPasswordFilled = passwordInput.value.trim() !== "";
+
+        loginBtn.disabled = !(isEmailFilled && isPasswordFilled);
+    }
+
+    emailInput.addEventListener("input", checkInputs);
+    passwordInput.addEventListener("input", checkInputs);
+    checkInputs();
 });
+
+

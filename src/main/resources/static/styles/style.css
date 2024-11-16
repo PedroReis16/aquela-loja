@@ -154,3 +154,23 @@ a {
   color: var(--primary-color-hover);
   text-decoration: underline;
 }
+
+.error-message {
+  color: red;
+  margin: 4px 8px;
+  font-size: 18px;
+  font-family: var(--secondary-font);
+  font-weight: 600;
+}
+
+.error-message.hidden i::before {
+  content: none;
+}
+
+.error-message i::before {
+  margin-right: 8px;
+  vertical-align: middle;
+  content: "\e002";
+  font-family: var(--material-icons);
+  font-size: 14px;
+}
