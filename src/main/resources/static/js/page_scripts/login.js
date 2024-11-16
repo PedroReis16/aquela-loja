@@ -2,6 +2,8 @@ const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
 const loginBtn = document.getElementById("loginBtn");
 
+const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+
 document.addEventListener("DOMContentLoaded", function () {
     //Verificando se as credenciais estão preenchidas
     function checkInputs() {
@@ -16,4 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
     checkInputs();
 });
 
+togglePasswordBtn.addEventListener("click", function () {
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
 
+    togglePasswordBtn.classList.toggle("visible");
+});

@@ -17,7 +17,7 @@
 
   <div class="login-content">
     <custom-card>
-      <form  th:action="@{/login}" method="post">
+      <form th:action="@{/login}" method="post">
         <img th:src="@{/images/logo-black.png}" id="loginLogo" alt="" />
 
         <p th:if="${param.error != null}" class="error-message">Email ou senha inválidos</p>
@@ -39,7 +39,7 @@
             <div class="input-text">
               <input type="password" name="password" id="passwordInput" class="text-input" />
             </div>
-            <button type="button" id="visibilityBtn"></button>
+            <button type="button" id="togglePasswordBtn"></button>
           </div>
         </div>
 

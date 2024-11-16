@@ -55,20 +55,24 @@
   font-size: 24px;
 }
 
-#visibilityBtn {
+#togglePasswordBtn {
   cursor: pointer;
   background-color: transparent;
   border: none;
   outline: none;
-}
-#visibilityBtn::before {
-  content: "\e8f4";
+
   font-family: var(--material-icons);
   color: var(--gray);
   font-size: 24px;
 }
+#togglePasswordBtn::before {
+  content: "\e8f4";
+}
+#togglePasswordBtn.visible::before {
+  content: "\e8f5";
+}
 
-#loginBtn{
+#loginBtn {
   justify-self: center;
 }
 
