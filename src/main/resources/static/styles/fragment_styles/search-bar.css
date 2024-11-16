@@ -48,3 +48,9 @@
   align-content: center;
   margin: 0px 16px 0px 0px;
 }
+
+@media (max-width: 768px) {
+  .search-container {
+    margin: 8px 0px 0px 0px;
+  }
+}

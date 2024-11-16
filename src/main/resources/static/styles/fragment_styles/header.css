@@ -22,8 +22,6 @@
 
 /* Barra de pesquisa */
 
-
-
 .emphasis-text:hover {
   color: var(--gray);
   text-decoration: underline;
@@ -42,7 +40,6 @@
   height: auto;
   margin: 32px 0px 0px 0px;
 }
-
 
 /* SideMenu */
 .side-menu {
@@ -144,9 +141,6 @@
   }
 
   /* Barra de pesquisa */
-  .search-container {
-    margin: 8px 0px 0px 0px;
-  }
 
   .logo-container {
     display: flex;
@@ -163,8 +157,6 @@
   .user-container {
     display: none;
   }
-
-  /* departamentos */
 
   .header-departaments {
     display: none;
@@ -197,5 +189,24 @@
     padding-bottom: 2px;
     color: var(--white);
     text-decoration: none;
+  }
+
+  /* Departamentos */
+  #departamentList {
+    transition: height 0.3s ease;
+    overflow: hidden;
+    height: 0px; /* Altura inicial */
+    position: absolute;
+    top: 100;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: black;
+    width: 100%;
+  }
+
+  #departamentList.fullscreen {
+    height: 100vh;
+    overflow: auto;
   }
 }
