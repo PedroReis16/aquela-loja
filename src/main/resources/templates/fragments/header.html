@@ -25,23 +25,27 @@
       </div>
     </div>
 
-    <div class="menu-container">
+    <div id="menuContainer">
 
       <div id="departamentList" th:insert="~{fragments/departaments::departaments}"></div>
 
       <div class="user-auth-actions">
-        
+        <!-- Caso não esteja autenticado -->
+        <div id="authorizedBtns" sec:authorize="!isAuthenticated()">
+          <a class="confirm-button" href="/login">Entre</a>
+          <a id="signUpLink" href="/cadastro">Cadastre-se</a>
+        </div>
+        <!-- Caso esteja autenticado -->
+        <div id="logoutLink" sec:authorize="isAuthenticated()">
+          <a class="confirm-button" href="/logout">Sair</a>
+        </div>
       </div>
     </div>
 
-  </div>
-
-
-
-  <div class="header-script" th:fragment="headerScript">
     <script th:src="@{/js/fragments_scripts/header.js}"></script>
-    <script th:src="@{/js/fragments_scripts/side-menu.js}"></script>
   </div>
+
+
 </body>
 
 </html>
