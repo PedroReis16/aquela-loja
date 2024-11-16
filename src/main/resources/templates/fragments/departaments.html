@@ -7,78 +7,89 @@
 </head>
 
 <body>
-    <div id="departamentsList" th:fragment="departaments">
-        <div class="departament-list"></div>
-
-        <div id="menuList">
-
-        </div>
-
+    <div th:fragment="departaments">
+        <nav class="nav-menu">
+            <ul class="menu-list" id="menuList">
+                <!-- O menu será preenchido via JavaScript -->
+            </ul>
+        </nav>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                const menuList = document.getElementById('menuList');
+                const isMobile = window.innerWidth <= 768;
+
+                // Função para criar o menu
+                function createMenu(departments) {
+                    departments.forEach(dept => {
+                        const menuItem = document.createElement('li');
+                        menuItem.className = 'menu-item';
+
+                        const menuLink = document.createElement('a');
+                        menuLink.href = '#';
+                        menuLink.className = 'menu-link';
+                        menuLink.textContent = capitalizeWords(dept.Departamento);
+
+                        const submenu = document.createElement('ul');
+                        submenu.className = 'submenu';
+
+                        dept.Values.forEach(value => {
+                            const submenuItem = document.createElement('li');
+                            submenuItem.className = 'submenu-item';
+
+                            const submenuLink = document.createElement('a');
+                            submenuLink.href = '#';
+                            submenuLink.textContent = capitalizeWords(value);
+
+                            submenuItem.appendChild(submenuLink);
+                            submenu.appendChild(submenuItem);
+                        });
+
+                        menuItem.appendChild(menuLink);
+                        menuItem.appendChild(submenu);
+                        menuList.appendChild(menuItem);
+
+                        // Adicionar evento de clique para mobile
+                        if (isMobile) {
+                            menuLink.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                this.classList.toggle('active');
+                                const submenu = this.nextElementSibling;
+                                submenu.classList.toggle('active');
+                            });
+                        }
+                    });
+
+                }
+
+                // Função para capitalizar palavras
+                function capitalizeWords(str) {
+                    return str.split(' ')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                        .join(' ');
+                }
+
+                // Fazer a requisição para obter os dados dos departamentos
                 fetch('/header/departaments', {
                     method: 'GET'
-                })
-                    .then(response => response.json())
+                }).then(response => response.json())
                     .then(responseDepartament => {
-                        const menuList = document.getElementById('menuList');
-                        const departaments = {};
-
                         // Verifique se responseDepartament é um objeto
                         if (typeof responseDepartament === 'object' && responseDepartament !== null) {
-                            Object.keys(responseDepartament).forEach(key => {
-                                departaments[key] = Array.from(responseDepartament[key]);
-                            });
+                            const departments = Object.keys(responseDepartament).map(key => ({
+                                Departamento: key,
+                                Values: Array.from(responseDepartament[key])
+                            }));
+                            createMenu(departments);
                         } else {
                             console.error('Response is not an object:', responseDepartament);
-                            return;
                         }
-
-                        // Criar menu
-                        Object.keys(departaments).forEach(departament => {
-                            const departamentItem = document.createElement('li');
-
-                            // Criar link do departamento
-                            const departamentLink = document.createElement('a');
-                            departamentLink.href = '#';
-                            departamentLink.textContent = capitalizeWords(departament);
-                            departamentLink.classList.add('drop-btn');
-                            departamentItem.appendChild(departamentLink);
-
-                            // Criar submenu
-                            const submenu = document.createElement('ul');
-                            submenu.className = 'submenu';
-
-
-                            departaments[departament].forEach(subdepartament => {
-                                const subdepartamentItem = document.createElement('li');
-                                const subdepartamentLink = document.createElement('a');
-                                subdepartamentLink.href = '#';
-                                subdepartamentLink.textContent = capitalizeWords(subdepartament);
-                                subdepartamentItem.appendChild(subdepartamentLink);
-
-                                submenu.appendChild(subdepartamentItem);
-                            });
-                            departamentItem.appendChild(submenu);
-
-                            departamentItem.addEventListener('click', function () {
-                                submenu.classList.toggle('show');
-                            });
-
-                            menuList.appendChild(departamentItem);
-                        });
                     })
                     .catch(error => {
                         console.error('Error:', error);
                     });
 
-                // Função para capitalizar palavras (se você ainda não tiver definido)
-                function capitalizeWords(str) {
-                    return str.split(' ').map(word =>
-                        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-                    ).join(' ');
-                }
+
             });
         </script>
     </div>

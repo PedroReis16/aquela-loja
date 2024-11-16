@@ -35,6 +35,10 @@
   display: none;
 }
 
+#departamentList {
+  display: flex;
+}
+
 @media (max-width: 768px) {
   .main-header {
     display: block;
