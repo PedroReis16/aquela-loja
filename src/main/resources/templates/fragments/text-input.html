@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div th:fragment="inputField(icon, placeholder, name, field)">
+        <div class="custom-input">
+            <label th:if="${icon}" for="${name}">
+                <i class="input-icon" th:attr="data-icon=${icon}"></i>
+            </label>
+            <input class="custom-input-field" type="text" th:attr="placeholder=${placeholder},name=${name},field=${field}">
+        </div>
+    </div>
+</body>
+
+</html>

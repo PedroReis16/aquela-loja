@@ -23,9 +23,16 @@
                         <!-- Etapa 1: Criar Conta -->
                         <div class="form-step active" id="step1">
                             <h1 class="cadastro-title">Criar Conta</h1>
-                            <div class="form-content">
+                            <div id="userDetailsForm">
 
-                                <div class="person-name-container">
+                                <div id="personNameContainer">
+                                    <div
+                                        th:include="~{fragments/text-input :: inputField(placeholder='Nome completo', icon='\e8f4', name='nomeCompleto',field='*{username}')}">
+                                    </div>
+                                    <p id="personNameErrorMessage" class="error-message"></p>
+                                </div>
+
+                                <!-- <div class="person-name-container">
                                     <div class="input-label">
                                         <i id="personIcon"></i>
                                         <input type="text" name="nomeCompleto" placeholder="Nome Completo"
@@ -105,7 +112,7 @@
                                             id="confirmPasswordBtn"></button>
                                     </div>
                                     <p id="confirmPasswordErrorMessage" class="error-message"></p>
-                                </div>
+                                </div> -->
 
                             </div>
 

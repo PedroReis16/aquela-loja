@@ -1,16 +1,19 @@
 import { validateUsername, validateCPF, validatePhone, validateBirthdate, validateEmail, validatePassword } from '../helpers/validators.js';
 import { maskCPF, maskCEP, maskPhone } from '../helpers/masks.js';
 
+const step1Form = document.getElementById('step1');
+const step2Form = document.getElementById('step2');
+
 const nextStepBtn = document.getElementById('nextStepBtn');
 nextStepBtn.addEventListener('click', function (e) {
-    document.getElementById('step1').classList.remove('active');
-    document.getElementById('step2').classList.add('active');
+    step1Form.classList.remove('active');
+    step2Form.classList.add('active');
 });
 
 const previousStepBtn = document.getElementById('previousStepBtn');
 previousStepBtn.addEventListener('click', function (e) {
-    document.getElementById('step2').classList.remove('active');
-    document.getElementById('step1').classList.add('active');
+    step2Form.classList.remove('active');
+    step1Form.classList.add('active');
 });
 
 

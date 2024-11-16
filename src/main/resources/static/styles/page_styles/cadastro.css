@@ -7,6 +7,16 @@
 }
 
 #formCard {
+  height: 500px;
+  width: 1000px;
+}
+
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
 }
 
 .form-content {
@@ -212,14 +222,6 @@
 
 #referenceIcon::before {
   content: "\e55f";
-}
-
-.form-step {
-  display: none;
-}
-
-.form-step.active {
-  display: block;
 }
 
 @media (max-width: 768px) {
