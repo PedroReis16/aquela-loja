@@ -1,5 +1,10 @@
 package br.edu.fesa.aquela_loja.models.enums;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.ACESSORIOS_GAMER;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.ACESSORIOS_PARA_TVS;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.APARELHOS_DE_SOM;
@@ -8,6 +13,7 @@ import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.CABOS_E_ADAPTADO
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.CAIXA_DE_SOM;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.COIFAS_E_DEPURADORES;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.COOKTOP;
+import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.COOLERS;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.DISCO_RIGIDO;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.DJ;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.DVD_E_BLURAY;
@@ -45,41 +51,38 @@ import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.TV_8K;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.TV_LED;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.WEBCAM_E_VIDEOCONFERENCIA;
 import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.XBOX;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static br.edu.fesa.aquela_loja.models.enums.CategoryEnum.COOLERS;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public enum DepartamentEnum {
-    HARDWARE(Set.of(COOLERS, DISCO_RIGIDO, FONTES, MEMORIA_RAM, PLACA_DE_VIDEO, PROCESSADORES, SSD)),
-    PERIPHERALS(Set.of(CABOS_E_ADAPTADORES, GABINETES, HEADSETS, MESA_DIGITALIZADORA, MOUSE, MOUSE_PAD, SUPORTES, TECLADO, WEBCAM_E_VIDEOCONFERENCIA)),
-    COMPUTERS(Set.of(IMPRESSORAS, MONITORES, NOTEBOOKS, PC, SCANNERS)),
-    GAMING(Set.of(ACESSORIOS_GAMER, NINTENDO, PLAYSTATION, PORTATEIS, SIMULADORES, XBOX)),
-    TELEVISIONS(Set.of(ACESSORIOS_PARA_TVS, SMART_TV, TV_4K, TV_8K, TV_LED)),
-    AUDIO(Set.of(APARELHOS_DE_SOM, ASSISTENTE_VIRTUAL, CAIXA_DE_SOM, DJ, DVD_E_BLURAY, FONE_DE_OUVIDO, HOME_THEATER_E_SOUNDBAR, MICROFONE, RADIO)),
-    ELETRODOMESTICS(Set.of(COIFAS_E_DEPURADORES, COOKTOP, FOGOES, FORNOS, GELADEIRAS)),;
+    HARDWARE("Hardware", Set.of(COOLERS, DISCO_RIGIDO, FONTES, MEMORIA_RAM, PLACA_DE_VIDEO, PROCESSADORES, SSD)),
+    PERIPHERALS("Periféricos", Set.of(CABOS_E_ADAPTADORES, GABINETES, HEADSETS, MESA_DIGITALIZADORA, MOUSE, MOUSE_PAD, SUPORTES, TECLADO, WEBCAM_E_VIDEOCONFERENCIA)),
+    COMPUTERS("Computadores", Set.of(IMPRESSORAS, MONITORES, NOTEBOOKS, PC, SCANNERS)),
+    GAMING("Games", Set.of(ACESSORIOS_GAMER, NINTENDO, PLAYSTATION, PORTATEIS, SIMULADORES, XBOX)),
+    TELEVISIONS("Televisores", Set.of(ACESSORIOS_PARA_TVS, SMART_TV, TV_4K, TV_8K, TV_LED)),
+    AUDIO("Áudio", Set.of(APARELHOS_DE_SOM, ASSISTENTE_VIRTUAL, CAIXA_DE_SOM, DJ, DVD_E_BLURAY, FONE_DE_OUVIDO, HOME_THEATER_E_SOUNDBAR, MICROFONE, RADIO)),
+    ELETRODOMESTICS("Eletrodomésticos", Set.of(COIFAS_E_DEPURADORES, COOKTOP, FOGOES, FORNOS, GELADEIRAS));
 
+    @Getter
+    private final String displayName;
     @Getter
     private final Set<CategoryEnum> categories;
 
+    DepartamentEnum(String displayName, Set<CategoryEnum> categories) {
+        this.displayName = displayName;
+        this.categories = categories;
+    }
+
     public static Map<String, Set<String>> getDepartaments() {
-        Map<String, Set<String>> departaments = new HashMap<>();
+        Map<String, Set<String>> departaments = new LinkedHashMap<>();
 
         for (DepartamentEnum departament : DepartamentEnum.values()) {
             departaments.put(
-                    departament.name(),
+                    departament.getDisplayName(),
                     departament.getCategories()
                             .stream()
                             .map(CategoryEnum::getDisplayName)
                             .collect(Collectors.toSet())
             );
-
         }
         return departaments;
     }
