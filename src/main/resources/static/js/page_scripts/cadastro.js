@@ -9,25 +9,28 @@ const step2Form = document.getElementById('step2');
 const nextStepBtn = document.getElementById('nextStepBtn');
 const previousStepBtn = document.getElementById('previousStepBtn');
 
+//Botão de submit
+const submitBtn = document.getElementById('saveNewUserBtn');
+
 //Campos do formulário
-let username = "";
-let cpf = "";
-let gender = "";
-let phone = "";
-let birthdate = "";
-let email = "";
-let password = "";
-let confirmedPassword = "";
-//Campos do formulario de endereço
-let cep = "";
-let street = "";
-let number = "";
-let complement = "";
-let neighborhood = "";
-let city = "";
-let state = "";
-let addressId = "";
-let reference = "";
+let formData = {
+    userName: "",
+    cpf: "",
+    phone: "",
+    birthdate: "",
+    email: "",
+    password: "",
+    confirmedPassword: "",
+    address: {
+        cep: "",
+        street: "",
+        number: "",
+        neighborhood: "",
+        city: "",
+        state: "",
+        addressId: ""
+    }
+}
 
 //Campos de validações
 const nameInput = document.querySelector('#nameInput');
@@ -58,6 +61,27 @@ const identificationInput = document.getElementById('addressIdInput');
 
 const numberInput = document.getElementById('numberInput');
 
+function checkDetailsFormValidity() {
+    if (formData.userName && formData.cpf && formData.phone && formData.birthdate && formData.email && formData.password && formData.confirmedPassword) {
+        nextStepBtn.disabled = false;
+    } else {
+        nextStepBtn.disabled = true;
+    }
+}
+
+function checkAddressFormValidity() {
+    if (formData.address.cep && formData.address.street && formData.address.number && formData.address.neighborhood && formData.address.city && formData.address.state && formData.address.addressId) {
+        submitBtn.disabled = false;
+    } else {
+        submitBtn.disabled = true;
+    }
+ }
+
+document.addEventListener('DOMContentLoaded', function () {
+    checkDetailsFormValidity();
+    checkAddressFormValidity();
+});
+
 //Funções de navegação entre os steps
 nextStepBtn.addEventListener('click', function (e) {
     step1Form.classList.remove('active');
@@ -78,9 +102,10 @@ nameInput.addEventListener('blur', function (e) {
         usernameError.textContent = 'Necessário informar o nome completo';
     } else {
         usernameError.textContent = '';
-        username = value;
+        formData.userName = value;
     }
-    username = value;
+    formData.userName = value;
+    checkDetailsFormValidity();
 });
 
 //Validando o CPF
@@ -111,7 +136,8 @@ cpfInput.addEventListener('blur', function (e) {
             cpfError.textContent = 'Erro ao validar CPF';
         }
     });
-    cpf = value;
+    formData.cpf = value;
+    checkDetailsFormValidity();
 });
 
 //Valida telefone
@@ -133,7 +159,8 @@ inputPhone.addEventListener('blur', function (e) {
     }
 
     phoneError.textContent = '';
-    phone = value;
+    formData.phone = value;
+    checkDetailsFormValidity();
 });
 
 //Valida data de nascimento
@@ -165,7 +192,8 @@ birthdateInput.addEventListener('blur', function (e) {
     }
 
     birthdateError.textContent = '';
-    birthdate = value;
+    formData.birthdate = value;
+    checkDetailsFormValidity();
 });
 
 
@@ -198,7 +226,8 @@ emailInput.addEventListener('blur', function (e) {
     });
 
     emailError.textContent = '';
-    email = value;
+    formData.email = value;
+    checkDetailsFormValidity();
 });
 
 
@@ -214,7 +243,8 @@ passwordInput.addEventListener('blur', function (e) {
     }
 
     passwordError.textContent = '';
-    password = value;
+    formData.password = value;
+    checkDetailsFormValidity();
 });
 
 //Confirmação de senha
@@ -228,7 +258,8 @@ confirmedPasswordInput.addEventListener('blur', function (e) {
     }
 
     confirmedPasswordError.textContent = '';
-    confirmedPassword = value;
+    formData.confirmedPassword = value;
+    checkDetailsFormValidity();
 });
 
 //Validações do endereço
@@ -262,10 +293,11 @@ inputCEP.addEventListener('blur', async function (e) {
                 cityInput.value = data.localidade;
                 stateInput.value = data.uf;
 
-                street = data.logradouro;
-                neighborhood = data.bairro;
-                city = data.localidade;
-                state = data.uf;
+                formData.address.cep = data.cep;
+                formData.address.street = data.logradouro;
+                formData.address.neighborhood = data.bairro;
+                formData.address.city = data.localidade;
+                formData.address.state = data.uf;
             }
             else {
                 streetInput.value =
@@ -277,14 +309,17 @@ inputCEP.addEventListener('blur', async function (e) {
             console.error('Erro ao buscar CEP:', error);
         }
     }
+    checkAddressFormValidity();
 });
 
 //Valida identificação
 identificationInput.addEventListener('blur', function (e) {
-    identification = e.target.value;
+    formData.address.addressId = e.target.value;
+    checkAddressFormValidity();
 });
 
 //Valida número
 numberInput.addEventListener('blur', function (e) {
-    number = e.target.value;
+    formData.address.number = e.target.value;
+    checkAddressFormValidity();
 });
