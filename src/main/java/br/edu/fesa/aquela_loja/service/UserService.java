@@ -233,4 +233,16 @@ public class UserService {
         paymentCardRepository.save(card);
     }
 
+    public UserDto FindUserByDocument(String document) {
+        try {
+            AppUserModel appUser = appUserRepository.findByDocument(document).get();
+
+            UserDto user = new UserDto(appUser);
+
+            return user;
+        } catch (Exception e) {
+            return null;
+        }    
+    }
+
 }

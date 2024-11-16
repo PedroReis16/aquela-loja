@@ -25,18 +25,11 @@
                             <h1 class="cadastro-title">Criar Conta</h1>
                             <div id="userDetailsForm">
 
-                                <div id="personNameContainer">
-                                    <div
-                                        th:include="~{fragments/text-input :: inputField(placeholder='Nome completo', icon='\e8f4', name='nomeCompleto',field='*{username}')}">
-                                    </div>
-                                    <p id="personNameErrorMessage" class="error-message"></p>
-                                </div>
-
-                                <!-- <div class="person-name-container">
+                                <div id="usernameContainer">
                                     <div class="input-label">
                                         <i id="personIcon"></i>
-                                        <input type="text" name="nomeCompleto" placeholder="Nome Completo"
-                                            th:field="*{username}" required>
+                                        <input type="text" id="nameInput" name="nomeCompleto"
+                                            placeholder="Nome Completo" th:field="*{username}" required>
                                         <label for="nomeCompleto"></label>
                                     </div>
                                     <p id="personNameErrorMessage" class="error-message"></p>
@@ -45,11 +38,11 @@
                                 <div class="document-container">
                                     <div class="input-label">
                                         <i id="documentIcon"></i>
-                                        <input type="tel" name="cpf" placeholder="CPF" th:field="*{document}"
-                                            maxlength="14" required>
+                                        <input id="cpfInput" type="tel" name="cpf" placeholder="CPF"
+                                            th:field="*{document}" maxlength="14" required>
                                         <label for="cpf"></label>
                                     </div>
-                                    <p id="DocumentErrorMessage" class="error-message"></p>
+                                    <p id="documentErrorMessage" class="error-message"></p>
                                 </div>
 
                                 <div class="gender-container">
@@ -67,14 +60,14 @@
                                 <div class="phone-container">
                                     <div class="input-label">
                                         <i id="phoneIcon"></i>
-                                        <input type="tel" name="telefone" placeholder="Telefone" th:field="*{phone}"
+                                        <input type="tel" id="phoneInput" name="telefone" placeholder="Telefone" th:field="*{phone}"
                                             required>
                                         <label for="telefone"></label>
                                     </div>
-                                    <p id="PhoneErrorMessage" class="error-message"></p>
+                                    <p id="phoneErrorMessage" class="error-message"></p>
                                 </div>
 
-                                <div class="birthdate-container">
+                                <!-- <div class="birthdate-container">
                                     <div class="input-label">
                                         <i id="birthIcon"></i>
                                         <input type="date" name="dataNascimento" placeholder="Data de nascimento"

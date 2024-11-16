@@ -30,7 +30,7 @@ public class AquelaLojaApplication {
                     .password(passwordEncoder.encode("admin"))
                     .gender("Other")
                     .birthdate("01/01/2000")
-                    .document("123.456.789-00")
+                    .document("858.703.940-74")
                     .phone("11 99999-9999")
                     .role(ADMIN)
                     .build();
