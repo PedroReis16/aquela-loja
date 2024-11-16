@@ -11,17 +11,27 @@
     <div class="user-avatar" th:fragment="userAvatar">
         <!-- Caso esteja autenticado -->
         <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
-        <div sec:authorize="isAuthenticated()">
+        <div class="avatar-content" sec:authorize="isAuthenticated()">
+
             <p>
-                <a id="userRedirect" href="/usuario"><span>Olá, <span class="emphasis-text"
-                            th:text="${#authentication.name}">Usuário</span></span></a>
+                Olá,
+                <a href="/usuario">
+                    <span class="emphasis-text" th:text="${#authentication.name}">
+
+                    </span>
+                </a>
                 <br />
-                <span class="emphasis-text"><a href="/logout" id="logout">Sair</a></span>
+                <span class="emphasis-text">
+                    <a href="/logout" id="logout">Sair</a>
+                </span>
             </p>
+
+
+
         </div>
 
         <!-- Caso não esteja autenticado -->
-        <div sec:authorize="!isAuthenticated()">
+        <div class="avatar-content" sec:authorize="!isAuthenticated()">
             <p>
                 <span class="emphasis-text"><a href="/login" id="login">Entre</a></span>
                 ou<br />
