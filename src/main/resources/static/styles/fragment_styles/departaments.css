@@ -71,8 +71,8 @@
 }
 
 .submenu {
-  max-height: 0; /* Esconde a sublista */
-  overflow: hidden; /* Esconde o conteúdo que excede o limite */
+  max-height: 0;
+  overflow: hidden;
   transition: max-height 0.3s ease;
   background-color: var(--dark-blue);
 }

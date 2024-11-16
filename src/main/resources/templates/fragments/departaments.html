@@ -60,17 +60,13 @@
 
                                 submenu.appendChild(subdepartamentItem);
                             });
-
                             departamentItem.appendChild(submenu);
-                            menuList.appendChild(departamentItem);
 
-                            // Adicionar evento de clique para mobile
-                            departamentLink.addEventListener('click', function (e) {
-                                if (window.innerWidth <= 768) {
-                                    e.preventDefault();
-                                    departamentItem.classList.toggle('active');
-                                }
+                            departamentItem.addEventListener('click', function () {
+                                submenu.classList.toggle('show');
                             });
+
+                            menuList.appendChild(departamentItem);
                         });
                     })
                     .catch(error => {

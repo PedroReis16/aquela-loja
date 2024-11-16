@@ -30,7 +30,8 @@
   margin: 32px 0px 0px 0px;
 }
 
-.user-auth-actions {
+.user-auth-actions,
+.mobile-user-avatar {
   display: none;
 }
 
@@ -86,7 +87,8 @@
     overflow: auto;
   }
 
-  #menuContainer.fullscreen + .user-auth-actions {
+  #menuContainer.fullscreen + .user-auth-actions,
+  #menuContainer.fullscreen + .mobile-user-avatar {
     display: block;
   }
 
@@ -101,6 +103,7 @@
     height: 80px;
     border-radius: 50%;
   }
+  .mobile-user-avatar > p,
   .mobile-user-avatar > p > a {
     color: var(--white);
     font-family: var(--default-font);
