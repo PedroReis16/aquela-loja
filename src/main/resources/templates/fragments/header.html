@@ -7,25 +7,25 @@
     <script th:src="@{/js/components/menu-toggle.js}" defer></script>
     <div class="main-header">
       <div class="logo-container">
-        <menu-toggle id="menuToggle"></menu-toggle>
+        <menu-toggle id="menuToggle" class="occultable"></menu-toggle>
 
         <a href="/" class="logo-link">
           <img th:src="@{/images/logo.png}" alt="" id="logo" />
         </a>
 
-        <div id="logoCart" th:insert="~{fragments/shopping-cart::shoppingCart}"></div>
+        <div id="logoCart" class="occultable" th:insert="~{fragments/shopping-cart::shoppingCart}"></div>
       </div>
 
-      <div th:insert="~{fragments/search-bar::searchBar}"></div>
+      <div th:insert="~{fragments/search-bar::searchBar}" class="occultable"></div>
 
-      <div class="action-pages">
+      <div class="action-pages occultable">
         <div th:insert="~{fragments/user-avatar::userAvatar}"></div>
 
         <div id="normalCart" th:insert="~{fragments/shopping-cart::shoppingCart}"></div>
       </div>
     </div>
 
-    <div id="menuContainer">
+    <div id="menuContainer" class="occultable">
       <div class="mobile-user-avatar">
         <img th:src="@{/images/robo-avatar.png}" />
 
