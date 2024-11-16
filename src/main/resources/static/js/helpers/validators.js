@@ -92,7 +92,20 @@ export function validateEmail(email) {
 
 //Validação de senha
 export function validatePassword(password) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(password);
+    const criteria = [
+        { regex: /[a-z]/, message: "pelo menos uma letra minúscula" },
+        { regex: /[A-Z]/, message: "pelo menos uma letra maiúscula" },
+        { regex: /\d/, message: "pelo menos um dígito" },
+        { regex: /[@$!%*?&]/, message: "pelo menos um caractere especial (@$!%*?&)" },
+        { regex: /.{8,}/, message: "pelo menos 8 caracteres" }
+    ];
+
+    const missingCriteria = criteria.filter(criterion => !criterion.regex.test(password)).map(criterion => criterion.message);
+
+    if (missingCriteria.length === 0) {
+        return { valid: true, message: "Senha válida" };
+    } else {
+        return { valid: false, message: "Senha inválida. Ela deve conter " + missingCriteria.join(", ") };
+    }
 }
 

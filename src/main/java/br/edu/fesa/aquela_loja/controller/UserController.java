@@ -154,4 +154,15 @@ public class UserController {
         return ResponseEntity.noContent().build();
 
     }
+
+    @GetMapping("user/emails")
+    public ResponseEntity<Void> isEmailAvailable(@RequestParam String email) {
+        UserDto user = userService.FindUserByEmail(email);
+
+        if (user != null) {
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.noContent().build();
+    }
 }

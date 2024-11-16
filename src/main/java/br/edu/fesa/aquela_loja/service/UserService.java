@@ -242,7 +242,19 @@ public class UserService {
             return user;
         } catch (Exception e) {
             return null;
-        }    
+        }
+    }
+
+    public UserDto FindUserByEmail(String email) {
+        try {
+            AppUserModel appUser = appUserRepository.findByEmail(email).get();
+
+            UserDto user = new UserDto(appUser);
+
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

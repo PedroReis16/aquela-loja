@@ -9,14 +9,14 @@ const nextStepBtn = document.getElementById('nextStepBtn');
 const previousStepBtn = document.getElementById('previousStepBtn');
 
 //Campos do formulário
-const username = "";
-const cpf = "";
-const gender = "";
-const phone = "";
-const birthdate = "";
-const email = "";
-const password = "";
-const confirmedPassword = "";
+let username = "";
+let cpf = "";
+let gender = "";
+let phone = "";
+let birthdate = "";
+let email = "";
+let password = "";
+let confirmedPassword = "";
 
 //Campos de validações
 const nameInput = document.querySelector('#nameInput');
@@ -30,6 +30,15 @@ const phoneError = document.getElementById('phoneErrorMessage');
 
 const birthdateInput = document.getElementById('birthdateInput');
 const birthdateError = document.getElementById('birthdateErrorMessage');
+
+const emailInput = document.getElementById('emailInput');
+const emailError = document.getElementById('emailErrorMessage');
+
+const passwordInput = document.getElementById('passwordInput');
+const passwordError = document.getElementById('passwordErrorMessage');
+
+const confirmedPasswordInput = document.getElementById('confirmPasswordInput');
+const confirmedPasswordError = document.getElementById('confirmPasswordErrorMessage');
 
 nextStepBtn.addEventListener('click', function (e) {
     step1Form.classList.remove('active');
@@ -53,6 +62,7 @@ nameInput.addEventListener('blur', function (e) {
         usernameError.textContent = '';
         username = value;
     }
+    username = value;
 });
 
 //Validando o CPF
@@ -83,6 +93,7 @@ cpfInput.addEventListener('blur', function (e) {
             cpfError.textContent = 'Erro ao validar CPF';
         }
     });
+    cpf = value;
 });
 
 //Valida telefone
@@ -136,13 +147,11 @@ birthdateInput.addEventListener('blur', function (e) {
     }
 
     birthdateError.textContent = '';
-    // birthdate = value;
+    birthdate = value;
 });
 
 
 //Valida email
-const emailInput = document.getElementById('emailInput');
-const emailError = document.getElementById('emailErrorMessage');
 
 emailInput.addEventListener('blur', function (e) {
     let value = e.target.value;
@@ -152,10 +161,57 @@ emailInput.addEventListener('blur', function (e) {
         return;
     }
 
+    fetch(`/user/emails?email=${value}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }).then(response => {
+        if (response.status == 200) {
+            emailError.textContent = 'Já existe um usuário cadastrado com esse email';
+            return;
+        }
+        else if (response.status == 204) {
+            emailError.textContent = '';
+        }
+        else {
+            emailError.textContent = 'Erro ao validar CPF';
+        }
+    });
+
     emailError.textContent = '';
-    // email = value;
+    email = value;
 });
 
+
+//Valida senha
+passwordInput.addEventListener('blur', function (e) {
+    const value = e.target.value;
+
+    var result = validatePassword(value);
+
+    if (!result.valid) {
+        passwordError.textContent = result.message;
+        return;
+    }
+
+    passwordError.textContent = '';
+    password = value;
+});
+
+//Confirmação de senha
+
+confirmedPasswordInput.addEventListener('blur', function (e) {
+    const value = e.target.value;
+
+    if (value !== passwordInput.value) {
+        confirmedPasswordError.textContent = 'AS senhas não conferem';
+        return;
+    }
+
+    confirmedPasswordError.textContent = '';
+    confirmedPassword = value;
+});
 
 // const inputCEP = document.querySelector('input[placeholder="CEP"]');
 // inputCEP.addEventListener('input', function (e) {
