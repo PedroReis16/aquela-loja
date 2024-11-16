@@ -4,12 +4,13 @@
 
 <body>
   <div class="header" th:fragment="header">
+    <script th:src="@{/js/components/menu-toggle.js}" defer></script>
     <div class="main-header">
       <div class="logo-container">
-        <i id="menuToggle" class="menu-toggle"></i>
+        <menu-toggle id="menuToggle"></menu-toggle>
 
         <a href="/" class="logo-link">
-          <img th:src="@{/images/logo.png}" alt="" class="logo" />
+          <img th:src="@{/images/logo.png}" alt="" id="logo" />
         </a>
 
         <div id="logoCart" th:insert="~{fragments/shopping-cart::shoppingCart}"></div>
@@ -24,7 +25,14 @@
       </div>
     </div>
 
-    <div id="departamentList" th:insert="~{fragments/departaments::departaments}"></div>
+    <div class="menu-container">
+
+      <div id="departamentList" th:insert="~{fragments/departaments::departaments}"></div>
+
+      <div class="user-auth-actions">
+        
+      </div>
+    </div>
 
   </div>
 

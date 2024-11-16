@@ -14,23 +14,12 @@
   display: none;
 }
 
-.logo {
+#logo {
   height: 48px;
   align-self: center;
   margin: 12px 0px 0px 0px;
 }
 
-/* Barra de pesquisa */
-
-.emphasis-text:hover {
-  color: var(--gray);
-  text-decoration: underline;
-}
-
-#userRedirect {
-  color: var(--white);
-  text-decoration: none;
-}
 /* Carrinho do usuário */
 #logoCart {
   display: none;
@@ -41,82 +30,6 @@
   margin: 32px 0px 0px 0px;
 }
 
-/* SideMenu */
-.side-menu {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #333;
-  color: white;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-  z-index: 999;
-  overflow-y: auto;
-  cursor: pointer;
-  background-color: var(--secondary-color);
-  display: grid;
-  grid-template-rows: 64px auto;
-}
-
-.side-menu-title {
-  display: flex;
-  margin: 16px 8px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#menuTitle {
-  font-size: 24px;
-  font-weight: 500;
-  margin-left: 8px;
-}
-
-#closeBtn {
-  margin: 2px 0 0 0;
-  background-color: transparent;
-}
-
-#closeBtn::before {
-  content: "\00d7";
-  font-size: 24px;
-  color: var(--dark-gray);
-  border: none;
-  cursor: pointer;
-}
-
-.item-title {
-  margin: 8px 8px;
-  height: 32px;
-}
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.side-menu li {
-  padding: 8px 0px;
-}
-
-.submenu {
-  max-height: 0; /* Esconde a sublista */
-  overflow: hidden; /* Esconde o conteúdo que excede o limite */
-  transition: max-height 0.3s ease;
-  background-color: var(--dark-blue);
-}
-
-.submenu.show {
-  max-height: 300px; /* Define um valor máximo quando a sublista está visível */
-}
-
-.submenu.show {
-  display: block; /* Mostra a sublista quando a classe "show" é adicionada */
-}
-
-.side-menu.open .overlay {
-  right: 0;
-}
 
 @media (max-width: 768px) {
   .main-header {
@@ -131,13 +44,8 @@
     border: none;
     cursor: pointer;
     margin: 24px 0px 0px 0px;
-  }
-
-  #menuToggle::before {
-    content: "\e5d2";
-    font-family: var(--material-icons);
-    color: var(--white);
-    font-size: 28px;
+    position: relative;
+    right: 16px;
   }
 
   /* Barra de pesquisa */
@@ -156,39 +64,6 @@
   .action-pages,
   .user-container {
     display: none;
-  }
-
-  .header-departaments {
-    display: none;
-  }
-
-  #menuToggle {
-    display: block;
-  }
-
-  .side-menu.active {
-    transform: translateX(0);
-  }
-
-  .departament-item {
-    text-align: left;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: var(--white);
-    text-decoration: none;
-  }
-
-  /* Side Menu */
-  .side-menu.active {
-    transform: translateX(0);
-  }
-
-  .departament-item {
-    text-align: left;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: var(--white);
-    text-decoration: none;
   }
 
   /* Departamentos */

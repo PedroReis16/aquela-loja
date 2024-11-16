@@ -70,6 +70,21 @@
   background-color: var(--primary-color);
 }
 
+.submenu {
+  max-height: 0; /* Esconde a sublista */
+  overflow: hidden; /* Esconde o conteúdo que excede o limite */
+  transition: max-height 0.3s ease;
+  background-color: var(--dark-blue);
+}
+
+.submenu.show {
+  max-height: 300px; /* Define um valor máximo quando a sublista está visível */
+}
+
+.submenu.show {
+  display: block; /* Mostra a sublista quando a classe "show" é adicionada */
+}
+
 @media (max-width: 768px) {
   #menuList {
     display: flex;
