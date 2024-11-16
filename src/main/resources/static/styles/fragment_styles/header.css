@@ -90,6 +90,26 @@
     display: block;
   }
 
+  .mobile-user-avatar {
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .mobile-user-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  .mobile-user-avatar > p > a {
+    color: var(--white);
+    font-family: var(--default-font);
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0px 0px 0px 16px;
+    text-decoration: none;
+  }
+
   .user-auth-actions {
     display: flex;
     position: absolute;
@@ -120,5 +140,4 @@
   #signUpLink:hover {
     text-decoration: underline;
   }
-   
 }

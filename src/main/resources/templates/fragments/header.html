@@ -26,6 +26,21 @@
     </div>
 
     <div id="menuContainer">
+      <div class="mobile-user-avatar">
+        <img th:src="@{/images/robo-avatar.png}" />
+
+        <p sec:authorize="isAuthenticated()">
+          <a id="userRedirect" href="/usuario">Olá, <span th:text="${#authentication.name}">Usuário</span>
+          </a>
+        </p>
+        <!-- Caso não esteja autenticado -->
+
+        <p sec:authorize="!isAuthenticated()">
+          Olá, visitante!
+        </p>
+
+      </div>
+
 
       <div id="departamentList" th:insert="~{fragments/departaments::departaments}"></div>
 
