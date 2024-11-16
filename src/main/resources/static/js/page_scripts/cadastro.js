@@ -136,7 +136,24 @@ birthdateInput.addEventListener('blur', function (e) {
     }
 
     birthdateError.textContent = '';
-    birthdate = value;
+    // birthdate = value;
+});
+
+
+//Valida email
+const emailInput = document.getElementById('emailInput');
+const emailError = document.getElementById('emailErrorMessage');
+
+emailInput.addEventListener('blur', function (e) {
+    let value = e.target.value;
+
+    if (!validateEmail(value)) {
+        emailError.textContent = 'Email inválido';
+        return;
+    }
+
+    emailError.textContent = '';
+    // email = value;
 });
 
 
