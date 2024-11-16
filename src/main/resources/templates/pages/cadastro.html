@@ -124,7 +124,8 @@
                                 <div class="cep-container">
                                     <div class="input-label">
                                         <i id="cepIcon"></i>
-                                        <input type="text" name="cep" placeholder="CEP" th:field="*{cep}" required>
+                                        <input type="text" id="cepInput" name="cep" placeholder="CEP" th:field="*{cep}"
+                                            required>
                                         <label for="cep"></label>
                                     </div>
                                     <p id="CEPInputErrorMessage" class="error-message"></p>
@@ -132,8 +133,8 @@
                                 <div class="identifier-container">
                                     <div class="input-label">
                                         <i id="idIcon"></i>
-                                        <input type="text" name="identificacao" placeholder="Identificação"
-                                            th:field="*{addressIdentification}" required>
+                                        <input type="text" id="addressIdInput" name="identificacao"
+                                            placeholder="Identificação" th:field="*{addressIdentification}" required>
                                         <label for="identificacao"></label>
                                     </div>
                                     <p id="identificationInputError" class="error-message"></p>
@@ -142,7 +143,7 @@
                                 <div class="address-input-container">
                                     <div class="input-label">
                                         <i id="streetIcon"></i>
-                                        <input type="text" name="endereco" placeholder="Endereço" th:field="*{street}"
+                                        <input type="text" id="streetInput" name="endereco" placeholder="Endereço" th:field="*{street}"
                                             readonly required>
                                         <label for="endereco"></label>
                                     </div>
@@ -152,8 +153,8 @@
                                 <div class="number-container">
                                     <div class="input-label">
                                         <i id="numberIcon"></i>
-                                        <input type="number" name="numero" placeholder="Número" th:field="*{number}"
-                                            required>
+                                        <input type="number" id="numberInput" name="numero" placeholder="Número"
+                                            th:field="*{number}" required>
                                         <label for="numero"></label>
                                     </div>
                                     <p id="numberInputError" class="error-message"></p>
@@ -162,7 +163,7 @@
                                 <div class="neighborhood-container">
                                     <div class="input-label">
                                         <i id="neighborhoodIcon"></i>
-                                        <input type="text" name="bairro" placeholder="Bairro" th:field="*{neighborhood}"
+                                        <input type="text" id="neighborhoodInput" name="bairro" placeholder="Bairro" th:field="*{neighborhood}"
                                             readonly required>
                                         <label for="bairro"></label>
                                     </div>
@@ -172,7 +173,7 @@
                                 <div class="city-container">
                                     <div class="input-label">
                                         <i id="cityIcon"></i>
-                                        <input type="text" name="cidade" placeholder="Cidade" th:field="*{city}"
+                                        <input type="text" id="cityInput" name="cidade" placeholder="Cidade" th:field="*{city}"
                                             readonly required>
                                         <label for="cidade"></label>
                                     </div>
@@ -182,7 +183,7 @@
                                 <div class="state-container">
                                     <div class="input-label">
                                         <i id="stateIcon"></i>
-                                        <input type="text" name="estado" placeholder="Estado" th:field="*{state}"
+                                        <input type="text" id="stateInput" name="estado" placeholder="Estado" th:field="*{state}"
                                             readonly required>
                                         <label for="estado"></label>
                                     </div>
@@ -192,7 +193,7 @@
                                 <div class="complement-container">
                                     <div class="input-label">
                                         <i id="complementIcon"></i>
-                                        <input type="text" name="complemento" placeholder="Complemento"
+                                        <input type="text" id="complementInput" name="complemento" placeholder="Complemento"
                                             th:field="*{complement}">
                                         <label for="complemento"></label>
                                     </div>
@@ -202,7 +203,7 @@
                                 <div class="reference-container">
                                     <div class="input-label">
                                         <i id="referenceIcon"></i>
-                                        <input type="text" name="referencia" placeholder="Referência"
+                                        <input type="text" id="referenceInput" name="referencia" placeholder="Referência"
                                             th:field="*{reference}">
                                         <label for="referencia"></label>
                                     </div>
