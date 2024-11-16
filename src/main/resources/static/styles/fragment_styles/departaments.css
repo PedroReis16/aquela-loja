@@ -1,4 +1,3 @@
-
 .nav-menu {
   background-color: var(--black);
   font-family: var(--default-font);
@@ -90,16 +89,16 @@
     text-decoration: none;
     color: var(--white);
     background-color: var(--black);
-    border-bottom: 1px solid #dee2e6;
   }
 
   .submenu {
-    display: none;
-    background-color: var(--black);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
   }
 
   .submenu.active {
-    display: block;
+    max-height: 500px; /* Ajuste conforme necessário */
   }
 
   .submenu-item a {
@@ -107,7 +106,6 @@
     padding: 0.75rem 1rem 0.75rem 2rem;
     color: var(--white);
     text-decoration: none;
-    border-bottom: 1px solid #eee;
   }
 
   /* Ícone de seta para indicar expansão */
@@ -115,6 +113,9 @@
     content: "+";
     float: right;
     transition: transform 0.3s;
+  }
+  .menu-link.active{
+    background-color: var(--primary-color);
   }
 
   .menu-link.active::after {

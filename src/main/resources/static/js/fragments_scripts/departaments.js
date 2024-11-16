@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     e.preventDefault();
                     this.classList.toggle('active');
                     const submenu = this.nextElementSibling;
+                    if (submenu.classList.contains('active')) {
+                        submenu.style.maxHeight = "0px"
+                        // submenu.classList.remove('active');
+                    } else {
+                        submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                    }
                     submenu.classList.toggle('active');
                 });
             }
@@ -48,7 +54,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para capitalizar palavras
     function capitalizeWords(str) {
         return str.split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .map(word => {
+                if (word === "E" || word === "DE" || word === "DA") {
+                    return word.toLowerCase();
+                }
+                else if (word === "PC" || word === "TV" || word === "DVD" || word === "CD" || word === "SSD" || word === "RAM")
+                    return word;
+                return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+            })
             .join(' ');
     }
 
@@ -72,5 +85,16 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
         });
 
+    window.addEventListener('resize', () => {
+        const submenus = document.querySelectorAll('.submenu');
+        submenus.forEach(submenu => {
+            submenu.style.maxHeight = null;
+            submenu.classList.remove('active');
+        });
 
+        const menuLinks = document.querySelectorAll('.menu-link');
+        menuLinks.forEach(menuLink => {
+            menuLink.classList.remove('active');
+        });
+    });
 });

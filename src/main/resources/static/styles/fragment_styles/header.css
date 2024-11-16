@@ -82,13 +82,18 @@
     right: 0;
     z-index: 1000;
     background-color: black;
-
+    display: grid;
+    grid-template-rows: 104px 1fr 72px;
     max-width: 100%;
   }
 
   #menuContainer.fullscreen {
     height: calc(100vh - 124px);
     overflow: auto;
+  }
+
+  #departamentList {
+    overflow-y: auto;
   }
 
   .no-scroll {
@@ -122,12 +127,11 @@
 
   .user-auth-actions {
     display: flex;
-    position: absolute;
-    bottom: 0;
     box-sizing: border-box;
     width: 100%;
     padding: 16px;
     justify-content: center;
+    margin-bottom: 16px;
   }
 
   #authorizedBtns,
