@@ -53,16 +53,18 @@ export function validatePhone(phone) {
 
 //Validação de data de nascimento
 export function validateBirthdate(birthdate) {
-    const date = new Date(birthdate);
+    const [day, month, year] = birthdate.split('/').map(Number);
+    const date = new Date(year, month - 1, day);
+
+    if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+        return { valid: false, error: 'Data inválida' }; // Data inválida
+    }
+
     const today = new Date();
     const minAge = 16;
     const maxAge = 100;
 
-    if (isNaN(date.getTime())) {
-        return false; // Data inválida
-    }
-
-    const age = today.getFullYear() - date.getFullYear();
+    let age = today.getFullYear() - date.getFullYear();
     const monthDiff = today.getMonth() - date.getMonth();
     const dayDiff = today.getDate() - date.getDate();
 
@@ -70,7 +72,15 @@ export function validateBirthdate(birthdate) {
         age--;
     }
 
-    return age >= minAge && age <= maxAge && date <= today;
+    if (age < minAge) {
+        return { valid: false, error: 'É necessário ter ao menos 16 anos' }; // Idade menor que 16 anos
+    }
+
+    if (age > maxAge || date > today) {
+        return { valid: false, error: 'Data inválida' }; // Idade inválida
+    }
+
+    return { valid: true };
 }
 
 //Validação de email

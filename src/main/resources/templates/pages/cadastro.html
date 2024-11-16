@@ -60,24 +60,24 @@
                                 <div class="phone-container">
                                     <div class="input-label">
                                         <i id="phoneIcon"></i>
-                                        <input type="tel" id="phoneInput" name="telefone" placeholder="Telefone" th:field="*{phone}"
-                                            required>
+                                        <input type="tel" id="phoneInput" name="telefone" placeholder="Telefone"
+                                            th:field="*{phone}" required>
                                         <label for="telefone"></label>
                                     </div>
                                     <p id="phoneErrorMessage" class="error-message"></p>
                                 </div>
 
-                                <!-- <div class="birthdate-container">
+                                <div class="birthdate-container">
                                     <div class="input-label">
                                         <i id="birthIcon"></i>
-                                        <input type="date" name="dataNascimento" placeholder="Data de nascimento"
+                                        <input type="text" id="birthdateInput" name="dataNascimento" placeholder="Data de nascimento"
                                             th:field="*{birthdate}" required>
                                         <label for="dataNascimento"></label>
                                     </div>
-                                    <p id="BirthdateErrorMessage" class="error-message"></p>
+                                    <p id="birthdateErrorMessage" class="error-message"></p>
                                 </div>
 
-                                <div class="details-email-container">
+                                <!--<div class="details-email-container">
                                     <div class="input-label">
                                         <i id="emailIcon"></i>
                                         <input type="email" id="emailInput" placeholder="Email" th:field="*{email}"

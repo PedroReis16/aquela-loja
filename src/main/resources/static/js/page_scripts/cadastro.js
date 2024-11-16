@@ -25,6 +25,12 @@ const usernameError = document.querySelector('#personNameErrorMessage');
 const cpfInput = document.getElementById('cpfInput');
 const cpfError = document.getElementById('documentErrorMessage');
 
+const inputPhone = document.getElementById("phoneInput");
+const phoneError = document.getElementById('phoneErrorMessage');
+
+const birthdateInput = document.getElementById('birthdateInput');
+const birthdateError = document.getElementById('birthdateErrorMessage');
+
 nextStepBtn.addEventListener('click', function (e) {
     step1Form.classList.remove('active');
     step2Form.classList.add('active');
@@ -80,8 +86,6 @@ cpfInput.addEventListener('blur', function (e) {
 });
 
 //Valida telefone
-const inputPhone = document.getElementById("phoneInput");
-const phoneError = document.getElementById('phoneErrorMessage');
 
 inputPhone.addEventListener('input', function (e) {
     if (e.target.value.length > 15)
@@ -103,16 +107,38 @@ inputPhone.addEventListener('blur', function (e) {
     phone = value;
 });
 
-// Máscaras para os campos
+//Valida data de nascimento
 
-// const inputTelefone = document.querySelector('input[placeholder="Telefone"]');
-// inputTelefone.addEventListener('input', function (e) {
-//     if (e.target.value.length > 15)
-//         e.target.value = e.target.value.substring(0, 15);
+birthdateInput.addEventListener('focus', function () {
+    birthdateError.textContent = 'A data deve estar no formato dia/mês/ano';
+    birthdateError.style.color = 'gray';
+});
 
-//     let value = e.target.value;
-//     e.target.value = maskPhone(value);
-// });
+birthdateInput.addEventListener('input', function (e) {
+    let value = e.target.value;
+    if (value.length > 10) {
+        e.target.value = value.substring(0, 10);
+    }
+    else if (value.length === 2 || value.length === 5) {
+        e.target.value = value + '/';
+    }
+});
+
+birthdateInput.addEventListener('blur', function (e) {
+    let value = e.target.value;
+
+    var result = validateBirthdate(value);
+
+    if (!result.valid) {
+        birthdateError.textContent = result.error;
+        birthdateError.style.color = 'red';
+        return;
+    }
+
+    birthdateError.textContent = '';
+    birthdate = value;
+});
+
 
 // const inputCEP = document.querySelector('input[placeholder="CEP"]');
 // inputCEP.addEventListener('input', function (e) {
