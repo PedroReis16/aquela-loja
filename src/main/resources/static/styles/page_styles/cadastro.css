@@ -144,7 +144,13 @@
   cursor: pointer;
 }
 
-.visibility-control::before {
+#passwordBtn::before ,
+#confirmPasswordBtn::before {
+  content: "\e8f4";
+}
+
+#passwordBtn.visible::before,
+#confirmPasswordBtn.visible::before {
   content: "\e8f5";
 }
 

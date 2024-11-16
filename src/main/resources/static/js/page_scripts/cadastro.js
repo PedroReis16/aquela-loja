@@ -9,6 +9,10 @@ const step2Form = document.getElementById('step2');
 const nextStepBtn = document.getElementById('nextStepBtn');
 const previousStepBtn = document.getElementById('previousStepBtn');
 
+//Botoes de visibilidade de senha
+const togglePasswordBtn = document.getElementById('passwordBtn');
+const confirmTogglePasswordBtn = document.getElementById('confirmPasswordBtn');
+
 //Botão de submit
 const submitBtn = document.getElementById('saveNewUserBtn');
 
@@ -62,7 +66,10 @@ const identificationInput = document.getElementById('addressIdInput');
 const numberInput = document.getElementById('numberInput');
 
 function checkDetailsFormValidity() {
-    if (formData.userName && formData.cpf && formData.phone && formData.birthdate && formData.email && formData.password && formData.confirmedPassword) {
+    if (formData.userName && formData.cpf &&
+        formData.phone && formData.birthdate &&
+        formData.email && formData.password &&
+        formData.confirmedPassword) {
         nextStepBtn.disabled = false;
     } else {
         nextStepBtn.disabled = true;
@@ -70,12 +77,15 @@ function checkDetailsFormValidity() {
 }
 
 function checkAddressFormValidity() {
-    if (formData.address.cep && formData.address.street && formData.address.number && formData.address.neighborhood && formData.address.city && formData.address.state && formData.address.addressId) {
+    if (formData.address.cep && formData.address.street &&
+        formData.address.number && formData.address.neighborhood &&
+        formData.address.city &&
+        formData.address.state && formData.address.addressId) {
         submitBtn.disabled = false;
     } else {
         submitBtn.disabled = true;
     }
- }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     checkDetailsFormValidity();
@@ -230,7 +240,6 @@ emailInput.addEventListener('blur', function (e) {
     checkDetailsFormValidity();
 });
 
-
 //Valida senha
 passwordInput.addEventListener('blur', function (e) {
     const value = e.target.value;
@@ -322,4 +331,21 @@ identificationInput.addEventListener('blur', function (e) {
 numberInput.addEventListener('blur', function (e) {
     formData.address.number = e.target.value;
     checkAddressFormValidity();
+});
+
+
+//Visibilidade do campo de senha
+
+togglePasswordBtn.addEventListener('click', function () {
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+
+    togglePasswordBtn.classList.toggle("visible");
+});
+
+confirmTogglePasswordBtn.addEventListener('click', function () {
+    const type = confirmedPasswordInput.getAttribute("type") === "password" ? "text" : "password";
+    confirmedPasswordInput.setAttribute("type", type);
+
+    confirmTogglePasswordBtn.classList.toggle("visible");
 });
