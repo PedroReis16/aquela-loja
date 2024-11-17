@@ -158,7 +158,7 @@ a {
 .error-message {
   color: red;
   margin: 4px 8px;
-  font-size: 18px;
+  font-size: 14px;
   font-family: var(--secondary-font);
   font-weight: 600;
 }

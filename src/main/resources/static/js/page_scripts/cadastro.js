@@ -262,7 +262,7 @@ confirmedPasswordInput.addEventListener('blur', function (e) {
     const value = e.target.value;
 
     if (value !== passwordInput.value) {
-        confirmedPasswordError.textContent = 'AS senhas não conferem';
+        confirmedPasswordError.textContent = 'As senhas não conferem';
         return;
     }
 

@@ -23,7 +23,8 @@
                         <!-- Etapa 1: Criar Conta -->
                         <div class="form-step active" id="step1">
                             <h1 class="cadastro-title">Criar Conta</h1>
-                            <div id="userDetailsForm">
+                            <div class="user-details-form">
+
 
                                 <div id="usernameContainer">
                                     <div class="input-label">
@@ -143,8 +144,8 @@
                                 <div class="address-input-container">
                                     <div class="input-label">
                                         <i id="streetIcon"></i>
-                                        <input type="text" id="streetInput" name="endereco" placeholder="Endereço" th:field="*{street}"
-                                            readonly required>
+                                        <input type="text" id="streetInput" name="endereco" placeholder="Endereço"
+                                            th:field="*{street}" readonly required>
                                         <label for="endereco"></label>
                                     </div>
                                     <p id="addressInputError" class="error-message"></p>
@@ -163,8 +164,8 @@
                                 <div class="neighborhood-container">
                                     <div class="input-label">
                                         <i id="neighborhoodIcon"></i>
-                                        <input type="text" id="neighborhoodInput" name="bairro" placeholder="Bairro" th:field="*{neighborhood}"
-                                            readonly required>
+                                        <input type="text" id="neighborhoodInput" name="bairro" placeholder="Bairro"
+                                            th:field="*{neighborhood}" readonly required>
                                         <label for="bairro"></label>
                                     </div>
                                     <p id="neighborhoodInputError" class="error-message"></p>
@@ -173,8 +174,8 @@
                                 <div class="city-container">
                                     <div class="input-label">
                                         <i id="cityIcon"></i>
-                                        <input type="text" id="cityInput" name="cidade" placeholder="Cidade" th:field="*{city}"
-                                            readonly required>
+                                        <input type="text" id="cityInput" name="cidade" placeholder="Cidade"
+                                            th:field="*{city}" readonly required>
                                         <label for="cidade"></label>
                                     </div>
                                     <p id="cityInputError" class="error-message"></p>
@@ -183,8 +184,8 @@
                                 <div class="state-container">
                                     <div class="input-label">
                                         <i id="stateIcon"></i>
-                                        <input type="text" id="stateInput" name="estado" placeholder="Estado" th:field="*{state}"
-                                            readonly required>
+                                        <input type="text" id="stateInput" name="estado" placeholder="Estado"
+                                            th:field="*{state}" readonly required>
                                         <label for="estado"></label>
                                     </div>
                                     <p id="stateInputError" class="error-message"></p>
@@ -193,8 +194,8 @@
                                 <div class="complement-container">
                                     <div class="input-label">
                                         <i id="complementIcon"></i>
-                                        <input type="text" id="complementInput" name="complemento" placeholder="Complemento"
-                                            th:field="*{complement}">
+                                        <input type="text" id="complementInput" name="complemento"
+                                            placeholder="Complemento" th:field="*{complement}">
                                         <label for="complemento"></label>
                                     </div>
                                     <p id="complementInputError" class="error-message"></p>
@@ -203,8 +204,8 @@
                                 <div class="reference-container">
                                     <div class="input-label">
                                         <i id="referenceIcon"></i>
-                                        <input type="text" id="referenceInput" name="referencia" placeholder="Referência"
-                                            th:field="*{reference}">
+                                        <input type="text" id="referenceInput" name="referencia"
+                                            placeholder="Referência" th:field="*{reference}">
                                         <label for="referencia"></label>
                                     </div>
                                     <p id="referenceInputError" class="error-message"></p>
@@ -212,11 +213,12 @@
 
                             </div>
 
-                            <button type="submit" id="saveNewUserBtn" class="confirm-button cadastro-btn">Salvar</button>
+                            <button type="submit" id="saveNewUserBtn" class="confirm-button cadastro-btn">Criar
+                                conta</button>
                         </div>
                     </form>
 
-                    <p id="redirectToLogin">Lembrou que aquela conta ainda existe? <a href="/login">Entre agora</a></p>
+                    <p id="redirectToLogin">Lembrou que aquela conta já existe? <a href="/login">Entre agora</a></p>
                 </div>
 
             </custom-card>

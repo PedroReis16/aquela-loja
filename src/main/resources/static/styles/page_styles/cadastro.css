@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   height: 88vh;
-  overflow-y: auto;
 }
 
 #formCard {
@@ -19,10 +18,11 @@
   display: block;
 }
 
-.form-content {
+.user-details-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  width: 100%;
 }
 
 .cadastro-title {
@@ -144,7 +144,7 @@
   cursor: pointer;
 }
 
-#passwordBtn::before ,
+#passwordBtn::before,
 #confirmPasswordBtn::before {
   content: "\e8f4";
 }
@@ -230,8 +230,25 @@
   content: "\e55f";
 }
 
-@media (max-width: 768px) {
-  .form-content {
+#redirectToLogin {
+  margin: 32px 0px 0px 0px;
+  text-align: center;
+  font-family: var(--default-font);
+  color: var(--black);
+}
+#redirectToLogin a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+#redirectToLogin a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .cadastro-container{
+    height: 100%;
+  }
+  .user-details-form {
     grid-template-columns: 1fr;
     gap: 8px;
   }
