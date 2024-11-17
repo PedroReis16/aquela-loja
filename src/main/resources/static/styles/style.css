@@ -19,6 +19,15 @@
 /* Widgets */
 @import url("./fragment_styles/header.css");
 @import url("./fragment_styles/footer.css");
+@import url("./fragment_styles/departaments.css");
+@import url("./fragment_styles/search-bar.css");
+@import url("./fragment_styles/user-avatar.css");
+@import url("./fragment_styles/shopping-cart.css");
+@import url("./fragment_styles/user-address-form.css");
+@import url("./fragment_styles/dialogs/delete-user-dialog.css");
+@import url("./fragment_styles/dialogs/user-address-dialog.css");
+@import url("./fragment_styles/cards/edit-user-details-card.css");
+@import url("./fragment_styles/cards/user-address-list-card.css");
 
 :root {
   --default-font: "Poppins", sans-serif;
@@ -103,7 +112,6 @@ a {
   border-radius: 4px;
   padding: 12px 24px;
   cursor: pointer;
-  margin: 24px 0px 0px 0px;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -150,3 +158,28 @@ a {
   color: var(--primary-color-hover);
   text-decoration: underline;
 }
+
+.error-message {
+  color: red;
+  margin: 4px 8px;
+  font-size: 14px;
+  font-family: var(--secondary-font);
+  font-weight: 600;
+}
+
+.error-message.hidden i::before {
+  content: none;
+}
+
+.error-message i::before {
+  margin-right: 8px;
+  vertical-align: middle;
+  content: "\e002";
+  font-family: var(--material-icons);
+  font-size: 14px;
+}
+
+.readonly-field {
+  color: var(--dark-gray);
+}
+

@@ -1,0 +1,43 @@
+/* Avatar do usuário */
+.user-avatar {
+  display: flex;
+  align-content: center;
+  height: auto;
+  margin: 12px 0px 0px 0px;
+}
+
+.avatar-content > p {
+  color: var(--white);
+  font-size: 14px;
+  font-family: var(--default-font);
+  position: relative;
+  top: 8px;
+  left: 8px;
+  font-weight: 400;
+}
+.avatar-content > p > a {
+  color: var(--white);
+  font-size: 14px;
+  font-family: var(--default-font);
+  font-weight: 400;
+  text-decoration: none;
+}
+.avatar-content > span {
+  margin: 16px 0px 0px 0px;
+}
+
+#userAvatar {
+  height: 48px;
+}
+
+.emphasis-text a {
+  color: var(--white);
+  font-family: var(--default-font);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.emphasis-text:hover {
+  color: var(--gray);
+  text-decoration: underline;
+}

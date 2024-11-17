@@ -47,10 +47,10 @@ public class UserService {
     public void createNewUser(NewUserDto newUser) {
         AppUserModel appUser = AppUserModel.builder()
                 .username(newUser.getUsername())
-                .document(newUser.getDocument())
+                .document(formatUserDocument(newUser.getDocument()))
                 .gender(newUser.getGender())
                 .birthdate(newUser.getBirthdate())
-                .phone(newUser.getPhone())
+                .phone(formatUserPhone(newUser.getPhone()))
                 .email(newUser.getEmail())
                 .password(passwordEncoder.encode(newUser.getPassword()))
                 .role(newUser.getRole())
@@ -231,6 +231,44 @@ public class UserService {
         card.setNumber(updatedCard.getExpirationDate());
 
         paymentCardRepository.save(card);
+    }
+
+    public UserDto FindUserByDocument(String document) {
+        try {
+            AppUserModel appUser = appUserRepository.findByDocument(document).get();
+
+            UserDto user = new UserDto(appUser);
+
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public UserDto FindUserByEmail(String email) {
+        try {
+            AppUserModel appUser = appUserRepository.findByEmail(email).get();
+
+            UserDto user = new UserDto(appUser);
+
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private String formatUserDocument(String document) {
+        if (document == null || document.length() != 11) {
+            throw new IllegalArgumentException("Documento inválido");
+        }
+        return document.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+    }
+
+    private String formatUserPhone(String phone) {
+        if (phone == null || phone.length() != 11) {
+            throw new IllegalArgumentException("Número de telefone inválido");
+        }
+        return phone.replaceAll("(\\d{2})(\\d{5})(\\d{4})", "($1) $2-$3");
     }
 
     public AppUserModel findUserByEmail(String email) {

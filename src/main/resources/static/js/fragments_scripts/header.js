@@ -1,29 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const currentPath = window.location.pathname;
+const currentRoute = window.location.pathname;
+const menuBtn = document.querySelector('#menuToggle');
+const component = document.getElementById('menuContainer');
 
-    console.log(currentPath);
 
-    const isMobile = window.innerWidth < 768;
+//Listagem de categoriass 
+menuBtn.addEventListener('click', function () {
+    component.classList.toggle('fullscreen');
+    document.body.classList.toggle('no-scroll', component.classList.contains('fullscreen'));
 
-    const menuToggle = document.getElementById("menuToggle");
-    const logoCart = document.getElementById("logoCart");
-    const logo = document.getElementsByClassName("logo-link");
-    const searchBar = document.querySelector(".search-bar");
-    const mainHeader = document.querySelector(".main-header");
-    const departaments = document.querySelector(".departaments");
-    const actionPages = document.querySelector(".action-pages");
-
-    if (currentPath == '/login' || currentPath == '/cadastro') {
-        menuToggle.style.display = "none";
-        logoCart.style.display = "none";
-        logo[0].style.width = "100%";
-        logo[0].style.textAlign = "center";
-        searchBar.style.display = "none";
-
-        if (isMobile) {
-            mainHeader.style.height = "62px";
-        }
-        departaments.style.display = "none";
-        actionPages.style.display = "none";
-    }
 });
+
+
+if (currentRoute == '/login' || currentRoute == '/cadastro' ) {
+    const occultableItems = document.querySelectorAll('.occultable');
+    const header = document.querySelector('.header');
+    const logo = document.querySelector('.logo-container');
+
+    occultableItems.forEach(item => {
+        item.setAttribute('style', 'display: none');
+    });
+
+    header.setAttribute('style', 'height: 72px');
+    logo.setAttribute('style', 'justify-content: center');
+
+}

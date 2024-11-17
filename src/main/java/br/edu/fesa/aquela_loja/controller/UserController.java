@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
@@ -140,5 +141,28 @@ public class UserController {
         userService.deleteUserCard(id);
 
         return "redirect:/usuario/meus-cartoes";
+    }
+
+    @GetMapping("user/documents")
+    public ResponseEntity<Void> isDocumentAvailable(@RequestParam String document) {
+        UserDto user = userService.FindUserByDocument(document);
+
+        if (user != null) {
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+    @GetMapping("user/emails")
+    public ResponseEntity<Void> isEmailAvailable(@RequestParam String email) {
+        UserDto user = userService.FindUserByEmail(email);
+
+        if (user != null) {
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.noContent().build();
     }
 }

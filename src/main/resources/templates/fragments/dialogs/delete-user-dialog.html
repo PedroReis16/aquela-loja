@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dialog-container" th:fragment="dialog">
+        <dialog id="deleteUserDialog">
+            <div id="dialogAccountHeader">
+                <h3>Excluir Conta</h3>
+                <button id="closeDialog"><i></i></button>
+            </div>
+            <div class="confirm-message">
+                <p>Tem certeza que deseja excluir sua conta? Caso prossiga todos os seus dados serão excluídos</p>
+            </div>
+
+            <div class="dialog-confirm-btns">
+                <button id="cancelDelete" class="cancel-btn">Cancelar</button>
+                <button id="confirmDelete" class="confirm-button">Sim</button>
+            </div>
+        </dialog>
+        <script th:src="@{/js/fragments_scripts/dialogs/delete-user-dialog.js}"></script>
+    </div>
+</body>
+
+</html>

@@ -9,80 +9,53 @@
   <link th:href="@{/styles/reset.css}" rel="stylesheet" />
   <link th:href="@{/styles/style.css}" rel="stylesheet" />
 
-  <script>
-    // Função JavaScript para exibir a notificação
-    function mostrarNotificacao() {
-        var notification = document.createElement('div');
-        notification.innerHTML = 'Usuário ou senha inválidos!';
-        notification.style.position = 'fixed';
-        notification.style.top = '20px';
-        notification.style.right = '20px';
-        notification.style.padding = '20px';
-        notification.style.backgroundColor = '#ed4e42';
-        notification.style.color = 'white';
-        notification.style.borderRadius = '5px';
-        notification.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-        notification.style.transition = 'opacity 0.3s ease-in-out';
-        notification.style.zIndex = '1000';
-
-        notification.style.fontSize = '18px';        // Aumenta o tamanho da fonte
-        notification.style.width = '300px';          // Define uma largura maior
-        notification.style.textAlign = 'center';
-
-        // Adicionar o elemento de notificação ao corpo da página
-        document.body.appendChild(notification);
-
-        // Remover a notificação após 5 segundos
-        setTimeout(function() {
-            notification.remove();
-        }, 5000);
-    }
-  </script>
+  <script type="module" th:src="@{/js/components/card.js}" defer></script>
 </head>
 
 <body>
+  <header th:replace="~{fragments/header :: header}"></header>
 
-  <div th:if="${param.error != null}">
-    <script type="text/javascript">
-      mostrarNotificacao(); // Chama a função para mostrar a notificação
-    </script>
-  </div>
+  <div class="login-content">
+    <custom-card>
+      <form th:action="@{/login}" method="post">
+        <img th:src="@{/images/logo-black.png}" id="loginLogo" alt="" />
 
-  <div class="login-content" th:fragment="content">
-    <form class="login-card" th:action="@{/login}" method="post">
-      <img th:src="@{/images/logo-black.png}" id="loginLogo" alt="" />
+        <p th:if="${param.error != null}" class="error-message">Email ou senha inválidos</p>
 
-      <div class="input-container">
-        <h3 class="input-title"><label for="emailInput">Email:</label></h3>
-        <div class="email-container">
-          <i class="input-icon" id="emailIcon"> </i>
-          <div class="input-text">
-            <input type="text" name="username" id="emailInput" class="text-input" />
+        <div class="input-container">
+          <h3 class="input-title"><label for="emailInput">Email:</label></h3>
+          <div class="email-container">
+            <i class="input-icon" id="emailIcon"> </i>
+            <div class="input-text">
+              <input type="text" name="username" id="emailInput" class="text-input" />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="input-container">
-        <h3 class="input-title"><label for="passwordInput">Senha:</label></h3>
+        <div class="input-container">
+          <h3 class="input-title"><label for="passwordInput">Senha:</label></h3>
 
-        <div class="password-container">
-          <i class="input-icon" id="passwordIcon"></i>
-          <div class="input-text">
-            <input type="password" name="password" id="passwordInput" class="text-input" />
+          <div class="password-container">
+            <i class="input-icon" id="passwordIcon"></i>
+            <div class="input-text">
+              <input type="password" name="password" id="passwordInput" class="text-input" />
+            </div>
+            <button type="button" id="togglePasswordBtn"></button>
           </div>
-          <button type="button" id="visibilityBtn"></button>
         </div>
-      </div>
 
-      <button type="submit" id="loginBtn">
-        <i></i>
-        <p></p>
-      </button>
-      <p id="forgotMyPassword"><a href="#">Esqueci minha senha</a></p>
-      <p id="signUp">
-        É novo por aqui?<a id="signUpLink" href="/cadastro">Crie sua conta</a>
-      </p>
-    </form>
+        <button type="submit" id="loginBtn" class="confirm-button">
+          <i></i>
+          <p></p>
+        </button>
+        <p id="forgotMyPassword"><a href="#">Esqueci minha senha</a></p>
+        <p id="signUp">
+          É novo por aqui?<a id="signUpLink" href="/cadastro">Crie sua conta</a>
+        </p>
+      </form>
+    </custom-card>
   </div>
+
+  <script th:src="@{/js/page_scripts/login.js}"></script>
 </body>
 
 </html>

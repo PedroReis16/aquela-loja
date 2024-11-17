@@ -1,276 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" th:href="@{/styles/fragment_styles/header_styles/header.css}" />
-</head>
 
 <body>
   <div class="header" th:fragment="header">
+    <script th:src="@{/js/components/menu-toggle.js}" defer></script>
     <div class="main-header">
       <div class="logo-container">
-        <i id="menuToggle" class="menu-toggle"></i>
+        <menu-toggle id="menuToggle" class="occultable"></menu-toggle>
 
         <a href="/" class="logo-link">
-          <img th:src="@{/images/logo.png}" alt="" class="logo" />
+          <img th:src="@{/images/logo.png}" alt="" id="logo" />
         </a>
 
-        <div id="logoCart" class="cart-container">
-          <div class="item-count">
-            <p id="count">1</p>
-          </div>
-          <a href="/carrinho" class="cart-icon"></a>
-        </div>
+        <div id="logoCart" class="occultable" th:insert="~{fragments/shopping-cart::shoppingCart}"></div>
       </div>
 
-      <div class="search-container">
-        <input id="searchBar" type="text" class="search-input" placeholder="Pesquisar..." />
-        <button id="searchButton"></button>
+      <div th:insert="~{fragments/search-bar::searchBar}" class="occultable"></div>
+
+      <div class="action-pages occultable">
+        <div th:insert="~{fragments/user-avatar::userAvatar}"></div>
+
+        <div id="normalCart" th:insert="~{fragments/shopping-cart::shoppingCart}"></div>
+      </div>
+    </div>
+
+    <div id="menuContainer" class="occultable">
+      <div class="mobile-user-avatar">
+        <img th:src="@{/images/robo-avatar.png}" />
+
+        <p sec:authorize="isAuthenticated()">
+          <a id="userRedirect" href="/usuario">Olá, <span th:text="${#authentication.name}">Usuário</span>
+          </a>
+        </p>
+        <!-- Caso não esteja autenticado -->
+
+        <p sec:authorize="!isAuthenticated()">
+          Olá, visitante!
+        </p>
+
       </div>
 
-      <div class="action-pages">
-        <div class="user-avatar">
-          <!-- Caso esteja autenticado -->
-          <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
-          <div sec:authorize="isAuthenticated()">
-            <p>
-              <a id="userRedirect" href="/usuario"><span >Olá, <span class="emphasis-text"
-                    th:text="${#authentication.name}">Usuário</span></span></a>
-              <br />
-              <span class="emphasis-text"><a href="/logout" id="logout">Sair</a></span>
-            </p>
-          </div>
 
-          <!-- Caso não esteja autenticado -->
-          <div sec:authorize="!isAuthenticated()">
-            <p>
-              <span class="emphasis-text"><a href="/login" id="login">Entre</a></span>
-              ou<br />
-              <span class="emphasis-text"><a href="/cadastro" id="signUp">Cadastre-se</a></span>
-            </p>
-          </div>
+      <div id="departamentList" th:replace="~{fragments/departaments::departaments}"></div>
 
+      <div class="user-auth-actions">
+        <!-- Caso não esteja autenticado -->
+        <div id="authorizedBtns" sec:authorize="!isAuthenticated()">
+          <a class="confirm-button" href="/login">Entre</a>
+          <a id="signUpLink" href="/cadastro">Cadastre-se</a>
         </div>
-
-        <div id="normalCart" class="cart-container">
-          <div class="item-count">
-            <p id="count">1</p>
-          </div>
-          <a href="/carrinho" class="cart-icon"></a>
+        <!-- Caso esteja autenticado -->
+        <div id="logoutLink" sec:authorize="isAuthenticated()">
+          <a class="confirm-button" href="/logout">Sair</a>
         </div>
       </div>
     </div>
 
-    <div class="header-departaments">
-      <div class="dropdown" id="hardware">
-        <button class="dropbtn">Hardware</button>
-        <div class="dropdown-content">
-          <a class="departament-item" href="#">Coolers</a>
-          <a class="departament-item" href="#">Disco Rígido</a>
-          <a class="departament-item" href="#">Drives</a>
-          <a class="departament-item" href="#">Fontes</a>
-          <a class="departament-item" href="#">Memória RAM</a>
-          <a class="departament-item" href="#">Placa de vídeo</a>
-          <a class="departament-item" href="#">Processadores</a>
-          <a class="departament-item" href="#">SSD</a>
-        </div>
-      </div>
-      <div class="dropdown" id="peripherals">
-        <button class="dropbtn">Periféricos</button>
-        <div class="dropdown-content">
-          <a class="departament-item" href="#">Cabos e Adaptadores</a>
-          <a class="departament-item" href="#">Gabinetes</a>
-          <a class="departament-item" href="#">Headsets</a>
-          <a class="departament-item" href="#">Mesa digitalizadora</a>
-          <a class="departament-item" href="#">Mouse</a>
-          <a class="departament-item" href="#">Mouse Pad</a>
-          <a class="departament-item" href="#">Pen drive</a>
-          <a class="departament-item" href="#">Suportes</a>
-          <a class="departament-item" href="#">Teclado</a>
-          <a class="departament-item" href="#">Webcam e Videoconferência</a>
-        </div>
-      </div>
-      <div class="dropdown" id="computer">
-        <button class="dropbtn">Computadores</button>
-        <div class="dropdown-content">
-          <a class="departament-item" href="#">Impressoras</a>
-          <a class="departament-item" href="#">Monitores</a>
-          <a class="departament-item" href="#">Notebooks</a>
-          <a class="departament-item" href="#">PC</a>
-          <a class="departament-item" href="#">Scanners</a>
-        </div>
-      </div>
-      <div class="dropdown" id="games">
-        <button class="dropbtn">Games</button>
-        <div class="dropdown-content">
-          <a class="departament-item" href="#">Acessórios Gamer</a>
-          <a class="departament-item" href="#">Nintendo</a>
-          <a class="departament-item" href="#">Playstation</a>
-          <a class="departament-item" href="#">Portáteis</a>
-          <a class="departament-item" href="#">Simuladores</a>
-          <a class="departament-item" href="#">Xbox</a>
-        </div>
-      </div>
-      <div class="dropdown" id="televisions">
-        <button class="dropbtn">Televisores</button>
-        <div class="dropdown-content">
-          <a class="departament-item" href="#">Acessórios para TVs</a>
-          <a class="departament-item" href="#">Smart TV</a>
-          <a class="departament-item" href="#">TV 4K</a>
-          <a class="departament-item" href="#">TV 8K</a>
-          <a class="departament-item" href="#">TV LED</a>
-        </div>
-      </div>
-      <div class="dropdown" id="audio">
-        <button class="dropbtn">Áudio</button>
-        <div class="dropdown-content">
-          <a class="departament-item" href="#">Aparelhos de som</a>
-          <a class="departament-item" href="#">Assistente virtual</a>
-          <a class="departament-item" href="#">Caixa de som</a>
-          <a class="departament-item" href="#">DJ</a>
-          <a class="departament-item" href="#">DVD e Blu-Ray</a>
-          <a class="departament-item" href="#">Fone de ouvido</a>
-          <a class="departament-item" href="#">Home Theater e Soundbar</a>
-          <a class="departament-item" href="#">Microfone</a>
-          <a class="departament-item" href="#">Rádio</a>
-        </div>
-      </div>
-      <div class="dropdown" id="home-appliances">
-        <button class="dropbtn">Eletrodomésticos</button>
-        <div class="dropdown-content">
-          <a class="departament-item" href="#">Bebedouro e Purificador</a>
-          <a class="departament-item" href="#">Coifas e Depuradores</a>
-          <a class="departament-item" href="#">Cooktop</a>
-          <a class="departament-item" href="#">Fogões</a>
-          <a class="departament-item" href="#">Fornos</a>
-          <a class="departament-item" href="#">Geladeiras</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-menu" id="sideMenu">
-      <div class="side-menu-title">
-        <h3 id="menuTitle">Departamentos</h3>
-        <p id="closeBtn"></p>
-      </div>
-
-      <ul>
-        <li class="menu-item">
-          <span class="item-title">Hardware</span>
-          <ul class="submenu">
-            <li><a class="departament-item" href="#">Coolers</a></li>
-            <li><a class="departament-item" href="#">Disco Rígido</a></li>
-            <li><a class="departament-item" href="#">Drives</a></li>
-            <li><a class="departament-item" href="#">Fontes</a></li>
-            <li><a class="departament-item" href="#">Memória RAM</a></li>
-            <li><a class="departament-item" href="#">Placa de vídeo</a></li>
-            <li><a class="departament-item" href="#">Processadores</a></li>
-            <li><a class="departament-item" href="#">SSD</a></li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <span class="item-title">Periféricos</span>
-          <ul class="submenu">
-            <li>
-              <a class="departament-item" href="#">Cabos e Adaptadores</a>
-            </li>
-            <li><a class="departament-item" href="#">Gabinetes</a></li>
-            <li><a class="departament-item" href="#">Headsets</a></li>
-            <li>
-              <a class="departament-item" href="#">Mesa digitalizadora</a>
-            </li>
-            <li><a class="departament-item" href="#">Mouse</a></li>
-            <li><a class="departament-item" href="#">Mouse Pad</a></li>
-            <li><a class="departament-item" href="#">Pen drive</a></li>
-            <li><a class="departament-item" href="#">Suportes</a></li>
-            <li><a class="departament-item" href="#">Teclado</a></li>
-            <li>
-              <a class="departament-item" href="#">Webcam e Videoconferência</a>
-            </li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <span class="item-title">Computadores</span>
-          <ul class="submenu">
-            <li><a class="departament-item" href="#">Impressoras</a></li>
-            <li><a class="departament-item" href="#">Monitores</a></li>
-            <li><a class="departament-item" href="#">Notebooks</a></li>
-            <li><a class="departament-item" href="#">PC</a></li>
-            <li><a class="departament-item" href="#">Scanners</a></li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <span class="item-title">Games</span>
-          <ul class="submenu">
-            <li>
-              <a class="departament-item" href="#">Acessórios Gamer</a>
-            </li>
-            <li><a class="departament-item" href="#">Nintendo</a></li>
-            <li><a class="departament-item" href="#">Playstation</a></li>
-            <li><a class="departament-item" href="#">Portáteis</a></li>
-            <li><a class="departament-item" href="#">Simuladores</a></li>
-            <li><a class="departament-item" href="#">Xbox</a></li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <span class="item-title">Televisores</span>
-          <ul class="submenu">
-            <li>
-              <a class="departament-item" href="#">Acessórios para TVs</a>
-            </li>
-            <li><a class="departament-item" href="#">Smart TV</a></li>
-            <li><a class="departament-item" href="#">TV 4K</a></li>
-            <li><a class="departament-item" href="#">TV 8K</a></li>
-            <li><a class="departament-item" href="#">TV LED</a></li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <span class="item-title">Áudio</span>
-          <ul class="submenu">
-            <li>
-              <a class="departament-item" href="#">Aparelhos de som</a>
-            </li>
-            <li>
-              <a class="departament-item" href="#">Assistente virtual</a>
-            </li>
-            <li><a class="departament-item" href="#">Caixa de som</a></li>
-            <li><a class="departament-item" href="#">DJ</a></li>
-            <li><a class="departament-item" href="#">DVD e Blu-Ray</a></li>
-            <li><a class="departament-item" href="#">Fone de ouvido</a></li>
-            <li>
-              <a class="departament-item" href="#">Home Theater e Soundbar</a>
-            </li>
-            <li><a class="departament-item" href="#">Microfone</a></li>
-            <li><a class="departament-item" href="#">Rádio</a></li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <span class="item-title">Eletrodomésticos</span>
-          <ul class="submenu">
-            <li>
-              <a class="departament-item" href="#">Bebedouro e Purificador</a>
-            </li>
-            <li>
-              <a class="departament-item" href="#">Coifas e Depuradores</a>
-            </li>
-            <li><a class="departament-item" href="#">Cooktop</a></li>
-            <li><a class="departament-item" href="#">Fogões</a></li>
-            <li><a class="departament-item" href="#">Fornos</a></li>
-            <li><a class="departament-item" href="#">Geladeiras</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-
-
-  <div class="header-script" th:fragment="headerScript">
     <script th:src="@{/js/fragments_scripts/header.js}"></script>
-    <script th:src="@{/js/fragments_scripts/side-menu.js}"></script>
   </div>
+
+
 </body>
 
 </html>

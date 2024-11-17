@@ -1,6 +1,6 @@
 //Validação de nome de usuário
 export function validateUsername(username) {
-    const words = input.trim().split(/\s+/);
+    const words = username.trim().split(/\s+/);
     return words.length === 2 && words[0].length > 0 && words[1].length > 0;
 }
 
@@ -43,7 +43,7 @@ export function validateCPF(cpf) {
 //Validação de telefone
 export function validatePhone(phone) {
     phone = phone.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-    if (phone.length === 10 || phone.length === 11) {
+    if ( phone.length === 11) {
         const regex = /^[1-9]{2}[2-9][0-9]{7,8}$/;
         return regex.test(phone);
     }
@@ -53,16 +53,18 @@ export function validatePhone(phone) {
 
 //Validação de data de nascimento
 export function validateBirthdate(birthdate) {
-    const date = new Date(birthdate);
+    const [day, month, year] = birthdate.split('/').map(Number);
+    const date = new Date(year, month - 1, day);
+
+    if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+        return { valid: false, error: 'Data inválida' }; // Data inválida
+    }
+
     const today = new Date();
     const minAge = 16;
     const maxAge = 100;
 
-    if (isNaN(date.getTime())) {
-        return false; // Data inválida
-    }
-
-    const age = today.getFullYear() - date.getFullYear();
+    let age = today.getFullYear() - date.getFullYear();
     const monthDiff = today.getMonth() - date.getMonth();
     const dayDiff = today.getDate() - date.getDate();
 
@@ -70,7 +72,15 @@ export function validateBirthdate(birthdate) {
         age--;
     }
 
-    return age >= minAge && age <= maxAge && date <= today;
+    if (age < minAge) {
+        return { valid: false, error: 'É necessário ter ao menos 16 anos' }; // Idade menor que 16 anos
+    }
+
+    if (age > maxAge || date > today) {
+        return { valid: false, error: 'Data inválida' }; // Idade inválida
+    }
+
+    return { valid: true };
 }
 
 //Validação de email
@@ -82,7 +92,20 @@ export function validateEmail(email) {
 
 //Validação de senha
 export function validatePassword(password) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(password);
+    const criteria = [
+        { regex: /[a-z]/, message: "pelo menos uma letra minúscula" },
+        { regex: /[A-Z]/, message: "pelo menos uma letra maiúscula" },
+        { regex: /\d/, message: "pelo menos um dígito" },
+        { regex: /[@$!%*?&]/, message: "pelo menos um caractere especial (@$!%*?&)" },
+        { regex: /.{8,}/, message: "pelo menos 8 caracteres" }
+    ];
+
+    const missingCriteria = criteria.filter(criterion => !criterion.regex.test(password)).map(criterion => criterion.message);
+
+    if (missingCriteria.length === 0) {
+        return { valid: true, message: "Senha válida" };
+    } else {
+        return { valid: false, message: "Senha inválida. Ela deve conter " + missingCriteria.join(", ") };
+    }
 }
 

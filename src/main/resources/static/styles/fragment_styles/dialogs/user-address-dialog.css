@@ -1,0 +1,65 @@
+#addressDialog {
+  outline: none;
+  border: none;
+  background-color: var(--white);
+  border-radius: 8px;
+  width: 56%;
+}
+
+#dialogAddressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+#addressDialogTitle {
+  font-family: var(--default-font);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--black);
+  vertical-align: center;
+}
+
+#addressDialogTitle > i::before {
+  content: "\e55f";
+  font-family: var(--material-icons);
+  color: var(--primary-color);
+  font-size: 24px;
+  position: relative;
+  top: 2px;
+  right: 4px;
+}
+
+#closeAddressDialogBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+#closeAddressDialogBtn > i::before {
+  content: "\e5cd";
+  font-family: var(--material-icons);
+  color: var(--primary-color);
+  font-size: 24px;
+}
+
+#address-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0px 0px 0px;
+}
+
+#address-action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+#deleteAddressBtn {
+  color: red;
+  display: none;
+}
+
+#defaultAddressBtn{
+  color: var(--gray);
+  display: none;
+}

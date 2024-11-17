@@ -1,0 +1,33 @@
+#detailsEditTitle {
+  font-family: var(--default-font);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+#detailsEditTitle ::before {
+  margin: 0px 8px 0px 0px;
+  font-family: var(--material-icons);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  content: "\ea67";
+  position: relative;
+  top: 2px;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.details-action-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  margin: 16px 0px 0px 0px;
+}

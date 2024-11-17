@@ -1,74 +1,58 @@
-.normal-user-content {
-  margin: 64px 3% 64px 3%;
-  background-color: var(--background-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.normal-user-content a {
-  text-decoration: none;
-}
-
-.user-card {
-  display: flex;
-  background-color: var(--white);
-  border-radius: 8px;
-  padding: 8px 24px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.user-details {
+.overview-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 100%;
+  font-family: var(--default-font);
 }
 
 .user-info {
-  margin: 0 16px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+#userProfilePic {
+  width: 72px;
+  height: 72px;
 }
 
-.user-info h3 {
+.user-info > p {
+  margin: 0px 0px 0px 16px;
+  text-align: left;
+}
+#userName {
   font-size: 20px;
   font-weight: bold;
   margin: 0px 0px 8px 0px;
+  font-family: var(--default-font);
+  color: var(--black);
 }
-
-.user-info p {
+#userEmail {
+  display: block;
   font-size: 16px;
   margin: 0px;
+  font-family: var(--secondary-font);
+  color: var(--dark-gray);
 }
-
-.user-info p > i::before {
+#userEmail > i::before {
   content: "\e158";
   font-family: var(--material-icons);
   color: var(--primary-color);
   position: relative;
-  top: 2px;
+  top: 4px;
   margin-right: 8px;
+  font-size: 20px;
 }
 
 #editProfileBtn {
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  padding: 8px;
-  border-radius: 8px;
-  color: var(--white);
-  font-weight: bold;
-  cursor: pointer;
-  font-family: var(--default-font);
-  text-align: center;
-  text-decoration: none;
-  align-content: center;
-  height: 32px;
-  align-self: center;
-  display: flex;
+  width: 150px;
+  vertical-align: middle;
   align-items: center;
+  height: 32px;
+  display: flex;
 }
 
-#editProfileBtn span::before {
+#editProfileBtn > span::before {
   content: "\e3c9";
   font-family: var(--material-icons);
   color: var(--white);
@@ -77,114 +61,119 @@
   top: 2px;
 }
 
-.widgets-container {
+#widgetsSection {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  margin: 32px 0;
+  margin-top: 24px;
 }
 
-#pageWidgetTitle {
-  font-size: 20px;
+#widgetsSection > h2 {
+  font-size: 24px;
   font-weight: bold;
+  margin: 0px 0px 16px 0px;
   font-family: var(--default-font);
   color: var(--black);
 }
 
-#pageWidgetTitle > i::before {
+#widgetsSection > h2 > i::before {
   content: "\e1bd";
   font-family: var(--material-icons);
   color: var(--primary-color);
   margin-right: 8px;
+  font-size: 24px;
   position: relative;
   top: 4px;
 }
 
-.widget-cards-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  width: 100%;
-  margin: 16px 0px;
-}
-
-.widget-card {
+.page-widgets {
   display: flex;
-  background-color: var(--white);
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 64px;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: stretch;
 }
 
-.widget-card i {
+.page-widgets a {
+  flex: 1 1 calc(33.333% - 32px); /* 3 itens por linha */
+  box-sizing: border-box;
+  min-width: 250px;
+  height: 100%;
+}
+
+.page-widgets custom-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-widgets i {
   font-family: var(--material-icons);
-  font-size: 48px;
+  font-size: 56px;
   color: var(--primary-color);
+  margin: 0px 0px 0px 0px;
+  display: block;
+  text-align: center;
+  flex-direction: column;
 }
 
-#editProfileCard i::before {
-  content: "\e7fd";
-}
-
-#ordersCard i::before {
-  content: "\e558";
+#userEditCard i::before {
+  content: "\e3c9";
 }
 
 #walletCard i::before {
   content: "\f8ff";
 }
 
-#wishListCard i::before {
-  content: "\e87d";
+#ordersCard i::before {
+  content: "\e558";
 }
 
-.widget-card-content {
-  margin: 0px 0px 0px 8px;
+#storageCard i::before {
+  content: "\ebb8";
+}
+
+#dataCard i::before {
+  content: "\e26b";
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .card-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   margin: 0px 0px 8px 0px;
   font-family: var(--default-font);
   color: var(--black);
 }
-
 .card-description {
-  font-size: 14px;
+  font-size: 16px;
   margin: 0px;
   font-family: var(--secondary-font);
   color: var(--dark-gray);
 }
 
-@media (max-width: 768px) {
-  .normal-user-content {
-    margin: 0px;
-  }
-
+@media screen and (max-width: 768px) {
   #editProfileBtn {
-    background-color: transparent;
-    border: none;
-    justify-self: end;
-  }
-  #editProfileBtn p {
     display: none;
   }
 
-  #editProfileBtn span::before {
-    color: var(--primary-color);
-    font-size: 24px;
+  .page-widgets a {
+    flex: 1 1 calc(50% - 32px);
   }
-  .widget-cards-container {
+
+  #storageCardContent {
     display: flex;
-    flex-direction: column;
-    margin: 16px 0px;
+    justify-content: space-around;
+    align-items: center;
   }
 }
-@media (min-width: 769px) {
-  #editProfileBtn:hover {
-    background-color: var(--primary-color-hover);
-    transition: all 0.6s;
+
+@media (max-width: 480px) {
+  .page-widgets a {
+    flex: 1 1 100%;
   }
 }

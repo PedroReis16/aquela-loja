@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="userAddressForm" th:fragment="addressForm">
+
+        <div class="cep-container">
+            <div class="input-label">
+                <i id="cepIcon"></i>
+                <input type="text" id="cepInput" name="cep" placeholder="CEP" th:field="*{cep}" required>
+                <label for="cep"></label>
+            </div>
+            <p id="CEPInputErrorMessage" class="error-message"></p>
+        </div>
+        <div class="identifier-container">
+            <div class="input-label">
+                <i id="idIcon"></i>
+                <input type="text" id="addressIdInput" name="identificacao" placeholder="Identificação"
+                    th:field="*{addressIdentification}" required>
+                <label for="identificacao"></label>
+            </div>
+            <p id="identificationInputError" class="error-message"></p>
+        </div>
+
+        <div class="address-input-container">
+            <div class="input-label">
+                <i id="streetIcon"></i>
+                <input type="text" id="streetInput" name="endereco" placeholder="Endereço" th:field="*{street}" readonly
+                    required>
+                <label for="endereco"></label>
+            </div>
+            <p id="addressInputError" class="error-message"></p>
+        </div>
+
+        <div class="number-container">
+            <div class="input-label">
+                <i id="numberIcon"></i>
+                <input type="number" id="numberInput" name="numero" placeholder="Número" th:field="*{number}" required>
+                <label for="numero"></label>
+            </div>
+            <p id="numberInputError" class="error-message"></p>
+        </div>
+
+        <div class="neighborhood-container">
+            <div class="input-label">
+                <i id="neighborhoodIcon"></i>
+                <input type="text" id="neighborhoodInput" name="bairro" placeholder="Bairro" th:field="*{neighborhood}"
+                    readonly required>
+                <label for="bairro"></label>
+            </div>
+            <p id="neighborhoodInputError" class="error-message"></p>
+        </div>
+
+        <div class="city-container">
+            <div class="input-label">
+                <i id="cityIcon"></i>
+                <input type="text" id="cityInput" name="cidade" placeholder="Cidade" th:field="*{city}" readonly
+                    required>
+                <label for="cidade"></label>
+            </div>
+            <p id="cityInputError" class="error-message"></p>
+        </div>
+
+        <div class="state-container">
+            <div class="input-label">
+                <i id="stateIcon"></i>
+                <input type="text" id="stateInput" name="estado" placeholder="Estado" th:field="*{state}" readonly
+                    required>
+                <label for="estado"></label>
+            </div>
+            <p id="stateInputError" class="error-message"></p>
+        </div>
+
+        <div class="complement-container">
+            <div class="input-label">
+                <i id="complementIcon"></i>
+                <input type="text" id="complementInput" name="complemento" placeholder="Complemento"
+                    th:field="*{complement}">
+                <label for="complemento"></label>
+            </div>
+            <p id="complementInputError" class="error-message"></p>
+        </div>
+
+        <div class="reference-container">
+            <div class="input-label">
+                <i id="referenceIcon"></i>
+                <input type="text" id="referenceInput" name="referencia" placeholder="Referência"
+                    th:field="*{reference}">
+                <label for="referencia"></label>
+            </div>
+            <p id="referenceInputError" class="error-message"></p>
+        </div>
+
+        <script type="module" th:src="@{/js/fragments_scripts/user-address-form.js}"></script>
+        
+    </div>
+</body>
+
+</html>

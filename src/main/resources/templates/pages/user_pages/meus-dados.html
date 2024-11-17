@@ -8,6 +8,8 @@
 
   <link th:href="@{/styles/reset.css}" rel="stylesheet" />
   <link th:href="@{/styles/style.css}" rel="stylesheet" />
+
+  <script th:src="@{/js/components/card.js}" defer></script>
 </head>
 
 <body>
@@ -18,225 +20,25 @@
 
     <div class="editable-items">
       <!-- Card para edição dos detalhes pessoais -->
-      <section class="user-details-edit-container">
-        <form id="userDetailsForm" th:action="@{/user/edit}" th:object="${updatedUser}" method="post">
-          <h3 class="edit-details-title" id="detailsEditTitle"><i></i>Dados básicos</h3>
-
-          <div class="details-container">
-            <div class="person-name-container edit-field-container">
-              <div class="input-label">
-                <i id="personIcon"></i>
-                <input type="text" id="nameInput" placeholder="Nome Completo" th:field="*{userName}" required />
-                <label for="nameInput"></label>
-              </div>
-              <p id="personNameErrorMessage" class="error-message"></p>
-            </div>
-
-            <div class="person-name-container edit-field-container">
-              <div class="input-label">
-                <i id="phoneIcon"></i>
-                <input type="text" id="nameInput" placeholder="Telefone" th:field="*{phone}" required />
-                <label for="nameInput"></label>
-              </div>
-              <p id="personNameErrorMessage" class="error-message"></p>
-            </div>
-
-            <div class="gender-container edit-field-container">
-              <div class="input-label">
-                <i id="genderIcon"></i>
-                <select id="genderSelect" class="custom-select" th:field="*{gender}">
-                  <option value="Male">Masculino</option>
-                  <option value="Female">Feminino</option>
-                  <option value="Other">Outro</option>
-                </select>
-              </div>
-              <p id="genderErrorMessage" class="error-message"></p>
-            </div>
-
-            <div class="person-name-container edit-field-container">
-              <div class="input-label">
-                <i id="emailIcon"></i>
-                <input type="text" id="nameInput" placeholder="Email" th:field="*{email}" required />
-                <label for="nameInput"></label>
-              </div>
-              <p id="personNameErrorMessage" class="error-message"></p>
-            </div>
-
-            <div class="person-name-container edit-field-container">
-              <div class="input-label">
-                <i id="documentIcon"></i>
-                <input type="text" id="nameInput" placeholder="CPF" th:field="*{document}" readonly />
-                <label for="nameInput"></label>
-              </div>
-              <p id="personNameErrorMessage" class="error-message"></p>
-            </div>
-
-            <div class="person-name-container edit-field-container">
-              <div class="input-label">
-                <i id="personIcon"></i>
-                <input type="text" id="nameInput" placeholder="Data de nascimento" th:field="*{birthDate}" readonly />
-                <label for="nameInput"></label>
-              </div>
-              <p id="personNameErrorMessage" class="error-message"></p>
-            </div>
-          </div>
-
-          <div class="details-action-buttons">
-            <div></div>
-            <button type="button" id="deleteUserAccount" class="cancel-btn">Excluir Conta</button>
-            <button type="submit" id="saveUserDetails">Salvar Alterações</button>
-            <div></div>
-          </div>
-        </form>
-      </section>
+      <div id="userDetailsCard" th:insert="~{/fragments/cards/edit-user-details-card::card(${updatedUser})}"></div>
 
       <!-- Card para edição dos endereços -->
-      <section class="user-details-edit-container">
-        <h3 class="edit-details-title" id="addressEdit Title"><i></i>Meus Endereços</h3>
 
-        <div class="address-list">
-          <th:block th:each="address : ${userAddress}">
-            <div class="address-card" th:data-address="${address}">
-              <div class="card-content">
-                <h3 id="address-identification" th:text="${address.addressIdentification}"></h3>
-                <p id="street" th:text="${address.street}"></p>
-                <p id="number-string" th:text="${address.numberString}"></p>
-                <p id="details" th:text="${address.details}"></p>
-                <p id="reference" th:text="${address.reference}"></p>
-              </div>
-              <div class="card-actions">
-                <button type="button" class="edit-address-btn">Editar</button>
-              </div>
-            </div>
-
-          </th:block>
-
-        </div>
-
-        <button type="button" id="newAddressBtn">Cadastrar novo endereço</button>
-      </section>
-
+      <div id="userAddressesCard" th:insert="~{/fragments/cards/user-address-list-card::card(${userAddress})}"></div>
     </div>
 
 
     <!-- Dialog para confirmar a exclusão da conta -->
-    <div class="dialog-container">
-      <dialog id="confirmDialog">
-        <div id="dialogAccountHeader">
-          <h3>Excluir Conta</h3>
-          <button id="closeDialog"><i></i></button>
-        </div>
-        <div class="confirm-message">
-          <p>Tem certeza que deseja excluir sua conta? Caso prossiga todos os seus dados serão excluídos</p>
-        </div>
-
-        <div class="dialog-confirm-btns">
-          <button id="cancelDelete" class="cancel-btn">Cancelar</button>
-          <button id="confirmDelete" class="confirm-button">Sim</button>
-        </div>
-      </dialog>
-    </div>
+    <div th:insert="~{/fragments/dialogs/delete-user-dialog::dialog}"> </div>
 
     <!-- Dialog para cadastro e edição de endereço -->
+    <div th:insert="~{/fragments/dialogs/user-address-dialog::dialog}"> </div>
 
-    <div class="dialog-container">
-      <dialog id="addressDialog">
-        <div id="dialogAddressHeader">
-          <h3 id="addressDialogTitle">Novo Endereço</h3>
-          <button id="closeAddressDialogBtn"><i></i></button>
-        </div>
-
-        <form id="addressForm" th:action="@{/user/new-address}" th:object="${newUserAddress}" method="post">
-          <div class="address-form">
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="cepIcon"></i>
-                <input type="text" id="editCEP" placeholder="CEP" th:field="*{cep}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="idIcon"></i>
-                <input type="text" id="editAddressId" placeholder="Identificação" th:field="*{addressIdentification}"
-                  required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="streetIcon"></i>
-                <input type="text" id="editStreet" placeholder="Endereço" th:field="*{street}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="numberIcon"></i>
-                <input type="text" id="editNumber" placeholder="Número" th:field="*{number}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="neighborhoodIcon"></i>
-                <input type="text" id="editNeighborhood" placeholder="Bairro" th:field="*{neighborhood}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="cityIcon"></i>
-                <input type="text" id="editCity" placeholder="Cidade" th:field="*{city}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="stateIcon"></i>
-                <input type="text" id="editState" placeholder="Estado" th:field="*{state}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="complementIcon"></i>
-                <input type="text" id="editComplement" placeholder="Complemento" th:field="*{complement}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-            <div class="address-form-container">
-              <div class="input-label">
-                <i id="referenceIcon"></i>
-                <input type="text" id="editReference" placeholder="Referência" th:field="*{reference}" required />
-                <label for="cepInput"></label>
-              </div>
-              <p id="cepErrorMessage" class="error-message"></p>
-            </div>
-          </div>
-
-          <div class="address-form-buttons">
-            <button type="button" id="cancelAddressBtn" class="cancel-btn">Excluir</button>
-            <button type="submit" id="saveAddressBtn">Salvar</button>
-          </div>
-
-        </form>
-      </dialog>
-    </div>
 
   </main>
 
-  <div th:replace="~{fragments/header :: headerScript}"></div>
   <!-- Script -->
-  <script th:src="@{/js/page_scripts/meus-dados.js}">
+  <script type="module" th:src="@{/js/page_scripts/meus-dados.js}">
 
   </script>
 </body>

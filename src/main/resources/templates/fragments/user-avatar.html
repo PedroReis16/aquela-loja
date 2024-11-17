@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="user-avatar" th:fragment="userAvatar">
+        <!-- Caso esteja autenticado -->
+        <a href="#"><img th:src="@{/images/robo-avatar.png}" id="userAvatar" /></a>
+        <div class="avatar-content" sec:authorize="isAuthenticated()">
+
+            <p>
+                Olá,
+                <a href="/usuario">
+                    <span class="emphasis-text" th:text="${#authentication.name}">
+
+                    </span>
+                </a>
+                <br />
+                <span class="emphasis-text">
+                    <a href="/logout" id="logout">Sair</a>
+                </span>
+            </p>
+
+
+
+        </div>
+
+        <!-- Caso não esteja autenticado -->
+        <div class="avatar-content" sec:authorize="!isAuthenticated()">
+            <p>
+                <span class="emphasis-text"><a href="/login" id="login">Entre</a></span>
+                ou<br />
+                <span class="emphasis-text"><a href="/cadastro" id="signUp">Cadastre-se</a></span>
+            </p>
+        </div>
+
+    </div>
+</body>
+
+</html>

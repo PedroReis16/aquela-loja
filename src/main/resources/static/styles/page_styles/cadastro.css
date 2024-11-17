@@ -1,20 +1,28 @@
 .cadastro-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  align-items: center;
+  height: 88vh;
 }
 
-#formCadastro {
-  margin: 15%;
+#formCard {
+  height: 500px;
+  width: 1000px;
 }
 
-.form-content {
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
+}
+
+.user-details-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  width: 100%;
 }
 
 .cadastro-title {
@@ -116,6 +124,7 @@
 
 .cadastro-btn {
   justify-self: center;
+  margin: 24px 0px 0px 0px;
 }
 
 .endereco-header {
@@ -129,25 +138,6 @@
 
 /* Estiliza o campo de entrada */
 
-.error-message {
-  color: red;
-  margin: 4px 8px;
-  font-size: 14px;
-  font-family: var(--secondary-font);
-}
-
-.error-message.hidden i::before {
-  content: none;
-}
-
-.error-message i::before {
-  margin-right: 8px;
-  vertical-align: middle;
-  content: "\e002";
-  font-family: var(--material-icons);
-  font-size: 14px;
-}
-
 .visibility-control {
   background-color: transparent;
   border: none;
@@ -155,96 +145,36 @@
   cursor: pointer;
 }
 
-.visibility-control::before {
+#passwordBtn::before,
+#confirmPasswordBtn::before {
+  content: "\e8f4";
+}
+
+#passwordBtn.visible::before,
+#confirmPasswordBtn.visible::before {
   content: "\e8f5";
 }
 
-#userAddressForm {
-  display: grid;
-  grid-template-areas:
-    "cep identifier identifier "
-    "street street number"
-    "neighborhood city state "
-    "complement complement complement "
-    "reference reference reference";
-  grid-gap: 10px;
-  justify-content: center;
+
+#redirectToLogin {
+  margin: 32px 0px 0px 0px;
+  text-align: center;
+  font-family: var(--default-font);
+  color: var(--black);
+}
+#redirectToLogin a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+#redirectToLogin a:hover {
+  text-decoration: underline;
 }
 
-.cep-container {
-  grid-area: cep;
-}
-.identifier-container {
-  grid-area: identifier;
-}
-.address-input-container {
-  grid-area: street;
-}
-.number-container {
-  grid-area: number;
-}
-.complement-container {
-  grid-area: complement;
-}
-.neighborhood-container {
-  grid-area: neighborhood;
-}
-.city-container {
-  grid-area: city;
-}
-.state-container {
-  grid-area: state;
-}
-.reference-container {
-  grid-area: reference;
-}
-
-#cepIcon::before {
-  content: "\e55f";
-}
-
-#idIcon::before {
-  content: "\e8d3";
-}
-
-#streetIcon::before {
-  content: "\eb91";
-}
-
-#numberIcon::before {
-  content: "\e9ef";
-}
-
-#neighborhoodIcon::before {
-  content: "\e0c8";
-}
-
-#cityIcon::before {
-  content: "\e7f1";
-}
-
-#stateIcon::before {
-  content: "\e55f";
-}
-
-#complementIcon::before {
-  content: "\ea40";
-}
-
-#referenceIcon::before {
-  content: "\e55f";
-}
-
-.form-step {
-  display: none;
-}
-
-.form-step.active {
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .form-content {
+@media screen and (max-width: 768px) {
+  .cadastro-container {
+    height: 100%;
+  }
+  .user-details-form {
     grid-template-columns: 1fr;
     gap: 8px;
   }
