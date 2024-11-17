@@ -124,6 +124,7 @@
 
 .cadastro-btn {
   justify-self: center;
+  margin: 24px 0px 0px 0px;
 }
 
 .endereco-header {
@@ -245,7 +246,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .cadastro-container{
+  .cadastro-container {
     height: 100%;
   }
   .user-details-form {

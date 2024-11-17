@@ -8,11 +8,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.edu.fesa.aquela_loja.models.entity.AddressModel;
 import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
-import br.edu.fesa.aquela_loja.models.entity.PaymentCardModel;
 import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
 import br.edu.fesa.aquela_loja.repository.IAddressRepository;
 import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
-import br.edu.fesa.aquela_loja.repository.IPaymentCardRepository;
 
 @SpringBootApplication
 public class AquelaLojaApplication {
@@ -22,7 +20,7 @@ public class AquelaLojaApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(BCryptPasswordEncoder passwordEncoder, IAppUserRepository userRepository, IAddressRepository addressRepository, IPaymentCardRepository paymentCardRepository) {
+    public CommandLineRunner commandLineRunner(BCryptPasswordEncoder passwordEncoder, IAppUserRepository userRepository, IAddressRepository addressRepository) {
         return args -> {
             AppUserModel admin = AppUserModel.builder()
                     .username("Administrador")
@@ -49,17 +47,8 @@ public class AquelaLojaApplication {
                     .appUser(admin)
                     .build();
 
-            PaymentCardModel adminCard = PaymentCardModel.builder()
-                    .holderName("Administrador")
-                    .number("1234 5678")
-                    .expirationDate("01/23")
-                    .cvv(123)
-                    .appUser(admin)
-                    .build();
-
             userRepository.save(admin);
             addressRepository.save(adminAdrress);
-            paymentCardRepository.save(adminCard);
         };
     }
 }

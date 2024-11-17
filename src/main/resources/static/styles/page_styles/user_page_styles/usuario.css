@@ -1,22 +1,80 @@
-.normal-user-content {
-  margin: 64px 3% 64px 3%;
-  background-color: var(--background-color);
+.overview-content {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.normal-user-content a {
-  text-decoration: none;
+  justify-content: space-between;
+  font-family: var(--default-font);
 }
 
-.user-card {
+.user-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+#userProfilePic {
+  width: 72px;
+  height: 72px;
+}
+
+.user-info > p {
+  margin: 0px 0px 0px 16px;
+  text-align: left;
+}
+#userName {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px 0px 8px 0px;
+  font-family: var(--default-font);
+  color: var(--black);
+}
+#userEmail {
+  display: block;
+  font-size: 16px;
+  margin: 0px;
+  font-family: var(--secondary-font);
+  color: var(--dark-gray);
+}
+#userEmail > i::before {
+  content: "\e158";
+  font-family: var(--material-icons);
+  color: var(--primary-color);
+  position: relative;
+  top: 4px;
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+#editProfileBtn {
+  width: 150px;
+  vertical-align: middle;
+  align-items: center;
+  height: 32px;
+  display: flex;
+}
+
+#editProfileBtn > span::before {
+  content: "\e3c9";
+  font-family: var(--material-icons);
+  color: var(--white);
+  margin: 6px 4px 0px 0px;
+  position: relative;
+  top: 2px;
+}
+
+@media screen and (max-width: 768px) {
+  #editProfileBtn {
+    display: none;
+  }
+}
+
+/* .user-card {
   display: flex;
   background-color: var(--white);
   border-radius: 8px;
   padding: 8px 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
+} */
+/* 
 .user-details {
   display: flex;
   justify-content: space-between;
@@ -187,4 +245,4 @@
     background-color: var(--primary-color-hover);
     transition: all 0.6s;
   }
-}
+} */

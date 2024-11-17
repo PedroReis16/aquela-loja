@@ -8,14 +8,42 @@
 
   <link th:href="@{/styles/reset.css}" rel="stylesheet" />
   <link th:href="@{/styles/style.css}" rel="stylesheet" />
+
+  <script th:src="@{/js/components/card.js}" defer></script>
 </head>
 
 <body>
   <header th:replace="~{fragments/header :: header}"></header>
 
   <main>
-    <div class="normal-user-content">
-      <section class="user-card" id="userOverviewCard">
+    <custom-card id="userOverviewCard">
+      <div class="overview-content">
+
+        <div class="user-info">
+          <img src="/images/robo-avatar.png" alt="" id="userProfilePic" />
+
+          <p>
+            <span id="userName">Bem vindo, [[${userName}]]
+            </span><br>
+            <span id="userEmail">
+              <i></i>
+              <span>[[${userEmail}]]</span>
+            </span>
+          </p>
+
+        </div>
+
+        <a class="confirm-button" id="editProfileBtn" href="/usuario/meus-dados">
+          <span></span>
+          <p>Editar dados</p>
+        </a>
+      </div>
+
+    </custom-card>
+
+
+    <!-- <div class="normal-user-content">
+      <custom-card id="userOverviewCard">
         <img th:src="@{/images/robo-avatar.png}" alt="" id="userProfilePic" />
         <div class="user-details">
           <div class="user-info">
@@ -29,7 +57,7 @@
             <p>Editar dados</p>
           </a>
         </div>
-      </section>
+      </custom-card>
 
       <section class="widgets-container">
         <h2 id="pageWidgetTitle"><i></i>Atalhos</h2>
@@ -96,7 +124,7 @@
 
         </div>
       </section>
-    </div>
+    </div> -->
   </main>
 
   </div>
