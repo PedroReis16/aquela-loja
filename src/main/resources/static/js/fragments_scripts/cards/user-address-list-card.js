@@ -52,19 +52,25 @@ addressCard.forEach(card => {
 
     editBtn.addEventListener('click', function () {
 
-        addressDialog.querySelector("#editCEP").value = result.cep;
-        addressDialog.querySelector("#editAddressId").value = result.addressIdentification;
-        addressDialog.querySelector("#editStreet").value = result.street;
-        addressDialog.querySelector("#editNumber").value = result.number;
-        addressDialog.querySelector("#editNeighborhood").value = result.neighborhood;
-        addressDialog.querySelector("#editCity").value = result.city;
-        addressDialog.querySelector("#editState").value = result.state;
-        addressDialog.querySelector("#editComplement").value = result.complement;
-        addressDialog.querySelector("#editReference").value = result.reference;
+        addressDialog.querySelector("#cepInput").value = result.cep;
+        addressDialog.querySelector("#addressIdInput").value = result.addressIdentification;
+        addressDialog.querySelector("#streetInput").value = result.street;
+        addressDialog.querySelector("#numberInput").value = result.number;
+        addressDialog.querySelector("#neighborhoodInput").value = result.neighborhood;
+        addressDialog.querySelector("#cityInput").value = result.city;
+        addressDialog.querySelector("#stateInput").value = result.state;
+        addressDialog.querySelector("#complementInput").value = result.complement;
+        addressDialog.querySelector("#referenceInput").value = result.reference;
 
         const addressForm = addressDialog.querySelector("#addressForm");
         addressForm.action = "";
         addressForm.object = "";
+
+        const deleteBtn = document.getElementById('deleteAddressBtn');
+        const defaultBtn = document.getElementById('defaultAddressBtn');
+
+        defaultBtn.style.display = "block";
+        deleteBtn.style.display = "block";
 
         addressDialog.showModal();
 

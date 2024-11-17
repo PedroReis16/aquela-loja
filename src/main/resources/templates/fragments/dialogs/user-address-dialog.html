@@ -11,7 +11,7 @@
     <div class="dialog-container" th:fragment="dialog">
         <dialog id="addressDialog">
             <div id="dialogAddressHeader">
-                <h3 id="addressDialogTitle">Novo Endereço</h3>
+                <h3 id="addressDialogTitle"><i></i>Novo Endereço</h3>
                 <button id="closeAddressDialogBtn"><i></i></button>
             </div>
 
@@ -99,11 +99,11 @@
                     </div>
                 </div>
 
-                <div class="address-form-buttons">
+                <div id="address-form-buttons">
                     <button type="button" id="cancelAddressBtn" class="cancel-btn">Cancelar</button>
-                    <div class="address-action-buttons">
-                        <button type="button" class="cancel-btn">Excluir</button>
-                        <button type="button" class="cancel-btn">Tornar
+                    <div id="address-action-buttons">
+                        <button type="button" class="cancel-btn" id="deleteAddressBtn">Excluir</button>
+                        <button type="button" class="cancel-btn" id="defaultAddressBtn">Tornar
                             padrão</button>
                         <button type="submit" class="confirm-button" id="saveAddressBtn">Salvar</button>
                     </div>
