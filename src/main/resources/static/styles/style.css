@@ -24,7 +24,8 @@
 @import url("./fragment_styles/user-avatar.css");
 @import url("./fragment_styles/shopping-cart.css");
 @import url("./fragment_styles/dialogs/delete-user-dialog.css");
-@import url("./fragment_styles/edit-user-details-card.css");
+@import url("./fragment_styles/cards/edit-user-details-card.css");
+@import url("./fragment_styles/cards/user-address-list-card.css");
 
 :root {
   --default-font: "Poppins", sans-serif;

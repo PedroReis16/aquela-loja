@@ -48,8 +48,8 @@
                         <i id="emailIcon"></i>
                         <input type="text" id="emailInput" placeholder="Email" th:field="*{email}" required
                             sec:authorize="hasRole('ROLE_USER')" />
-                        <input type="text" class="readonly-field" placeholder="Email" th:field="*{email}" readonly
-                            sec:authorize="hasRole('ROLE_ADMIN')" />
+                        <input type="text" id="emailInput" class="readonly-field" placeholder="Email"
+                            th:field="*{email}" readonly sec:authorize="hasRole('ROLE_ADMIN')" />
                         <label for="nameInput"></label>
                     </div>
                     <p id="emailErrorMessage" class="error-message"></p>
@@ -83,6 +83,8 @@
                 <div></div>
             </div>
         </form>
+
+        <script type="module" th:src="@{/js/fragments_scripts/cards/edit-user-details-card.js}"></script>
     </custom-card>
 </body>
 

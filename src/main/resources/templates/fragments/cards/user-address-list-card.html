@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <custom-card th:fragment="card(userAddress)">
+        <h3 class="edit-details-title" id="addressEdit Title"><i></i>Meus Endereços</h3>
+
+        <div class="address-list">
+            <th:block th:each="address : ${userAddress}">
+                <div class="address-card" th:data-address="${address}">
+                    <div class="card-content">
+                        <h3 id="address-identification" th:text="${address.addressIdentification}"></h3>
+                        <p id="street" th:text="${address.street}"></p>
+                        <p id="number-string" th:text="${address.numberString}"></p>
+                        <p id="details" th:text="${address.details}"></p>
+                        <p id="reference" th:text="${address.reference}"></p>
+                    </div>
+                    <div class="card-actions">
+                        <button type="button" class="edit-address-btn">Editar</button>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+
+        <button type="button" id="newAddressBtn">Cadastrar novo endereço</button>
+
+        <script type="module" th:src="@{/js/fragments_scripts/cards/user-address-list-card.js}"></script>
+    </custom-card>
+</body>
+
+</html>

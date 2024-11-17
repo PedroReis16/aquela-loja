@@ -20,34 +20,11 @@
 
     <div class="editable-items">
       <!-- Card para edição dos detalhes pessoais -->
-      <div id="userDetailsCard" th:insert="~{fragments/edit-user-details-card::card(updatedUser)}"></div>
+      <div id="userDetailsCard" th:insert="~{/fragments/cards/edit-user-details-card::card(${updatedUser})}"></div>
 
       <!-- Card para edição dos endereços -->
-      <custom-card id="userAddressesCard">
-        <h3 class="edit-details-title" id="addressEdit Title"><i></i>Meus Endereços</h3>
 
-        <div class="address-list">
-          <th:block th:each="address : ${userAddress}">
-            <div class="address-card" th:data-address="${address}">
-              <div class="card-content">
-                <h3 id="address-identification" th:text="${address.addressIdentification}"></h3>
-                <p id="street" th:text="${address.street}"></p>
-                <p id="number-string" th:text="${address.numberString}"></p>
-                <p id="details" th:text="${address.details}"></p>
-                <p id="reference" th:text="${address.reference}"></p>
-              </div>
-              <div class="card-actions">
-                <button type="button" class="edit-address-btn">Editar</button>
-              </div>
-            </div>
-
-          </th:block>
-
-        </div>
-
-        <button type="button" id="newAddressBtn">Cadastrar novo endereço</button>
-      </custom-card>
-
+      <div id="userAddressesCard" th:insert="~{/fragments/cards/user-address-list-card::card(${userAddress})}"></div>
     </div>
 
 
