@@ -11,7 +11,7 @@ menuBtn.addEventListener('click', function () {
 });
 
 
-if (currentRoute == '/login' || currentRoute == '/cadastro') {
+if (currentRoute == '/login' || currentRoute == '/cadastro' ) {
     const occultableItems = document.querySelectorAll('.occultable');
     const header = document.querySelector('.header');
     const logo = document.querySelector('.logo-container');

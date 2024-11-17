@@ -8,6 +8,8 @@
 
   <link th:href="@{/styles/reset.css}" rel="stylesheet" />
   <link th:href="@{/styles/style.css}" rel="stylesheet" />
+
+  <script th:src="@{/js/components/card.js}" defer></script>
 </head>
 
 <body>
@@ -18,7 +20,7 @@
 
     <div class="editable-items">
       <!-- Card para edição dos detalhes pessoais -->
-      <section class="user-details-edit-container">
+      <custom-card>
         <form id="userDetailsForm" th:action="@{/user/edit}" th:object="${updatedUser}" method="post">
           <h3 class="edit-details-title" id="detailsEditTitle"><i></i>Dados básicos</h3>
 
@@ -35,10 +37,10 @@
             <div class="person-name-container edit-field-container">
               <div class="input-label">
                 <i id="phoneIcon"></i>
-                <input type="text" id="nameInput" placeholder="Telefone" th:field="*{phone}" required />
+                <input type="text" id="phoneInput" placeholder="Telefone" th:field="*{phone}" required />
                 <label for="nameInput"></label>
               </div>
-              <p id="personNameErrorMessage" class="error-message"></p>
+              <p id="phoneErrorMessage" class="error-message"></p>
             </div>
 
             <div class="gender-container edit-field-container">
@@ -56,16 +58,17 @@
             <div class="person-name-container edit-field-container">
               <div class="input-label">
                 <i id="emailIcon"></i>
-                <input type="text" id="nameInput" placeholder="Email" th:field="*{email}" required />
+                <input type="text" id="emailInput" placeholder="Email" th:field="*{email}" required />
                 <label for="nameInput"></label>
               </div>
-              <p id="personNameErrorMessage" class="error-message"></p>
+              <p id="emailErrorMessage" class="error-message"></p>
             </div>
 
             <div class="person-name-container edit-field-container">
               <div class="input-label">
                 <i id="documentIcon"></i>
-                <input type="text" id="nameInput" placeholder="CPF" th:field="*{document}" readonly />
+                <input type="text" id="documentInput" class="readonly-field" placeholder="CPF" th:field="*{document}"
+                  readonly />
                 <label for="nameInput"></label>
               </div>
               <p id="personNameErrorMessage" class="error-message"></p>
@@ -73,8 +76,9 @@
 
             <div class="person-name-container edit-field-container">
               <div class="input-label">
-                <i id="personIcon"></i>
-                <input type="text" id="nameInput" placeholder="Data de nascimento" th:field="*{birthDate}" readonly />
+                <i id="birthIcon"></i>
+                <input type="text" id="birthDateInput" class="readonly-field" placeholder="Data de nascimento"
+                  th:field="*{birthDate}" readonly />
                 <label for="nameInput"></label>
               </div>
               <p id="personNameErrorMessage" class="error-message"></p>
@@ -84,14 +88,14 @@
           <div class="details-action-buttons">
             <div></div>
             <button type="button" id="deleteUserAccount" class="cancel-btn">Excluir Conta</button>
-            <button type="submit" id="saveUserDetails">Salvar Alterações</button>
+            <button type="submit" id="saveUserDetails" class="confirm-button">Salvar Alterações</button>
             <div></div>
           </div>
         </form>
-      </section>
+      </custom-card>
 
       <!-- Card para edição dos endereços -->
-      <section class="user-details-edit-container">
+      <custom-card>
         <h3 class="edit-details-title" id="addressEdit Title"><i></i>Meus Endereços</h3>
 
         <div class="address-list">
@@ -114,7 +118,7 @@
         </div>
 
         <button type="button" id="newAddressBtn">Cadastrar novo endereço</button>
-      </section>
+      </custom-card>
 
     </div>
 
@@ -235,7 +239,7 @@
   </main>
 
   <!-- Script -->
-  <script th:src="@{/js/page_scripts/meus-dados.js}">
+  <script type="module" th:src="@{/js/page_scripts/meus-dados.js}">
 
   </script>
 </body>

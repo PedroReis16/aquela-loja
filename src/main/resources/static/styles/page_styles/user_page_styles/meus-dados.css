@@ -77,21 +77,6 @@
   align-content: center;
 }
 
-#saveUserDetails {
-  background-color: var(--primary-color);
-  color: var(--white);
-  border: none;
-  cursor: pointer;
-  font-family: var(--default-font);
-  font-size: 20px;
-  padding: 8px;
-  font-weight: 500;
-  border-radius: 4px;
-}
-
-#saveUserDetails:hover {
-  background-color: var(--primary-color-hover);
-}
 
 /* Dialog para exclusão de conta */
 

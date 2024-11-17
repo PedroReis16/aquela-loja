@@ -173,3 +173,7 @@ a {
   font-family: var(--material-icons);
   font-size: 14px;
 }
+
+.readonly-field {
+  color: var(--dark-gray);
+}

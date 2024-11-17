@@ -71,9 +71,10 @@ function checkDetailsFormValidity() {
         formData.email && formData.password &&
         formData.confirmedPassword) {
         nextStepBtn.disabled = false;
-    } else {
-        nextStepBtn.disabled = true;
+        return;
     }
+    nextStepBtn.disabled = true;
+
 }
 
 function checkAddressFormValidity() {
@@ -82,9 +83,10 @@ function checkAddressFormValidity() {
         formData.address.city &&
         formData.address.state && formData.address.addressId) {
         submitBtn.disabled = false;
-    } else {
-        submitBtn.disabled = true;
+        return;
     }
+    submitBtn.disabled = true;
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -114,7 +116,6 @@ nameInput.addEventListener('blur', function (e) {
         usernameError.textContent = '';
         formData.userName = value;
     }
-    formData.userName = value;
     checkDetailsFormValidity();
 });
 

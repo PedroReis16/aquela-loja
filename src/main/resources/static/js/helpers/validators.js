@@ -43,7 +43,7 @@ export function validateCPF(cpf) {
 //Validação de telefone
 export function validatePhone(phone) {
     phone = phone.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-    if (phone.length === 10 || phone.length === 11) {
+    if ( phone.length === 11) {
         const regex = /^[1-9]{2}[2-9][0-9]{7,8}$/;
         return regex.test(phone);
     }

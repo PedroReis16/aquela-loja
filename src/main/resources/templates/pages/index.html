@@ -194,7 +194,7 @@
   <header th:replace="~{fragments/header :: header}"></header>
 
   <!-- Carrossel de Promoções -->
-  <!-- <div class="promo-carousel">
+  <div class="promo-carousel">
     <div class="promo-carousel-inner">
       <div class="promo-carousel-item">
         <img src="/api/placeholder/1200/400" alt="Promoção 1">
@@ -212,22 +212,23 @@
     <button class="carousel-control carousel-next" id="promo-next">
       <i class="fas fa-chevron-right"></i>
     </button>
-  </div> -->
+  </div>
 
   <!-- Seção de Produtos -->
   <section class="products-section">
-    <!-- <h2 class="section-title">Produtos em Destaque</h2>
+    <h2 class="section-title">Produtos em Destaque</h2>
     <div class="category-tabs">
       <button class="category-tab active">Todos</button>
       <button class="category-tab">Eletrônicos</button>
       <button class="category-tab">Moda</button>
       <button class="category-tab">Casa</button>
-    </div> -->
-    <!-- <div class="products-carousel">
-      <div class="products-carousel-inner"> -->
+    </div>
+    <div class="products-carousel">
+      <div class="products-carousel-inner">
         <!-- 8 produtos no carrossel -->
-        <!-- <div class="product-card" th:each="product : ${products}">
-          <img th:src="${product.imageBase64}" style="width: 75px; height: 75px; object-fit: cover;" class="product-image">
+        <div class="product-card" th:each="product : ${products}">
+          <img th:src="${product.imageBase64}" style="width: 75px; height: 75px; object-fit: cover;"
+            class="product-image">
           <div class="product-info">
             <h3 class="product-title" th:text="${product.name}"></h3>
             <p class="product-price" th:text="${product.price}"></p>
@@ -235,64 +236,64 @@
               <button class="product-button">Adicionar ao Carrinho</button>
             </a>
           </div>
-        </div> -->
-<!--        <div class="product-card">-->
-<!--          <img src="/api/placeholder/250/200" alt="Produto 2" class="product-image">-->
-<!--          <div class="product-info">-->
-<!--            <h3 class="product-title">Notebook ABC</h3>-->
-<!--            <p class="product-price">R$ 3.499,90</p>-->
-<!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="product-card">-->
-<!--          <img src="/api/placeholder/250/200" alt="Produto 3" class="product-image">-->
-<!--          <div class="product-info">-->
-<!--            <h3 class="product-title">Tênis Esportivo</h3>-->
-<!--            <p class="product-price">R$ 299,90</p>-->
-<!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="product-card">-->
-<!--          <img src="/api/placeholder/250/200" alt="Produto 4" class="product-image">-->
-<!--          <div class="product-info">-->
-<!--            <h3 class="product-title">Câmera Digital</h3>-->
-<!--            <p class="product-price">R$ 2.499,90</p>-->
-<!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="product-card">-->
-<!--          <img src="/api/placeholder/250/200" alt="Produto 5" class="product-image">-->
-<!--          <div class="product-info">-->
-<!--            <h3 class="product-title">Smart TV 55"</h3>-->
-<!--            <p class="product-price">R$ 3.999,90</p>-->
-<!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="product-card">-->
-<!--          <img src="/api/placeholder/250/200" alt="Produto 6" class="product-image">-->
-<!--          <div class="product-info">-->
-<!--            <h3 class="product-title">Fone Bluetooth</h3>-->
-<!--            <p class="product-price">R$ 199,90</p>-->
-<!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="product-card">-->
-<!--          <img src="/api/placeholder/250/200" alt="Produto 7" class="product-image">-->
-<!--          <div class="product-info">-->
-<!--            <h3 class="product-title">Relógio Smart</h3>-->
-<!--            <p class="product-price">R$ 899,90</p>-->
-<!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="product-card">-->
-<!--          <img src="/api/placeholder/250/200" alt="Produto 8" class="product-image">-->
-<!--          <div class="product-info">-->
-<!--            <h3 class="product-title">Tablet Pro</h3>-->
-<!--            <p class="product-price">R$ 2.699,90</p>-->
-<!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-<!--          </div>-->
-<!--        </div>-->
-      <!-- </div>
+        </div>
+        <!--        <div class="product-card">-->
+        <!--          <img src="/api/placeholder/250/200" alt="Produto 2" class="product-image">-->
+        <!--          <div class="product-info">-->
+        <!--            <h3 class="product-title">Notebook ABC</h3>-->
+        <!--            <p class="product-price">R$ 3.499,90</p>-->
+        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="product-card">-->
+        <!--          <img src="/api/placeholder/250/200" alt="Produto 3" class="product-image">-->
+        <!--          <div class="product-info">-->
+        <!--            <h3 class="product-title">Tênis Esportivo</h3>-->
+        <!--            <p class="product-price">R$ 299,90</p>-->
+        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="product-card">-->
+        <!--          <img src="/api/placeholder/250/200" alt="Produto 4" class="product-image">-->
+        <!--          <div class="product-info">-->
+        <!--            <h3 class="product-title">Câmera Digital</h3>-->
+        <!--            <p class="product-price">R$ 2.499,90</p>-->
+        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="product-card">-->
+        <!--          <img src="/api/placeholder/250/200" alt="Produto 5" class="product-image">-->
+        <!--          <div class="product-info">-->
+        <!--            <h3 class="product-title">Smart TV 55"</h3>-->
+        <!--            <p class="product-price">R$ 3.999,90</p>-->
+        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="product-card">-->
+        <!--          <img src="/api/placeholder/250/200" alt="Produto 6" class="product-image">-->
+        <!--          <div class="product-info">-->
+        <!--            <h3 class="product-title">Fone Bluetooth</h3>-->
+        <!--            <p class="product-price">R$ 199,90</p>-->
+        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="product-card">-->
+        <!--          <img src="/api/placeholder/250/200" alt="Produto 7" class="product-image">-->
+        <!--          <div class="product-info">-->
+        <!--            <h3 class="product-title">Relógio Smart</h3>-->
+        <!--            <p class="product-price">R$ 899,90</p>-->
+        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="product-card">-->
+        <!--          <img src="/api/placeholder/250/200" alt="Produto 8" class="product-image">-->
+        <!--          <div class="product-info">-->
+        <!--            <h3 class="product-title">Tablet Pro</h3>-->
+        <!--            <p class="product-price">R$ 2.699,90</p>-->
+        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+      </div>
       <button class="carousel-control carousel-prev" id="products-prev">
         <i class="fas fa-chevron-left"></i>
       </button>
@@ -300,94 +301,94 @@
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
-  </section> -->
-  
+  </section>
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script>
     function addToCart(productId) {
-       $.ajax({
-           url: '/add-Cart/' + productId,
-           type: 'POST',
-           success: function(response) {
-               Swal.fire(
-                   'Adicionado!',
-                   'success'
-               ).then(() => {
-                   location.reload();
-               });
-           },
-           error: function(error) {
-               Swal.fire(
-                   'Erro!',
-                   'Ocorreu um erro ao tentar remover o produto.',
-                   'error'
-               );
-           }
-       });
+      $.ajax({
+        url: '/add-Cart/' + productId,
+        type: 'POST',
+        success: function (response) {
+          Swal.fire(
+            'Adicionado!',
+            'success'
+          ).then(() => {
+            location.reload();
+          });
+        },
+        error: function (error) {
+          Swal.fire(
+            'Erro!',
+            'Ocorreu um erro ao tentar remover o produto.',
+            'error'
+          );
+        }
+      });
     }
 
-   // Função genérica para controlar carrosséis
-   function setupCarousel(carouselInner, prevBtn, nextBtn, itemWidth, itemsToShow = 1) {
-     let currentIndex = 0;
-     const items = carouselInner.children;
-     const maxIndex = Math.max(0, items.length - itemsToShow);
+    // Função genérica para controlar carrosséis
+    function setupCarousel(carouselInner, prevBtn, nextBtn, itemWidth, itemsToShow = 1) {
+      let currentIndex = 0;
+      const items = carouselInner.children;
+      const maxIndex = Math.max(0, items.length - itemsToShow);
 
-     function updateCarousel() {
-       const offset = itemWidth * currentIndex;
-       carouselInner.style.transform = `translateX(-${offset}px)`;
-     }
+      function updateCarousel() {
+        const offset = itemWidth * currentIndex;
+        carouselInner.style.transform = `translateX(-${offset}px)`;
+      }
 
-     prevBtn.addEventListener('click', () => {
-       currentIndex = Math.max(currentIndex - 1, 0);
-       updateCarousel();
-     });
+      prevBtn.addEventListener('click', () => {
+        currentIndex = Math.max(currentIndex - 1, 0);
+        updateCarousel();
+      });
 
-     nextBtn.addEventListener('click', () => {
-       currentIndex = Math.min(currentIndex + 1, maxIndex);
-       updateCarousel();
-     });
+      nextBtn.addEventListener('click', () => {
+        currentIndex = Math.min(currentIndex + 1, maxIndex);
+        updateCarousel();
+      });
 
-     return updateCarousel;
-   }
+      return updateCarousel;
+    }
 
-   // Configurar carrossel de promoções
-   const promoCarousel = setupCarousel(
-     document.querySelector('.promo-carousel-inner'),
-     document.querySelector('#promo-prev'),
-     document.querySelector('#promo-next'),
-     document.querySelector('.promo-carousel-item').offsetWidth
-   );
+    // Configurar carrossel de promoções
+    const promoCarousel = setupCarousel(
+      document.querySelector('.promo-carousel-inner'),
+      document.querySelector('#promo-prev'),
+      document.querySelector('#promo-next'),
+      document.querySelector('.promo-carousel-item').offsetWidth
+    );
 
-   // Configurar carrossel de produtos (4 itens visíveis por vez)
-   const productsCarousel = setupCarousel(
-     document.querySelector('.products-carousel-inner'),
-     document.querySelector('#products-prev'),
-     document.querySelector('#products-next'),
-     250 + 16, // largura do card + gap
-     4
-   );
+    // Configurar carrossel de produtos (4 itens visíveis por vez)
+    const productsCarousel = setupCarousel(
+      document.querySelector('.products-carousel-inner'),
+      document.querySelector('#products-prev'),
+      document.querySelector('#products-next'),
+      250 + 16, // largura do card + gap
+      4
+    );
 
-   // Autoplay do carrossel de promoções
-   setInterval(() => {
-     const promoInner = document.querySelector('.promo-carousel-inner');
-     const items = promoInner.children;
-     let currentIndex = parseInt(promoInner.style.transform.replace(/[^0-9-]/g, '')) || 0;
-     currentIndex = (Math.abs(currentIndex) / items[0].offsetWidth + 1) % items.length;
-     promoInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-   }, 5000);
+    // Autoplay do carrossel de promoções
+    setInterval(() => {
+      const promoInner = document.querySelector('.promo-carousel-inner');
+      const items = promoInner.children;
+      let currentIndex = parseInt(promoInner.style.transform.replace(/[^0-9-]/g, '')) || 0;
+      currentIndex = (Math.abs(currentIndex) / items[0].offsetWidth + 1) % items.length;
+      promoInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }, 5000);
 
-   // Interatividade das tabs de categoria
-   const categoryTabs = document.querySelectorAll('.category-tab');
-   categoryTabs.forEach(tab => {
-     tab.addEventListener('click', () => {
-       categoryTabs.forEach(t => t.classList.remove('active'));
-       tab.classList.add('active');
-       // Aqui você pode adicionar lógica para filtrar os produtos por categoria
-     });
-   });
-  </script> -->
+    // Interatividade das tabs de categoria
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    categoryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        categoryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        // Aqui você pode adicionar lógica para filtrar os produtos por categoria
+      });
+    });
+  </script>
 </body>
 
 </html>
