@@ -23,7 +23,9 @@
 @import url("./fragment_styles/search-bar.css");
 @import url("./fragment_styles/user-avatar.css");
 @import url("./fragment_styles/shopping-cart.css");
+@import url("./fragment_styles/user-address-form.css");
 @import url("./fragment_styles/dialogs/delete-user-dialog.css");
+@import url("./fragment_styles/dialogs/user-address-dialog.css");
 @import url("./fragment_styles/cards/edit-user-details-card.css");
 @import url("./fragment_styles/cards/user-address-list-card.css");
 

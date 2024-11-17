@@ -16,92 +16,102 @@
             </div>
 
             <form id="addressForm" th:action="@{/user/new-address}" th:object="${newUserAddress}" method="post">
-                <div class="address-form">
-                    <div class="address-form-container">
+                <div id="userAddressForm">
+                    <div class="cep-container">
                         <div class="input-label">
                             <i id="cepIcon"></i>
-                            <input type="text" id="editCEP" placeholder="CEP" th:field="*{cep}" required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="cepInput" name="cep" placeholder="CEP" th:field="*{cep}" required>
+                            <label for="cep"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="CEPInputErrorMessage" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="identifier-container">
                         <div class="input-label">
                             <i id="idIcon"></i>
-                            <input type="text" id="editAddressId" placeholder="Identificação"
-                                th:field="*{addressIdentification}" required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="addressIdInput" name="identificacao" placeholder="Identificação"
+                                th:field="*{addressIdentification}" required>
+                            <label for="identificacao"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="identificationInputError" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="address-input-container">
                         <div class="input-label">
                             <i id="streetIcon"></i>
-                            <input type="text" id="editStreet" placeholder="Endereço" th:field="*{street}" required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="streetInput" name="endereco" placeholder="Endereço"
+                                th:field="*{street}" readonly required>
+                            <label for="endereco"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="addressInputError" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="number-container">
                         <div class="input-label">
                             <i id="numberIcon"></i>
-                            <input type="text" id="editNumber" placeholder="Número" th:field="*{number}" required />
-                            <label for="cepInput"></label>
+                            <input type="number" id="numberInput" name="numero" placeholder="Número"
+                                th:field="*{number}" required>
+                            <label for="numero"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="numberInputError" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="neighborhood-container">
                         <div class="input-label">
                             <i id="neighborhoodIcon"></i>
-                            <input type="text" id="editNeighborhood" placeholder="Bairro" th:field="*{neighborhood}"
-                                required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="neighborhoodInput" name="bairro" placeholder="Bairro"
+                                th:field="*{neighborhood}" readonly required>
+                            <label for="bairro"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="neighborhoodInputError" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="city-container">
                         <div class="input-label">
                             <i id="cityIcon"></i>
-                            <input type="text" id="editCity" placeholder="Cidade" th:field="*{city}" required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="cityInput" name="cidade" placeholder="Cidade" th:field="*{city}"
+                                readonly required>
+                            <label for="cidade"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="cityInputError" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="state-container">
                         <div class="input-label">
                             <i id="stateIcon"></i>
-                            <input type="text" id="editState" placeholder="Estado" th:field="*{state}" required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="stateInput" name="estado" placeholder="Estado" th:field="*{state}"
+                                readonly required>
+                            <label for="estado"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="stateInputError" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="complement-container">
                         <div class="input-label">
                             <i id="complementIcon"></i>
-                            <input type="text" id="editComplement" placeholder="Complemento" th:field="*{complement}"
-                                required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="complementInput" name="complemento" placeholder="Complemento"
+                                th:field="*{complement}">
+                            <label for="complemento"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="complementInputError" class="error-message"></p>
                     </div>
-                    <div class="address-form-container">
+                    <div class="reference-container">
                         <div class="input-label">
                             <i id="referenceIcon"></i>
-                            <input type="text" id="editReference" placeholder="Referência" th:field="*{reference}"
-                                required />
-                            <label for="cepInput"></label>
+                            <input type="text" id="referenceInput" name="referencia" placeholder="Referência"
+                                th:field="*{reference}">
+                            <label for="referencia"></label>
                         </div>
-                        <p id="cepErrorMessage" class="error-message"></p>
+                        <p id="referenceInputError" class="error-message"></p>
                     </div>
                 </div>
 
                 <div class="address-form-buttons">
-                    <button type="button" id="cancelAddressBtn" class="cancel-btn">Excluir</button>
-                    <button type="submit" id="saveAddressBtn">Salvar</button>
+                    <button type="button" id="cancelAddressBtn" class="cancel-btn">Cancelar</button>
+                    <div class="address-action-buttons">
+                        <button type="button" class="cancel-btn">Excluir</button>
+                        <button type="button" class="cancel-btn">Tornar
+                            padrão</button>
+                        <button type="submit" class="confirm-button" id="saveAddressBtn">Salvar</button>
+                    </div>
                 </div>
 
             </form>
         </dialog>
+        <script type="module" th:src="@{/js/fragments_scripts/dialogs/user-address-dialog.js}"></script>
     </div>
 </body>
 

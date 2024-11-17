@@ -1,0 +1,7 @@
+#addressDialog {
+  outline: none;
+  border: none;
+  background-color: var(--white);
+  border-radius: 8px;
+  width: 56%;
+}

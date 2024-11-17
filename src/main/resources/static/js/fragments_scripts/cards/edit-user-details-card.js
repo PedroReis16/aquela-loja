@@ -1,5 +1,5 @@
-import { validateUsername, validatePhone, validateBirthdate, validateEmail } from '../../helpers/validators.js';
-import { maskCPF, maskCEP, maskPhone } from '../../helpers/masks.js';
+import { validateUsername, validatePhone, validateEmail } from '../../helpers/validators.js';
+import { maskPhone } from '../../helpers/masks.js';
 
 //Formulário de dados do usuário
 const nameInput = document.getElementById('nameInput');
