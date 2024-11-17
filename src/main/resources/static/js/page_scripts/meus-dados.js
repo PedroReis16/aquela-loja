@@ -34,7 +34,6 @@ const newAddressButton = document.getElementById('newAddressBtn');
 const addressCard = document.querySelectorAll('.address-card');
 
 function canSaveUserDetails() {
-    console.log("validação");
     if (userFormData.name && userFormData.phone && userFormData.email) {
         saveUserDetailsBtn.disabled = false;
 

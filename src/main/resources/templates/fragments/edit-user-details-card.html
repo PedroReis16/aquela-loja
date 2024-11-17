@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <custom-card th:fragment="card(updatedUser)">
+        <form id="userDetailsForm" th:action="@{/user/edit}" th:object="${updatedUser}" method="post">
+            <h3 class="edit-details-title" id="detailsEditTitle"><i></i>Dados básicos</h3>
+
+            <div class="details-container">
+                <div class="person-name-container edit-field-container">
+                    <div class="input-label">
+                        <i id="personIcon"></i>
+                        <input type="text" id="nameInput" placeholder="Nome Completo" th:field="*{userName}" required />
+                        <label for="nameInput"></label>
+                    </div>
+                    <p id="personNameErrorMessage" class="error-message"></p>
+                </div>
+
+                <div class="person-name-container edit-field-container">
+                    <div class="input-label">
+                        <i id="phoneIcon"></i>
+                        <input type="text" id="phoneInput" placeholder="Telefone" th:field="*{phone}" required />
+                        <label for="nameInput"></label>
+                    </div>
+                    <p id="phoneErrorMessage" class="error-message"></p>
+                </div>
+
+                <div class="gender-container edit-field-container">
+                    <div class="input-label">
+                        <i id="genderIcon"></i>
+                        <select id="genderSelect" class="custom-select" th:field="*{gender}">
+                            <option value="Male">Masculino</option>
+                            <option value="Female">Feminino</option>
+                            <option value="Other">Outro</option>
+                        </select>
+                    </div>
+                    <p id="genderErrorMessage" class="error-message"></p>
+                </div>
+
+                <div class="person-name-container edit-field-container">
+                    <div class="input-label">
+                        <i id="emailIcon"></i>
+                        <input type="text" id="emailInput" placeholder="Email" th:field="*{email}" required
+                            sec:authorize="hasRole('ROLE_USER')" />
+                        <input type="text" class="readonly-field" placeholder="Email" th:field="*{email}" readonly
+                            sec:authorize="hasRole('ROLE_ADMIN')" />
+                        <label for="nameInput"></label>
+                    </div>
+                    <p id="emailErrorMessage" class="error-message"></p>
+                </div>
+
+                <div class="person-name-container edit-field-container">
+                    <div class="input-label">
+                        <i id="documentIcon"></i>
+                        <input type="text" id="documentInput" class="readonly-field" placeholder="CPF"
+                            th:field="*{document}" readonly />
+                        <label for="nameInput"></label>
+                    </div>
+                    <p id="personNameErrorMessage" class="error-message"></p>
+                </div>
+
+                <div class="person-name-container edit-field-container">
+                    <div class="input-label">
+                        <i id="birthIcon"></i>
+                        <input type="text" id="birthDateInput" class="readonly-field" placeholder="Data de nascimento"
+                            th:field="*{birthDate}" readonly />
+                        <label for="nameInput"></label>
+                    </div>
+                    <p id="personNameErrorMessage" class="error-message"></p>
+                </div>
+            </div>
+
+            <div class="details-action-buttons">
+                <div></div>
+                <button type="button" id="deleteUserAccount" class="cancel-btn">Excluir Conta</button>
+                <button type="submit" id="saveUserDetails" class="confirm-button">Salvar Alterações</button>
+                <div></div>
+            </div>
+        </form>
+    </custom-card>
+</body>
+
+</html>

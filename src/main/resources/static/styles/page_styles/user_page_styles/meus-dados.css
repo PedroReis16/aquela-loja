@@ -1,9 +1,11 @@
-
 .editable-items {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  min-height: 64vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+#userDetailsCard,
+#userAddressesCard {
+  flex: 1;
 }
 
 #contentTitle {
@@ -12,7 +14,6 @@
   margin: 0px 0px 16px 16px;
   font-weight: bold;
 }
-
 #contentTitle > i::before {
   content: "\e1bd";
   font-family: var(--material-icons);
@@ -22,66 +23,8 @@
   margin-right: 8px;
 }
 
-.user-details-edit-container {
-  padding: 16px;
-  background-color: var(--white);
-  border-radius: 8px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-  margin: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 90%;
-}
-
-.edit-details-title {
-  font-family: var(--default-font);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--black);
-  margin-bottom: 16px;
-}
-
-.edit-details-title > i::before {
-  font-family: var(--material-icons);
-  position: relative;
-  top: 4px;
-  color: var(--primary-color);
-  margin-right: 8px;
-}
-
-/* Campo de detalhes do usuário */
-#userDetailsForm {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.details-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-}
-#detailsEditTitle ::before {
-  content: "\ea67";
-}
-.edit-field-container {
-  margin: 4px 0;
-}
-
-.details-action-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-content: center;
-}
-
-
-
-
 /* Listagem endereço de usuário */
-#addressEditTitle ::before {
+/* #addressEditTitle ::before {
   content: "\e55f";
 }
 .address-list::-webkit-scrollbar {
@@ -115,7 +58,6 @@
   flex-direction: column;
 }
 
-/* Card de endereços */
 .address-card {
   border: 1px solid #ccc;
   padding: 16px;
@@ -136,11 +78,10 @@
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
-
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .editable-items {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 }
