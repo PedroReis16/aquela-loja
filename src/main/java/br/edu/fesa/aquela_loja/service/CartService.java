@@ -84,4 +84,12 @@ public class CartService {
         }
         return null; // Retorna null caso não encontre o cookie
     }
+
+    public void removeFromCart(String pId, HttpServletRequest request, HttpServletResponse response) {
+        List<String> cartItems = getCartItems(request);
+
+        cartItems.remove(pId);
+
+        saveCartItems(response, cartItems);
+    }
 }

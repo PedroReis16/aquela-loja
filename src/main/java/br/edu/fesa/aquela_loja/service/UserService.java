@@ -233,4 +233,8 @@ public class UserService {
         paymentCardRepository.save(card);
     }
 
+    public AppUserModel findUserByEmail(String email) {
+        return appUserRepository.findByEmail(email).orElseThrow();
+    }
+
 }

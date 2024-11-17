@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-BR" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
@@ -150,39 +150,24 @@
     <div class="step-content" id="cart-step">
       <h2>Seu Carrinho</h2>
       <div id="cart-items">
-        <div th:each="product : ${products}">
-          <div class="cart-item" data-id="${product.id}">
-            <img th:src="${product.imageBase64}">
-            <div>
-              <h3 th:text="${product.name}"></h3>
-              <p th:text="'R$ ' + ${product.price}"> </p>
-              <div class="quantity-controls">
-                <button onclick="updateQuantity(${product.id}, -1)">-</button>
-                <span>1</span>
-                <button onclick="updateQuantity(${product.id}, 1)">+</button>
-                <button onclick="removeItem(${product.id})">Remover</button>
-              </div>
-            </div>
-          </div>
+        <!-- Items serão inseridos via JavaScript -->
+      </div>
+
+      <div sec:authorize="isAuthenticated()">
+        <h2 >Endereço de Entrega</h2>
+        <div class="address-selection" id="cart-adds">
+
+        </div>
+
+        <div class="navigation-buttons">
+          <button class="btn" onclick="nextStep()">Próximo</button>
         </div>
       </div>
 
-      <div class="address-selection">
-        <h3>Endereço de Entrega</h3>
-        <div class="address-card selected">
-          <h4>Casa</h4>
-          <p>Rua Exemplo, 123</p>
-          <p>São Paulo - SP</p>
+      <div sec:authorize="!isAuthenticated()">
+        <div class="navigation-buttons">
+          <a href="/login"><button class="btn">Continuar</button></a>
         </div>
-        <div class="address-card">
-          <h4>Trabalho</h4>
-          <p>Av. Exemplo, 456</p>
-          <p>São Paulo - SP</p>
-        </div>
-      </div>
-
-      <div class="navigation-buttons">
-        <button class="btn" onclick="nextStep()">Próximo</button>
       </div>
     </div>
 
@@ -190,9 +175,8 @@
     <div class="step-content hidden" id="payment-step">
       <h2>Forma de Pagamento</h2>
       <div class="payment-methods">
-        <div class="payment-method" onclick="selectPayment(this)">
-          <h4>Cartão de Crédito</h4>
-          <p>**** **** **** 1234</p>
+        <div id="cart-payCards">
+
         </div>
         <div class="payment-method" onclick="selectPayment(this)">
           <h4>PIX</h4>
@@ -220,10 +204,12 @@
         </div>
         <div id="order-total"></div>
       </div>
+      <div id="confirmed-adds"></div>
+      <div id="confirmed-payment"></div>
 
       <div class="navigation-buttons">
         <button class="btn" onclick="previousStep()">Voltar</button>
-        <button class="btn" onclick="nextStep()">Confirmar Pedido</button>
+        <button class="btn" onclick="submitData()">Confirmar Pedido</button>
       </div>
     </div>
 
@@ -238,39 +224,124 @@
   </div>
 
   <script>
-    // Dados de exemplo
-    const cartItems = [
-      { id: 1, name: "Produto 1", price: 99.99, quantity: 1, image: "/api/placeholder/80/80" },
-      { id: 2, name: "Produto 2", price: 149.99, quantity: 1, image: "/api/placeholder/80/80" }
-    ];
-
+    let cartItems = [];
+    let cartAdds = [];
+    let cartPayCards = [];
     let currentStep = 1;
     const totalSteps = 4;
 
+    let selectedPayment = null;
+    let selectedAddress = null;
+    let confirmedCartItems = [];
+    const confirmedPayDiv = document.getElementById('confirmed-payment');
+    const confirmedAddsDiv = document.getElementById('confirmed-adds');
+
     // Inicialização
     window.onload = function () {
-      renderCart();
-      updateOrderSummary();
+      loadCartItems();
+      loadUserAdds();
+      loadUserPayCards();
+<!--      renderCart();-->
+<!--      updateOrderSummary();-->
     };
+
+    function loadCartItems() {
+      fetch('/cart-items')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao buscar os itens do carrinho');
+          }
+          return response.json();  // Converte a resposta para JSON
+        })
+        .then(data => {
+          cartItems = data;  // Preenche a variável cartItems com a resposta da API
+          renderCart();  // Renderiza os itens do carrinho
+          updateOrderSummary();  // Atualiza o resumo do pedido
+        })
+        .catch(error => {
+          console.error('Erro ao carregar os itens do carrinho:', error);
+        });
+    }
+
 
     // Renderiza os itens do carrinho
     function renderCart() {
-<!--      const cartContainer = document.getElementById('cart-items');-->
-<!--      cartContainer.innerHTML = cartItems.map(item => `-->
-<!--                <div class="cart-item" data-id="${item.id}">-->
-<!--                    <img src="${item.image}" alt="${item.name}">-->
-<!--                    <div>-->
-<!--                        <h3>${item.name}</h3>-->
-<!--                        <p>R$ ${item.price.toFixed(2)}</p>-->
-<!--                        <div class="quantity-controls">-->
-<!--                            <button onclick="updateQuantity(${item.id}, -1)">-</button>-->
-<!--                            <span>${item.quantity}</span>-->
-<!--                            <button onclick="updateQuantity(${item.id}, 1)">+</button>-->
-<!--                            <button onclick="removeItem(${item.id})">Remover</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            `).join('');-->
+      const cartContainer = document.getElementById('cart-items');
+      cartContainer.innerHTML = cartItems.map(item => `
+                <div class="cart-item" data-id="${item.id}">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h3>${item.name}</h3>
+                        <p>R$ ${item.price.toFixed(2)}</p>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button onclick="removeItem(${item.id})">Remover</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    function loadUserAdds() {
+      fetch('/cart-addresses')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao buscar os endereços');
+          }
+          return response.json();  // Converte a resposta para JSON
+        })
+        .then(data => {
+          cartAdds = data;  // Preenche a variável cartAdds com a resposta da API
+          renderAdds();
+        })
+        .catch(error => {
+          console.error('Erro ao carregar os endereços:', error);
+        });
+    }
+
+
+    // Renderiza os itens do carrinho
+    function renderAdds() {
+      const cartContainer = document.getElementById('cart-adds');
+      cartContainer.innerHTML = cartAdds.map(item => `
+                <div class="address-card" onclick="selectAdds(this)">
+                  <h4 class="title">${item.title}</h4>
+                  <p class="street">${item.street}, ${item.number}</p>
+                  <p class="location">${item.location}</p>
+                </div>
+            `).join('');
+    }
+
+    function loadUserPayCards() {
+      fetch('/cart-payCards')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao buscar os cartões');
+          }
+          return response.json();  // Converte a resposta para JSON
+        })
+        .then(data => {
+          cartPayCards = data;  // Preenche a variável cartPayCards com a resposta da API
+          renderPayCards();
+        })
+        .catch(error => {
+          console.error('Erro ao carregar os cartões:', error);
+        });
+    }
+
+
+    // Renderiza os itens do carrinho
+    function renderPayCards() {
+      const cartContainer = document.getElementById('cart-payCards');
+      cartContainer.innerHTML = cartPayCards.map(item => `
+                <div class="payment-method" onclick="selectPayment(this)">
+                  <h4>Cartão</h4>
+                  <p class="number">${item.number}</p>
+                  <p class="expiration-date">${item.expirationDate}</p>
+                </div>
+            `).join('');
     }
 
     // Atualiza o resumo do pedido
@@ -281,12 +352,14 @@
 
       orderItems.innerHTML = cartItems.map(item => `
                 <div class="cart-item">
-                    <img src="${item.imageBase64}" alt="${item.name}">
+                  <div class="confirmed-items">
+                    <img src="${item.image}" alt="${item.name}">
                     <div>
-                        <h3>${item.name}</h3>
-                        <p>Quantidade: 2</p>
+                        <h3 class="itemName">${item.name}</h3>
+                        <p class="quantity">Quantidade: ${item.quantity}</p>
                         <p>R$ ${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
+                  </div>
                 </div>
             `).join('');
 
@@ -310,6 +383,11 @@
         cartItems.splice(index, 1);
         renderCart();
         updateOrderSummary();
+
+        fetch('/remove/cart-items/' + itemId,
+        {
+          method: 'POST',
+        })
       }
     }
 
@@ -319,6 +397,17 @@
         el.classList.remove('selected');
       });
       element.classList.add('selected');
+
+      confirmedPayDiv.innerHTML = element.innerHTML;
+    }
+
+    function selectAdds(element) {
+      document.querySelectorAll('.address-card').forEach(el => {
+        el.classList.remove('selected');
+      });
+      element.classList.add('selected');
+
+      confirmedAddsDiv.innerHTML = element.innerHTML;
     }
 
     // Navegação entre etapas
@@ -364,6 +453,80 @@
       alert('Redirecionando para a Home...');
       // Aqui você pode adicionar o redirecionamento real
       // window.location.href = '/';
+    }
+
+    function getSelectedPayment() {
+      // Armazena os dados do pagamento selecionado
+      selectedPayment = {
+        number: confirmedPayDiv.querySelector('.number').textContent,
+        expirationDate: confirmedPayDiv.querySelector('.expiration-date').textContent
+      };
+
+      console.log("Pagamento selecionado:", selectedPayment);
+    }
+
+    function getSelectedAdds() {
+
+      // Armazena os dados do endereço selecionado
+      selectedAddress = {
+        title: confirmedAddsDiv.querySelector('.title').textContent,
+        street: confirmedAddsDiv.querySelector('.street').textContent,
+        location: confirmedAddsDiv.querySelector('.location').textContent
+      };
+
+      console.log("Endereço selecionado:", selectedAddress);
+    }
+
+    function getCartItems() {
+      confirmedCartItems = [];  // Resetar o array de itens do carrinho
+
+      // Captura todos os itens do carrinho
+      const cartItemsDivs = document.querySelectorAll('.confirmed-items');
+
+      cartItemsDivs.forEach(itemDiv => {
+        const itemName = itemDiv.querySelector('.itemName').textContent;
+        const itemQuantity = parseInt(itemDiv.querySelector('.quantity').textContent.replace('Quantidade: ', ''));
+
+        // Adiciona o item ao array de carrinho
+        confirmedCartItems.push({
+          name: itemName,
+          quantity: itemQuantity
+        });
+      });
+
+      console.log("Itens do carrinho:", confirmedCartItems);
+    }
+
+    function submitData() {
+      getCartItems();
+      getSelectedPayment();
+      getSelectedAdds();
+
+      // Verifica se todos os itens foram selecionados
+      if (!selectedPayment || !selectedAddress || confirmedCartItems.length === 0) {
+        alert("Por favor, selecione um pagamento, um endereço e adicione itens ao carrinho.");
+        return;
+      }
+
+      // Cria o objeto com os dados que serão enviados para a API
+      const data = {
+        payment: selectedPayment,
+        address: selectedAddress,
+        cartItems: confirmedCartItems  // Adiciona os itens do carrinho
+      };
+
+      // Envia os dados via API (supondo que a API esteja esperando um POST)
+      fetch('/orders/new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),  // Envia os dados como JSON
+      })
+      .catch(error => {
+        console.error("Erro ao enviar dados:", error);
+        alert("Ocorreu um erro ao enviar os dados.");
+      });
     }
   </script>
 </body>
