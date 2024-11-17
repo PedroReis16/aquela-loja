@@ -271,4 +271,8 @@ public class UserService {
         return phone.replaceAll("(\\d{2})(\\d{5})(\\d{4})", "($1) $2-$3");
     }
 
+    public AppUserModel findUserByEmail(String email) {
+        return appUserRepository.findByEmail(email).orElseThrow();
+    }
+
 }

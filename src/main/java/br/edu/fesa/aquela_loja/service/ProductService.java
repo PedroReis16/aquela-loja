@@ -3,6 +3,8 @@ package br.edu.fesa.aquela_loja.service;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,5 +69,9 @@ public class ProductService {
     public List<ProductModel> findByIdIn(List<String> pIds) {
         var ids = pIds.stream().map(Long::parseLong).collect(Collectors.toList());
         return productRepository.findAllById(ids);
+    }
+
+    public List<CartItemDto> getCartDto(List<String> cartItems) {
+        return findByIdIn(cartItems).stream().map(CartItemDto::fromProdutc).collect(Collectors.toList());
     }
 }
