@@ -20,11 +20,8 @@ let userFormData = {
 const saveUserDetailsBtn = document.getElementById('saveUserDetails');
 
 //Dialog de confirmação de exclusão de conta
-const accountDeleteDialog = document.getElementById('confirmDialog');
+const accountDeleteDialog = document.getElementById('deleteUserDialog');
 const deleteButton = document.getElementById('deleteUserAccount');
-const cancelButton = document.getElementById('cancelDelete');
-const confirmButton = document.getElementById('confirmDelete');
-const closeDialog = document.getElementById('closeDialog');
 
 //Dialog de adição ou edição do endereço
 const addressDialog = document.getElementById('addressDialog');
@@ -102,7 +99,7 @@ emailInput.addEventListener('blur', function (e) {
     if (!validateEmail(value)) {
         userFormData.email = "";
         emailErrorMessage.textContent = 'Email inválido';
-        
+
     }
     else {
         emailErrorMessage.textContent = '';
@@ -111,23 +108,12 @@ emailInput.addEventListener('blur', function (e) {
     canSaveUserDetails();
 });
 
-
-//Dialog de confirmação de exclusão de conta
+//Dialog para exclusão de conta
 deleteButton.addEventListener('click', function () {
     accountDeleteDialog.showModal();
 });
 
-closeDialog.addEventListener('click', function () {
-    accountDeleteDialog.close();
-});
 
-cancelButton.addEventListener('click', function () {
-    accountDeleteDialog.close();
-});
-
-confirmButton.addEventListener('click', function () {
-    window.location.href = '/user/delete';
-});
 
 //Dialog de adição ou edição do endereço
 newAddressButton.addEventListener('click', function () {
