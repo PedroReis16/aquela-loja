@@ -38,46 +38,42 @@
           <p>Editar dados</p>
         </a>
       </div>
-
     </custom-card>
 
+    <section id="widgetsSection">
+      <h2><i></i>Atalhos</h2>
 
-    <!-- <div class="normal-user-content">
-      <custom-card id="userOverviewCard">
-        <img th:src="@{/images/robo-avatar.png}" alt="" id="userProfilePic" />
-        <div class="user-details">
-          <div class="user-info">
-            <h3 id="userName">Bem vindo, <span th:text="${userName}"></span>
-            </h3>
-            <p id="userEmail"><i></i><span th:text="${userEmail}"></span></p>
-          </div>
-
-          <a id="editProfileBtn" href="/usuario/meus-dados">
-            <span></span>
-            <p>Editar dados</p>
-          </a>
-        </div>
-      </custom-card>
-
-      <section class="widgets-container">
-        <h2 id="pageWidgetTitle"><i></i>Atalhos</h2>
-
-        <div class="widget-cards-container">
-          <a href="/usuario/meus-dados">
-            <div class="user-card widget-card" id="editProfileCard">
+      <div class="page-widgets">
+        <a href="/usuario/meus-dados">
+          <custom-card id="userEditCard" class="widget-card">
+            <div class="card-content">
               <i></i>
               <div class="widget-card-content">
                 <p class="card-title">Meus Dados</p>
                 <p class="card-description">
-                  Atualize suas informações pessoais,<br />
-                  edite ou cadastre um endereço
+                  Atualize suas informações pessoais e<br />
+                  gerencie seus endereços
                 </p>
               </div>
             </div>
-          </a>
+          </custom-card>
+        </a>
+        <a href="/usuario/meus-cartoes">
 
-          <a href="/usuario/meus-pedidos">
-            <div class="user-card widget-card" id="ordersCard">
+          <custom-card id="walletCard" class="widget-card">
+            <div class="card-content">
+              <i></i>
+              <div class="widget-card-content">
+                <p class="card-title">Carteira</p>
+                <p class="card-description">Gerencie seus cartões</p>
+              </div>
+            </div>
+          </custom-card>
+        </a>
+
+        <a href="/usuario/meus-pedidos">
+          <custom-card id="ordersCard" class="widget-card">
+            <div class="card-content">
               <i></i>
               <div class="widget-card-content">
                 <p class="card-title">Meus Pedidos</p>
@@ -86,46 +82,36 @@
                 </p>
               </div>
             </div>
-          </a>
+          </custom-card>
+        </a>
 
-          <a href="/usuario/meus-cartoes">
-            <div class="user-card widget-card" id="walletCard">
+
+        <a href="/product/list-all">
+          <custom-card id="storageCard" class="widget-card" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div id="storageCardContent">
               <i></i>
               <div class="widget-card-content">
-                <p class="card-title">Carteira</p>
-                <p class="card-description">Gerencie seus cartões</p>
+                <p class="card-title">Estoque</p>
+                <p class="card-description">Gerencie o estoque</p>
               </div>
             </div>
-          </a>
-
-          <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a href="/product/list-all">
-              <div class="user-card widget-card" id="productList">
-                <i></i>
-                <div class="widget-card-content">
-                  <p class="card-title">Estoque</p>
-                  <p class="card-description">Gerencie o estoque</p>
-                </div>
+          </custom-card>
+        </a>
+        <a href="#">
+          <custom-card id="dataCard" class="widget-card" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="resultCardContent">
+              <i></i>
+              <div class="widget-card-content">
+                <p class="card-title">Resultados</p>
+                <p class="card-description">Observe como anda suas vendas</p>
               </div>
-            </a>
-          </div>
+            </div>
+          </custom-card>
+        </a>
 
-          <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a href="/product/list-all">
-              <div class="user-card widget-card" id="productList">
-                <i></i>
-                <div class="widget-card-content">
-                  <p class="card-title">Resultados</p>
-                  <p class="card-description">Observe como anda suas vendas</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-        </div>
-      </section>
-    </div> -->
-  </main>
+      </div>
+    </section>
+</main>
 
   </div>
 </body>
