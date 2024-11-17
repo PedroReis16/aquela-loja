@@ -2,7 +2,7 @@ package br.edu.fesa.aquela_loja.service;
 
 import java.io.IOException;
 import java.util.List;
-
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,5 +58,14 @@ public class ProductService {
 
     public void fillImage(ProductModel product) {
         imageService.fillImage(product);
+    }
+
+    public void deleteById(Long pId) {
+        productRepository.deleteById(pId);
+    }
+
+    public List<ProductModel> findByIdIn(List<String> pIds) {
+        var ids = pIds.stream().map(Long::parseLong).collect(Collectors.toList());
+        return productRepository.findAllById(ids);
     }
 }

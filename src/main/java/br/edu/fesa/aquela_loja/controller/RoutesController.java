@@ -1,19 +1,38 @@
 package br.edu.fesa.aquela_loja.controller;
 
+import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.entity.ProductModel;
+import br.edu.fesa.aquela_loja.service.CartService;
+import br.edu.fesa.aquela_loja.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import java.util.List;
 
 @Controller
 public class RoutesController {
 
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private CartService cartService;
+
     @GetMapping({"/", "/inicio", "/home"})
-    public String loadPage(Model model, @PathVariable(required = false) String page) {
+    public String loadPage(ModelMap model, @PathVariable(required = false) String page) {
+        List<ProductModel> products = productService.findAll();
+        model.addAttribute("products", products);
+
         return "pages/index";
     }
 
@@ -41,8 +60,25 @@ public class RoutesController {
     }
 
     @GetMapping("/carrinho")
-    public String getMethodName() {
+    public String getMethodName(HttpServletRequest request, ModelMap model) {
+        List<String> pIds = cartService.getCartItems(request);
+
+        List<ProductModel> products = productService.findByIdIn(pIds);
+        model.addAttribute("products", products);
+
         return "pages/carrinho";
+    }
+
+    @PostMapping("/add-Cart/{id}")
+    public ResponseEntity<Void> addToCart(
+            @CookieValue(value = "CartItems", defaultValue = "") String cartCookie,
+            @PathVariable("id") Long pId,
+            HttpServletRequest request,
+            HttpServletResponse response) {
+
+        cartService.addToCart(request, response, pId.toString());
+
+        return ResponseEntity.ok().build();
     }
 
     // @GetMapping({"/usuario/{page}"})
