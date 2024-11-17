@@ -4,6 +4,7 @@ import br.edu.fesa.aquela_loja.models.dto.ProductRegDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -89,5 +90,11 @@ public class ProductController {
         redirectAttributes.addAttribute("showUptNotification", true);
 
         return "redirect:/product/list-all";
+    }
+
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long pId) {
+        productService.deleteById(pId);
+        return ResponseEntity.ok().build();
     }
 }

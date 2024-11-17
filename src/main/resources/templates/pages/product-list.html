@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Lista de Padrões</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/styles/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
     <style>
         .container {
             margin-top: 40px;
@@ -93,18 +95,22 @@
             }, 5000);
         }
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 
+<header th:replace="~{fragments/header :: header}"></header>
+
 <div th:if="${showRegNotification}">
     <script type="text/javascript">
-        mostrarNotificacao(); // Chama a função para mostrar a notificação
+        mostrarNotificacao();
     </script>
 </div>
 
 <div th:if="${showUptNotification}">
     <script type="text/javascript">
-        mostrarNotificacaoUpdate(); // Chama a função para mostrar a notificação
+        mostrarNotificacaoUpdate();
     </script>
 </div>
 
@@ -112,7 +118,7 @@
     <h1>Lista de Produtos</h1>
     <div class="d-flex justify-content-between mb-3">
         <a href="/product/form" class="btn btn-primary">Inserir</a>
-        <a href="#" th:href="@{/}" class="btn btn-info">Principal</a>
+        <input type="text" id="searchInput" class="form-control w-2" placeholder="Pesquisar produto...">
     </div>
     <table class="table table-bordered">
         <thead class="thead-light">
@@ -140,7 +146,7 @@
                 <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Editar</a>
             </td>
             <td>
-                <a th:href="@{/hotelaria-fesa/product/remover/{id}(id=${product.id})}" class="btn btn-danger btn-sm">Remover</a>
+                <a class="btn btn-danger btn-sm" th:onclick="|confirmDelete(${product.id})|">Remover</a>
             </td>
         </tr>
         </tbody>
@@ -148,8 +154,71 @@
 </div>
 
 <!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<div th:replace="~{fragments/header :: headerScript}"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function confirmDelete(productId) {
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: 'Esta ação não pode ser desfeita!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, remover!',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteProduct(productId);
+            }
+        });
+    }
+
+    function deleteProduct(productId) {
+        // Envia uma requisição POST para a API do Spring Boot para excluir o produto
+        $.ajax({
+            url: '/product/delete/' + productId,
+            type: 'POST',
+            success: function(response) {
+                Swal.fire(
+                    'Deletado!',
+                    'O produto foi removido com sucesso.',
+                    'success'
+                ).then(() => {
+                    location.reload();
+                });
+            },
+            error: function(error) {
+                Swal.fire(
+                    'Erro!',
+                    'Ocorreu um erro ao tentar remover o produto.',
+                    'error'
+                );
+            }
+        });
+    }
+
+    $(document).ready(function () {
+    $('#searchInput').on('input', function () {
+        var searchValue = $(this).val().toLowerCase();
+        filterProducts(searchValue);
+    });
+
+    function filterProducts(searchValue) {
+        $('table tbody tr').each(function () {
+            var productName = $(this).find('td:nth-child(3)').text().toLowerCase();
+            if (productName.indexOf(searchValue) !== -1) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

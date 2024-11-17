@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
@@ -141,23 +141,34 @@
 </head>
 
 <body>
-  <header th:replace="~{fragments/header :: header}"></header>
+  <div class="container">
+    <div class="steps">
+      <div class="step active" id="step1">1. Carrinho</div>
+      <div class="step" id="step2">2. Pagamento</div>
+      <div class="step" id="step3">3. Confirmação</div>
+      <div class="step" id="step4">4. Finalização</div>
+    </div>
 
-  <main>
-    <div class="container">
-      <div class="steps">
-        <div class="step active" id="step1">1. Carrinho</div>
-        <div class="step" id="step2">2. Pagamento</div>
-        <div class="step" id="step3">3. Confirmação</div>
-        <div class="step" id="step4">4. Finalização</div>
-      </div>
-
-      <!-- Etapa 1: Carrinho -->
-      <div class="step-content" id="cart-step">
-        <h2>Seu Carrinho</h2>
-        <div id="cart-items">
-          <!-- Items serão inseridos via JavaScript -->
+    <!-- Etapa 1: Carrinho -->
+    <div class="step-content" id="cart-step">
+      <h2>Seu Carrinho</h2>
+      <div id="cart-items">
+        <div th:each="product : ${products}">
+          <div class="cart-item" data-id="${product.id}">
+            <img th:src="${product.imageBase64}">
+            <div>
+              <h3 th:text="${product.name}"></h3>
+              <p th:text="'R$ ' + ${product.price}"> </p>
+              <div class="quantity-controls">
+                <button onclick="updateQuantity(${product.id}, -1)">-</button>
+                <span>1</span>
+                <button onclick="updateQuantity(${product.id}, 1)">+</button>
+                <button onclick="removeItem(${product.id})">Remover</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
         <div class="address-selection">
           <h3>Endereço de Entrega</h3>
@@ -249,22 +260,22 @@
 
     // Renderiza os itens do carrinho
     function renderCart() {
-      const cartContainer = document.getElementById('cart-items');
-      cartContainer.innerHTML = cartItems.map(item => `
-                <div class="cart-item" data-id="${item.id}">
-                    <img src="${item.image}" alt="${item.name}">
-                    <div>
-                        <h3>${item.name}</h3>
-                        <p>R$ ${item.price.toFixed(2)}</p>
-                        <div class="quantity-controls">
-                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
-                            <button onclick="removeItem(${item.id})">Remover</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+<!--      const cartContainer = document.getElementById('cart-items');-->
+<!--      cartContainer.innerHTML = cartItems.map(item => `-->
+<!--                <div class="cart-item" data-id="${item.id}">-->
+<!--                    <img src="${item.image}" alt="${item.name}">-->
+<!--                    <div>-->
+<!--                        <h3>${item.name}</h3>-->
+<!--                        <p>R$ ${item.price.toFixed(2)}</p>-->
+<!--                        <div class="quantity-controls">-->
+<!--                            <button onclick="updateQuantity(${item.id}, -1)">-</button>-->
+<!--                            <span>${item.quantity}</span>-->
+<!--                            <button onclick="updateQuantity(${item.id}, 1)">+</button>-->
+<!--                            <button onclick="removeItem(${item.id})">Remover</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            `).join('');-->
     }
 
     // Atualiza o resumo do pedido
@@ -275,10 +286,10 @@
 
       orderItems.innerHTML = cartItems.map(item => `
                 <div class="cart-item">
-                    <img src="${item.image}" alt="${item.name}">
+                    <img src="${item.imageBase64}" alt="${item.name}">
                     <div>
                         <h3>${item.name}</h3>
-                        <p>Quantidade: ${item.quantity}</p>
+                        <p>Quantidade: 2</p>
                         <p>R$ ${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                 </div>
