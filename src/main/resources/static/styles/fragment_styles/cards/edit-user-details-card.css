@@ -18,10 +18,10 @@
   top: 2px;
 }
 
-.details-container {    
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+.details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .details-action-buttons {

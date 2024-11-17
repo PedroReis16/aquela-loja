@@ -9,12 +9,12 @@
 
 <body>
     <custom-card th:fragment="card(userAddress)">
-        <h3 class="edit-details-title" id="addressEdit Title"><i></i>Meus Endereços</h3>
+        <h3 id="userAddressListTitle"><i></i>Meus Endereços</h3>
 
         <div class="address-list">
-            <th:block th:each="address : ${userAddress}">
+            <th:block th:each="address, iterStat : ${userAddress}">
                 <div class="address-card" th:data-address="${address}">
-                    <div class="card-content">
+                    <div class="address-card-content">
                         <h3 id="address-identification" th:text="${address.addressIdentification}"></h3>
                         <p id="street" th:text="${address.street}"></p>
                         <p id="number-string" th:text="${address.numberString}"></p>
@@ -22,13 +22,15 @@
                         <p id="reference" th:text="${address.reference}"></p>
                     </div>
                     <div class="card-actions">
+                        <p th:if="${address.default}">Padrão</p>
                         <button type="button" class="edit-address-btn">Editar</button>
                     </div>
                 </div>
+                <hr th:unless="${iterStat.last}" />
             </th:block>
         </div>
 
-        <button type="button" id="newAddressBtn">Cadastrar novo endereço</button>
+        <button type="button" class="confirm-button" id="newAddressBtn">Cadastrar novo endereço</button>
 
         <script type="module" th:src="@{/js/fragments_scripts/cards/user-address-list-card.js}"></script>
     </custom-card>

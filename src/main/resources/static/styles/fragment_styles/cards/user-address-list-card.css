@@ -1,0 +1,82 @@
+#userAddressListTitle {
+  font-family: var(--default-font);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+#userAddressListTitle ::before {
+  content: "\e55f";
+  margin: 0px 8px 0px 0px;
+  font-family: var(--material-icons);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  position: relative;
+  top: 2px;
+}
+
+
+.address-card {
+  display: grid;
+  grid-template-columns: 90% auto;
+}
+.address-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  justify-self: start;
+  text-align: left;
+}
+
+.address-card-content h3 {
+  font-family: var(--default-font);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--black);
+}
+.address-card-content p {
+  font-family: var(--default-font);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+  padding-left: 4px;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-self: flex-start;
+}
+
+.card-actions p {
+  font-family: var(--default-font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.card-actions button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--default-font);
+  color: var(--dark-gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  justify-self: end;
+  margin-top: auto;
+}
+.card-actions button:hover {
+  text-decoration: underline;
+}
+
+#newAddressBtn {
+  width: 100%;
+  margin: 16px 0px 0px 0px;
+}

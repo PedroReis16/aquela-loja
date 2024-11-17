@@ -23,62 +23,6 @@
   margin-right: 8px;
 }
 
-/* Listagem endereço de usuário */
-/* #addressEditTitle ::before {
-  content: "\e55f";
-}
-.address-list::-webkit-scrollbar {
-  display: none;
-}
-
-.address-list {
-  max-height: 480px;
-  overflow-y: auto;
-  padding: 8px;
-}
-
-.address-card {
-  display: grid;
-  grid-template-columns: 1fr 32px;
-  padding: 16px;
-  margin-bottom: 4px;
-}
-
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  height: 100%;
-}
-
-.address-list {
-  height: 100%;
-  display: flex;
-  align-content: flex-start;
-  flex-direction: column;
-}
-
-.address-card {
-  border: 1px solid #ccc;
-  padding: 16px;
-  margin: 8px 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.card-content {
-  margin-bottom: 16px;
-}
-.card-actions {
-  text-align: right;
-}
-.edit-address-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-} */
 
 @media (max-width: 900px) {
   .editable-items {
