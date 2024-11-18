@@ -2,6 +2,7 @@ package br.edu.fesa.aquela_loja.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -137,7 +138,11 @@ public class UserService {
 
         for (AddressModel address : userAddresses) {
             UserAddressDto userAddress = new UserAddressDto(address);
-            result.add(userAddress);
+            if (address.getIsDefault()) {
+                result.add(0, userAddress); // Adiciona o endereço padrão no início da lista
+            } else {
+                result.add(userAddress);
+            }
         }
 
         return result;
@@ -273,6 +278,24 @@ public class UserService {
 
     public AppUserModel findUserByEmail(String email) {
         return appUserRepository.findByEmail(email).orElseThrow();
+    }
+
+    public void setDefaultAddress(Long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+
+        List<AddressModel> userAddresses = addressRepository.findByAppUser(appUser).get();
+
+        for (AddressModel address : userAddresses) {
+            if (Objects.equals(address.getId(), id)) {
+                address.setIsDefault(true);
+            } else {
+                address.setIsDefault(false);
+            }
+        }
+
+        addressRepository.saveAll(userAddresses);
     }
 
 }

@@ -93,6 +93,14 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/user/update-address/{id}")
+    public ResponseEntity<Void> setDefaultAddress(@PathVariable Long id) {
+
+        userService.setDefaultAddress(id);
+
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/user/delete-address/{id}")
     public ResponseEntity<Void> deleteUserAddress(@PathVariable Long id) {
         userService.deleteUserAddress(id);
@@ -165,4 +173,5 @@ public class UserController {
 
         return ResponseEntity.noContent().build();
     }
+
 }

@@ -11,5 +11,8 @@ window.addEventListener('click', function (event) {
     if (event.target === addressDialog) {
         addressDialog.querySelectorAll('input').forEach(input => { input.value = ""; });
         addressDialog.close();
+
+        //TODO: Suavizar o close dessa dialog, recarregando apenas a lista de endereços
+        window.location.reload();
     }
 });
