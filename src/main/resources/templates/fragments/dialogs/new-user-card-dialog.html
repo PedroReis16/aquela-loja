@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dialog-container" th:fragment="dialog">
+        <dialog id="newUserCardDialog">
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <div class="card-logo" id="cardBrand">
+                            💳
+                        </div>
+                        <div class="card-chip"></div>
+                        <div class="card-number" id="cardNumber">•••• •••• •••• ••••</div>
+                        <div class="card-holder" id="cardName">NOME DO TITULAR</div>
+                        <div class="card-expiry" id="cardExpiry">MM/AA</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-strip"></div>
+                        <div class="card-cvv" id="cardCvv">•••</div>
+                    </div>
+                </div>
+            </div>
+            <form class="newUserCardForm">
+                <div class="form-group">
+                    <label for="number">Número do Cartão</label>
+                    <input type="text" id="number" maxlength="19" placeholder="1234 5678 9012 3456">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Nome do Titular</label>
+                    <input type="text" id="name" placeholder="Nome como está no cartão">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry">Validade</label>
+                        <input type="text" id="expiry" maxlength="5" placeholder="MM/AA">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" maxlength="3" placeholder="123">
+                    </div>
+                </div>
+
+                <button type="submit">Cadastrar Cartão</button>
+            </form>
+        </dialog>
+        <script th:src="@{/js/fragments_scripts/dialogs/new-user-card-dialog.js}"></script>
+    </div>
+</body>
+
+</html>

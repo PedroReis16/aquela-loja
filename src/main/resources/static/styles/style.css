@@ -13,7 +13,6 @@
 @import url("./page_styles/user_page_styles/usuario.css");
 @import url("./page_styles/user_page_styles/meus-dados.css");
 @import url("./page_styles/user_page_styles/meus-cartoes.css");
-@import url("./page_styles/user_page_styles/novo-cartao.css");
 @import url("./page_styles/user_page_styles/meus-pedidos.css");
 
 /* Widgets */
@@ -29,6 +28,8 @@
 @import url("./fragment_styles/cards/edit-user-details-card.css");
 @import url("./fragment_styles/cards/user-address-list-card.css");
 @import url("./fragment_styles/dialogs/edit-card-dialog.css");
+@import url("./fragment_styles/dialogs/new-user-card-dialog.css");
+@import url("./fragment_styles/cards/new-user-card.css");
 
 :root {
   --default-font: "Poppins", sans-serif;

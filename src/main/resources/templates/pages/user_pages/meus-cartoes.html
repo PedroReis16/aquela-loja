@@ -19,7 +19,7 @@
   <main>
     <div class="card-header">
       <h2 id="cardPageTitle"><i></i> Meus cartões</h2>
-      <a class="confirm-button" href="meus-cartoes/novo">Adicionar cartão</a>
+      <button type="button" id="newUserCardBtn" class="confirm-button">Adicionar cartão</button>
     </div>
 
     <div class="cards-grid">
@@ -37,7 +37,8 @@
     <!-- Dialog para confirmar a exclusão da conta -->
     <div th:insert="~{/fragments/dialogs/edit-card-dialog::dialog}"></div>
 
-
+    <!-- Dialog para cadastro de cartão de crédito -->
+    <div th:insert="~{/fragments/dialogs/new-user-card-dialog::dialog}"></div>
   </main>
 
   <script th:src="@{/js/page_scripts/meus-cartoes.js}"></script>

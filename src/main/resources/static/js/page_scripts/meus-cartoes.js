@@ -5,6 +5,8 @@ const editCardDialog = document.getElementById('editCardDialog');
 const editCardForm = document.getElementById('editCardForm');
 const closeDialogBtn = document.querySelectorAll('.close-dialog-btn');
 
+const newUserCardBtn = document.getElementById('newUserCardBtn');
+const newUserCardDialog = document.getElementById('newUserCardDialog');
 
 userCard.forEach(card => {
 
@@ -82,12 +84,9 @@ function openEditCardDialog(result) {
     editCardDialog.showModal();
 }
 
-deleteCardBtn.addEventListener('click', () => {
-
-});
-
-editCardForm.addEventListener('submit', async (event) => {
-
+newUserCardBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    newUserCardDialog.showModal();
 });
 
 closeDialogBtn.forEach(btn => {
@@ -101,6 +100,9 @@ closeDialogBtn.forEach(btn => {
 window.addEventListener('click', function (event) {
     if (event.target === editCardDialog) {
         closeDialog();
+    }
+    if (event.target == newUserCardDialog) {
+        newUserCardDialog.close();
     }
 });
 
