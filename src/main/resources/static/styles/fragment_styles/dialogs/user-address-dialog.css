@@ -55,11 +55,11 @@
 }
 
 #deleteAddressBtn {
-  color: red;
+  color: var(--black);
   display: none;
 }
 
-#defaultAddressBtn{
+#defaultAddressBtn {
   color: var(--gray);
   display: none;
 }

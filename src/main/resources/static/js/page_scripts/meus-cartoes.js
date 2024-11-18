@@ -9,7 +9,8 @@ const closeDialogBtn = document.querySelectorAll('.close-dialog-btn');
 userCard.forEach(card => {
 
     //Mapeando o evento de clique em cada cartão 
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (event) => {
+        event.preventDefault();
         const cardDetails = card.getAttribute('data-card');
 
         const regex = /(\w+)=([^,]*)/g;
@@ -35,8 +36,8 @@ userCard.forEach(card => {
 });
 
 function openEditCardDialog(result) {
-    editCardDialog.querySelector('input[id="holderName"]').value = result.holderName;
-    editCardDialog.querySelector('input[id="expirationDate"]').value = result.expirationDate;
+    editCardDialog.querySelector('#holderName').value = result.holderName;
+    editCardDialog.querySelector('#expirationDate').value = result.expirationDate;
 
     const deleteCardBtn = editCardDialog.querySelector('#deleteCardBtn');
 
@@ -71,9 +72,9 @@ function openEditCardDialog(result) {
             body: JSON.stringify(data)
         }).then(response => {
             if (response.ok) {
-                card.querySelector('.card-holder').textContent = data.holderName;
-                card.querySelector('.card-expiration').textContent = data.expirationDate;
-                closeDialog();
+                // card.querySelector('.card-holder').textContent = data.holderName;
+                // card.querySelector('.card-expiration').textContent = data.expirationDate;
+                // closeDialog();
             }
         });
     });
@@ -89,8 +90,12 @@ editCardForm.addEventListener('submit', async (event) => {
 
 });
 
-closeDialogBtn.forEach(() => {
-    closeDialog();
+closeDialogBtn.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        editCardDialog.close();
+        // Adicione qualquer outra lógica necessária para fechar a dialog
+    });
 });
 
 window.addEventListener('click', function (event) {
@@ -100,6 +105,6 @@ window.addEventListener('click', function (event) {
 });
 
 function closeDialog() {
-    editCardDialog.querySelectorAll('input').forEach(input => { input.value = ""; });
+    // editCardDialog.querySelectorAll('input').forEach(input => { input.value = ""; });
     editCardDialog.close();
 }

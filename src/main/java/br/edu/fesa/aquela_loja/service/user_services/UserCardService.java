@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import br.edu.fesa.aquela_loja.models.dto.card.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.card.UpdateUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.card.UserCardDto;
-import br.edu.fesa.aquela_loja.models.entity.UserModel;
 import br.edu.fesa.aquela_loja.models.entity.UserCardModel;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
 import br.edu.fesa.aquela_loja.repository.IUserCardRepository;
 
 @Service
@@ -66,7 +66,7 @@ public class UserCardService {
         UserCardModel card = repository.findById(id).get();
 
         card.setHolderName(updatedCard.getHolderName());
-        card.setNumber(updatedCard.getExpirationDate());
+        card.setExpirationDate(updatedCard.getExpirationDate());
 
         repository.save(card);
     }

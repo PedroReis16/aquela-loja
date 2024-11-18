@@ -28,6 +28,7 @@
 @import url("./fragment_styles/dialogs/user-address-dialog.css");
 @import url("./fragment_styles/cards/edit-user-details-card.css");
 @import url("./fragment_styles/cards/user-address-list-card.css");
+@import url("./fragment_styles/dialogs/edit-card-dialog.css");
 
 :root {
   --default-font: "Poppins", sans-serif;
@@ -160,7 +161,7 @@ a {
 }
 
 .error-message {
-  color: red;
+  color: var(--error);
   margin: 4px 8px;
   font-size: 14px;
   font-family: var(--secondary-font);
@@ -182,4 +183,3 @@ a {
 .readonly-field {
   color: var(--dark-gray);
 }
-
