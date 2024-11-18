@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
-import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.address.NewUserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.address.UserAddressDto;
 import br.edu.fesa.aquela_loja.service.user_services.UserAddressService;
 
 @Controller

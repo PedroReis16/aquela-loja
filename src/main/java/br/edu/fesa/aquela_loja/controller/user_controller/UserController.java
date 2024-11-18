@@ -5,16 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
-import br.edu.fesa.aquela_loja.models.dto.UpdateUserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.service.user_services.UserService;
 import jakarta.servlet.http.HttpServletRequest;

@@ -8,12 +8,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
-import br.edu.fesa.aquela_loja.models.dto.UpdateUserCardDto;
-import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
-import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
-import br.edu.fesa.aquela_loja.models.entity.PaymentCardModel;
-import br.edu.fesa.aquela_loja.repository.IPaymentCardRepository;
+import br.edu.fesa.aquela_loja.models.dto.card.NewUserCardDto;
+import br.edu.fesa.aquela_loja.models.dto.card.UpdateUserCardDto;
+import br.edu.fesa.aquela_loja.models.dto.card.UserCardDto;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
+import br.edu.fesa.aquela_loja.models.entity.UserCardModel;
+import br.edu.fesa.aquela_loja.repository.IUserCardRepository;
 
 @Service
 public class UserCardService {
@@ -22,18 +22,18 @@ public class UserCardService {
     private UserService userService;
 
     @Autowired
-    private IPaymentCardRepository repository;
+    private IUserCardRepository repository;
 
     public List<UserCardDto> getUserCard() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserModel appUser = userService.findUserByEmail(auth.getName());
+        UserModel appUser = userService.findUserByEmail(auth.getName());
 
-        List<PaymentCardModel> userCards = repository.findByAppUser(appUser).get();
+        List<UserCardModel> userCards = repository.findByAppUser(appUser).get();
 
         List<UserCardDto> result = new ArrayList<>();
 
-        for (PaymentCardModel card : userCards) {
+        for (UserCardModel card : userCards) {
             UserCardDto userCard = new UserCardDto(card);
             result.add(userCard);
         }
@@ -44,9 +44,9 @@ public class UserCardService {
     public void addNewCard(NewUserCardDto newCard) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserModel appUser = userService.findUserByEmail(auth.getName());
+        UserModel appUser = userService.findUserByEmail(auth.getName());
 
-        PaymentCardModel card = PaymentCardModel.builder()
+        UserCardModel card = UserCardModel.builder()
                 .holderName(newCard.getHolderName())
                 .number(newCard.getNumber())
                 .expirationDate(newCard.getExpirationDate())
@@ -62,7 +62,7 @@ public class UserCardService {
     }
 
     public void updateUserCard(Long id, UpdateUserCardDto updatedCard) {
-        PaymentCardModel card = repository.findById(id).get();
+        UserCardModel card = repository.findById(id).get();
 
         card.setHolderName(updatedCard.getHolderName());
         card.setNumber(updatedCard.getExpirationDate());

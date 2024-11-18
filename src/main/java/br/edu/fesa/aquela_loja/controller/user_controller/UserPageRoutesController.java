@@ -8,11 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
-import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
-import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
-import br.edu.fesa.aquela_loja.models.dto.UserCardDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
+import br.edu.fesa.aquela_loja.models.dto.address.NewUserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.address.UserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.card.NewUserCardDto;
+import br.edu.fesa.aquela_loja.models.dto.card.UserCardDto;
 import br.edu.fesa.aquela_loja.service.user_services.UserAddressService;
 import br.edu.fesa.aquela_loja.service.user_services.UserCardService;
 import br.edu.fesa.aquela_loja.service.user_services.UserService;

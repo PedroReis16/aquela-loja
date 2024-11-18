@@ -2,6 +2,8 @@ package br.edu.fesa.aquela_loja.models.dto;
 
 import br.edu.fesa.aquela_loja.models.enums.Role;
 import static br.edu.fesa.aquela_loja.models.enums.Role.USER;
+
+import br.edu.fesa.aquela_loja.models.dto.address.NewUserAddressDto;
 import lombok.Data;
 
 @Data

@@ -9,30 +9,30 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserAddressDto;
-import br.edu.fesa.aquela_loja.models.dto.UserAddressDto;
-import br.edu.fesa.aquela_loja.models.entity.AddressModel;
-import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
-import br.edu.fesa.aquela_loja.repository.IAddressRepository;
-import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import br.edu.fesa.aquela_loja.models.dto.address.NewUserAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.address.UserAddressDto;
+import br.edu.fesa.aquela_loja.models.entity.UserAddressModel;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
+import br.edu.fesa.aquela_loja.repository.IUserAddressRepository;
+import br.edu.fesa.aquela_loja.repository.IUserRepository;
 
 @Service
 public class UserAddressService {
 
     @Autowired
-    private IAppUserRepository appUserRepository;
+    private IUserRepository appUserRepository;
     @Autowired
-    private IAddressRepository repository;
+    private IUserAddressRepository repository;
 
     public List<UserAddressDto> getUserAddress() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+        UserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
 
-        List<AddressModel> userAddresses = repository.findByAppUser(appUser).get();
+        List<UserAddressModel> userAddresses = repository.findByAppUser(appUser).get();
         List<UserAddressDto> result = new ArrayList<>();
 
-        for (AddressModel address : userAddresses) {
+        for (UserAddressModel address : userAddresses) {
             UserAddressDto userAddress = new UserAddressDto(address);
             if (address.getIsDefault()) {
                 result.add(0, userAddress); // Adiciona o endereço padrão no início da lista
@@ -44,8 +44,8 @@ public class UserAddressService {
         return result;
     }
 
-    public void newAddressFromEntity(NewUserAddressDto newUserAddress, AppUserModel appUser) {
-        AddressModel addressModel = AddressModel.builder()
+    public void newAddressFromEntity(NewUserAddressDto newUserAddress, UserModel appUser) {
+        UserAddressModel addressModel = UserAddressModel.builder()
                 .cep(newUserAddress.getCep())
                 .addressIdentification(newUserAddress.getAddressIdentification())
                 .street(newUserAddress.getStreet())
@@ -65,9 +65,9 @@ public class UserAddressService {
     public void addNewAddress(NewUserAddressDto newUserAddress) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+        UserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
 
-        AddressModel addressModel = AddressModel.builder()
+        UserAddressModel addressModel = UserAddressModel.builder()
                 .cep(newUserAddress.getCep())
                 .addressIdentification(newUserAddress.getAddressIdentification())
                 .street(newUserAddress.getStreet())
@@ -85,7 +85,7 @@ public class UserAddressService {
     }
 
     public void updateUserAddress(UserAddressDto userAddressDto) {
-        AddressModel addressModel = repository.findById(userAddressDto.getId()).get();
+        UserAddressModel addressModel = repository.findById(userAddressDto.getId()).get();
 
         addressModel.setCep(userAddressDto.getCep());
         addressModel.setAddressIdentification(userAddressDto.getAddressIdentification());
@@ -109,11 +109,11 @@ public class UserAddressService {
     public void setDefaultAddress(Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+        UserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
 
-        List<AddressModel> userAddresses = repository.findByAppUser(appUser).get();
+        List<UserAddressModel> userAddresses = repository.findByAppUser(appUser).get();
 
-        for (AddressModel address : userAddresses) {
+        for (UserAddressModel address : userAddresses) {
             if (Objects.equals(address.getId(), id)) {
                 address.setIsDefault(true);
             } else {

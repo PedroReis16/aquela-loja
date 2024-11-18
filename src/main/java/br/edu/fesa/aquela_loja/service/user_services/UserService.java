@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
-import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
-import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
+import br.edu.fesa.aquela_loja.repository.IUserRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 public class UserService {
 
     @Autowired
-    private final IAppUserRepository appUserRepository;
+    private final IUserRepository appUserRepository;
 
     @Autowired
     private final UserAddressService userAddressService;
@@ -31,7 +31,7 @@ public class UserService {
 
 
     public void createNewUser(NewUserDto newUser) {
-        AppUserModel appUser = AppUserModel.builder()
+        UserModel appUser = UserModel.builder()
                 .username(newUser.getUsername())
                 .document(newUser.getDocument())
                 .gender(newUser.getGender())
@@ -64,7 +64,7 @@ public class UserService {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+        UserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
         // AppUserModel appUser = appUserRepository.findByDocument(auth.getCredentials().)
 
         UserDto user = new UserDto(appUser);
@@ -73,7 +73,7 @@ public class UserService {
     }
 
     public void updateUser(UserDto updatedUser) {
-        AppUserModel savedUser = appUserRepository.findByDocument(updatedUser.getDocument()).get();
+        UserModel savedUser = appUserRepository.findByDocument(updatedUser.getDocument()).get();
 
         savedUser.setUsername(updatedUser.getUserName());
         savedUser.setEmail(updatedUser.getEmail());
@@ -86,7 +86,7 @@ public class UserService {
     public void deleteUser(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
+        UserModel appUser = appUserRepository.findByEmail(auth.getName()).get();
 
         appUserRepository.delete(appUser);
 
@@ -115,7 +115,7 @@ public class UserService {
 
     public UserDto FindUserByDocument(String document) {
         try {
-            AppUserModel appUser = appUserRepository.findByDocument(document).get();
+            UserModel appUser = appUserRepository.findByDocument(document).get();
 
             UserDto user = new UserDto(appUser);
 
@@ -127,7 +127,7 @@ public class UserService {
 
     public UserDto FindUserByEmail(String email) {
         try {
-            AppUserModel appUser = appUserRepository.findByEmail(email).get();
+            UserModel appUser = appUserRepository.findByEmail(email).get();
 
             UserDto user = new UserDto(appUser);
 
@@ -151,7 +151,7 @@ public class UserService {
     //     return phone.replaceAll("(\\d{2})(\\d{5})(\\d{4})", "($1) $2-$3");
     // }
 
-    public AppUserModel findUserByEmail(String email) {
+    public UserModel findUserByEmail(String email) {
         return appUserRepository.findByEmail(email).orElseThrow();
     }
 

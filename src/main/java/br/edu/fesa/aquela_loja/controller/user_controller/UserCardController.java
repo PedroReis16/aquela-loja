@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserCardDto;
-import br.edu.fesa.aquela_loja.models.dto.UpdateUserCardDto;
+import br.edu.fesa.aquela_loja.models.dto.card.NewUserCardDto;
+import br.edu.fesa.aquela_loja.models.dto.card.UpdateUserCardDto;
 import br.edu.fesa.aquela_loja.service.user_services.UserCardService;
 
 @Controller
