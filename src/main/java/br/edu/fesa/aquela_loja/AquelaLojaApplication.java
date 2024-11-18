@@ -1,7 +1,16 @@
 package br.edu.fesa.aquela_loja;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import br.edu.fesa.aquela_loja.models.entity.UserAddressModel;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
+import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
+import br.edu.fesa.aquela_loja.repository.IUserAddressRepository;
+import br.edu.fesa.aquela_loja.repository.IUserRepository;
 
 @SpringBootApplication
 public class AquelaLojaApplication {
@@ -11,20 +20,20 @@ public class AquelaLojaApplication {
     }
 
     // @Bean
-    // public CommandLineRunner commandLineRunner(BCryptPasswordEncoder passwordEncoder, IAppUserRepository userRepository, IAddressRepository addressRepository) {
+    // public CommandLineRunner commandLineRunner(BCryptPasswordEncoder passwordEncoder, IUserRepository userRepository, IUserAddressRepository addressRepository) {
     //     return args -> {
-    //         AppUserModel admin = AppUserModel.builder()
+    //         UserModel admin = UserModel.builder()
     //                 .username("Administrador")
     //                 .email("admin")
     //                 .password(passwordEncoder.encode("admin"))
     //                 .gender("Other")
     //                 .birthdate("01/01/2000")
     //                 .document("858.703.940-74")
-    //                 .phone("11 99999-9999")
+    //                 .phone("(11) 99999-9999")
     //                 .role(ADMIN)
     //                 .build();
 
-    //         AddressModel adminAdrress = AddressModel.builder()
+    //         UserAddressModel adminAdrress = UserAddressModel.builder()
     //                 .cep("12345-678")
     //                 .addressIdentification("Casa")
     //                 .street("Rua dos Bobos")
