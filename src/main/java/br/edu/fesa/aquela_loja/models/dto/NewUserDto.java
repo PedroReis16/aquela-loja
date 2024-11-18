@@ -32,4 +32,19 @@ public class NewUserDto {
     private String reference;
 
     private Role role = USER;
+
+    public NewUserAddressDto toNewUserAddressDto() {
+        NewUserAddressDto newUserAddressDto = new NewUserAddressDto();
+        newUserAddressDto.setCep(cep);
+        newUserAddressDto.setAddressIdentification(addressIdentification);
+        newUserAddressDto.setStreet(street);
+        newUserAddressDto.setNumber(number);
+        newUserAddressDto.setNeighborhood(neighborhood);
+        newUserAddressDto.setCity(city);
+        newUserAddressDto.setState(state);
+        newUserAddressDto.setComplement(complement);
+        newUserAddressDto.setReference(reference);
+
+        return newUserAddressDto;
+    }
 }

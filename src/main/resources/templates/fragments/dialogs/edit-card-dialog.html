@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dialog-container" th:fragment="dialog">
+        <dialog id="editCardDialog">
+            <form id="editCardForm">
+                <div id="dialogEditCardHeader">
+                    <h3>Editar forma de pagamento</h3>
+                    <button class="close-dialog-btn"><i></i></button>
+                </div>
+
+                <label for="holderName">Nome do titular</label>
+                <input type="text" id="holderName" name="holderName" required />
+
+                <label for="expirationDate">Nome do titular</label>
+                <input type="text" id="expirationDate" name="expirationDate" required />
+
+                <div class="dialog-confirm-btns">
+                    <button type="button" id="deleteCardBtn">Remover da carteira</button>
+                    <div class="edit-card-actions">
+                        <button class="cancel-btn close-dialog-btn">Cancelar</button>
+                        <button type="submit" class="confirm-button" id="saveCardBtn">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
+    </div>
+</body>
+
+</html>

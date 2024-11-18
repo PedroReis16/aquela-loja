@@ -9,6 +9,7 @@
   <link rel="stylesheet" th:href="@{/styles/reset.css}">
   <link rel="stylesheet" th:href="@{/styles/style.css}">
 
+  <script th:src="@{/js/components/card.js}" defer></script>
 </head>
 
 <body>
@@ -16,55 +17,85 @@
   <header th:replace="~{fragments/header :: header}"></header>
 
   <main>
-    <div class="card-container">
-      <div class="card-header">
-        <h1>Meus cartões</h1>
-        <a href="meus-cartoes/novo">Adicionar cartão</a>
-      </div>
+    <div class="card-header">
+      <h2 id="cardPageTitle"><i></i> Meus cartões</h2>
+      <a class="confirm-button" href="meus-cartoes/novo">Adicionar cartão</a>
+    </div>
 
-      <div class="cards-list">
-        <th:block th:each="card : ${userCards}">
-          <div class="user-card" th:data-card="${card}">
-            <div class="card-brand" th:text="${card.holderName}"></div>
-            <div class="card-number">**** **** **** <span th:text="${card.number}"></span></div>
-            <button type="button" class="manage-btn">Editar</button>
-          </div>
-
-        </th:block>
+    <div class="cards-grid">
+      <div class="card" th:each="card : ${userCards}">
+        <div class="card-type">MASTERCARD</div>
+        <!-- <div class="card-type" th:text="${card.bandeira}">MASTERCARD</div> -->
+        <div class="card-number" th:text="${card.number}">**** **** **** 1234</div>
+        <div class="card-info">
+          <div class="card-holder" th:text="${card.holderName}">JOÃO SILVA</div>
+          <div class="expiry" th:text="${card.expirationDate}">12/25</div>
+        </div>
       </div>
     </div>
 
 
     <!-- Dialog para confirmar a exclusão da conta -->
-    <div class="dialog-container">
-      <dialog id="editCardDialog">
-        <form id="editCardForm">
-          <div id="dialogEditCardHeader">
-            <h3>Editar forma de pagamento</h3>
-            <button class="close-dialog-btn"><i></i></button>
-          </div>
-
-          <label for="holderName">Nome do titular</label>
-          <input type="text" id="holderName" name="holderName" required />
-
-          <label for="expirationDate">Nome do titular</label>
-          <input type="text" id="expirationDate" name="expirationDate" required />
-
-          <div class="dialog-confirm-btns">
-            <button type="button" id="deleteCardBtn">Remover da carteira</button>
-            <div class="edit-card-actions">
-              <button class="cancel-btn close-dialog-btn">Cancelar</button>
-              <button type="submit" class="confirm-button" id="saveCardBtn">Salvar</button>
-            </div>
-          </div>
-        </form>
-      </dialog>
-    </div>
+    <div th:insert="~{/fragments/dialogs/edit-card-dialog::dialog}"></div>
 
 
   </main>
 
-  <script th:src="@{/js/page_scripts/meus-cartoes.js}"></script>
+  <!-- <script th:src="@{/js/page_scripts/meus-cartoes.js}"></script> -->
+
+  <script>
+    // Dados simulados dos cartões
+    // const cards = [
+    //   {
+    //     number: '**** **** **** 1234',
+    //     holder: 'JOÃO SILVA',
+    //     expiry: '12/25',
+    //     type: 'VISA'
+    //   },
+    //   {
+    //     number: '**** **** **** 5678',
+    //     holder: 'JOÃO SILVA',
+    //     expiry: '03/26',
+    //     type: 'MASTERCARD'
+    //   }
+    // ];
+
+    // // Função para renderizar os cartões
+    // function renderCards() {
+    //   const container = document.getElementById('cardsContainer');
+    //   container.innerHTML = '';
+
+    //   cards.forEach(card => {
+    //     const cardElement = document.createElement('div');
+    //     cardElement.className = 'card';
+    //     cardElement.innerHTML = `
+    //             <div class="card-type">${card.type}</div>
+    //             <div class="card-number">${card.number}</div>
+    //             <div class="card-info">
+    //                 <div class="card-holder">${card.holder}</div>
+    //                 <div class="expiry">${card.expiry}</div>
+    //             </div>
+    //         `;
+    //     container.appendChild(cardElement);
+    //   });
+    // }
+
+    // // Função para adicionar novo cartão (simulação)
+    // function addNewCard() {
+    //   const newCard = {
+    //     number: '**** **** **** ' + Math.floor(1000 + Math.random() * 9000),
+    //     holder: 'JOÃO SILVA',
+    //     expiry: '12/26',
+    //     type: Math.random() > 0.5 ? 'VISA' : 'MASTERCARD'
+    //   };
+
+    //   cards.push(newCard);
+    //   renderCards();
+    // }
+
+    // // Renderizar cartões iniciais
+    // renderCards();
+  </script>
 </body>
 
 </html>

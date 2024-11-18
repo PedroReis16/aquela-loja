@@ -1,9 +1,70 @@
-.user-card {
+.card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  margin: 16px 0;
-  border: 1px solid var(--gray);
-  border-radius: 8px;
+  margin: 0px 0px 16px 0px;
+}
+
+.card-header h2 {
+  font-family: var(--default-font);
+  font-size: 22px;
+  margin: 0px 0px 0px 0px;
+  font-weight: bold;
+}
+.card-header h2 > i::before {
+  content: "\e870";
+  font-family: var(--material-icons);
+  position: relative;
+  top: 4px;
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-number {
+  font-size: 1.4em;
+  letter-spacing: 2px;
+  margin: 20px 0;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.card-holder,
+.expiry {
+  font-size: 0.9em;
+}
+
+.card-type {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
 }
