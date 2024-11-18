@@ -184,3 +184,18 @@ a {
 .readonly-field {
   color: var(--dark-gray);
 }
+
+.close-dialog-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.close-dialog-button > i::before {
+  content: "\e5cd";
+  font-family: var(--material-icons);
+
+  color: var(--primary-color);
+  font-size: 24px;
+}

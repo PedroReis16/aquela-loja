@@ -23,19 +23,6 @@
   color: var(--black);
 }
 
-#dialogAccountHeader > button > i::before {
-  content: "\e5cd";
-  font-family: var(--material-icons);
-
-  color: var(--primary-color);
-  font-size: 24px;
-}
-
-#dialogAccountHeader > button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
 
 .confirm-message {
   padding: 16px;

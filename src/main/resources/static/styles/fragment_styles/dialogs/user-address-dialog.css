@@ -31,18 +31,6 @@
   right: 4px;
 }
 
-#closeAddressDialogBtn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-#closeAddressDialogBtn > i::before {
-  content: "\e5cd";
-  font-family: var(--material-icons);
-  color: var(--primary-color);
-  font-size: 24px;
-}
-
 #address-form-buttons {
   display: flex;
   justify-content: space-between;
