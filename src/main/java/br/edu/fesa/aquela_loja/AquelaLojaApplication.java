@@ -1,16 +1,7 @@
 package br.edu.fesa.aquela_loja;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import br.edu.fesa.aquela_loja.models.entity.UserAddressModel;
-import br.edu.fesa.aquela_loja.models.entity.UserModel;
-import static br.edu.fesa.aquela_loja.models.enums.Role.ADMIN;
-import br.edu.fesa.aquela_loja.repository.IUserAddressRepository;
-import br.edu.fesa.aquela_loja.repository.IUserRepository;
 
 @SpringBootApplication
 public class AquelaLojaApplication {
