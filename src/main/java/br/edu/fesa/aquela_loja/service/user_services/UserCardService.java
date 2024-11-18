@@ -24,7 +24,7 @@ public class UserCardService {
     @Autowired
     private IUserCardRepository repository;
 
-    public List<UserCardDto> getUserCard() {
+    public List<UserCardDto> getUserCards() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         UserModel appUser = userService.findUserByEmail(auth.getName());
@@ -40,6 +40,7 @@ public class UserCardService {
 
         return result;
     }
+
 
     public void addNewCard(NewUserCardDto newCard) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

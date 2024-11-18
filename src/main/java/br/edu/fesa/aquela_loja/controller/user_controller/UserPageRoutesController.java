@@ -60,7 +60,7 @@ public class UserPageRoutesController {
 
     @GetMapping("/meus-cartoes")
     public String userCardPage(Model model) {
-        List<UserCardDto> cards = userCardService.getUserCard();
+        List<UserCardDto> cards = userCardService.getUserCards();
 
         model.addAttribute("userCards", cards);
 

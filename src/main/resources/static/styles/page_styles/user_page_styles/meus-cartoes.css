@@ -26,37 +26,40 @@
   margin-bottom: 30px;
 }
 
-.card {
+.user-card {
   background: linear-gradient(135deg, #2c3e50, #3498db);
   border-radius: 15px;
   padding: 20px;
   color: white;
   position: relative;
   transition: transform 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--default-font);
 }
 
-.card:hover {
+.user-card:hover {
   transform: translateY(-5px);
 }
 
-.card-number {
+.user-card-number {
   font-size: 1.4em;
   letter-spacing: 2px;
   margin: 20px 0;
 }
 
-.card-info {
+.user-card-info {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
 }
 
-.card-holder,
+.user-card-holder,
 .expiry {
   font-size: 0.9em;
 }
 
-.card-type {
+.user-card-type {
   position: absolute;
   top: 20px;
   right: 20px;
