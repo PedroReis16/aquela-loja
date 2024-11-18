@@ -8,21 +8,6 @@
   outline: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-#dialogAccountHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  border-bottom: 1px solid var(--gray);
-}
-#dialogAccountHeader > h3 {
-  font-family: var(--default-font);
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  color: var(--black);
-}
-
 
 .confirm-message {
   padding: 16px;

@@ -185,6 +185,21 @@ a {
   color: var(--dark-gray);
 }
 
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.dialog-header > h3 {
+  font-family: var(--default-font);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--black);
+  vertical-align: middle;
+}
+
 .close-dialog-button {
   background-color: transparent;
   border: none;
