@@ -2,6 +2,7 @@
   border: none;
   outline: none;
   border-radius: 8px;
+  overflow-x: hidden;
 }
 
 #newUserCardTitleIcon::before {
@@ -15,7 +16,7 @@
 }
 
 #newCardForm {
-  margin: 16px 0px 0px 0px;  
+  margin: 16px 0px 16px 0px;
   display: grid;
   grid-template-areas:
     "cardNumber cardNumber"
@@ -31,9 +32,11 @@
 }
 #expiracyDateContainer {
   grid-area: cardExpiry;
+  margin-right: 4px;
 }
 #cardCVVContainer {
   grid-area: cardCvv;
+  margin-left: 4px;
 }
 
 .new-card-dialog-actions {

@@ -3,7 +3,6 @@ package br.edu.fesa.aquela_loja.controller.user_controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +20,11 @@ public class UserCardController {
     private UserCardService service;
 
     @PostMapping("/new-card")
-    public String newUserCard(@ModelAttribute("newUserAddress") NewUserCardDto newCard) {
+    public ResponseEntity<Void> newUserCard(@RequestBody NewUserCardDto newCard) {
         service.addNewCard(newCard);
 
-        return "redirect:/usuario/meus-cartoes";
+        // return "redirect:/usuario/meus-cartoes";
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/update-card/{id}")
