@@ -148,7 +148,7 @@ a {
 
 .cancel-btn {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--gray);
   border: none;
   cursor: pointer;
   font-family: var(--default-font);
@@ -157,7 +157,7 @@ a {
 }
 
 .cancel-btn:hover {
-  color: var(--primary-color-hover);
+  /* color: var(--dark-gray); */
   text-decoration: underline;
 }
 

@@ -13,6 +13,12 @@ const expiryInput = document.getElementById('expiry');
 const cvvInput = document.getElementById('cvv');
 const form = document.getElementById('creditCardForm');
 
+// Botão de fechar
+const closeBtn = document.querySelectorAll('.new-card-cancel');
+
+// Dialog
+const newCardDialog = document.getElementById('newUserCardDialog');
+
 // Padrões de bandeiras de cartão
 const cardPatterns = {
     visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
@@ -76,4 +82,12 @@ cvvInput.addEventListener('blur', () => {
 
 cvvInput.addEventListener('input', (e) => {
     cardCvv.textContent = e.target.value || '•••';
+});
+
+closeBtn.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        newCardDialog.close();
+        // Adicione qualquer outra lógica necessária para fechar a dialog
+    });
 });

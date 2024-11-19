@@ -13,3 +13,58 @@
   top: 4px;
   right: 8px;
 }
+
+#newCardForm {
+  margin: 16px 0px 0px 0px;  
+  display: grid;
+  grid-template-areas:
+    "cardNumber cardNumber"
+    "cardHolder cardHolder"
+    "cardExpiry cardCvv";
+}
+
+#cardNumberContainer {
+  grid-area: cardNumber;
+}
+#holderNameContainer {
+  grid-area: cardHolder;
+}
+#expiracyDateContainer {
+  grid-area: cardExpiry;
+}
+#cardCVVContainer {
+  grid-area: cardCvv;
+}
+
+.new-card-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  min-height: 280px;
+}
+
+.card-container-large,
+.form-large {
+  width: 100%;
+}
+
+@media (min-width: 920px) {
+  .dialog-content {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card-container-large {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .form-large {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}

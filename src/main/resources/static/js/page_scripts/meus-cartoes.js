@@ -86,7 +86,7 @@ function openEditCardDialog(result) {
 
 newUserCardBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    newUserCardDialog.showModal();
+    newCardDialog.showModal();
 });
 
 closeDialogBtn.forEach(btn => {
@@ -101,8 +101,8 @@ window.addEventListener('click', function (event) {
     if (event.target === editCardDialog) {
         closeDialog();
     }
-    if (event.target == newUserCardDialog) {
-        newUserCardDialog.close();
+    if(event.target == newCardDialog){
+        newCardDialog.close();
     }
 });
 

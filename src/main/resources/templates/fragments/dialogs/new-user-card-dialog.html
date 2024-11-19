@@ -12,50 +12,72 @@
         <dialog id="newUserCardDialog">
             <div class="dialog-header" id="newUserCardHeader">
                 <h3><i id="newUserCardTitleIcon"></i>Cadastrar Cartão</h3>
-                <button class="close-dialog-button" id="closeNewUserCardDialog"><i></i></button>
+                <button class="close-dialog-button new-card-cancel" id="closeNewUserCardDialog"><i></i></button>
             </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-front">
-                        <div class="card-logo" id="cardBrand">
-                            💳
+            <div class="dialog-content">
+                <div class="card-container card-container-large">
+                    <div class="card">
+                        <div class="card-front">
+                            <div class="card-logo" id="cardBrand">
+                                💳
+                            </div>
+                            <div class="card-chip"></div>
+                            <div class="card-number" id="cardNumber">•••• •••• •••• ••••</div>
+                            <div class="card-holder" id="cardName">NOME DO TITULAR</div>
+                            <div class="card-expiry" id="cardExpiry">MM/AA</div>
                         </div>
-                        <div class="card-chip"></div>
-                        <div class="card-number" id="cardNumber">•••• •••• •••• ••••</div>
-                        <div class="card-holder" id="cardName">NOME DO TITULAR</div>
-                        <div class="card-expiry" id="cardExpiry">MM/AA</div>
-                    </div>
-                    <div class="card-back">
-                        <div class="card-strip"></div>
-                        <div class="card-cvv" id="cardCvv">•••</div>
+                        <div class="card-back">
+                            <div class="card-strip"></div>
+                            <div class="card-cvv" id="cardCvv">•••</div>
+                        </div>
                     </div>
                 </div>
+                <form class="newUserCardForm form-large">
+                    <div id="newCardForm">
+                        <div id="cardNumberContainer">
+                            <div class="input-label">
+                                <i id="numberIcon"></i>
+                                <input type="text" id="number" name="number" maxlength="19"
+                                    placeholder="Número do cartão" required>
+                                <label for="number"></label>
+                            </div>
+                            <p id="cardNumberErrorMessage" class="error-message"></p>
+                        </div>
+
+                        <div id="holderNameContainer">
+                            <div class="input-label">
+                                <i id="personIcon"></i>
+                                <input type="text" id="name" name="name" placeholder="Nome do titular" required>
+                                <label for="name"></label>
+                            </div>
+                            <p id="holderNameErrorMessage" class="error-message"></p>
+                        </div>
+
+                        <div id="expiracyDateContainer">
+                            <div class="input-label">
+                                <i id="birthIcon"></i>
+                                <input type="text" id="expiry" name="expiry" maxlength="5" placeholder="MM/AA" required>
+                                <label for="expiry"></label>
+                            </div>
+                            <p id="ExpiracyErrorMessage" class="error-message"></p>
+                        </div>
+
+                        <div id="cardCVVContainer">
+                            <div class="input-label">
+                                <i id="passwordIcon"></i>
+                                <input type="text" id="cvv" name="cvv" placeholder="CVV" maxlength="3" required>
+                                <label for="CVV"></label>
+                            </div>
+                            <p id="CVVErrorMessage" class="error-message"></p>
+                        </div>
+                    </div>
+
+                </form>
             </div>
-            <form class="newUserCardForm">
-                <div class="form-group">
-                    <label for="number">Número do Cartão</label>
-                    <input type="text" id="number" maxlength="19" placeholder="1234 5678 9012 3456">
-                </div>
-
-                <div class="form-group">
-                    <label for="name">Nome do Titular</label>
-                    <input type="text" id="name" placeholder="Nome como está no cartão">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="expiry">Validade</label>
-                        <input type="text" id="expiry" maxlength="5" placeholder="MM/AA">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" maxlength="3" placeholder="123">
-                    </div>
-                </div>
-
-                <button type="submit">Cadastrar Cartão</button>
-            </form>
+            <div class="new-card-dialog-actions">
+                <button type="button" class="cancel-btn new-card-cancel" id="cancelNewCard">Cancelar</button>
+                <button type="submit" class="confirm-button" id="saveNewCard">Cadastrar Cartão</button>
+            </div>
         </dialog>
         <script th:src="@{/js/fragments_scripts/dialogs/new-user-card-dialog.js}"></script>
     </div>

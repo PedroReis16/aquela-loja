@@ -98,7 +98,7 @@
   border-radius: 4px;
 }
 
-.form {
+/* .form {
   background: white;
   padding: 30px;
   border-radius: 10px;
@@ -107,7 +107,7 @@
 
 .form-group {
   margin-bottom: 20px;
-}
+} */
 
 /* label {
     display: block;
@@ -129,7 +129,7 @@
     border-color: #2196f3;
   } */
 
-.form-row {
+/* .form-row {
   display: flex;
   gap: 20px;
 }
@@ -146,4 +146,4 @@
   color: #f44336;
   font-size: 12px;
   margin-top: 5px;
-}
+} */
