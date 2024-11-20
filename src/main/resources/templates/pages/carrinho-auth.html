@@ -458,24 +458,51 @@
 
     function getSelectedPayment() {
       // Armazena os dados do pagamento selecionado
-      selectedPayment = {
-        number: confirmedPayDiv.querySelector('.number').textContent,
-        expirationDate: confirmedPayDiv.querySelector('.expiration-date').textContent
-      };
+      if (confirmedPayDiv) {
+          const type = confirmedPayDiv.querySelector('h4')?.textContent?.trim();
+          if (!type) {
+              console.error("Tipo de pagamento não encontrado.");
+              return;
+          }
 
-      console.log("Pagamento selecionado:", selectedPayment);
+          if (type.toLowerCase() === "cartão") {
+              selectedPayment = {
+                  type: type,
+                  number: confirmedPayDiv.querySelector('.number')?.textContent || 'N/A',
+                  expirationDate: confirmedPayDiv.querySelector('.expiration-date')?.textContent || 'N/A'
+              };
+          } else {
+              selectedPayment = {
+                  type: type,
+                  number: 'N/A',
+                  expirationDate: 'N/A'
+              };
+          }
+
+          console.log("Pagamento selecionado:", selectedPayment);
+      } else {
+          console.error("Div de confirmação de pagamento não encontrada.");
+      }
     }
 
     function getSelectedAdds() {
+      if (confirmedAddsDiv) {
+          // Captura os dados do endereço
+          const title = confirmedAddsDiv.querySelector('.title')?.textContent?.trim() || 'Título indisponível';
+          const street = confirmedAddsDiv.querySelector('.street')?.textContent?.trim() || 'Rua indisponível';
+          const location = confirmedAddsDiv.querySelector('.location')?.textContent?.trim() || 'Localização indisponível';
 
-      // Armazena os dados do endereço selecionado
-      selectedAddress = {
-        title: confirmedAddsDiv.querySelector('.title').textContent,
-        street: confirmedAddsDiv.querySelector('.street').textContent,
-        location: confirmedAddsDiv.querySelector('.location').textContent
-      };
+          // Armazena os dados do endereço selecionado
+          selectedAddress = {
+              title: title,
+              street: street,
+              location: location
+          };
 
-      console.log("Endereço selecionado:", selectedAddress);
+          console.log("Endereço selecionado:", selectedAddress);
+      } else {
+          console.error("Div de endereço confirmada não encontrada.");
+      }
     }
 
     function getCartItems() {

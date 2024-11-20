@@ -33,7 +33,7 @@ public class OrderModel {
     private Long id;
 
     @ManyToOne
-    private AppUserModel user;
+    private UserModel user;
 
     private String destination;
 
@@ -45,6 +45,8 @@ public class OrderModel {
     private BigDecimal totalPrice;
 
     private String paymentCardNumber;
+
+    private String paymentType;
 
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status;

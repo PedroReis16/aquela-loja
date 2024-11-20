@@ -7,7 +7,7 @@ import br.edu.fesa.aquela_loja.models.enums.OrderStatusEnum;
 import br.edu.fesa.aquela_loja.repository.IOrderRepository;
 import br.edu.fesa.aquela_loja.service.CartService;
 import br.edu.fesa.aquela_loja.service.ProductService;
-import br.edu.fesa.aquela_loja.service.UserService;
+import br.edu.fesa.aquela_loja.service.user_services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,6 +69,7 @@ public class OrderController {
 
             order.setStatus(OrderStatusEnum.WAITING_PAYMENT);
 
+            order.setPaymentType(dto.getPayment().getType());
             order.setPaymentCardNumber(dto.getPayment().getNumber());
 
             order.setDestination(dto.getAddress().getLocation() + " n:" + dto.getAddress().getStreet());
