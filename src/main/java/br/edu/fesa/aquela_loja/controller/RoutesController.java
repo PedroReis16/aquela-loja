@@ -81,10 +81,6 @@ public class RoutesController {
         return ResponseEntity.ok().build();
     }
 
-    // @GetMapping({"/usuario/{page}"})
-    // public String loadUserPages(Model model, @PathVariable String page) {
-    //     return "pages/user_pages/" + page;
-    // }
     @GetMapping("/administrador")
     public String getAdminPage() {
         return "pages/admin_pages/admin";

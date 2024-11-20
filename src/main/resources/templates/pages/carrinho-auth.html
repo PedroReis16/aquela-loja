@@ -156,12 +156,21 @@
         <!-- Items serão inseridos via JavaScript -->
       </div>
 
-      <div class="address-selection" id="cart-adds" hidden="">
+      <div sec:authorize="isAuthenticated()">
+        <h2 >Endereço de Entrega</h2>
+        <div class="address-selection" id="cart-adds">
 
+        </div>
+
+        <div class="navigation-buttons">
+          <button class="btn" onclick="nextStep()">Próximo</button>
+        </div>
       </div>
 
-      <div class="navigation-buttons">
-        <a href="/cart-auth"><button class="btn">Continuar</button></a>
+      <div sec:authorize="!isAuthenticated()">
+        <div class="navigation-buttons">
+          <a href="/login"><button class="btn">Continuar</button></a>
+        </div>
       </div>
     </div>
 
@@ -351,7 +360,7 @@
                     <div>
                         <h3 class="itemName">${item.name}</h3>
                         <p class="quantity">Quantidade: ${item.quantity}</p>
-                        <p>R$ ${(item.price * item.quantity).toFixed(2)}</p>
+                        <p class="itemPrice">R$ ${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   </div>
                 </div>
@@ -444,9 +453,7 @@
     }
 
     function goToHome() {
-      alert('Redirecionando para a Home...');
-      // Aqui você pode adicionar o redirecionamento real
-      // window.location.href = '/';
+      window.location.href = '/';
     }
 
     function getSelectedPayment() {
@@ -480,11 +487,13 @@
       cartItemsDivs.forEach(itemDiv => {
         const itemName = itemDiv.querySelector('.itemName').textContent;
         const itemQuantity = parseInt(itemDiv.querySelector('.quantity').textContent.replace('Quantidade: ', ''));
+        const itemPrice = parseFloat(itemDiv.querySelector('.itemPrice').textContent.trim().replace(/R\$\s?/, ''));
 
         // Adiciona o item ao array de carrinho
         confirmedCartItems.push({
           name: itemName,
-          quantity: itemQuantity
+          quantity: itemQuantity,
+          totalPrice: itemPrice
         });
       });
 
@@ -516,6 +525,9 @@
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),  // Envia os dados como JSON
+      })
+      .then(data => {
+        nextStep();
       })
       .catch(error => {
         console.error("Erro ao enviar dados:", error);
