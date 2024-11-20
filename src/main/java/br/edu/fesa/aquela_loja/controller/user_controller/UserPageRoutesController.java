@@ -29,7 +29,8 @@ public class UserPageRoutesController {
     @Autowired
     private UserAddressService userAddressService;
 
-    @GetMapping()
+    
+    @GetMapping({"/", ""})
     public String userPage(Model model) {
 
         UserDto user = userService.getAuthenticatedUser();
