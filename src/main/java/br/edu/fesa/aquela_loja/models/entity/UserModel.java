@@ -17,7 +17,7 @@ import br.edu.fesa.aquela_loja.models.enums.Role;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AppUserModel implements UserDetails {
+public class UserModel implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +40,10 @@ public class AppUserModel implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
-    private List<AddressModel> address;
+    private List<UserAddressModel> address;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
-    private List<PaymentCardModel> wallet;
+    private List<UserCardModel> wallet;
 
 
 

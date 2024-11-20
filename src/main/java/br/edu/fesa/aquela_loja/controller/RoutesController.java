@@ -1,11 +1,7 @@
 package br.edu.fesa.aquela_loja.controller;
 
-import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
-import br.edu.fesa.aquela_loja.models.entity.ProductModel;
-import br.edu.fesa.aquela_loja.service.CartService;
-import br.edu.fesa.aquela_loja.service.ProductService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,7 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.entity.ProductModel;
+import br.edu.fesa.aquela_loja.service.CartService;
+import br.edu.fesa.aquela_loja.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class RoutesController {
@@ -92,11 +93,6 @@ public class RoutesController {
     @GetMapping("/administrador")
     public String getAdminPage() {
         return "pages/admin_pages/admin";
-    }
-
-    @GetMapping("/user-address")
-    public String getAddressPage() {
-        return "pages/user-address";
     }
 
 }

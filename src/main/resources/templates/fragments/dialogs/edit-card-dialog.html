@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dialog-container" th:fragment="dialog">
+        <dialog id="editCardDialog">
+            <form id="editCardForm">
+                <div class="dialog-header" id="dialogEditCardHeader">
+                    <h3>Editar forma de pagamento</h3>
+                    <button class="close-dialog-button"><i></i></button>
+                </div>
+
+                <div class="edit-card-content">
+                    <div class="holder-name-container">
+                        <div class="input-label">
+                            <i id="personIcon"></i>
+                            <input type="text" id="holderName" name="holderName" placeholder="Nome do titular">
+                            <label for="referencia"></label>
+                        </div>
+                        <p id="referenceInputError" class="error-message"></p>
+                    </div>
+
+                    <div class="expiration-date-container">
+                        <div class="input-label">
+                            <i id="birthIcon"></i>
+                            <input type="text" id="expirationDate" name="expirationDate" placeholder="Nome do titular">
+                            <label for="referencia"></label>
+                        </div>
+                        <p id="referenceInputError" class="error-message"></p>
+                    </div>
+                </div>
+
+                <div class="delete-dialog-action-btns">
+                    <button class="cancel-btn close-dialog-btn">Cancelar</button>
+                    <div class="edit-card-actions">
+                        <button type="button" class="cancel-btn" id="deleteCardBtn">Excluir</button>
+                        <button type="submit" class="confirm-button" id="saveCardBtn">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
+    </div>
+</body>
+
+</html>

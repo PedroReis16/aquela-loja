@@ -1,0 +1,73 @@
+.card-container {
+  position: relative;
+  /* width: 100%; */
+  height: 200px;
+  margin-bottom: 20px;
+  font-family: var(--default-font);
+  user-select: none;
+  left: 64px;
+}
+
+.card-container .front {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  background: linear-gradient(45deg, #1a1a1a, #3d3d3d);
+  border-radius: 15px;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  padding: 20px;
+  color: white;
+}
+
+.front.flip {
+  transform: rotateY(180deg);
+}
+
+.back {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  background: linear-gradient(45deg, #1a1a1a, #3d3d3d);
+  border-radius: 15px;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  padding: 20px;
+  color: white;
+}
+
+.back.flip {
+  transform: rotateY(0deg);
+}
+
+.card-number-box {
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-top: 40px;
+}
+
+.card-holder-name {
+  font-size: 18px;
+  margin-top: 40px;
+}
+
+.exp-date {
+  margin-top: 10px;
+}
+
+.stripe {
+  background: #000;
+  height: 40px;
+  margin: 10px 0;
+}
+
+.cvv-box {
+  height: 40px;
+  background: white;
+  color: black;
+  padding: 10px;
+  margin-top: 10px;
+}

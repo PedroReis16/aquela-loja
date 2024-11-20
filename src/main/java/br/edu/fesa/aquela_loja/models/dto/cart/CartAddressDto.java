@@ -1,6 +1,6 @@
 package br.edu.fesa.aquela_loja.models.dto.cart;
 
-import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class CartAddressDto {
     private String number;
     private String location;
 
-    public static List<CartAddressDto> fromUser(AppUserModel user) {
+    public static List<CartAddressDto> fromUser(UserModel user) {
 
         return user.getAddress().stream().map(address -> CartAddressDto.builder()
                 .title(address.getAddressIdentification())

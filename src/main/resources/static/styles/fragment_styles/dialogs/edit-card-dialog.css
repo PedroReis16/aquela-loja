@@ -1,0 +1,42 @@
+#editCardDialog {
+  border: none;
+  outline: none;
+  border-radius: 8px;
+ 
+}
+#editCardForm {
+  width: 100%;
+  height: 45%;
+}
+
+.edit-card-content {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.holder-name-container,
+.expiration-date-container {
+  flex: 1;
+}
+
+.delete-dialog-action-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  align-items: end;
+}
+.edit-card-actions {
+  display: flex;
+  gap: 8px;
+}
+#deleteCardBtn {
+  color: var(--error);
+}
+
+@media screen and (max-width: 768px) {
+  .edit-card-content {
+    flex-direction: column;
+  }
+}

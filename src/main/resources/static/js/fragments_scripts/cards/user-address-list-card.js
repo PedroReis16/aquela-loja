@@ -12,16 +12,26 @@ const addressCard = document.querySelectorAll('.address-card');
 //Validação formulários de usuário
 
 //Ações para a dialog de endereços
+function clearDialogsInputs() {
+    const inputs = addressDialog.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.value = "";
+    });
+}
+
 newAddressButton.addEventListener('click', function () {
+
     addressDialog.showModal();
 });
 
 closeAddressDialogBtn.addEventListener('click', function () {
     addressDialog.close();
+    window.location.reload();
 });
 
 cancelAddressBtn.addEventListener('click', function () {
     addressDialog.close();
+    window.location.reload();
 });
 
 //Editar Card
@@ -59,18 +69,24 @@ addressCard.forEach(card => {
         addressDialog.querySelector("#neighborhoodInput").value = result.neighborhood;
         addressDialog.querySelector("#cityInput").value = result.city;
         addressDialog.querySelector("#stateInput").value = result.state;
-        addressDialog.querySelector("#complementInput").value = result.complement;
-        addressDialog.querySelector("#referenceInput").value = result.reference;
+
+        if (result.complement)
+            addressDialog.querySelector("#complementInput").value = result.complement;
+        if (result.reference)
+            addressDialog.querySelector("#referenceInput").value = result.reference;
 
         const addressForm = addressDialog.querySelector("#addressForm");
         addressForm.action = "";
         addressForm.object = "";
 
+        addressForm.setAttribute('data-address-id', result.id);
         const deleteBtn = document.getElementById('deleteAddressBtn');
         const defaultBtn = document.getElementById('defaultAddressBtn');
+        const saveAddressBtn = document.getElementById('saveAddressBtn');
 
         defaultBtn.style.display = "block";
         deleteBtn.style.display = "block";
+        saveAddressBtn.disabled = false;
 
         addressDialog.showModal();
 
@@ -100,14 +116,6 @@ addressCard.forEach(card => {
 
         });
 
-        addressForm.querySelector("#deleteAddress").addEventListener('click', function () {
-            fetch(`/user/delete-address/${result.id}`, {
-                method: 'POST',
-            }).then(response => {
-                if (response.ok) {
-                    window.location.reload();
-                }
-            });
-        });
+
     });
 });

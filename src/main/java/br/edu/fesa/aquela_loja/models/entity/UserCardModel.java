@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class PaymentCardModel {
+public class UserCardModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,5 +34,5 @@ public class PaymentCardModel {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    private AppUserModel appUser;
+    private UserModel appUser;
 }

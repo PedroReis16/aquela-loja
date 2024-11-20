@@ -2,6 +2,8 @@ package br.edu.fesa.aquela_loja.models.dto;
 
 import br.edu.fesa.aquela_loja.models.enums.Role;
 import static br.edu.fesa.aquela_loja.models.enums.Role.USER;
+
+import br.edu.fesa.aquela_loja.models.dto.address.NewUserAddressDto;
 import lombok.Data;
 
 @Data
@@ -32,4 +34,19 @@ public class NewUserDto {
     private String reference;
 
     private Role role = USER;
+
+    public NewUserAddressDto toNewUserAddressDto() {
+        NewUserAddressDto newUserAddressDto = new NewUserAddressDto();
+        newUserAddressDto.setCep(cep);
+        newUserAddressDto.setAddressIdentification(addressIdentification);
+        newUserAddressDto.setStreet(street);
+        newUserAddressDto.setNumber(number);
+        newUserAddressDto.setNeighborhood(neighborhood);
+        newUserAddressDto.setCity(city);
+        newUserAddressDto.setState(state);
+        newUserAddressDto.setComplement(complement);
+        newUserAddressDto.setReference(reference);
+
+        return newUserAddressDto;
+    }
 }

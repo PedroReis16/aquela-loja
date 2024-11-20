@@ -1,6 +1,6 @@
-package br.edu.fesa.aquela_loja.models.dto;
+package br.edu.fesa.aquela_loja.models.dto.address;
 
-import br.edu.fesa.aquela_loja.models.entity.AddressModel;
+import br.edu.fesa.aquela_loja.models.entity.UserAddressModel;
 import lombok.Data;
 
 @Data
@@ -35,7 +35,7 @@ public class UserAddressDto {
     public UserAddressDto() {
     }
 
-    public UserAddressDto(AddressModel address) {
+    public UserAddressDto(UserAddressModel address) {
         this.id = address.getId();
         this.cep = address.getCep();
         this.addressIdentification = address.getAddressIdentification();

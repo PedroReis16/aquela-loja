@@ -1,6 +1,6 @@
 package br.edu.fesa.aquela_loja.models.dto;
 
-import br.edu.fesa.aquela_loja.models.entity.AppUserModel;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
 import lombok.Data;
 
 @Data
@@ -15,7 +15,7 @@ public class UserDto {
 
     public UserDto(){}
 
-    public UserDto(AppUserModel appUser){
+    public UserDto(UserModel appUser){
         this.id = appUser.getUserId();
         this.userName = appUser.getUsername();
         this.document = appUser.getDocument();

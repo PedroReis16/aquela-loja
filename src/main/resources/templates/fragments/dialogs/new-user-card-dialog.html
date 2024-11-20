@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dialog-container" th:fragment="dialog">
+        <dialog id="newUserCardDialog">
+            <div class="dialog-header" id="newUserCardHeader">
+                <h3><i id="newUserCardTitleIcon"></i>Cadastrar Cartão</h3>
+                <button class="close-dialog-button new-card-cancel" id="closeNewUserCardDialog"><i></i></button>
+            </div>
+            <div class="dialog-content">
+                <div class="card-container card-container-large">
+                    <div class="front">
+                        <div class="card-number-box">#### #### #### ####</div>
+                        <div class="card-holder-name">Nome Completo</div>
+                        <div class="exp-date">MM/AA</div>
+                    </div>
+                    <div class="back">
+                        <div class="stripe"></div>
+                        <div class="cvv-box">cvv</div>
+                    </div>
+                </div>
+                <form class="newUserCardForm form-large">
+                    <div id="newCardForm">
+                        <div id="cardNumberContainer">
+                            <div class="input-label">
+                                <i id="numberIcon"></i>
+                                <input type="text" id="number" name="number" maxlength="19"
+                                    placeholder="Número do cartão" required>
+                                <label for="number"></label>
+                            </div>
+                            <p id="cardNumberErrorMessage" class="error-message"></p>
+                        </div>
+
+                        <div id="holderNameContainer">
+                            <div class="input-label">
+                                <i id="personIcon"></i>
+                                <input type="text" id="name" name="name" placeholder="Nome do titular" required>
+                                <label for="name"></label>
+                            </div>
+                            <p id="holderNameErrorMessage" class="error-message"></p>
+                        </div>
+
+                        <div id="expiracyDateContainer">
+                            <div class="input-label">
+                                <i id="birthIcon"></i>
+                                <input type="text" id="expiry" name="expiry" maxlength="5" placeholder="MM/AA" required>
+                                <label for="expiry"></label>
+                            </div>
+                            <p id="ExpiracyErrorMessage" class="error-message"></p>
+                        </div>
+
+                        <div id="cardCVVContainer">
+                            <div class="input-label">
+                                <i id="passwordIcon"></i>
+                                <input type="text" id="cvv" name="cvv" placeholder="CVV" maxlength="3" required>
+                                <label for="CVV"></label>
+                            </div>
+                            <p id="CVVErrorMessage" class="error-message"></p>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="new-card-dialog-actions">
+                <button type="button" class="cancel-btn new-card-cancel" id="cancelNewCard">Cancelar</button>
+                <button type="submit" class="confirm-button" id="saveNewCard">Cadastrar Cartão</button>
+            </div>
+        </dialog>
+        <script th:src="@{/js/fragments_scripts/dialogs/new-user-card-dialog.js}"></script>
+    </div>
+</body>
+
+</html>

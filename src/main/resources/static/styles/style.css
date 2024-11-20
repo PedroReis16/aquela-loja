@@ -13,7 +13,6 @@
 @import url("./page_styles/user_page_styles/usuario.css");
 @import url("./page_styles/user_page_styles/meus-dados.css");
 @import url("./page_styles/user_page_styles/meus-cartoes.css");
-@import url("./page_styles/user_page_styles/novo-cartao.css");
 @import url("./page_styles/user_page_styles/meus-pedidos.css");
 
 /* Widgets */
@@ -28,6 +27,9 @@
 @import url("./fragment_styles/dialogs/user-address-dialog.css");
 @import url("./fragment_styles/cards/edit-user-details-card.css");
 @import url("./fragment_styles/cards/user-address-list-card.css");
+@import url("./fragment_styles/dialogs/edit-card-dialog.css");
+@import url("./fragment_styles/dialogs/new-user-card-dialog.css");
+@import url("./fragment_styles/cards/new-user-card.css");
 
 :root {
   --default-font: "Poppins", sans-serif;
@@ -146,7 +148,7 @@ a {
 
 .cancel-btn {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--gray);
   border: none;
   cursor: pointer;
   font-family: var(--default-font);
@@ -155,12 +157,12 @@ a {
 }
 
 .cancel-btn:hover {
-  color: var(--primary-color-hover);
+  /* color: var(--dark-gray); */
   text-decoration: underline;
 }
 
 .error-message {
-  color: red;
+  color: var(--error);
   margin: 4px 8px;
   font-size: 14px;
   font-family: var(--secondary-font);
@@ -183,3 +185,32 @@ a {
   color: var(--dark-gray);
 }
 
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.dialog-header > h3 {
+  font-family: var(--default-font);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--black);
+  vertical-align: middle;
+}
+
+.close-dialog-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.close-dialog-button > i::before {
+  content: "\e5cd";
+  font-family: var(--material-icons);
+
+  color: var(--primary-color);
+  font-size: 24px;
+}

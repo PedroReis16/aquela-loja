@@ -1,13 +1,7 @@
 package br.edu.fesa.aquela_loja.controller;
 
-import br.edu.fesa.aquela_loja.models.dto.cart.CartAddressDto;
-import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
-import br.edu.fesa.aquela_loja.models.dto.cart.CartPaymentCardDto;
-import br.edu.fesa.aquela_loja.service.CartService;
-import br.edu.fesa.aquela_loja.service.ProductService;
-import br.edu.fesa.aquela_loja.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -18,7 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import br.edu.fesa.aquela_loja.models.dto.cart.CartAddressDto;
+import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
+import br.edu.fesa.aquela_loja.models.dto.cart.CartPaymentCardDto;
+import br.edu.fesa.aquela_loja.service.CartService;
+import br.edu.fesa.aquela_loja.service.ProductService;
+import br.edu.fesa.aquela_loja.service.user_services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class CartController {

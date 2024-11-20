@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.edu.fesa.aquela_loja.repository.IAppUserRepository;
+import br.edu.fesa.aquela_loja.repository.IUserRepository;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 public class AppUserService implements UserDetailsService {
 
     @Autowired
-    private final IAppUserRepository repository;
+    private final IUserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
