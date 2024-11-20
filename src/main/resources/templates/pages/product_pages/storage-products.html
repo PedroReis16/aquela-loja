@@ -15,21 +15,24 @@
 
     <header th:replace="~{fragments/header :: header}"></header>
 
-    <div class="product-content">
-        <div class="dialog-header" id="storageProductHeader">
-            <h3><i></i> Produtos Disponíveis</h3>
-            <!-- <a href="/product/form" class="btn btn-primary">Inserir</a> -->
-            <button class="confirm-button" id="newProductBtn"><i></i>Novo Produto</button>
-        </div>
-
-        <div class="product-list">
-            <div th:each="product : ${products}" th:insert="~{/fragments/cards/edit-product-card::editProductCard(
-                    '${product}'
-                    )}">
+    <main>
+        <div class="product-content">
+            <div class="dialog-header" id="storageProductHeader">
+                <h3><i></i> Produtos Disponíveis</h3>
+                <a href="/product/form" class="btn btn-primary">Inserir</a>
+                <button class="confirm-button" id="newProductBtn"><i></i>Novo Produto</button>
             </div>
+
+            <div class="product-list">
+                <div th:each="product : ${products}" th:insert="~{/fragments/cards/edit-product-card::editProductCard(
+                        '${product}'
+                        )}">
+                </div>
+            </div>
+
         </div>
-       
-    </div>
+    </main>
+    <script th:src="@{/js/pages/storage-products.js}"></script>
 </body>
 
 </html>
