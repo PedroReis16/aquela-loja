@@ -1,10 +1,13 @@
 package br.edu.fesa.aquela_loja.service;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
+import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
+import br.edu.fesa.aquela_loja.models.enums.DepartamentEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,5 +76,51 @@ public class ProductService {
 
     public List<CartItemDto> getCartDto(List<String> cartItems) {
         return findByIdIn(cartItems).stream().map(CartItemDto::fromProdutc).collect(Collectors.toList());
+    }
+
+    public List<ProductModel> getProductsForCategoryOrDepartament(String filter) {
+
+        try {
+            CategoryEnum category = getEnumValue(CategoryEnum.class, filter);
+            if (category != null) {
+                return productRepository.findByCategory(category);
+            } else {
+                  List<ProductModel> products = new java.util.ArrayList<>(List.of());
+                DepartamentEnum departament = getEnumValue(DepartamentEnum.class, filter);
+
+                if (departament != null) {
+                    for (CategoryEnum cat : departament.getCategories()) {
+                        productRepository.findByCategory(CategoryEnum.MEMORIA_RAM);
+                        var pCat = productRepository.findByCategory(cat);
+                        if (!pCat.isEmpty()) {
+                            products.addAll(pCat);
+                        }
+                    }
+                }
+
+                return products;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao determinar categoria ou departamento");
+            return List.of();
+        }
+    }
+
+    private <E extends Enum<E>> E getEnumValue(Class<E> enumClass, String filter) {
+        for (E value : enumClass.getEnumConstants()) {
+            if (equalsIgnoreCaseAndAccent(value.name().replace('_', ' '), filter)) {
+                return value;
+            }
+        }
+        return null; // Retorna nulo se o valor não for encontrado no enum
+    }
+
+    public static boolean equalsIgnoreCaseAndAccent(String str1, String str2) {
+        if (str1 == null || str2 == null) {
+            return str1 == null && str2 == null;
+        }
+        String normalizedStr1 = Normalizer.normalize(str1, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        String normalizedStr2 = Normalizer.normalize(str2, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        return normalizedStr1.equalsIgnoreCase(normalizedStr2);
     }
 }

@@ -81,6 +81,14 @@ public class RoutesController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/itens/{category}")
+    public String getCategoriesProducts(@PathVariable("category") String filter, ModelMap model) {
+        List<ProductModel> products = productService.getProductsForCategoryOrDepartament(filter);
+        model.addAttribute("products", products);
+
+        return "pages/product-filtered";
+    }
+
     @GetMapping("/administrador")
     public String getAdminPage() {
         return "pages/admin_pages/admin";
