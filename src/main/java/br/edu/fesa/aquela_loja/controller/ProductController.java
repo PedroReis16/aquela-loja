@@ -75,7 +75,7 @@ public class ProductController {
     @PostMapping("/update")
     public String updateProduct(@ModelAttribute ProductModel product, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap model) {
         try {
-            if (productService.exists(product.getName().trim())) {
+            if (productService.exists(product.getName().trim()) && !productService.findById(String.valueOf(product.getId())).getName().equals(product.getName())) {
                 productService.fillImage(product);
                 model.addAttribute("product", product);
                 model.addAttribute("nameError",true);

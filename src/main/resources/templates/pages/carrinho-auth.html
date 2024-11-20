@@ -156,12 +156,21 @@
         <!-- Items serão inseridos via JavaScript -->
       </div>
 
-      <div class="address-selection" id="cart-adds" hidden="">
+      <div sec:authorize="isAuthenticated()">
+        <h2 >Endereço de Entrega</h2>
+        <div class="address-selection" id="cart-adds">
 
+        </div>
+
+        <div class="navigation-buttons">
+          <button class="btn" onclick="nextStep()">Próximo</button>
+        </div>
       </div>
 
-      <div class="navigation-buttons">
-        <a href="/cart-auth"><button class="btn">Continuar</button></a>
+      <div sec:authorize="!isAuthenticated()">
+        <div class="navigation-buttons">
+          <a href="/login"><button class="btn">Continuar</button></a>
+        </div>
       </div>
     </div>
 
@@ -351,7 +360,7 @@
                     <div>
                         <h3 class="itemName">${item.name}</h3>
                         <p class="quantity">Quantidade: ${item.quantity}</p>
-                        <p>R$ ${(item.price * item.quantity).toFixed(2)}</p>
+                        <p class="itemPrice">R$ ${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   </div>
                 </div>
@@ -444,31 +453,56 @@
     }
 
     function goToHome() {
-      alert('Redirecionando para a Home...');
-      // Aqui você pode adicionar o redirecionamento real
-      // window.location.href = '/';
+      window.location.href = '/';
     }
 
     function getSelectedPayment() {
       // Armazena os dados do pagamento selecionado
-      selectedPayment = {
-        number: confirmedPayDiv.querySelector('.number').textContent,
-        expirationDate: confirmedPayDiv.querySelector('.expiration-date').textContent
-      };
+      if (confirmedPayDiv) {
+          const type = confirmedPayDiv.querySelector('h4')?.textContent?.trim();
+          if (!type) {
+              console.error("Tipo de pagamento não encontrado.");
+              return;
+          }
 
-      console.log("Pagamento selecionado:", selectedPayment);
+          if (type.toLowerCase() === "cartão") {
+              selectedPayment = {
+                  type: type,
+                  number: confirmedPayDiv.querySelector('.number')?.textContent || 'N/A',
+                  expirationDate: confirmedPayDiv.querySelector('.expiration-date')?.textContent || 'N/A'
+              };
+          } else {
+              selectedPayment = {
+                  type: type,
+                  number: 'N/A',
+                  expirationDate: 'N/A'
+              };
+          }
+
+          console.log("Pagamento selecionado:", selectedPayment);
+      } else {
+          console.error("Div de confirmação de pagamento não encontrada.");
+      }
     }
 
     function getSelectedAdds() {
+      if (confirmedAddsDiv) {
+          // Captura os dados do endereço
+          const title = confirmedAddsDiv.querySelector('.title')?.textContent?.trim() || 'Título indisponível';
+          const street = confirmedAddsDiv.querySelector('.street')?.textContent?.trim() || 'Rua indisponível';
+          const location = confirmedAddsDiv.querySelector('.location')?.textContent?.trim() || 'Localização indisponível';
 
-      // Armazena os dados do endereço selecionado
-      selectedAddress = {
-        title: confirmedAddsDiv.querySelector('.title').textContent,
-        street: confirmedAddsDiv.querySelector('.street').textContent,
-        location: confirmedAddsDiv.querySelector('.location').textContent
-      };
+          // Armazena os dados do endereço selecionado
+          selectedAddress = {
+              title: title,
+              street: street,
+              location: location
+          };
 
-      console.log("Endereço selecionado:", selectedAddress);
+          console.log("Endereço selecionado:", selectedAddress);
+      } else {
+          console.error("Div de endereço confirmada não encontrada.");
+      }
     }
 
     function getCartItems() {
@@ -480,11 +514,13 @@
       cartItemsDivs.forEach(itemDiv => {
         const itemName = itemDiv.querySelector('.itemName').textContent;
         const itemQuantity = parseInt(itemDiv.querySelector('.quantity').textContent.replace('Quantidade: ', ''));
+        const itemPrice = parseFloat(itemDiv.querySelector('.itemPrice').textContent.trim().replace(/R\$\s?/, ''));
 
         // Adiciona o item ao array de carrinho
         confirmedCartItems.push({
           name: itemName,
-          quantity: itemQuantity
+          quantity: itemQuantity,
+          totalPrice: itemPrice
         });
       });
 
@@ -516,6 +552,9 @@
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),  // Envia os dados como JSON
+      })
+      .then(data => {
+        nextStep();
       })
       .catch(error => {
         console.error("Erro ao enviar dados:", error);

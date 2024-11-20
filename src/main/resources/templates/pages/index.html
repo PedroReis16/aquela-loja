@@ -225,74 +225,17 @@
     </div>
     <div class="products-carousel">
       <div class="products-carousel-inner">
-        <!-- 8 produtos no carrossel -->
         <div class="product-card" th:each="product : ${products}">
           <img th:src="${product.imageBase64}" style="width: 75px; height: 75px; object-fit: cover;"
             class="product-image">
           <div class="product-info">
             <h3 class="product-title" th:text="${product.name}"></h3>
-            <p class="product-price" th:text="${product.price}"></p>
-            <a class="btn btn-danger btn-sm" th:onclick="|addToCart(${product.id})|">Remover
+            <p class="product-price" th:text="'R$ ' + ${product.price}"></p>
+            <a class="btn btn-danger btn-sm" th:onclick="|addToCart(${product.id})|">
               <button class="product-button">Adicionar ao Carrinho</button>
             </a>
           </div>
         </div>
-        <!--        <div class="product-card">-->
-        <!--          <img src="/api/placeholder/250/200" alt="Produto 2" class="product-image">-->
-        <!--          <div class="product-info">-->
-        <!--            <h3 class="product-title">Notebook ABC</h3>-->
-        <!--            <p class="product-price">R$ 3.499,90</p>-->
-        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--        <div class="product-card">-->
-        <!--          <img src="/api/placeholder/250/200" alt="Produto 3" class="product-image">-->
-        <!--          <div class="product-info">-->
-        <!--            <h3 class="product-title">Tênis Esportivo</h3>-->
-        <!--            <p class="product-price">R$ 299,90</p>-->
-        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--        <div class="product-card">-->
-        <!--          <img src="/api/placeholder/250/200" alt="Produto 4" class="product-image">-->
-        <!--          <div class="product-info">-->
-        <!--            <h3 class="product-title">Câmera Digital</h3>-->
-        <!--            <p class="product-price">R$ 2.499,90</p>-->
-        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--        <div class="product-card">-->
-        <!--          <img src="/api/placeholder/250/200" alt="Produto 5" class="product-image">-->
-        <!--          <div class="product-info">-->
-        <!--            <h3 class="product-title">Smart TV 55"</h3>-->
-        <!--            <p class="product-price">R$ 3.999,90</p>-->
-        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--        <div class="product-card">-->
-        <!--          <img src="/api/placeholder/250/200" alt="Produto 6" class="product-image">-->
-        <!--          <div class="product-info">-->
-        <!--            <h3 class="product-title">Fone Bluetooth</h3>-->
-        <!--            <p class="product-price">R$ 199,90</p>-->
-        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--        <div class="product-card">-->
-        <!--          <img src="/api/placeholder/250/200" alt="Produto 7" class="product-image">-->
-        <!--          <div class="product-info">-->
-        <!--            <h3 class="product-title">Relógio Smart</h3>-->
-        <!--            <p class="product-price">R$ 899,90</p>-->
-        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--        <div class="product-card">-->
-        <!--          <img src="/api/placeholder/250/200" alt="Produto 8" class="product-image">-->
-        <!--          <div class="product-info">-->
-        <!--            <h3 class="product-title">Tablet Pro</h3>-->
-        <!--            <p class="product-price">R$ 2.699,90</p>-->
-        <!--            <button class="product-button">Adicionar ao Carrinho</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
       </div>
       <button class="carousel-control carousel-prev" id="products-prev">
         <i class="fas fa-chevron-left"></i>
