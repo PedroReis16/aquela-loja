@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
             menuItem.className = 'menu-item';
 
             const menuLink = document.createElement('a');
-            menuLink.href = '#';
+            menuLink.href = '/itens/' + dept.Departamento;
             menuLink.className = 'menu-link';
             menuLink.textContent = capitalizeWords(dept.Departamento);
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 submenuItem.className = 'submenu-item';
 
                 const submenuLink = document.createElement('a');
-                submenuLink.href = '#';
+                submenuLink.href = '/itens/' + value;
                 submenuLink.textContent = capitalizeWords(value);
 
                 submenuItem.appendChild(submenuLink);
