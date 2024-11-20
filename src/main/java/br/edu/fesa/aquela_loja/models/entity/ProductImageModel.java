@@ -3,8 +3,6 @@ package br.edu.fesa.aquela_loja.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Base64;
-
 @Entity
 @Getter
 @Setter

@@ -1,7 +1,6 @@
 package br.edu.fesa.aquela_loja.models.entity;
 
 
-import br.edu.fesa.aquela_loja.models.dto.order.AddressOrderDto;
 import br.edu.fesa.aquela_loja.models.dto.order.CartItemOrderDto;
 import br.edu.fesa.aquela_loja.models.enums.OrderStatusEnum;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,11 +14,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Data
