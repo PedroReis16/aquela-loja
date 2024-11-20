@@ -8,10 +8,12 @@
 </head>
 
 <body>
-    <div class="search-container" th:fragment="searchBar">
-        <input id="searchBar" type="text" class="search-input" placeholder="Pesquisar..." />
-        <button id="searchButton"></button>
-    </div>
+    <form action="/search" method="get" th:fragment="searchBar">
+        <div class="search-container">
+            <input id="searchBar" name="searched" type="text" class="search-input" placeholder="Pesquisar..." required/>
+            <button id="searchButton" type="submit"></button>
+        </div>
+    </form>
 </body>
 
 </html>
