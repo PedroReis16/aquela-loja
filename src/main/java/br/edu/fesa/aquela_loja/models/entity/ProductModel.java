@@ -27,7 +27,7 @@ public class ProductModel {
 
     private BigDecimal price;
 
-    private int qtStock;
+    private int stockCount;
 
     private String brand;
 

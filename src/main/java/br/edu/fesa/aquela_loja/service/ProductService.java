@@ -34,7 +34,7 @@ public class ProductService {
                 .price(pDto.getPrice())
                 .brand(pDto.getBrand())
                 .category(pDto.getCategory())
-                .qtStock(pDto.getQtdStock())
+                .stockCount(pDto.getStockCount())
                 .description(pDto.getDescription())
                 .build();
 

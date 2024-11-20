@@ -1,9 +1,9 @@
 package br.edu.fesa.aquela_loja.models.dto;
 
+import java.math.BigDecimal;
+
 import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
 import lombok.Data;
-
-import java.math.BigDecimal;
 
 @Data
 public class ProductRegDto {
@@ -16,7 +16,7 @@ public class ProductRegDto {
 
     private CategoryEnum category;
 
-    private int qtdStock;
+    private int stockCount;
 
     private String description;
 }

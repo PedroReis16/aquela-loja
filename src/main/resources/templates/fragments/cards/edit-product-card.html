@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script th:src="@{/js/components/card.js}" defer></script>
+</head>
+
+<body>
+    <custom-card padding="16px" div="edit-product-card" th:fragment="editProductCard(product)">
+
+        <img th:src="${product.imageBase64}" class="product-image">
+        <div class="product-card-content">
+            <h2 th:text="${product.name}"></h2>
+            <p th:text="${product.brand}"></p>
+            <p th:text="${product.category.displayName}"></p>
+            <div class="product-statistics">
+                <p>Disponível: <span th:text="${product.stockCount}"></span></p>
+                <p class="product-edit-card-price"> Valor: <span th:text="${product.price}"><span></p>
+            </div>
+        </div>
+
+        <button class="edit-product-btn confirm-button"><i></i>Editar</button>
+    </custom-card>
+</body>
+
+</html>
