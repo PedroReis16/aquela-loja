@@ -11,6 +11,7 @@ import br.edu.fesa.aquela_loja.service.user_services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -45,7 +46,7 @@ public class OrderController {
     private IOrderRepository orderRepository;
 
     @PostMapping("/new")
-    public ResponseEntity<Void> createNewOrder(@RequestBody NewOrderDto dto, HttpServletRequest request) throws JsonProcessingException {
+    public ResponseEntity<Void> createNewOrder(@RequestBody NewOrderDto dto, HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
         List<String> pIds = cartService.getCartItems(request);
 
         if (dto != null) {
@@ -75,6 +76,8 @@ public class OrderController {
             order.setDestination(dto.getAddress().getLocation() + " n:" + dto.getAddress().getStreet());
 
             orderRepository.save(order);
+
+            cartService.removeAllFromCart(request, response);
         }
 
         // Processa o endereço

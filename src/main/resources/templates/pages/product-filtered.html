@@ -60,6 +60,19 @@
       background: #27ae60;
     }
 
+    .centered-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .centered-container img {
+      max-width: 100%;
+      height: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -75,6 +88,10 @@
       <button class="product-button">Adicionar ao Carrinho</button>
     </a>
   </div>
+</div>
+
+<div th:if="!${product}" class="centered-container">
+  <img th:src="@{/images/notFound.png}" alt="">
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
