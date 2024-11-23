@@ -32,6 +32,7 @@
 @import url("./fragment_styles/dialogs/new-user-card-dialog.css");
 @import url("./fragment_styles/cards/new-user-card.css");
 @import url("./fragment_styles/cards/edit-product-card.css");
+@import url("./fragment_styles/cards/product-dialog.css");
 
 :root {
   --default-font: "Poppins", sans-serif;

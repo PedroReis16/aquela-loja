@@ -29,7 +29,7 @@ public class ProductController {
 
     @GetMapping("/form")
     public String regProductForm(ProductRegDto productRegDto) {
-        return "pages/product-form";
+        return "pages/product_pages/new-product";
     }
 
     @GetMapping("/list-all")
