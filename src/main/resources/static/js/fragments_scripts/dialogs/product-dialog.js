@@ -7,10 +7,16 @@ const productBrand = document.getElementById('productBrand');
 
 // Image preview
 const imagePreview = document.getElementById('imagePreview');
-const previewCardImage = document.getElementById('previewCardImage');
-const previewTitle = document.getElementById('previewTitle');
-const previewPrice = document.getElementById('previewPrice');
-const previewInstallment = document.getElementById('previewInstallment');
+const productCardImage = document.getElementById('productCardImage');
+const productTitle = document.getElementById('productTitle');
+const productTitleTooltip = document.getElementById('productTitleTooltip');
+const productPreviewPrice = document.getElementById('productPreviewPrice');
+const productInstallment = document.getElementById('productInstallment');
+
+// const Butão salvar
+const saveProductBtn = document.getElementById('saveNewProduct');
+const dialog = document.getElementById('productDialog');
+const closeDialogBtn = document.getElementById('closeNewProductDialog');
 
 // Format price to Brazilian currency
 function formatPrice(value) {
@@ -28,7 +34,7 @@ productImage.addEventListener('change', function (e) {
 
         reader.onload = function (e) {
             // Update both preview areas
-            previewCardImage.src = e.target.result;
+            productCardImage.src = e.target.result;
         }
 
         reader.readAsDataURL(file);
@@ -37,15 +43,16 @@ productImage.addEventListener('change', function (e) {
 
 // Live preview updates
 productDescription.addEventListener('input', function (e) {
-    previewTitle.textContent = e.target.value || 'Nome do Produto';
+    productTitle.textContent = e.target.value || 'Nome do Produto';
+    productTitleTooltip.textContent = e.target.value || 'Nome do Produto';
 });
 
 productPrice.addEventListener('input', function (e) {
     const value = parseFloat(e.target.value) || 0;
     const installmentValue = value / 10;
 
-    previewPrice.textContent = formatPrice(value);
-    previewInstallment.textContent = `ou 10x de ${formatPrice(installmentValue)} sem juros`;
+    productPreviewPrice.textContent = formatPrice(value);
+    productInstallment.textContent = `ou 10x de ${formatPrice(installmentValue)} sem juros`;
 });
 
 async function populateCategories() {
@@ -96,8 +103,22 @@ async function populateBrands() {
 
 }
 
+function validateFields() {
+    if (productDescription.value === '' || productPrice.value === '' || productPrice <= 0 || productImage.value === '') {
+        saveProductBtn.disabled = true;
+    }
+    return saveProductBtn.disabled = false;
+}
+
+
+
 document.addEventListener('DOMContentLoaded', async function () {
 
     await populateCategories();
     await populateBrands();
+
+});
+
+closeDialogBtn.addEventListener('click', function () {
+    dialog.close();
 });

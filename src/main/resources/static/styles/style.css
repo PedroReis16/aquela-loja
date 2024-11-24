@@ -95,6 +95,7 @@ a {
   outline: none;
   box-sizing: border-box;
   height: 56px;
+  font-family: var(--secondary-font);
 }
 
 .input-label input {
@@ -213,4 +214,35 @@ a {
 
   color: var(--primary-color);
   font-size: 24px;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-container h2 {
+  margin: 0;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%; /* Exibe abaixo do título */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark-gray);
+  color: var(--white);
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: wrap;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.tooltip-container:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
 }

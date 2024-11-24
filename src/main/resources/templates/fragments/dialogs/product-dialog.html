@@ -12,11 +12,11 @@
         <dialog id="productDialog">
             <div class="dialog-header" id="productDialogHeader">
                 <h3><i id="productDialogHeaderIcon"></i>Novo Produto</h3>
-                <button class="close-dialog-button new-card-cancel" id="closeNewUserCardDialog"><i></i></button>
+                <button class="close-dialog-button new-card-cancel" id="closeNewProductDialog"><i></i></button>
             </div>
 
             <div class="dialog-content">
-                <form action="" method="post" id="productFrom">
+                <form action="" method="post" id="productForm">
                     <div class="product-description-container">
                         <div class="input-label">
                             <i id="descriptionIcon"></i>
@@ -30,23 +30,11 @@
                     <div class="product-description-container">
                         <div class="input-label">
                             <i id="categoryIcon"></i>
-                            <select name="productCategory" id="productCategory"></select>
-                            <!-- <input type="text" id="productCategory" name="productCategory"
-                                placeholder="Categoria do produto"> -->
+                            <select name="productCategory" id="productCategory" class="product-dropdown"></select>
                             <label for="productCategory"></label>
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
-
-                    <!-- <div class="gender-container">
-                        <div class="input-label">
-                            <i id="genderIcon"></i>
-                            <select id="productCategory" class="custom-select" >
-                                
-                            </select>
-                        </div>
-                        <p id="genderErrorMessage" class="error-message"></p>
-                    </div> -->
 
                     <div class="product-description-container">
                         <div class="input-label">
@@ -60,7 +48,8 @@
                     <div class="product-description-container">
                         <div class="input-label">
                             <i id="descriptionIcon"></i>
-                            <select id="productBrand" name="productBrand" placeholder="Marca do produto">
+                            <select id="productBrand" name="productBrand" class="product-dropdown"
+                                placeholder="Marca do produto">
 
                             </select>
 
@@ -80,27 +69,28 @@
                 </form>
 
 
-                <div class="preview-card">
-                    <div class="preview-card-actions">
-                        <button class="action-button">♡</button>
-                        <button class="action-button">🛒</button>
+                <div class="product-card">
+
+                    <div class="product-card-image">
+                        <img id="productCardImage" src="/api/placeholder/400/320" alt="Preview">
                     </div>
-                    <div class="preview-card-image">
-                        <img id="previewCardImage" src="/api/placeholder/400/320" alt="Preview">
-                    </div>
-                    <div class="preview-card-content">
-                        <div class="preview-card-title" id="previewTitle">Nome do Produto</div>
-                        <div class="preview-card-price" id="previewPrice">R$ 0,00</div>
-                        <div class="preview-card-installment" id="previewInstallment">ou 10x de R$ 0,00 sem juros
+                    <div class="product-card-content">
+                        <!-- <div class="product-card-title" id="productTitle">Nome do Produto</div> -->
+                        <div class="tooltip-container">
+                            <h2 id="productTitle">Descrição do produto</h2>
+                            <div class="tooltip" id="productTitleTooltip"></div>
                         </div>
-                        <button class="preview-card-button">Comprar</button>
+                        <div class="product-card-price" id="productPreviewPrice">R$ 0,00</div>
+                        <div class="product-card-installment" id="productInstallment">ou 10x de R$ 0,00 sem juros
+                        </div>
+                        <button class="confirm-button" id="productCardBtn">Comprar</button>
                     </div>
                 </div>
             </div>
 
-            <div class="new-card-dialog-actions">
-                <button type="button" class="cancel-btn new-card-cancel" id="cancelNewCard">Cancelar</button>
-                <button type="submit" class="confirm-button" id="saveNewCard">Salvar</button>
+            <div class="new-product-dialog-actions">
+                <button type="button" class="cancel-btn new-product-cancel" id="cancelNewProduct">Cancelar</button>
+                <button type="submit" class="confirm-button" id="saveNewProduct">Salvar</button>
             </div>
         </dialog>
 

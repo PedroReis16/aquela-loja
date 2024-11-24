@@ -54,33 +54,4 @@
   margin: 0px 8px;
 }
 
-.tooltip-container {
-  position: relative;
-  display: inline-block;
-}
 
-.tooltip-container h2 {
-  margin: 0;
-}
-
-.tooltip {
-  position: absolute;
-  top: 100%; /* Exibe abaixo do título */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--dark-gray);
-  color: var(--white);
-  padding: 5px 10px;
-  border-radius: 5px;
-  white-space: nowrap;
-  font-size: 14px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  pointer-events: none;
-}
-
-.tooltip-container:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-}

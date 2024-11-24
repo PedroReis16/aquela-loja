@@ -8,20 +8,20 @@
 </head>
 
 <body>
-    <div class="preview-card">
-        <div class="preview-card-actions">
-            <button class="action-button">♡</button>
-            <button class="action-button">🛒</button>
+    <div class="product-card">
+
+        <div class="product-card-image">
+            <img id="productCardImage" src="/api/placeholder/400/320" alt="Preview">
         </div>
-        <div class="preview-card-image">
-            <img id="previewCardImage" src="/api/placeholder/400/320" alt="Preview">
-        </div>
-        <div class="preview-card-content">
-            <div class="preview-card-title" id="previewTitle">Nome do Produto</div>
-            <div class="preview-card-price" id="previewPrice">R$ 0,00</div>
-            <div class="preview-card-installment" id="previewInstallment">ou 10x de R$ 0,00 sem juros
+        <div class="product-card-content">
+            <div class="tooltip-container">
+                <h2 id="productTitlte">Product Name</h2>
+                <div class="tooltip" id="productTitleTooltip"></div>
             </div>
-            <button class="preview-card-button">Comprar</button>
+            <div class="product-card-price" id="productPrice">R$ 0,00</div>
+            <div class="product-card-installment" id="productInstallment">ou 10x de R$ 0,00 sem juros
+            </div>
+            <button class="confirm-button" card="product-card-btn">Comprar</button>
         </div>
     </div>
 </body>
