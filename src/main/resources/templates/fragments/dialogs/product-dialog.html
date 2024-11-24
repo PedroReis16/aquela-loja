@@ -28,28 +28,27 @@
                     </div>
                     <div class="product-description-container">
                         <div class="input-label">
-                            <i id="descriptionIcon"></i>
-                            <input type="text" id="productDescription" name="productDescription"
+                            <i id="categoryIcon"></i>
+                            <input type="text" id="productCategory" name="productCategory"
                                 placeholder="Categoria do produto">
+                            <label for="productCategory"></label>
+                        </div>
+                        <p id="referenceInputError" class="error-message"></p>
+                    </div>
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="priceIcon"></i>
+                            <input type="text" id="productPrice" name="productPrice" placeholder="Preço">
                             <label for="productDescription"></label>
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
                     <div class="product-description-container">
                         <div class="input-label">
-                            <i id="descriptionIcon"></i>
-                            <input type="text" id="productDescription" name="productDescription"
-                                placeholder="Preço">
-                            <label for="productDescription"></label>
-                        </div>
-                        <p id="referenceInputError" class="error-message"></p>
-                    </div>
-                    <div class="product-description-container">
-                        <div class="input-label">
-                            <i id="descriptionIcon"></i>
-                            <input type="text" id="productDescription" name="productDescription"
-                                placeholder="Categoria">
-                            <label for="productDescription"></label>
+                            <i id="stockIcon"></i>
+                            <input type="text" id="productBrand" name="productBrand"
+                                placeholder="Quantidade em estoque">
+                            <label for="productBrand"></label>
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
@@ -71,14 +70,21 @@
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div> -->
-
-                    <div class="form-group">
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="pictureIcon"></i>
+                            <input type="file" id="productImage" accept="image/*" required>
+                            <label for="productDescription"></label>
+                        </div>
+                        <p id="referenceInputError" class="error-message"></p>
+                    </div>
+                    <!-- <div class="form-group">
                         <label for="productImage">Imagem do Produto*</label>
                         <input type="file" id="productImage" accept="image/*" required>
                         <div class="image-preview" id="imagePreview">
                             <span>Selecione uma imagem</span>
                         </div>
-                    </div>
+                    </div> -->
 
                 </form>
 

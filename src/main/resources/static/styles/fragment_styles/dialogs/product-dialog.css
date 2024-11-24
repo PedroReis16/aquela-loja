@@ -12,3 +12,32 @@
   font-size: 20px;
   color: var(--gray);
 }
+
+#categoryIcon::before {
+  content: "\e574";
+  font-family: var(--material-icons);
+  font-size: 20px;
+  color: var(--gray);
+}
+
+#priceIcon::before {
+  content: "\ef63";
+  font-family: var(--material-icons);
+  font-size: 20px;
+  color: var(--gray);
+}
+
+#stockIcon::before {
+  content: "\e1a1";
+  font-family: var(--material-icons);
+  font-size: 20px;
+  color: var(--gray);
+}
+
+#pictureIcon::before {
+  content: "\e410";
+  font-family: var(--material-icons);
+  font-size: 20px;
+  color: var(--gray);
+}
+
