@@ -1,5 +1,8 @@
 package br.edu.fesa.aquela_loja.models.enums;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public enum CategoryEnum {
     ACESSORIOS_GAMER("ACESSÓRIOS GAMER"),
     ACESSORIOS_PARA_TVS("ACESSÓRIOS PARA TVS"),
@@ -57,5 +60,15 @@ public enum CategoryEnum {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public static Map<CategoryEnum, String> getCategories() {
+        Map<CategoryEnum, String> categoryDisplayNames = new LinkedHashMap<>();
+
+        for (CategoryEnum category : CategoryEnum.values()) {
+            categoryDisplayNames.put(category, category.getDisplayName());
+        }
+
+        return categoryDisplayNames;
     }
 }
