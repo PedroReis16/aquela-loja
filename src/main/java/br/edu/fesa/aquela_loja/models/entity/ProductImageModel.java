@@ -15,12 +15,12 @@ public class ProductImageModel {
     @Column(insertable=false, updatable=false)
     private Long id;
 
-    private String name;
+    // private String name;
 
     @Lob
     private byte[] data;
 
-    private String type;
+    // private String type;
 
 //    @ManyToOne
 //    @JoinColumn(name = "ProductId")

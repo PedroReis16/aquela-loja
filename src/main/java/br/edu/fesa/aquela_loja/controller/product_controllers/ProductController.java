@@ -46,12 +46,18 @@ public class ProductController {
         return "pages/product-edit";
     }
 
-    // @PostMapping("/new-product")
-    // public ResponseEntity<Void> postMethodName(@RequestBody NewProductDto newProduct) {
-    //     productService.createNewProduct(newProduct);
-
-    //     return ResponseEntity.ok().build();
-    // }
+    @PostMapping("/new-product")
+    public ResponseEntity<Void> postMethodName(@RequestBody NewProductDto newProduct) {
+       try {
+        productService.createNewProduct(newProduct);
+        
+        
+        
+        return ResponseEntity.ok().build();
+       } catch (Exception e) {
+        return ResponseEntity.badRequest().build();
+       }
+    }
     
     // @PostMapping("/registration")
     // public String registringProduct(ProductRegDto productRegDto, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap model) {

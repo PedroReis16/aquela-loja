@@ -27,7 +27,7 @@ public class ProductService {
     private ImageService imageService;
 
     @Transactional
-    public void createNewProduct(final NewProductDto pDto) throws IOException {
+    public void createNewProduct( NewProductDto pDto) throws IOException {
 
         ProductModel product = ProductModel.builder()
                 .name(pDto.getPName())
@@ -38,8 +38,8 @@ public class ProductService {
                 .description(pDto.getDescription())
                 .build();
 
-        // var imgSaved = imageService.generateFileModel(img);
-        // product.setImg(imgSaved);
+        var imgSaved = imageService.generateFileModel(pDto.getImage());
+        product.setImg(imgSaved);
 
         productRepository.save(product);
     }
