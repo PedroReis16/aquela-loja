@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.fesa.aquela_loja.models.dto.ProductRegDto;
+import br.edu.fesa.aquela_loja.models.dto.NewProductDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.service.ProductService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/product")
@@ -29,7 +31,7 @@ public class ProductController {
 
     @GetMapping("")
     public ResponseEntity<Void> findProductByName(@RequestParam String description) {
-        Boolean exists = productService.exists(description);
+        boolean exists = productService.exists(description);
 
         if (exists) {
             return ResponseEntity.ok().build();
@@ -44,25 +46,32 @@ public class ProductController {
         return "pages/product-edit";
     }
 
-    @PostMapping("/registration")
-    public String registringProduct(ProductRegDto productRegDto, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap model) {
+    // @PostMapping("/new-product")
+    // public ResponseEntity<Void> postMethodName(@RequestBody NewProductDto newProduct) {
+    //     productService.createNewProduct(newProduct);
 
-        try {
-            if (productService.exists(productRegDto.getPName().trim())) {
-                model.addAttribute("productRegDto", productRegDto);
-                model.addAttribute("nameError", true);
+    //     return ResponseEntity.ok().build();
+    // }
+    
+    // @PostMapping("/registration")
+    // public String registringProduct(ProductRegDto productRegDto, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap model) {
 
-                return "pages/product-form";
-            }
+    //     try {
+    //         if (productService.exists(productRegDto.getPName().trim())) {
+    //             model.addAttribute("productRegDto", productRegDto);
+    //             model.addAttribute("nameError", true);
 
-            productService.createNewProduct(productRegDto, file);
-            redirectAttributes.addAttribute("showRegNotification", true);
-        } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("message", "Falha ao carregar imagem");
-        }
+    //             return "pages/product-form";
+    //         }
 
-        return "redirect:/product/list-all";
-    }
+    //         productService.createNewProduct(productRegDto, file);
+    //         redirectAttributes.addAttribute("showRegNotification", true);
+    //     } catch (IOException e) {
+    //         redirectAttributes.addFlashAttribute("message", "Falha ao carregar imagem");
+    //     }
+
+    //     return "redirect:/product/list-all";
+    // }
 
     @PostMapping("/update")
     public String updateProduct(@ModelAttribute ProductModel product, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap model) {

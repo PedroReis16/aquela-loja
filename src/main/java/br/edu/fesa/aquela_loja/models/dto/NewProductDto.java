@@ -7,7 +7,7 @@ import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
 import lombok.Data;
 
 @Data
-public class ProductRegDto {
+public class NewProductDto {
 
     private String pName;
 
@@ -20,4 +20,5 @@ public class ProductRegDto {
     private int stockCount;
 
     private String description;
+    private String image;
 }

@@ -5,16 +5,16 @@ import java.text.Normalizer;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
-import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
-import br.edu.fesa.aquela_loja.models.enums.DepartamentEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.edu.fesa.aquela_loja.models.dto.ProductRegDto;
+import br.edu.fesa.aquela_loja.models.dto.NewProductDto;
+import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
+import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
+import br.edu.fesa.aquela_loja.models.enums.DepartamentEnum;
 import br.edu.fesa.aquela_loja.repository.IProductRepository;
 
 @Service
@@ -27,7 +27,7 @@ public class ProductService {
     private ImageService imageService;
 
     @Transactional
-    public void createNewProduct(final ProductRegDto pDto, final MultipartFile img) throws IOException {
+    public void createNewProduct(final NewProductDto pDto) throws IOException {
 
         ProductModel product = ProductModel.builder()
                 .name(pDto.getPName())
@@ -38,8 +38,8 @@ public class ProductService {
                 .description(pDto.getDescription())
                 .build();
 
-        var imgSaved = imageService.generateFileModel(img);
-        product.setImg(imgSaved);
+        // var imgSaved = imageService.generateFileModel(img);
+        // product.setImg(imgSaved);
 
         productRepository.save(product);
     }

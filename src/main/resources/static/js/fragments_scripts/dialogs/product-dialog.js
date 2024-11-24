@@ -5,6 +5,13 @@ const productPrice = document.getElementById('productPrice');
 const productImage = document.getElementById('productImage');
 const productBrand = document.getElementById('productBrand');
 
+// Mensagens de erro
+const descriptionError = document.getElementById('productDescriptionError');
+const productCategoryError = document.getElementById('productCategoryError');
+const productPriceError = document.getElementById('productPriceError');
+const productBrandError = document.getElementById('productBrandError');
+const productImageError = document.getElementById('productImageError');
+
 // Image preview
 const imagePreview = document.getElementById('imagePreview');
 const productCardImage = document.getElementById('productCardImage');
@@ -15,8 +22,25 @@ const productInstallment = document.getElementById('productInstallment');
 
 // const Butão salvar
 const saveProductBtn = document.getElementById('saveNewProduct');
+const cancelProductBtn = document.getElementById('cancelNewProduct');
 const dialog = document.getElementById('productDialog');
 const closeDialogBtn = document.getElementById('closeNewProductDialog');
+
+let formData = {
+    description: '',
+    category: '',
+    price: '',
+    brand: '',
+    image: ''
+}
+
+function canSaveProduct() {
+    if (formData.description && formData.category && formData.price && formData.brand && formData.image) {
+        saveProductBtn.disabled = false;
+        return;
+    }
+    saveProductBtn.disabled = true;
+}
 
 // Format price to Brazilian currency
 function formatPrice(value) {
@@ -35,6 +59,10 @@ productImage.addEventListener('change', function (e) {
         reader.onload = function (e) {
             // Update both preview areas
             productCardImage.src = e.target.result;
+
+            console.log(e.target.result);
+            formData.image = e.target.result;
+            canSaveProduct();
         }
 
         reader.readAsDataURL(file);
@@ -43,37 +71,46 @@ productImage.addEventListener('change', function (e) {
 
 // Live preview updates
 productDescription.addEventListener('input', function (e) {
-    productTitle.textContent = e.target.value || 'Nome do Produto';
-    productTitleTooltip.textContent = e.target.value || 'Nome do Produto';
+    productTitle.textContent = e.target.value;
+    productTitleTooltip.textContent = e.target.value;
 });
 
 productPrice.addEventListener('input', function (e) {
-    const value = parseFloat(e.target.value) || 0;
+    const value = parseFloat(e.target.value.replace(',', '.')) || 0;
     const installmentValue = value / 10;
+
+    if (value <= 0) {
+        productPriceError.textContent = 'Preço inválido';
+        return;
+    } else {
+        productPriceError.textContent = '';
+    }
 
     productPreviewPrice.textContent = formatPrice(value);
     productInstallment.textContent = `ou 10x de ${formatPrice(installmentValue)} sem juros`;
+
+    formData.price = value;
+    canSaveProduct();
 });
 
-const descriptionError = document.getElementById('productDescriptionError');
+
 productDescription.addEventListener('blur', async function (e) {
     let value = e.target.value;
 
     const response = await fetch(`/product?description=${value}`)
 
-    if (response.noContent) {
+    if (response.status === 204) {
         descriptionError.textContent = '';
     }
     else {
         descriptionError.textContent = 'Produto já cadastrado';
+        return;
     }
+
+    formData.description = value;
+    canSaveProduct();
 });
 
-
-const productCategoryError = document.getElementById('productCategoryError');
-const productPriceError = document.getElementById('productPriceError');
-const productBrandError = document.getElementById('productBrandError');
-const productImageError = document.getElementById('productImageError');
 
 
 // Inicialização dos campos ao carregar o arquivo
@@ -124,20 +161,46 @@ async function populateBrands() {
     }
 
 }
-function validateFields() {
-    if (productDescription.value === '' || productPrice.value === '' || productPrice <= 0 || productImage.value === '') {
-        saveProductBtn.disabled = true;
-    }
-    return saveProductBtn.disabled = false;
-}
 
+productCategory.addEventListener('change', function (e) {
+    formData.category = e.target.value;
+    canSaveProduct();
+});
+productBrand.addEventListener('change', function (e) {
+    formData.brand = e.target.value;
+    canSaveProduct();
+});
 
 
 document.addEventListener('DOMContentLoaded', async function () {
-
     await populateCategories();
     await populateBrands();
 
+    formData.category = productCategory.value;
+    formData.brand = productBrand.value;
+
+    canSaveProduct();
+});
+
+saveProductBtn.addEventListener('click', async function () {
+    const response = await fetch('/product/new-product', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+        dialog.close();
+        location.reload();
+    } else {
+        console.error('Failed to save product:', response.statusText);
+    }
+});
+
+cancelProductBtn.addEventListener('click', function () {
+    dialog.close();
 });
 
 closeDialogBtn.addEventListener('click', function () {
