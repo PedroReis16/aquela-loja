@@ -21,7 +21,11 @@ public class ProductPageRouteController {
     @GetMapping({"/", ""})
     public String getMethodName(ModelMap model) {
         List<ProductDto> sortedProducts = productService.getAllItems();
+        
+
         model.addAttribute("products", sortedProducts);
+
+
 
         return "pages/product_pages/storage-products";
     }

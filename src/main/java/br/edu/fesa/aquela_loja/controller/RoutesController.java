@@ -34,11 +34,11 @@ public class RoutesController {
         List<ProductDto> products = productService.findAllLimit10();
         model.addAttribute("products", products);
 
-        List<ProductModel> process = productService.find10ByCategory(CategoryEnum.PROCESSADORES);
-        model.addAttribute("process", process);
+        List<ProductDto> process = productService.find10ByCategory(CategoryEnum.PROCESSADORES);
+        model.addAttribute("processors", process);
 
-        List<ProductModel> phone = productService.find10ByCategory(CategoryEnum.FONE_DE_OUVIDO);
-        model.addAttribute("phone", phone);
+        List<ProductDto> phone = productService.find10ByCategory(CategoryEnum.FONE_DE_OUVIDO);
+        model.addAttribute("audios", phone);
 
         return "pages/index";
     }

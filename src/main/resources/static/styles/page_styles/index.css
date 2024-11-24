@@ -41,7 +41,7 @@
   right: 10px;
 }
 
-#discountTitle {
+.sectionTitle {
   font-family: var(--default-font);
   font-weight: 700;
   font-size: 20px;
@@ -53,6 +53,25 @@
   height: 8px;
   position: relative;
   top: 4px;
+  margin-right: 4px;
+}
+
+#processorsTitle i::before {
+  content: url("../../images/icons8-processor-24.png");
+  width: 8px;
+  height: 8px;
+  position: relative;
+  top: 4px;
+  margin-right: 4px;
+}
+
+#audiosTitle i::before {
+  content: url("../../images/icons8-sound-24.png");
+  width: 8px;
+  height: 8px;
+  position: relative;
+  top: 4px;
+  margin-right: 4px;
 }
 
 /* Carrossel de Produtos */
@@ -74,12 +93,9 @@
   transition: transform 0.5s ease;
 }
 
-
-
 /* .product-card:hover {
   transform: translateY(-5px);
 } */
-
 
 /* Controles dos Carrosséis */
 .carousel-container {

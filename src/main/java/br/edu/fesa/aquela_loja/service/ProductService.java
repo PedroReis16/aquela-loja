@@ -72,8 +72,26 @@ public class ProductService {
         return result;
     }
 
-    public List<ProductModel> find10ByCategory(CategoryEnum category) {
-        return productRepository.findTop10ByCategory(category);
+    public List<ProductDto> find10ByCategory(CategoryEnum category) {
+        List<ProductModel> models = productRepository.findTop10ByCategory(category);
+        List<ProductDto> result = new ArrayList<>();
+
+        for (ProductModel product : models) {
+            ProductDto productDto = new ProductDto();
+            productDto.setId(product.getId());
+            productDto.setName(product.getName());
+            productDto.setBrand(product.getBrand());
+            productDto.setCategory(product.getCategory());
+            productDto.setPrice(product.getPrice());
+            productDto.setStockCount(product.getStockCount());
+
+            String base64Image = Base64.getEncoder().encodeToString(product.getImg().getData());
+            productDto.setImage("data:image/jpg;base64," + base64Image);
+
+            result.add(productDto);
+        }
+
+        return result;
     }
 
     public ProductModel findById(final String id) {
@@ -163,8 +181,8 @@ public class ProductService {
         List<ProductModel> products = findAll();
 
         List<ProductModel> sortedProducts = products.stream()
-                .sorted((produdc1, product2) -> produdc1.getDescription()
-                .compareTo(product2.getDescription()))
+                .sorted((produdc1, product2) -> produdc1.getName()
+                .compareTo(product2.getName()))
                 .toList();
 
         for (ProductModel product : sortedProducts) {
