@@ -17,6 +17,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,5 +75,25 @@ public class OrderModel {
         }
 
         return new HashMap<>();
+    }
+
+    public String getItemsRelation() {
+        var mapRelation = getItemsQtRelation();
+
+        StringBuilder builder= new StringBuilder();
+
+        mapRelation.forEach((name, qt) -> builder.append(name).append(" - ").append(qt).append("<br>"));
+
+        return builder.toString();
+    }
+
+    public String getFormattedOrderedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return orderedAt.format(formatter);
+    }
+
+    public String getFormattedUpdatedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return updateAt.format(formatter);
     }
 }

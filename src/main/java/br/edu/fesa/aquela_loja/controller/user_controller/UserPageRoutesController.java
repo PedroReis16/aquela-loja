@@ -2,9 +2,13 @@ package br.edu.fesa.aquela_loja.controller.user_controller;
 
 import java.util.List;
 
+import br.edu.fesa.aquela_loja.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +29,8 @@ public class UserPageRoutesController {
     private UserService userService;
     @Autowired
     private UserCardService userCardService;
+    @Autowired
+    private OrderService orderService;
 
     @Autowired
     private UserAddressService userAddressService;
@@ -54,7 +60,15 @@ public class UserPageRoutesController {
     }
 
     @GetMapping("/meus-pedidos")
-    public String userOrdersPage(Model model) {
+    public String userOrdersPage(ModelMap model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if(auth.getAuthorities().stream().toList().get(0).getAuthority().equals("ROLE_ADMIN")) {
+            model.addAttribute("order", orderService.findAll());
+        } else {
+            model.addAttribute("order", orderService.findOrderByClient(userService.findUserByEmail(auth.getName())));
+        }
+
         return "pages/user_pages/meus-pedidos";
     }
 
