@@ -104,7 +104,7 @@ productDescription.addEventListener('input', function (e) {
 
 productPrice.addEventListener('input', function (e) {
     // Remove caracteres não numéricos
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    e.target.value = e.target.value.replace(/[^0-9,]/g, '');
 
 
     const value = parseFloat(e.target.value.replace(',', '.')) || 0;

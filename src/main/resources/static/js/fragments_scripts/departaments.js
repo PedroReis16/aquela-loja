@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function capitalizeWords(str) {
         return str.split(' ')
             .map(word => {
-                if (word === "E" || word === "DE" || word === "DA") {
+                if (word === "e" || word === "de" || word === "da"||word === "para") {
                     return word.toLowerCase();
                 }
                 else if (word === "PC" || word === "TV" || word === "DVD" || word === "CD" || word === "SSD" || word === "RAM")

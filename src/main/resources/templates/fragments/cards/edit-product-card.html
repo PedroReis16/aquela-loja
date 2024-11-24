@@ -10,25 +10,25 @@
 </head>
 
 <body>
-    <custom-card padding="16px" div="edit-product-card" th:fragment="editProductCard(product)">
+    <div class="product-card editable-product-card" th:fragment="editProductCard(product)">
 
-        <img th:src="${product.image}" class="product-image">
+        <div class="product-card-image">
+            <img id="productCardImage" th:src="${product.image}" alt="Preview">
+        </div>
         <div class="product-card-content">
-            <!-- <h2 th:text="${product.name}" th:title="${product.name}"></h2> -->
             <div class="tooltip-container">
-                <h2 class="product-name" th:text="${product.description}">Product Name</h2>
-                <div class="tooltip" th:text="${product.description}"></div>
+                <h2 id="productTitlte" class="product-name" th:text="${product.description}">Product Name</h2>
+                <div class="tooltip" id="productTitleTooltip" th:text="${product.description}"></div>
             </div>
             <p th:text="${product.brand}"></p>
             <p th:text="${product.category.displayName}"></p>
             <div class="product-statistics">
                 <p>Disponível: <span th:text="${product.stockCount}"></span></p>
-                <p class="product-edit-card-price"> Valor: <span th:text="${product.price}"><span></p>
+                <p class="product-edit-card-price"> R$ <span th:text="${product.price}"><span></p>
             </div>
+            <button class="confirm-button" card="product-card-btn">Editar</button>
         </div>
-
-        <button class="edit-product-btn confirm-button"><i></i>Editar</button>
-    </custom-card>
+    </div>
 </body>
 
 </html>
