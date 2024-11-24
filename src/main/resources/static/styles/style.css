@@ -5,7 +5,6 @@
 /* Import of page and widget styles */
 
 /* Pages */
-@import url("./page_styles/inicio.css");
 @import url("./page_styles/produtos.css");
 @import url("./page_styles/carrinho.css");
 @import url("./page_styles/login.css");
@@ -15,6 +14,7 @@
 @import url("./page_styles/user_page_styles/meus-cartoes.css");
 @import url("./page_styles/user_page_styles/meus-pedidos.css");
 @import url("./page_styles/product_page_styles/storage-products.css");
+@import url("./page_styles/index.css");
 
 /* Widgets */
 @import url("./fragment_styles/header.css");
