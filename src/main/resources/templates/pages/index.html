@@ -70,60 +70,56 @@
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </button>
-
-      <a href="#" class="view-all">VER TUDO ></a>
     </div>
-  </section>
 
-  <!-- <section class="products-section">
-    <h2 class="section-title">Aqueeeles Processadores</h2>
-    <div class="products-carousel">
-      <div class="products-carousel-inner">
-        <div class="product-card" th:each="product : ${process}">
-          <img th:src="${product.imageBase64}" style="width: 75px; height: 75px; object-fit: cover;"
-            class="product-image">
-          <div class="product-info">
-            <h3 class="product-title" th:text="${product.name}"></h3>
-            <p class="product-price" th:text="'R$ ' + ${product.price}"></p>
-            <a class="btn btn-danger btn-sm" th:onclick="|addToCart(${product.id})|">
-              <button class="product-button">Adicionar ao Carrinho</button>
-            </a>
+    <div class="carousel-container">
+      <button class="carousel-button prev" disabled>
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="carousel-wrapper">
+        <div class="carousel">
+          <div th:each="product : ${products}" th:insert="~{/fragments/cards/product-card::productCard('${product}')}">
           </div>
         </div>
       </div>
-      <button class="carousel-control carousel-prev" id="products-prev2">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="carousel-control carousel-next" id="products-next2">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-  </section>
 
-  <section class="products-section">
-    <h2 class="section-title">Aqueleeee Fone</h2>
-    <div class="products-carousel">
-      <div class="products-carousel-inner">
-        <div class="product-card" th:each="product : ${phone}">
-          <img th:src="${product.imageBase64}" style="width: 75px; height: 75px; object-fit: cover;"
-            class="product-image">
-          <div class="product-info">
-            <h3 class="product-title" th:text="${product.name}"></h3>
-            <p class="product-price" th:text="'R$ ' + ${product.price}"></p>
-            <a class="btn btn-danger btn-sm" th:onclick="|addToCart(${product.id})|">
-              <button class="product-button">Adicionar ao Carrinho</button>
-            </a>
+      <button class="carousel-button next">
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+
+    </div>
+
+    <div class="carousel-container">
+      <button class="carousel-button prev" disabled>
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="carousel-wrapper">
+        <div class="carousel">
+          <div th:each="product : ${products}" th:insert="~{/fragments/cards/product-card::productCard('${product}')}">
           </div>
         </div>
       </div>
-      <button class="carousel-control carousel-prev" id="products-prev3">
-        <i class="fas fa-chevron-left"></i>
+
+      <button class="carousel-button next">
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
       </button>
-      <button class="carousel-control carousel-next" id="products-next3">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+
+
     </div>
-  </section> -->
+
+  </section>
+
 
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -132,11 +128,3 @@
 </body>
 
 </html>
-<!-- </head> -->
-<!-- <body>
-    
-
-    
-   </body> -->
-
-<!-- </html> -->
