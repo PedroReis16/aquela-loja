@@ -1,0 +1,14 @@
+#productDialog {
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  width: 80%;
+  height: 70%;
+}
+
+#descriptionIcon::before {
+  content: "\e873";
+  font-family: var(--material-icons);
+  font-size: 20px;
+  color: var(--gray);
+}
