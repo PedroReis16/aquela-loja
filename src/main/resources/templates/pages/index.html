@@ -11,7 +11,7 @@
   <title>Aquela Loja</title>
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  
+
 </head>
 
 <body>
@@ -49,13 +49,8 @@
 
   <!-- Seção de Produtos -->
   <section class="products-section">
-    <h2 class="section-title">Produtos em Destaque</h2>
-    <div class="category-tabs">
-      <button class="category-tab active">Todos</button>
-      <button class="category-tab">Eletrônicos</button>
-      <button class="category-tab">Moda</button>
-      <button class="category-tab">Casa</button>
-    </div>
+    <h2 class="section-title"><i></i>Aquele precinho</h2>
+    
     <div class="products-carousel">
       <div class="products-carousel-inner">
         <div class="product-card" th:each="product : ${products}">
@@ -85,7 +80,7 @@
       <div class="products-carousel-inner">
         <div class="product-card" th:each="product : ${process}">
           <img th:src="${product.imageBase64}" style="width: 75px; height: 75px; object-fit: cover;"
-               class="product-image">
+            class="product-image">
           <div class="product-info">
             <h3 class="product-title" th:text="${product.name}"></h3>
             <p class="product-price" th:text="'R$ ' + ${product.price}"></p>
@@ -110,7 +105,7 @@
       <div class="products-carousel-inner">
         <div class="product-card" th:each="product : ${phone}">
           <img th:src="${product.imageBase64}" style="width: 75px; height: 75px; object-fit: cover;"
-               class="product-image">
+            class="product-image">
           <div class="product-info">
             <h3 class="product-title" th:text="${product.name}"></h3>
             <p class="product-price" th:text="'R$ ' + ${product.price}"></p>

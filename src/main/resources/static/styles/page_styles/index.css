@@ -1,8 +1,8 @@
 /* Carrossel de Promoções */
 .promo-carousel {
   position: relative;
-  max-width: 1200px;
-  margin: 2rem auto;
+  /* max-width: 1200px; */
+  max-width: 100%;
   overflow: hidden;
 }
 
@@ -20,7 +20,6 @@
   width: 100%;
   height: 100%;
   object-fit: fill;
-  border-radius: 8px;
 }
 
 .carousel-control {
