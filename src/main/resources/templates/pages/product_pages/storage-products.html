@@ -19,11 +19,14 @@
         <div class="product-content">
             <div class="dialog-header" id="storageProductHeader">
                 <h3><i></i> Produtos Disponíveis</h3>
-                <button type="button" class="confirm-button" id="newProductBtn"><i></i>Novo Produto</button>
+                <div id="storageHeaderActions">
+                    <div id="storageSearchBar" th:insert="~{/fragments/search-bar::searchBar}"></div>
+                    <button type="button" class="confirm-button" id="newProductBtn"><i></i>Novo Produto</button>
+                </div>
             </div>
 
             <div class="product-list">
-                <div th:each="product : ${products}" th:insert="~{/fragments/cards/edit-product-card::editProductCard(
+                <div class="editable-product" th:each="product : ${products}" th:insert="~{/fragments/cards/edit-product-card::editProductCard(
                         '${product}'
                         )}">
                 </div>

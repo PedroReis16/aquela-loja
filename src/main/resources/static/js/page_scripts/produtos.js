@@ -1,6 +1,30 @@
 const newProductBtn = document.getElementById('newProductBtn');
 const productDialog = document.getElementById('productDialog');
 
+const productList = document.querySelector('.product-list');
+const searchBar = document.querySelector('#storageSearchBar>form');
+
+const productCard = document.querySelectorAll('.editable-product')
+
+function filterProducts(searchValue) {
+    productCard.forEach(product => {
+        const productName = product.querySelector('.product-name').textContent.toLowerCase();
+        if (productName.indexOf(searchValue) !== -1) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+    // $('table tbody tr').each(function () {
+    //     var productName = $(this).find('td:nth-child(3)').text().toLowerCase();
+    //     if (productName.indexOf(searchValue) !== -1) {
+    //         $(this).show();
+    //     } else {
+    //         $(this).hide();
+    //     }
+    // });
+}
+
 newProductBtn.addEventListener('click', () => {
     productDialog.showModal();
 });
@@ -9,6 +33,11 @@ window.addEventListener('click', function (event) {
     if (event.target === productDialog) {
         productDialog.close();
     }
+});
+
+searchBar.addEventListener('input', function (e) {
+    var searchValue = e.target.value.toLowerCase();
+    filterProducts(searchValue);
 });
 
 // function confirmDelete(productId) {
@@ -52,20 +81,3 @@ window.addEventListener('click', function (event) {
 // }
 
 // Query para filtro escrito dos produtos
-// $(document).ready(function () {
-//     $('#searchInput').on('input', function () {
-//         var searchValue = $(this).val().toLowerCase();
-//         filterProducts(searchValue);
-//     });
-
-//     function filterProducts(searchValue) {
-//         $('table tbody tr').each(function () {
-//             var productName = $(this).find('td:nth-child(3)').text().toLowerCase();
-//             if (productName.indexOf(searchValue) !== -1) {
-//                 $(this).show();
-//             } else {
-//                 $(this).hide();
-//             }
-//         });
-//     }
-// });

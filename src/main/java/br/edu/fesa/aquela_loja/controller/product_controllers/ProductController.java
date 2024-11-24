@@ -1,7 +1,6 @@
 package br.edu.fesa.aquela_loja.controller.product_controllers;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
