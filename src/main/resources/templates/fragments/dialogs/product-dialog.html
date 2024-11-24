@@ -26,15 +26,28 @@
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
+
                     <div class="product-description-container">
                         <div class="input-label">
                             <i id="categoryIcon"></i>
-                            <input type="text" id="productCategory" name="productCategory"
-                                placeholder="Categoria do produto">
+                            <select name="productCategory" id="productCategory"></select>
+                            <!-- <input type="text" id="productCategory" name="productCategory"
+                                placeholder="Categoria do produto"> -->
                             <label for="productCategory"></label>
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
+
+                    <!-- <div class="gender-container">
+                        <div class="input-label">
+                            <i id="genderIcon"></i>
+                            <select id="productCategory" class="custom-select" >
+                                
+                            </select>
+                        </div>
+                        <p id="genderErrorMessage" class="error-message"></p>
+                    </div> -->
+
                     <div class="product-description-container">
                         <div class="input-label">
                             <i id="priceIcon"></i>
@@ -43,33 +56,18 @@
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
-                    <div class="product-description-container">
-                        <div class="input-label">
-                            <i id="stockIcon"></i>
-                            <input type="text" id="productBrand" name="productBrand"
-                                placeholder="Quantidade em estoque">
-                            <label for="productBrand"></label>
-                        </div>
-                        <p id="referenceInputError" class="error-message"></p>
-                    </div>
+
                     <div class="product-description-container">
                         <div class="input-label">
                             <i id="descriptionIcon"></i>
-                            <input type="text" id="productDescription" name="productDescription"
-                                placeholder="Marca do produto (Deixar como Enum)">
-                            <label for="productDescription"></label>
+                            <select id="productBrand" name="productBrand" placeholder="Marca do produto">
+
+                            </select>
+
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
-                    <!-- <div class="product-description-container">
-                        <div class="input-label">
-                            <i id="descriptionIcon"></i>
-                            <input type="text" id="productDescription" name="productDescription"
-                                placeholder="Marca do produto (Deixar normal)">
-                            <label for="productDescription"></label>
-                        </div>
-                        <p id="referenceInputError" class="error-message"></p>
-                    </div> -->
+
                     <div class="product-description-container">
                         <div class="input-label">
                             <i id="pictureIcon"></i>
@@ -78,33 +76,24 @@
                         </div>
                         <p id="referenceInputError" class="error-message"></p>
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="productImage">Imagem do Produto*</label>
-                        <input type="file" id="productImage" accept="image/*" required>
-                        <div class="image-preview" id="imagePreview">
-                            <span>Selecione uma imagem</span>
-                        </div>
-                    </div> -->
 
                 </form>
 
-                <div class="preview-section">
-                    <h3>Pré-visualização do Card</h3>
-                    <div class="preview-card">
-                        <div class="preview-card-actions">
-                            <button class="action-button">♡</button>
-                            <button class="action-button">🛒</button>
+
+                <div class="preview-card">
+                    <div class="preview-card-actions">
+                        <button class="action-button">♡</button>
+                        <button class="action-button">🛒</button>
+                    </div>
+                    <div class="preview-card-image">
+                        <img id="previewCardImage" src="/api/placeholder/400/320" alt="Preview">
+                    </div>
+                    <div class="preview-card-content">
+                        <div class="preview-card-title" id="previewTitle">Nome do Produto</div>
+                        <div class="preview-card-price" id="previewPrice">R$ 0,00</div>
+                        <div class="preview-card-installment" id="previewInstallment">ou 10x de R$ 0,00 sem juros
                         </div>
-                        <div class="preview-card-image">
-                            <img id="previewCardImage" src="/api/placeholder/400/320" alt="Preview">
-                        </div>
-                        <div class="preview-card-content">
-                            <div class="preview-card-title" id="previewTitle">Nome do Produto</div>
-                            <div class="preview-card-price" id="previewPrice">R$ 0,00</div>
-                            <div class="preview-card-installment" id="previewInstallment">ou 10x de R$ 0,00 sem juros
-                            </div>
-                            <button class="preview-card-button">Comprar</button>
-                        </div>
+                        <button class="preview-card-button">Comprar</button>
                     </div>
                 </div>
             </div>

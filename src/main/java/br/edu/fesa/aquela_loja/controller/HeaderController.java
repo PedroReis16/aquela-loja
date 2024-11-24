@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
 import br.edu.fesa.aquela_loja.models.enums.DepartamentEnum;
 
+import br.edu.fesa.aquela_loja.models.enums.BrandEnum;
+
 @Controller
 @RequestMapping("/header")
 public class HeaderController {
@@ -23,6 +25,11 @@ public class HeaderController {
     @GetMapping("/categories")
     public ResponseEntity<Map<CategoryEnum, String>> getCategories() {
         return ResponseEntity.ok(CategoryEnum.getCategories());
+    }
+
+    @GetMapping("/brands")
+    public ResponseEntity<Map<BrandEnum, String>> getBrands() {
+        return ResponseEntity.ok(BrandEnum.getBrands());
     }
 
 }
