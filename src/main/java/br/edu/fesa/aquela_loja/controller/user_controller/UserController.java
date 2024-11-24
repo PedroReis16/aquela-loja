@@ -1,7 +1,11 @@
 package br.edu.fesa.aquela_loja.controller.user_controller;
 
+import br.edu.fesa.aquela_loja.models.dto.cart.CartPaymentCardDto;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +19,8 @@ import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.service.user_services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.util.List;
 
 @Controller
 @SessionAttributes("user")
@@ -32,7 +38,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    
 
     @PostMapping(value = "/edit")
     public String editUserDetails(@ModelAttribute UserDto updatedUser) {
@@ -49,7 +54,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    
 
     @GetMapping("/documents")
     public ResponseEntity<Void> isDocumentAvailable(@RequestParam String document) {
@@ -74,4 +78,17 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/name")
+    public ResponseEntity<String> getAuthenticatedUserName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        if (!username.contains("anonymousUser")) {
+            UserModel user = userService.findUserByEmail(auth.getName());
+
+            return ResponseEntity.ok(user.getUsername());
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }

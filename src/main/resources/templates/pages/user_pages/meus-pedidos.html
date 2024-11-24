@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,6 +7,8 @@
 
   <link rel="stylesheet" th:href="@{/styles/reset.css}">
   <link rel="stylesheet" th:href="@{/styles/style.css}">
+  <script th:src="@{/js/components/card.js}" defer></script>
+
 </head>
 
 <body>
@@ -14,7 +16,65 @@
 
   <main>
     <div class="user-orders-view-content" th:fragment="content">
-      <p>Visualizar pedidos</p>
+      <form class="status-filter-form" th:action="@{/orders/filtered-products}" method="post">
+        <label for="status-search" class="status-filter-label">Filtrar por Status:</label>
+        <select id="status-search" name="status" class="status-filter-select">
+          <option value="TODOS" selected>Todos</option>
+          <option th:each="status : ${T(br.edu.fesa.aquela_loja.models.enums.OrderStatusEnum).values()}"
+                  th:value="${status.name()}"
+                  th:text="${status.displayName}">
+          </option>
+        </select>
+        <button type="submit" class="status-filter-button confirm-button">Pesquisar</button>
+      </form>
+
+
+      <div class="product-card" th:each="order : ${order}">
+        <div class="product-info">
+          <h3 class="product-title" th:text="'Pedido Nº: ' + ${order.id}"></h3>
+
+          <div class="order-details">
+            <div class="order-items">
+              <h4>Itens do Pedido:</h4>
+              <p th:utext="${order.itemsRelation}"></p>
+            </div>
+
+            <div class="order-destination">
+              <h4>Local de Entrega:</h4>
+              <p th:text="${order.destination}"></p>
+            </div>
+
+            <div class="order-dates">
+              <h4>Datas:</h4>
+              <p><strong>Data do Pedido:</strong> <span th:text="${order.formattedOrderedDate}"></span></p>
+              <p><strong>Última Atualização:</strong> <span th:text="${order.formattedUpdatedDate}"></span></p>
+            </div>
+          </div>
+
+          <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <form th:action="@{/orders/update-status}" method="post" class="status-form">
+              <input type="hidden" name="orderId" th:value="${order.id}" />
+
+              <label for="status-select">Alterar Status:</label>
+              <select id="status-select" name="status">
+                <option value="TODOS" selected>Todos</option>
+                <option th:each="status : ${T(br.edu.fesa.aquela_loja.models.enums.OrderStatusEnum).values()}"
+                        th:value="${status.name()}"
+                        th:text="${status.displayName}"
+                        th:selected="${order.status.name() == status.name()}">
+                </option>
+              </select>
+
+              <button type="submit" class="update-button confirm-button">Atualizar Status</button>
+            </form>
+          </div>
+
+          <div sec:authorize="hasRole('USER')">
+            <h4>Status do Pedido:</h4>
+            <p class="order-status" th:text="${order.status.displayName}"></p>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
