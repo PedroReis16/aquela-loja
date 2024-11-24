@@ -1,7 +1,7 @@
 const productForm = document.getElementById('productForm');
-const productName = document.getElementById('productName');
-const category = document.getElementById('category');
-const price = document.getElementById('price');
+const productDescription = document.getElementById('productDescription');
+const productCategory = document.getElementById('productCategory');
+const productPrice = document.getElementById('productPrice');
 const productImage = document.getElementById('productImage');
 const imagePreview = document.getElementById('imagePreview');
 const previewCardImage = document.getElementById('previewCardImage');
@@ -25,7 +25,6 @@ productImage.addEventListener('change', function (e) {
 
         reader.onload = function (e) {
             // Update both preview areas
-            imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
             previewCardImage.src = e.target.result;
         }
 
@@ -34,11 +33,11 @@ productImage.addEventListener('change', function (e) {
 });
 
 // Live preview updates
-productName.addEventListener('input', function (e) {
+productDescription.addEventListener('input', function (e) {
     previewTitle.textContent = e.target.value || 'Nome do Produto';
 });
 
-price.addEventListener('input', function (e) {
+productPrice.addEventListener('input', function (e) {
     const value = parseFloat(e.target.value) || 0;
     const installmentValue = value / 10;
 
