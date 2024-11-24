@@ -48,6 +48,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @SuppressWarnings("null")
     @PostMapping("/new")
     public ResponseEntity<Void> createNewOrder(@RequestBody NewOrderDto dto, HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
         List<String> pIds = cartService.getCartItems(request);

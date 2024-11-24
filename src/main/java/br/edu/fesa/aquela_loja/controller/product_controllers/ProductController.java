@@ -53,7 +53,7 @@ public class ProductController {
         
         
         return ResponseEntity.ok().build();
-       } catch (Exception e) {
+       } catch (IOException e) {
         return ResponseEntity.badRequest().build();
        }
     }

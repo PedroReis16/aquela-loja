@@ -61,7 +61,6 @@ public class ProductModel {
         try (ByteArrayInputStream bais = new ByteArrayInputStream(imageData)) {
             return URLConnection.guessContentTypeFromStream(bais);
         } catch (IOException e) {
-            e.printStackTrace();
             return null;  // Caso não consiga determinar o tipo, retorna null
         }
     }

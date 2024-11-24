@@ -95,7 +95,7 @@ public class ProductService {
     }
 
     public ProductModel findById(final String id) {
-        return productRepository.findById(Long.parseLong(id)).orElse(new ProductModel());
+        return productRepository.findById(Long.valueOf(id)).orElse(new ProductModel());
     }
 
     public void update(final ProductModel product, final MultipartFile img) throws IOException {
