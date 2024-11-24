@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmls:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,20 +8,20 @@
 </head>
 
 <body>
-    <div class="product-card">
+    <div class="product-card" th:fragment="productCard(product)">
 
         <div class="product-card-image">
-            <img id="productCardImage" src="/api/placeholder/400/320" alt="Preview">
+            <img id="productCardImage" th:src="${product.image}" alt="Preview">
         </div>
         <div class="product-card-content">
             <div class="tooltip-container">
-                <h2 id="productTitlte">Product Name</h2>
-                <div class="tooltip" id="productTitleTooltip"></div>
+                <h2 id="productTitlte" class="product-name" th:text="${product.description}">Product Name</h2>
+                <div class="tooltip" id="productTitleTooltip" th:text="${product.description}"></div>
             </div>
-            <div class="product-card-price" id="productPrice">R$ 0,00</div>
-            <div class="product-card-installment" id="productInstallment">ou 10x de R$ 0,00 sem juros
+            <div class="product-card-price" id="productPrice" th:text="${product.price}"></div>
+            <div class="product-card-installment" id="productInstallment">ou 10x de R$0,00 sem juros
             </div>
-            <button class="confirm-button" card="product-card-btn">Comprar</button>
+            <button class="confirm-button" th:attr="data-product=${product}">Comprar</button>
         </div>
     </div>
 </body>

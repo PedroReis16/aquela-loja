@@ -51,8 +51,25 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<ProductModel> findAllLimit10() {
-        return productRepository.findTop10ByOrderByName();
+    public List<ProductDto> findAllLimit10() {
+        List<ProductModel> products = productRepository.findTop10ByOrderByName();
+        List<ProductDto> result = new ArrayList<>();
+
+        for (ProductModel product : products) {
+            ProductDto productDto = new ProductDto();
+            productDto.setId(product.getId());
+            productDto.setDescription(product.getDescription());
+            productDto.setBrand(product.getBrand());
+            productDto.setCategory(product.getCategory());
+            productDto.setPrice(product.getPrice());
+            productDto.setStockCount(product.getStockCount());
+
+            String base64Image = Base64.getEncoder().encodeToString(product.getImg().getData());
+            productDto.setImage("data:image/jpg;base64," + base64Image);
+
+            result.add(productDto);
+        }
+        return result;
     }
 
     public List<ProductModel> find10ByCategory(CategoryEnum category) {

@@ -59,7 +59,6 @@ productCard.forEach(product => {
 
             result[key] = value;
         }
-        console.log(result);
         openEditProductDialog(result);
     });
 });
