@@ -24,15 +24,20 @@
 @import url("./fragment_styles/user-avatar.css");
 @import url("./fragment_styles/shopping-cart.css");
 @import url("./fragment_styles/user-address-form.css");
-@import url("./fragment_styles/dialogs/delete-user-dialog.css");
-@import url("./fragment_styles/dialogs/user-address-dialog.css");
+
+/* Cards */
 @import url("./fragment_styles/cards/edit-user-details-card.css");
 @import url("./fragment_styles/cards/user-address-list-card.css");
+@import url("./fragment_styles/cards/new-user-card.css");
+@import url("./fragment_styles/cards/product-card.css");
+
+/* Dialogs */
+@import url("./fragment_styles/dialogs/delete-user-dialog.css");
+@import url("./fragment_styles/dialogs/user-address-dialog.css");
+@import url("./fragment_styles/cards/edit-product-card.css");
 @import url("./fragment_styles/dialogs/edit-card-dialog.css");
 @import url("./fragment_styles/dialogs/new-user-card-dialog.css");
-@import url("./fragment_styles/cards/new-user-card.css");
-@import url("./fragment_styles/cards/edit-product-card.css");
-@import url("./fragment_styles/cards/product-dialog.css");
+@import url("./fragment_styles/dialogs/product-dialog.css");
 
 :root {
   --default-font: "Poppins", sans-serif;

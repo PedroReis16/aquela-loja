@@ -7,6 +7,10 @@
   color: var(--primary-color);
 }
 
+#newProductBtn {
+  outline: none;
+}
+
 #newProductBtn > i::before {
   content: "\e145";
   font-size: 16px;

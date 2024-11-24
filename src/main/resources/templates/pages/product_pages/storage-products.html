@@ -20,7 +20,7 @@
             <div class="dialog-header" id="storageProductHeader">
                 <h3><i></i> Produtos Disponíveis</h3>
                 <a href="/product/form" class="btn btn-primary">Inserir</a>
-                <button class="confirm-button" id="newProductBtn"><i></i>Novo Produto</button>
+                <button type="button" class="confirm-button" id="newProductBtn"><i></i>Novo Produto</button>
             </div>
 
             <div class="product-list">
@@ -29,10 +29,14 @@
                         )}">
                 </div>
             </div>
-
         </div>
+
+
+        <!-- Dialog para cadastro e edição dos produtos -->
+        <div th:replace="~{/fragments/dialogs/product-dialog::dialog}"></div>
+
     </main>
-    <script th:src="@{/js/pages/storage-products.js}"></script>
+    <script th:src="@{/js/page_scripts/produtos.js}"></script>
 </body>
 
 </html>
