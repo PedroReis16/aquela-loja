@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.net.URLConnection;
 import java.util.Base64;
 
+import br.edu.fesa.aquela_loja.models.enums.BrandEnum;
+
 @Entity
 @Getter
 @Setter
@@ -29,7 +31,7 @@ public class ProductModel {
 
     private int stockCount;
 
-    private String brand;
+    private BrandEnum brand;
 
     private String description;
 

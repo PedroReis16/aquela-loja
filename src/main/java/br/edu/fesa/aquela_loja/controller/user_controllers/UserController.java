@@ -1,7 +1,5 @@
 package br.edu.fesa.aquela_loja.controller.user_controllers;
 
-import br.edu.fesa.aquela_loja.models.dto.cart.CartPaymentCardDto;
-import br.edu.fesa.aquela_loja.models.entity.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,11 +14,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
+import br.edu.fesa.aquela_loja.models.entity.UserModel;
 import br.edu.fesa.aquela_loja.service.user_services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.util.List;
 
 @Controller
 @SessionAttributes("user")
@@ -89,6 +86,6 @@ public class UserController {
             return ResponseEntity.ok(user.getUsername());
         }
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 }

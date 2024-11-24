@@ -2,6 +2,7 @@ package br.edu.fesa.aquela_loja.models.dto;
 
 import java.math.BigDecimal;
 
+import br.edu.fesa.aquela_loja.models.enums.BrandEnum;
 import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
 import lombok.Data;
 
@@ -12,7 +13,7 @@ public class ProductRegDto {
 
     private BigDecimal price;
 
-    private String brand;
+    private BrandEnum brand;
 
     private CategoryEnum category;
 
