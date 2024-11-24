@@ -45,6 +45,7 @@
   font-family: var(--default-font);
   font-weight: 700;
   font-size: 20px;
+  margin-left: 16px;
 }
 
 #discountTitle i::before {
@@ -166,14 +167,4 @@
 
 .view-all:hover {
   color: #333;
-}
-
-@media (max-width: 768px) {
-  .carousel-container {
-    padding: 0 20px;
-  }
-
-  /* .product-card {
-        min-width: 220px;
-    } */
 }
