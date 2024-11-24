@@ -1,4 +1,4 @@
-package br.edu.fesa.aquela_loja.controller;
+package br.edu.fesa.aquela_loja.controller.product_controllers;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,29 +27,15 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/form")
-    public String regProductForm(ProductRegDto productRegDto) {
-        return "pages/product_pages/new-product";
-    }
+    @GetMapping("")
+    public ResponseEntity<Void> findProductByName(@RequestParam String description) {
+        Boolean exists = productService.exists(description);
 
-    @GetMapping("/list-all")
-    public String listAllProducts(ModelMap model, @RequestParam(required = false) String showRegNotification, @RequestParam(required = false) String showUptNotification) {
-        List<ProductModel> products = productService.findAll();
-
-        List<ProductModel> sortedProducts = products.stream()
-                .sorted((produdc1, product2) -> produdc1.getName().compareTo(product2.getName()))
-                .toList();
-        model.addAttribute("products", sortedProducts);
-
-        if("true".equals(showRegNotification)) {
-            model.addAttribute("showRegNotification", true);
-        }
-
-        if("true".equals(showUptNotification)) {
-            model.addAttribute("showUptNotification", true);
-        }
-
-        return "pages/product_pages/storage-products";
+        if (exists) {
+            return ResponseEntity.ok().build();
+        } 
+          return ResponseEntity.noContent().build();
+        
     }
 
     @GetMapping("/edit/{id}")
@@ -64,7 +50,7 @@ public class ProductController {
         try {
             if (productService.exists(productRegDto.getPName().trim())) {
                 model.addAttribute("productRegDto", productRegDto);
-                model.addAttribute("nameError",true);
+                model.addAttribute("nameError", true);
 
                 return "pages/product-form";
             }
@@ -84,7 +70,7 @@ public class ProductController {
             if (productService.exists(product.getName().trim()) && !productService.findById(String.valueOf(product.getId())).getName().equals(product.getName())) {
                 productService.fillImage(product);
                 model.addAttribute("product", product);
-                model.addAttribute("nameError",true);
+                model.addAttribute("nameError", true);
 
                 return "pages/product-edit";
             }

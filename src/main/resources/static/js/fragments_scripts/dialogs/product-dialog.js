@@ -55,6 +55,28 @@ productPrice.addEventListener('input', function (e) {
     productInstallment.textContent = `ou 10x de ${formatPrice(installmentValue)} sem juros`;
 });
 
+const descriptionError = document.getElementById('productDescriptionError');
+productDescription.addEventListener('blur', async function (e) {
+    let value = e.target.value;
+
+    const response = await fetch(`/product?description=${value}`)
+
+    if (response.noContent) {
+        descriptionError.textContent = '';
+    }
+    else {
+        descriptionError.textContent = 'Produto já cadastrado';
+    }
+});
+
+
+const productCategoryError = document.getElementById('productCategoryError');
+const productPriceError = document.getElementById('productPriceError');
+const productBrandError = document.getElementById('productBrandError');
+const productImageError = document.getElementById('productImageError');
+
+
+// Inicialização dos campos ao carregar o arquivo
 async function populateCategories() {
     const response = await fetch('/header/categories');
     if (response.ok) {
@@ -102,7 +124,6 @@ async function populateBrands() {
     }
 
 }
-
 function validateFields() {
     if (productDescription.value === '' || productPrice.value === '' || productPrice <= 0 || productImage.value === '') {
         saveProductBtn.disabled = true;

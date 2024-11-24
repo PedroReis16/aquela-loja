@@ -1,4 +1,4 @@
-package br.edu.fesa.aquela_loja.controller.user_controller;
+package br.edu.fesa.aquela_loja.controller.user_controllers;
 
 import br.edu.fesa.aquela_loja.models.dto.cart.CartPaymentCardDto;
 import br.edu.fesa.aquela_loja.models.entity.UserModel;

@@ -1,4 +1,4 @@
-package br.edu.fesa.aquela_loja.controller.user_controller;
+package br.edu.fesa.aquela_loja.controller.user_controllers;
 
 import java.util.List;
 
