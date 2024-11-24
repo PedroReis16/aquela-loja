@@ -39,7 +39,7 @@ let formData = {
 
 function resetForm() {
     productForm.reset();
-    productCardImage.src = '/images/placeholder.png';
+    productCardImage.src = '';
     productTitle.textContent = 'Nome do produto';
     productTitleTooltip.textContent = 'Nome do produto';
     productPreviewPrice.textContent = 'R$ 0,00';
@@ -58,7 +58,6 @@ function resetForm() {
         stockCount: 0,
         image: ''
     }
-    canSaveProduct();
 }
 
 function canSaveProduct() {

@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <div class="product-card editable-product-card" th:fragment="editProductCard(product)">
+    <div class="product-card editable-product-card" th:fragment="editProductCard(product)" >
 
         <div class="product-card-image">
             <img id="productCardImage" th:src="${product.image}" alt="Preview">
         </div>
-        <div class="product-card-content">
+        <div class="product-card-content" >
             <div class="tooltip-container">
                 <h2 id="productTitlte" class="product-name" th:text="${product.description}">Product Name</h2>
                 <div class="tooltip" id="productTitleTooltip" th:text="${product.description}"></div>
@@ -26,7 +26,7 @@
                 <p>Disponível: <span th:text="${product.stockCount}"></span></p>
                 <p class="product-edit-card-price"> R$ <span th:text="${product.price}"><span></p>
             </div>
-            <button class="confirm-button" card="product-card-btn">Editar</button>
+            <button class="confirm-button product-edit-btn" th:attr="data-product=${product}">Editar</button>
         </div>
     </div>
 </body>

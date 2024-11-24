@@ -31,6 +31,7 @@ public class ProductModel {
 
     private int stockCount;
     
+    @Enumerated(EnumType.STRING)
     private BrandEnum brand;
 
     private String description;
