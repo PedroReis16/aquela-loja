@@ -59,8 +59,18 @@
 
                     <div class="product-description-container">
                         <div class="input-label">
+                            <i id="stockIcon"></i>
+                            <input type="text" id="productStock" name="productStock"
+                                placeholder="Quantidade em estoque">
+                            <label for="productStock"></label>
+                        </div>
+                        <p id="productStockCountError" class="error-message"></p>
+                    </div>
+
+                    <div class="product-description-container">
+                        <div class="input-label">
                             <i id="pictureIcon"></i>
-                            <input type="file" id="productImage" accept="image/*" required>
+                            <input type="file" id="productImage" accept="image/jpeg" required>
                             <label for="productDescription"></label>
                         </div>
                         <p id="productImageError" class="error-message"></p>
@@ -77,8 +87,8 @@
                     <div class="product-card-content">
                         <!-- <div class="product-card-title" id="productTitle">Nome do Produto</div> -->
                         <div class="tooltip-container">
-                            <h2 id="productTitle">Descrição do produto</h2>
-                            <div class="tooltip" id="productTitleTooltip"></div>
+                            <h2 id="productTitle">Descrição</h2>
+                            <div class="tooltip" id="productTitleTooltip">Descrição</div>
                         </div>
                         <div class="product-card-price" id="productPreviewPrice">R$ 0,00</div>
                         <div class="product-card-installment" id="productInstallment">ou 10x de R$ 0,00 sem juros

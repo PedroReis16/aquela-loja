@@ -3,6 +3,7 @@ const productDescription = document.getElementById('productDescription');
 const productCategory = document.getElementById('productCategory');
 const productPrice = document.getElementById('productPrice');
 const productImage = document.getElementById('productImage');
+const productStockCount = document.getElementById('productStock');
 const productBrand = document.getElementById('productBrand');
 
 // Mensagens de erro
@@ -11,6 +12,7 @@ const productCategoryError = document.getElementById('productCategoryError');
 const productPriceError = document.getElementById('productPriceError');
 const productBrandError = document.getElementById('productBrandError');
 const productImageError = document.getElementById('productImageError');
+const productStockError = document.getElementById('productStockCountError');
 
 // Image preview
 const imagePreview = document.getElementById('imagePreview');
@@ -31,11 +33,12 @@ let formData = {
     category: '',
     price: '',
     brand: '',
+    stockCount: 0,
     image: ''
 }
 
 function canSaveProduct() {
-    if (formData.description && formData.category && formData.price && formData.brand && formData.image) {
+    if (formData.description && formData.category && formData.price && formData.brand && formData.stockCount > 0 && formData.image) {
         saveProductBtn.disabled = false;
         return;
     }
@@ -76,6 +79,10 @@ productDescription.addEventListener('input', function (e) {
 });
 
 productPrice.addEventListener('input', function (e) {
+    // Remove caracteres não numéricos
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+
+
     const value = parseFloat(e.target.value.replace(',', '.')) || 0;
     const installmentValue = value / 10;
 
@@ -111,7 +118,21 @@ productDescription.addEventListener('blur', async function (e) {
     canSaveProduct();
 });
 
+productStockCount.addEventListener('input', function (e) {
+    // Remove caracteres não numéricos
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
 
+
+    let value = parseInt(e.target.value) || 0;
+
+    if (value <= 0) {
+        productStockError.textContent = 'Quantidade inválida';
+        return;
+    }
+    productStockError.textContent = '';
+    formData.stockCount = value;
+    canSaveProduct();
+});
 
 // Inicialização dos campos ao carregar o arquivo
 async function populateCategories() {

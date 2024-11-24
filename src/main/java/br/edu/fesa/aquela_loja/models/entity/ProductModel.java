@@ -30,7 +30,7 @@ public class ProductModel {
     private BigDecimal price;
 
     private int stockCount;
-
+    
     private BrandEnum brand;
 
     private String description;

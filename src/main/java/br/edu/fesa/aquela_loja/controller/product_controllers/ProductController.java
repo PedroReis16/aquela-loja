@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.fesa.aquela_loja.models.dto.NewProductDto;
+import br.edu.fesa.aquela_loja.models.dto.product.NewProductDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.service.ProductService;
 import org.springframework.web.bind.annotation.RequestBody;

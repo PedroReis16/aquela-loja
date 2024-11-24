@@ -1,4 +1,4 @@
-package br.edu.fesa.aquela_loja.models.dto;
+package br.edu.fesa.aquela_loja.models.dto.product;
 
 import java.math.BigDecimal;
 
