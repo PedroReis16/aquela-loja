@@ -29,7 +29,7 @@ const dialog = document.getElementById('productDialog');
 const closeDialogBtn = document.getElementById('closeNewProductDialog');
 
 let formData = {
-    description: '',
+    name: '',
     category: '',
     price: '',
     brand: '',
@@ -51,7 +51,7 @@ function resetForm() {
     productImageError.textContent = '';
     productStockError.textContent = '';
     formData = {
-        description: '',
+        name: '',
         category: '',
         price: '',
         brand: '',
@@ -61,7 +61,7 @@ function resetForm() {
 }
 
 function canSaveProduct() {
-    if (formData.description && formData.category && formData.price && formData.brand && formData.stockCount > 0 && formData.image) {
+    if (formData.name && formData.category && formData.price && formData.brand && formData.stockCount > 0 && formData.image) {
         saveProductBtn.disabled = false;
         return;
     }
@@ -137,7 +137,7 @@ productDescription.addEventListener('blur', async function (e) {
         return;
     }
 
-    formData.description = value;
+    formData.name = value;
     canSaveProduct();
 });
 

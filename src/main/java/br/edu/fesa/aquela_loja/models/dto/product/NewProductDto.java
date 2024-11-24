@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class NewProductDto {
 
-    private String pName;
+    private String name;
 
     private BigDecimal price;
 
@@ -19,6 +19,6 @@ public class NewProductDto {
 
     private int stockCount;
 
-    private String description;
+    // private String description;
     private String image;
 }

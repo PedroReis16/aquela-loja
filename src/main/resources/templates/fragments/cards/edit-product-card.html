@@ -17,8 +17,8 @@
         </div>
         <div class="product-card-content" >
             <div class="tooltip-container">
-                <h2 id="productTitlte" class="product-name" th:text="${product.description}">Product Name</h2>
-                <div class="tooltip" id="productTitleTooltip" th:text="${product.description}"></div>
+                <h2 id="productTitlte" class="product-name" th:text="${product.name}">Product Name</h2>
+                <div class="tooltip" id="productTitleTooltip" th:text="${product.name}"></div>
             </div>
             <p th:text="${product.brand}"></p>
             <p th:text="${product.category.displayName}"></p>

@@ -33,12 +33,12 @@ public class ProductService {
     public void createNewProduct(NewProductDto pDto) throws IOException {
 
         ProductModel product = ProductModel.builder()
-                .name(pDto.getPName())
+                .name(pDto.getName())
                 .price(pDto.getPrice())
                 .brand(pDto.getBrand())
                 .category(pDto.getCategory())
                 .stockCount(pDto.getStockCount())
-                .description(pDto.getDescription())
+                // .description(pDto.getDescription())
                 .build();
 
         var imgSaved = imageService.generateFileModel(pDto.getImage());
@@ -58,7 +58,7 @@ public class ProductService {
         for (ProductModel product : products) {
             ProductDto productDto = new ProductDto();
             productDto.setId(product.getId());
-            productDto.setDescription(product.getDescription());
+            productDto.setName(product.getName());
             productDto.setBrand(product.getBrand());
             productDto.setCategory(product.getCategory());
             productDto.setPrice(product.getPrice());
@@ -171,7 +171,7 @@ public class ProductService {
 
             ProductDto productDto = new ProductDto();
             productDto.setId(product.getId());
-            productDto.setDescription(product.getDescription());
+            productDto.setName(product.getName());
             productDto.setBrand(product.getBrand());
             productDto.setCategory(product.getCategory());
             productDto.setPrice(product.getPrice());
