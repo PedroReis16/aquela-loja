@@ -67,6 +67,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/user/delete").permitAll()
                 .requestMatchers("/user/documents").permitAll()
                 .requestMatchers("/user/emails").permitAll()
+                                .requestMatchers("/user/name").permitAll()
                 .requestMatchers("/user/**").hasAnyRole(USER.name(), ADMIN.name())
                 .anyRequest().permitAll()
                 )

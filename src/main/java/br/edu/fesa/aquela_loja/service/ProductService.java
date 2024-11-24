@@ -48,6 +48,14 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public List<ProductModel> findAllLimit10(){
+        return productRepository.findTop10ByOrderByName();
+    }
+
+    public List<ProductModel> find10ByCategory(CategoryEnum category) {
+        return productRepository.findTop10ByCategory(category);
+    }
+
     public ProductModel findById(final String id) {
         return productRepository.findById(Long.parseLong(id)).orElse(new ProductModel());
     }
@@ -122,5 +130,9 @@ public class ProductService {
         String normalizedStr1 = Normalizer.normalize(str1, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
         String normalizedStr2 = Normalizer.normalize(str2, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
         return normalizedStr1.equalsIgnoreCase(normalizedStr2);
+    }
+
+    public List<ProductModel> findProductsByNameLike(String searched) {
+        return productRepository.findByNameContainingIgnoreCase(searched);
     }
 }

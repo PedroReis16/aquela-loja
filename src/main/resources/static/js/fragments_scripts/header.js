@@ -24,3 +24,18 @@ if (currentRoute == '/login' || currentRoute == '/cadastro' ) {
     logo.setAttribute('style', 'justify-content: center');
 
 }
+
+fetch('/user/name')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro na resposta da API');
+      }
+      return response.text();
+    })
+    .then(data => {
+      const userNameElement = document.getElementById('nam-user');
+      userNameElement.textContent = data;
+    })
+    .catch(error => {
+      console.error('Erro ao buscar dados do usuário:', error);
+    });
