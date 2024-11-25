@@ -1,6 +1,7 @@
 package br.edu.fesa.aquela_loja.service;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,15 @@ public class ImageService {
     @Autowired
     private IProductRepository productRepository;
 
-    public ProductImageModel generateFileModel(MultipartFile file) throws IOException {
+    public ProductImageModel generateFileModel(String imgBase64) throws IOException {
+        if (imgBase64.startsWith("data:image")) {
+            imgBase64 = imgBase64.substring(imgBase64.indexOf(",") + 1);
+        }
+    
+        byte[] img = Base64.getDecoder().decode(imgBase64);
+    
         return ProductImageModel.builder()
-                .name(file.getOriginalFilename())
-                .type(file.getContentType())
-                .data(file.getBytes())
+                .data(img)
                 .build();
     }
 
@@ -30,15 +35,13 @@ public class ImageService {
         if (pModel.isPresent()) {
             if (!"".equals(img.getOriginalFilename())) {
 
-
                 ProductImageModel imageModel = pModel.get().getImg();
 
                 imageModel.setData(img.getBytes());
-                imageModel.setType(img.getContentType());
-                imageModel.setName(img.getOriginalFilename());
+                // imageModel.setType(img.getContentType());
+                // imageModel.setName(img.getOriginalFilename());
                 model.setImg(imageModel);
-            }
-            else {
+            } else {
                 model.setImg(pModel.get().getImg());
             }
         }

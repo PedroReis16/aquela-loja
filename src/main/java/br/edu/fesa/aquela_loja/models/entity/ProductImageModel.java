@@ -3,8 +3,6 @@ package br.edu.fesa.aquela_loja.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Base64;
-
 @Entity
 @Getter
 @Setter
@@ -17,12 +15,12 @@ public class ProductImageModel {
     @Column(insertable=false, updatable=false)
     private Long id;
 
-    private String name;
+    // private String name;
 
     @Lob
     private byte[] data;
 
-    private String type;
+    // private String type;
 
 //    @ManyToOne
 //    @JoinColumn(name = "ProductId")

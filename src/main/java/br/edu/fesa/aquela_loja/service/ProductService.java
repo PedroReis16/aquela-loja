@@ -2,19 +2,22 @@ package br.edu.fesa.aquela_loja.service;
 
 import java.io.IOException;
 import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
-import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
-import br.edu.fesa.aquela_loja.models.enums.DepartamentEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.edu.fesa.aquela_loja.models.dto.ProductRegDto;
+import br.edu.fesa.aquela_loja.models.dto.product.ProductDto;
+import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
+import br.edu.fesa.aquela_loja.models.dto.product.NewProductDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
+import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
+import br.edu.fesa.aquela_loja.models.enums.DepartamentEnum;
 import br.edu.fesa.aquela_loja.repository.IProductRepository;
 
 @Service
@@ -27,18 +30,18 @@ public class ProductService {
     private ImageService imageService;
 
     @Transactional
-    public void createNewProduct(final ProductRegDto pDto, final MultipartFile img) throws IOException {
+    public void createNewProduct(NewProductDto pDto) throws IOException {
 
         ProductModel product = ProductModel.builder()
-                .name(pDto.getPName())
+                .name(pDto.getName())
                 .price(pDto.getPrice())
                 .brand(pDto.getBrand())
                 .category(pDto.getCategory())
-                .qtStock(pDto.getQtdStock())
-                .description(pDto.getDescription())
+                .stockCount(pDto.getStockCount())
+                // .description(pDto.getDescription())
                 .build();
 
-        var imgSaved = imageService.generateFileModel(img);
+        var imgSaved = imageService.generateFileModel(pDto.getImage());
         product.setImg(imgSaved);
 
         productRepository.save(product);
@@ -48,12 +51,47 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<ProductModel> findAllLimit10(){
-        return productRepository.findTop10ByOrderByName();
+    public List<ProductDto> findAllLimit10() {
+        List<ProductModel> products = productRepository.findTop10ByOrderByName();
+        List<ProductDto> result = new ArrayList<>();
+
+        for (ProductModel product : products) {
+            ProductDto productDto = new ProductDto();
+            productDto.setId(product.getId());
+            productDto.setName(product.getName());
+            productDto.setBrand(product.getBrand());
+            productDto.setCategory(product.getCategory());
+            productDto.setPrice(product.getPrice());
+            productDto.setStockCount(product.getStockCount());
+
+            String base64Image = Base64.getEncoder().encodeToString(product.getImg().getData());
+            productDto.setImage("data:image/jpg;base64," + base64Image);
+
+            result.add(productDto);
+        }
+        return result;
     }
 
-    public List<ProductModel> find10ByCategory(CategoryEnum category) {
-        return productRepository.findTop10ByCategory(category);
+    public List<ProductDto> find10ByCategory(CategoryEnum category) {
+        List<ProductModel> models = productRepository.findTop10ByCategory(category);
+        List<ProductDto> result = new ArrayList<>();
+
+        for (ProductModel product : models) {
+            ProductDto productDto = new ProductDto();
+            productDto.setId(product.getId());
+            productDto.setName(product.getName());
+            productDto.setBrand(product.getBrand());
+            productDto.setCategory(product.getCategory());
+            productDto.setPrice(product.getPrice());
+            productDto.setStockCount(product.getStockCount());
+
+            String base64Image = Base64.getEncoder().encodeToString(product.getImg().getData());
+            productDto.setImage("data:image/jpg;base64," + base64Image);
+
+            result.add(productDto);
+        }
+
+        return result;
     }
 
     public ProductModel findById(final String id) {
@@ -93,7 +131,7 @@ public class ProductService {
             if (category != null) {
                 return productRepository.findByCategory(category);
             } else {
-                  List<ProductModel> products = new java.util.ArrayList<>(List.of());
+                List<ProductModel> products = new java.util.ArrayList<>(List.of());
                 DepartamentEnum departament = getEnumValue(DepartamentEnum.class, filter);
 
                 if (departament != null) {
@@ -127,12 +165,42 @@ public class ProductService {
         if (str1 == null || str2 == null) {
             return str1 == null && str2 == null;
         }
-        String normalizedStr1 = Normalizer.normalize(str1, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
-        String normalizedStr2 = Normalizer.normalize(str2, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        String normalizedStr1 = Normalizer.normalize(str1, Normalizer.Form.NFD).replaceAll(
+                "\\p{M}", "");
+        String normalizedStr2 = Normalizer.normalize(str2, Normalizer.Form.NFD).replaceAll(
+                "\\p{M}", "");
         return normalizedStr1.equalsIgnoreCase(normalizedStr2);
     }
 
     public List<ProductModel> findProductsByNameLike(String searched) {
         return productRepository.findByNameContainingIgnoreCase(searched);
+    }
+
+    public List<ProductDto> getAllItems() {
+        List<ProductDto> result = new ArrayList<>();
+        List<ProductModel> products = findAll();
+
+        List<ProductModel> sortedProducts = products.stream()
+                .sorted((produdc1, product2) -> produdc1.getName()
+                .compareTo(product2.getName()))
+                .toList();
+
+        for (ProductModel product : sortedProducts) {
+
+            ProductDto productDto = new ProductDto();
+            productDto.setId(product.getId());
+            productDto.setName(product.getName());
+            productDto.setBrand(product.getBrand());
+            productDto.setCategory(product.getCategory());
+            productDto.setPrice(product.getPrice());
+            productDto.setStockCount(product.getStockCount());
+
+            String base64Image = Base64.getEncoder().encodeToString(product.getImg().getData());
+            productDto.setImage("data:image/jpg;base64," + base64Image);
+
+            result.add(productDto);
+        }
+
+        return result;
     }
 }

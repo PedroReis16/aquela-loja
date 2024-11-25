@@ -3,6 +3,7 @@ package br.edu.fesa.aquela_loja.controller;
 import java.util.List;
 
 import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.product.ProductDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.service.CartService;
 import br.edu.fesa.aquela_loja.service.ProductService;
@@ -29,14 +31,14 @@ public class RoutesController {
 
     @GetMapping({"/", "/inicio", "/home"})
     public String loadPage(ModelMap model, @PathVariable(required = false) String page) {
-        List<ProductModel> products = productService.findAllLimit10();
+        List<ProductDto> products = productService.findAllLimit10();
         model.addAttribute("products", products);
 
-        List<ProductModel> process = productService.find10ByCategory(CategoryEnum.PROCESSADORES);
-        model.addAttribute("process", process);
+        List<ProductDto> process = productService.find10ByCategory(CategoryEnum.PROCESSADORES);
+        model.addAttribute("processors", process);
 
-        List<ProductModel> phone = productService.find10ByCategory(CategoryEnum.FONE_DE_OUVIDO);
-        model.addAttribute("phone", phone);
+        List<ProductDto> phone = productService.find10ByCategory(CategoryEnum.FONE_DE_OUVIDO);
+        model.addAttribute("audios", phone);
 
         return "pages/index";
     }

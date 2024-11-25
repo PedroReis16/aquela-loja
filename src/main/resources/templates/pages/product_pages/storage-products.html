@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Padrões</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/styles/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+
+    <script th:src="@{/js/components/card.js}" defer></script>
+</head>
+
+<body>
+
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main>
+        <div class="product-content">
+            <div class="dialog-header" id="storageProductHeader">
+                <h3><i></i> Produtos Disponíveis</h3>
+                <div id="storageHeaderActions">
+                    <div id="storageSearchBar" th:insert="~{/fragments/search-bar::searchBar}"></div>
+                    <button type="button" class="confirm-button" id="newProductBtn"><i></i>Novo Produto</button>
+                </div>
+            </div>
+
+            <div class="product-list">
+                <div class="editable-product" th:each="product : ${products}" th:insert="~{/fragments/cards/edit-product-card::editProductCard(
+                        '${product}'
+                        )}">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Dialog para cadastro e edição dos produtos -->
+        <div th:replace="~{/fragments/dialogs/product-dialog::dialog}"></div>
+
+    </main>
+    <script th:src="@{/js/page_scripts/produtos.js}"></script>
+</body>
+
+</html>

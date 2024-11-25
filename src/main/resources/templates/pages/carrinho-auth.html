@@ -157,7 +157,7 @@
       </div>
 
       <div sec:authorize="isAuthenticated()">
-        <h2 >Endereço de Entrega</h2>
+        <h2>Endereço de Entrega</h2>
         <div class="address-selection" id="cart-adds">
 
         </div>
@@ -244,8 +244,8 @@
       loadCartItems();
       loadUserAdds();
       loadUserPayCards();
-<!--      renderCart();-->
-<!--      updateOrderSummary();-->
+      //  renderCart();
+      //  updateOrderSummary();
     };
 
     function loadCartItems() {
@@ -388,9 +388,9 @@
         updateOrderSummary();
 
         fetch('/remove/cart-items/' + itemId,
-        {
-          method: 'POST',
-        })
+          {
+            method: 'POST',
+          })
       }
     }
 
@@ -459,49 +459,49 @@
     function getSelectedPayment() {
       // Armazena os dados do pagamento selecionado
       if (confirmedPayDiv) {
-          const type = confirmedPayDiv.querySelector('h4')?.textContent?.trim();
-          if (!type) {
-              console.error("Tipo de pagamento não encontrado.");
-              return;
-          }
+        const type = confirmedPayDiv.querySelector('h4')?.textContent?.trim();
+        if (!type) {
+          console.error("Tipo de pagamento não encontrado.");
+          return;
+        }
 
-          if (type.toLowerCase() === "cartão") {
-              selectedPayment = {
-                  type: type,
-                  number: confirmedPayDiv.querySelector('.number')?.textContent || 'N/A',
-                  expirationDate: confirmedPayDiv.querySelector('.expiration-date')?.textContent || 'N/A'
-              };
-          } else {
-              selectedPayment = {
-                  type: type,
-                  number: 'N/A',
-                  expirationDate: 'N/A'
-              };
-          }
+        if (type.toLowerCase() === "cartão") {
+          selectedPayment = {
+            type: type,
+            number: confirmedPayDiv.querySelector('.number')?.textContent || 'N/A',
+            expirationDate: confirmedPayDiv.querySelector('.expiration-date')?.textContent || 'N/A'
+          };
+        } else {
+          selectedPayment = {
+            type: type,
+            number: 'N/A',
+            expirationDate: 'N/A'
+          };
+        }
 
-          console.log("Pagamento selecionado:", selectedPayment);
+        console.log("Pagamento selecionado:", selectedPayment);
       } else {
-          console.error("Div de confirmação de pagamento não encontrada.");
+        console.error("Div de confirmação de pagamento não encontrada.");
       }
     }
 
     function getSelectedAdds() {
       if (confirmedAddsDiv) {
-          // Captura os dados do endereço
-          const title = confirmedAddsDiv.querySelector('.title')?.textContent?.trim() || 'Título indisponível';
-          const street = confirmedAddsDiv.querySelector('.street')?.textContent?.trim() || 'Rua indisponível';
-          const location = confirmedAddsDiv.querySelector('.location')?.textContent?.trim() || 'Localização indisponível';
+        // Captura os dados do endereço
+        const title = confirmedAddsDiv.querySelector('.title')?.textContent?.trim() || 'Título indisponível';
+        const street = confirmedAddsDiv.querySelector('.street')?.textContent?.trim() || 'Rua indisponível';
+        const location = confirmedAddsDiv.querySelector('.location')?.textContent?.trim() || 'Localização indisponível';
 
-          // Armazena os dados do endereço selecionado
-          selectedAddress = {
-              title: title,
-              street: street,
-              location: location
-          };
+        // Armazena os dados do endereço selecionado
+        selectedAddress = {
+          title: title,
+          street: street,
+          location: location
+        };
 
-          console.log("Endereço selecionado:", selectedAddress);
+        console.log("Endereço selecionado:", selectedAddress);
       } else {
-          console.error("Div de endereço confirmada não encontrada.");
+        console.error("Div de endereço confirmada não encontrada.");
       }
     }
 
@@ -553,13 +553,13 @@
         },
         body: JSON.stringify(data),  // Envia os dados como JSON
       })
-      .then(data => {
-        nextStep();
-      })
-      .catch(error => {
-        console.error("Erro ao enviar dados:", error);
-        alert("Ocorreu um erro ao enviar os dados.");
-      });
+        .then(data => {
+          nextStep();
+        })
+        .catch(error => {
+          console.error("Erro ao enviar dados:", error);
+          alert("Ocorreu um erro ao enviar os dados.");
+        });
     }
   </script>
 </body>

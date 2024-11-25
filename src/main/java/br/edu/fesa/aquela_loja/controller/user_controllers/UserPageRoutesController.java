@@ -1,4 +1,4 @@
-package br.edu.fesa.aquela_loja.controller.user_controller;
+package br.edu.fesa.aquela_loja.controller.user_controllers;
 
 import br.edu.fesa.aquela_loja.models.dto.UserDto;
 import br.edu.fesa.aquela_loja.models.dto.address.NewUserAddressDto;
@@ -34,7 +34,8 @@ public class UserPageRoutesController {
     @Autowired
     private UserAddressService userAddressService;
 
-    @GetMapping()
+    
+    @GetMapping({"/", ""})
     public String userPage(Model model) {
 
         UserDto user = userService.getAuthenticatedUser();
