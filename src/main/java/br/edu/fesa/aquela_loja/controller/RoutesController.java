@@ -2,18 +2,18 @@ package br.edu.fesa.aquela_loja.controller;
 
 import java.util.List;
 
+import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.fesa.aquela_loja.models.dto.NewUserDto;
+import br.edu.fesa.aquela_loja.models.dto.product.ProductDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.service.CartService;
 import br.edu.fesa.aquela_loja.service.ProductService;
@@ -31,8 +31,14 @@ public class RoutesController {
 
     @GetMapping({"/", "/inicio", "/home"})
     public String loadPage(ModelMap model, @PathVariable(required = false) String page) {
-        List<ProductModel> products = productService.findAll();
+        List<ProductDto> products = productService.findAllLimit10();
         model.addAttribute("products", products);
+
+        List<ProductDto> process = productService.find10ByCategory(CategoryEnum.PROCESSADORES);
+        model.addAttribute("processors", process);
+
+        List<ProductDto> phone = productService.find10ByCategory(CategoryEnum.FONE_DE_OUVIDO);
+        model.addAttribute("audios", phone);
 
         return "pages/index";
     }
@@ -82,10 +88,23 @@ public class RoutesController {
         return ResponseEntity.ok().build();
     }
 
-    // @GetMapping({"/usuario/{page}"})
-    // public String loadUserPages(Model model, @PathVariable String page) {
-    //     return "pages/user_pages/" + page;
-    // }
+    @GetMapping("/itens/{category}")
+    public String getCategoriesProducts(@PathVariable("category") String filter, ModelMap model) {
+        List<ProductModel> products = productService.getProductsForCategoryOrDepartament(filter);
+        model.addAttribute("products", products);
+
+        return "pages/product-filtered";
+    }
+
+    @GetMapping("/search")
+    public String getSearchedProducts(@RequestParam String searched, ModelMap model) {
+        List<ProductModel> products = productService.findProductsByNameLike(searched);
+
+        model.addAttribute("products", products);
+
+        return "pages/product-filtered";
+    }
+
     @GetMapping("/administrador")
     public String getAdminPage() {
         return "pages/admin_pages/admin";

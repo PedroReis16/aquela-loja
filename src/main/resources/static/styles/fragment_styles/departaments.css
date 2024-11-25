@@ -47,6 +47,8 @@
 
   .menu-link:hover {
     background-color: var(--primary-color);
+    text-decoration: none;
+    color: var(--white);
   }
 
   .submenu {
@@ -114,7 +116,7 @@
     float: right;
     transition: transform 0.3s;
   }
-  .menu-link.active{
+  .menu-link.active {
     background-color: var(--primary-color);
   }
 

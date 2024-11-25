@@ -62,10 +62,12 @@ public class WebSecurityConfig {
                 //Autenticação das rotas de administrador
                 .requestMatchers("/admin/**").hasRole(ADMIN.name())
                 //Autenticação das rotas de usuário
+                .requestMatchers("/cart-auth").authenticated()
                 .requestMatchers("/user/registration").permitAll()
                 .requestMatchers("/user/delete").permitAll()
                 .requestMatchers("/user/documents").permitAll()
                 .requestMatchers("/user/emails").permitAll()
+                                .requestMatchers("/user/name").permitAll()
                 .requestMatchers("/user/**").hasAnyRole(USER.name(), ADMIN.name())
                 .anyRequest().permitAll()
                 )

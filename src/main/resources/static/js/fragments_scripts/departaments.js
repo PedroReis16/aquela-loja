@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
             menuItem.className = 'menu-item';
 
             const menuLink = document.createElement('a');
-            menuLink.href = '#';
+            menuLink.href = '/itens/' + dept.Departamento;
             menuLink.className = 'menu-link';
             menuLink.textContent = capitalizeWords(dept.Departamento);
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 submenuItem.className = 'submenu-item';
 
                 const submenuLink = document.createElement('a');
-                submenuLink.href = '#';
+                submenuLink.href = '/itens/' + value;
                 submenuLink.textContent = capitalizeWords(value);
 
                 submenuItem.appendChild(submenuLink);
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function capitalizeWords(str) {
         return str.split(' ')
             .map(word => {
-                if (word === "E" || word === "DE" || word === "DA") {
+                if (word === "e" || word === "de" || word === "da"||word === "para") {
                     return word.toLowerCase();
                 }
                 else if (word === "PC" || word === "TV" || word === "DVD" || word === "CD" || word === "SSD" || word === "RAM")

@@ -5,7 +5,6 @@
 /* Import of page and widget styles */
 
 /* Pages */
-@import url("./page_styles/inicio.css");
 @import url("./page_styles/produtos.css");
 @import url("./page_styles/carrinho.css");
 @import url("./page_styles/login.css");
@@ -14,6 +13,8 @@
 @import url("./page_styles/user_page_styles/meus-dados.css");
 @import url("./page_styles/user_page_styles/meus-cartoes.css");
 @import url("./page_styles/user_page_styles/meus-pedidos.css");
+@import url("./page_styles/product_page_styles/storage-products.css");
+@import url("./page_styles/index.css");
 
 /* Widgets */
 @import url("./fragment_styles/header.css");
@@ -23,13 +24,20 @@
 @import url("./fragment_styles/user-avatar.css");
 @import url("./fragment_styles/shopping-cart.css");
 @import url("./fragment_styles/user-address-form.css");
-@import url("./fragment_styles/dialogs/delete-user-dialog.css");
-@import url("./fragment_styles/dialogs/user-address-dialog.css");
+
+/* Cards */
 @import url("./fragment_styles/cards/edit-user-details-card.css");
 @import url("./fragment_styles/cards/user-address-list-card.css");
+@import url("./fragment_styles/cards/new-user-card.css");
+@import url("./fragment_styles/cards/product-card.css");
+
+/* Dialogs */
+@import url("./fragment_styles/dialogs/delete-user-dialog.css");
+@import url("./fragment_styles/dialogs/user-address-dialog.css");
+@import url("./fragment_styles/cards/edit-product-card.css");
 @import url("./fragment_styles/dialogs/edit-card-dialog.css");
 @import url("./fragment_styles/dialogs/new-user-card-dialog.css");
-@import url("./fragment_styles/cards/new-user-card.css");
+@import url("./fragment_styles/dialogs/product-dialog.css");
 
 :root {
   --default-font: "Poppins", sans-serif;
@@ -87,6 +95,7 @@ a {
   outline: none;
   box-sizing: border-box;
   height: 56px;
+  font-family: var(--secondary-font);
 }
 
 .input-label input {
@@ -120,16 +129,8 @@ a {
   align-content: center;
   vertical-align: middle;
 }
-
-.confirm-button i::before {
-  content: "\e5c8";
+.confirm-button > i::before {
   font-family: var(--material-icons);
-  margin-right: 8px;
-  margin-left: 8px;
-  margin-top: 8px;
-  font-size: 16px;
-  position: relative;
-  top: 2px;
 }
 
 .confirm-button:disabled {
@@ -213,4 +214,35 @@ a {
 
   color: var(--primary-color);
   font-size: 24px;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-container h2 {
+  margin: 0;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%; /* Exibe abaixo do título */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark-gray);
+  color: var(--white);
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: wrap;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.tooltip-container:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
 }

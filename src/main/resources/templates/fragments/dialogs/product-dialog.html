@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dialog-container" th:fragment="dialog">
+        <dialog id="productDialog">
+            <div class="dialog-header" id="productDialogHeader">
+                <h3>Novo Produto</h3>
+                <button class="close-dialog-button new-card-cancel" id="closeNewProductDialog"><i></i></button>
+            </div>
+
+            <div class="dialog-content">
+                <form action="/product/new-product" method="post" id="productForm">
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="descriptionIcon"></i>
+                            <input type="text" id="productDescription" name="productDescription"
+                                placeholder="Descrição do produto">
+                            <label for="productDescription"></label>
+                        </div>
+                        <p id="productDescriptionError" class="error-message"></p>
+                    </div>
+
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="categoryIcon"></i>
+                            <select name="productCategory" id="productCategory" class="product-dropdown"></select>
+                            <label for="productCategory"></label>
+                        </div>
+                        <p id="productCategoryError" class="error-message"></p>
+                    </div>
+
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="priceIcon"></i>
+                            <input type="text" id="productPrice" name="productPrice" placeholder="Preço">
+                            <label for="productDescription"></label>
+                        </div>
+                        <p id="productPriceError" class="error-message"></p>
+                    </div>
+
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="descriptionIcon"></i>
+                            <select id="productBrand" name="productBrand" class="product-dropdown"
+                                placeholder="Marca do produto">
+
+                            </select>
+
+                        </div>
+                        <p id="productBrandError" class="error-message"></p>
+                    </div>
+
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="stockIcon"></i>
+                            <input type="text" id="productStock" name="productStock"
+                                placeholder="Quantidade em estoque">
+                            <label for="productStock"></label>
+                        </div>
+                        <p id="productStockCountError" class="error-message"></p>
+                    </div>
+
+                    <div class="product-description-container">
+                        <div class="input-label">
+                            <i id="pictureIcon"></i>
+                            <input type="file" id="productImage" accept="image/jpeg" required>
+                            <label for="productDescription"></label>
+                        </div>
+                        <p id="productImageError" class="error-message"></p>
+                    </div>
+
+                </form>
+
+
+                <div class="product-card product-dialog-card">
+
+                    <div class="product-card-image">
+                        <img id="productCardImage" src="/api/placeholder/400/320" alt="Preview">
+                    </div>
+                    <div class="product-card-content">
+                        <!-- <div class="product-card-title" id="productTitle">Nome do Produto</div> -->
+                        <div class="tooltip-container">
+                            <h2 id="productTitle">Descrição</h2>
+                            <div class="tooltip" id="productTitleTooltip">Descrição</div>
+                        </div>
+                        <div class="product-card-price" id="productPreviewPrice">R$ 0,00</div>
+                        <div class="product-card-installment" id="productInstallment">ou 10x de R$ 0,00 sem juros
+                        </div>
+                        <button class="confirm-button" id="productCardBtn">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="new-product-dialog-actions">
+                <button type="button" class="cancel-btn new-product-cancel" id="cancelNewProduct">Cancelar</button>
+                <button type="submit" class="confirm-button" id="saveNewProduct">Salvar</button>
+            </div>
+        </dialog>
+
+        <script th:src="@{/js/fragments_scripts/dialogs/product-dialog.js}"></script>
+    </div>
+</body>
+
+</html>

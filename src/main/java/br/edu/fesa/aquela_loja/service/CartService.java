@@ -21,10 +21,12 @@ public class CartService {
         List<String> cartItems = getCartItems(request);
 
         // Adiciona o ID do produto ao carrinho
-        cartItems.add(productId);
+        if (!cartItems.contains(productId)) {
+            cartItems.add(productId);
 
-        // Salva os itens atualizados no cookie
-        saveCartItems(response, cartItems);
+            // Salva os itens atualizados no cookie
+            saveCartItems(response, cartItems);
+        }
     }
 
     // Recupera os itens do carrinho a partir do cookie (agora uma lista de IDs)
@@ -89,6 +91,14 @@ public class CartService {
         List<String> cartItems = getCartItems(request);
 
         cartItems.remove(pId);
+
+        saveCartItems(response, cartItems);
+    }
+
+    public void removeAllFromCart(HttpServletRequest request, HttpServletResponse response) {
+        List<String> cartItems = getCartItems(request);
+
+        cartItems.clear();
 
         saveCartItems(response, cartItems);
     }

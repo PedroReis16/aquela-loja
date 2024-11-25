@@ -156,21 +156,12 @@
         <!-- Items serão inseridos via JavaScript -->
       </div>
 
-      <div sec:authorize="isAuthenticated()">
-        <h2 >Endereço de Entrega</h2>
-        <div class="address-selection" id="cart-adds">
+      <div class="address-selection" id="cart-adds" hidden="">
 
-        </div>
-
-        <div class="navigation-buttons">
-          <button class="btn" onclick="nextStep()">Próximo</button>
-        </div>
       </div>
 
-      <div sec:authorize="!isAuthenticated()">
-        <div class="navigation-buttons">
-          <a href="/login"><button class="btn">Continuar</button></a>
-        </div>
+      <div class="navigation-buttons">
+        <a href="/cart-auth"><button class="btn">Continuar</button></a>
       </div>
     </div>
 
