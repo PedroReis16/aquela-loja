@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Gráficos de Vendas</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" th:href="@{/styles/reset.css}">
+  <link rel="stylesheet" th:href="@{/styles/style.css}">
+  <style>
+    /* Estilo geral para a página */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 2em;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 1.5em;
+    }
+
+    /* Estilo para os gráficos */
+    canvas {
+        display: block;
+        max-width: 100%;
+        margin: 0 auto 30px;
+    }
+
+    /* Ajuste o tamanho do gráfico */
+    #brandSalesChart,
+    #topProductsChart {
+        width: 70% !important;  /* Garantir que os gráficos ocupem 80% da largura da tela */
+        height: 250px;  /* Altura fixa para os gráficos */
+    }
+  </style>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<h1>Relatórios de Vendas</h1>
+
+<h2>Vendas por Marca</h2>
+<canvas id="brandSalesChart"></canvas>
+
+<h2>Top 10 Produtos Mais Vendidos</h2>
+<canvas id="topProductsChart"></canvas>
+
+<script>
+  // Função para buscar e renderizar o gráfico de vendas por marca
+  function fetchSalesData() {
+      fetch('/chart/sales')  // Endpoint de vendas por marca
+          .then(response => response.json())
+          .then(data => {
+              const labels = data.map(item => item.brand);  // Extrair as marcas
+              const salesData = data.map(item => item.totalSale);  // Extrair total de vendas
+
+              const ctx = document.getElementById('brandSalesChart').getContext('2d');
+              const brandSalesChart = new Chart(ctx, {
+                  type: 'bar',  // Tipo de gráfico
+                  data: {
+                      labels: labels,  // Marca como rótulo
+                      datasets: [{
+                          label: 'Vendas por Marca',
+                          data: salesData,  // Dados de vendas
+                          backgroundColor: 'rgba(135, 206, 250, 0.4)',  // Cor de fundo das barras
+                          borderColor: 'rgba(135, 206, 250, 1)',
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      responsive: true,
+                      scales: {
+                          y: {
+                              beginAtZero: true  // Começar o eixo Y do gráfico em 0
+                          }
+                      }
+                  }
+              });
+          })
+          .catch(error => console.error('Erro ao carregar dados de vendas:', error));
+  }
+
+  // Função para buscar e renderizar o gráfico de top 10 produtos mais vendidos
+  function fetchTopProductsData() {
+      fetch('/chart/top-products')  // Endpoint de top 10 produtos
+          .then(response => response.json())
+          .then(data => {
+              const productNames = data.map(item => item.productName);  // Nomes dos produtos
+              const productQuantities = data.map(item => item.quantity);  // Quantidades vendidas
+
+              const ctx = document.getElementById('topProductsChart').getContext('2d');
+              const topProductsChart = new Chart(ctx, {
+                  type: 'bar',  // Tipo de gráfico
+                  data: {
+                      labels: productNames,  // Nome dos produtos como rótulos
+                      datasets: [{
+                          label: 'Top 10 Produtos Mais Vendidos',
+                          data: productQuantities,  // Quantidades dos produtos vendidos
+                          backgroundColor: 'rgba(173, 216, 230, 0.4)',  // Cor das barras
+                          borderColor: 'rgba(173, 216, 230, 1)',
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      responsive: true,
+                      scales: {
+                          y: {
+                              beginAtZero: true  // Começar o eixo Y do gráfico em 0
+                          }
+                      }
+                  }
+              });
+          })
+          .catch(error => console.error('Erro ao carregar dados de produtos:', error));
+  }
+
+  // Carregar os dois gráficos ao carregar a página
+  window.onload = function() {
+      fetchSalesData();
+      fetchTopProductsData();
+  };
+</script>
+</body>
+</html>
+

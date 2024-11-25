@@ -1,7 +1,9 @@
 package br.edu.fesa.aquela_loja.controller;
 
+import br.edu.fesa.aquela_loja.models.dto.order.CartItemOrderDto;
 import br.edu.fesa.aquela_loja.models.dto.order.NewOrderDto;
 import br.edu.fesa.aquela_loja.models.entity.OrderModel;
+import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.models.enums.OrderStatusEnum;
 import br.edu.fesa.aquela_loja.repository.IOrderRepository;
 import br.edu.fesa.aquela_loja.service.CartService;
@@ -50,8 +52,9 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/new")
-    public ResponseEntity<Void> createNewOrder(@RequestBody NewOrderDto dto, HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
+    public ResponseEntity<String> createNewOrder(@RequestBody NewOrderDto dto, HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
         List<String> pIds = cartService.getCartItems(request);
+        boolean qtError = false;
 
         if (dto != null) {
             OrderModel order = new OrderModel();
@@ -63,7 +66,27 @@ public class OrderController {
                 order.setUser(userService.findUserByEmail(username));
             }
 
-            order.setItems(productService.findByIdIn(pIds));
+            List<ProductModel> orderItems = productService.findByIdIn(pIds);
+
+            for (CartItemOrderDto item : dto.getCartItems()) {
+                ProductModel product = productService.findByName(item.getName());
+
+                if (product.getStockCount() > 0) {
+                    if (item.getQuantity() > product.getStockCount()) {
+                        return ResponseEntity.badRequest().body("Quantidade do item " + item.getName() + " excedida!!");
+                    }
+
+                    if (item.getQuantity() > 10) {
+                        return ResponseEntity.badRequest()
+                                .body("Quantidade do item '" + item.getName() + "' excede o limite de 10 unidades por pedido!");
+                    }
+                    product.setStockCount(product.getStockCount() - item.getQuantity());
+                } else {
+                    return ResponseEntity.badRequest().body("Produto '" + item.getName() + " indisponível!!");
+                }
+            }
+
+            order.setItems(orderItems);
 
 
             order.setJsonItems(objectMapper.writeValueAsString(dto.getCartItems()));
@@ -88,7 +111,7 @@ public class OrderController {
         System.out.println("Endereço: " + dto.getAddress());
 
         // Retorna uma resposta de sucesso
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Pedido criado com sucesso!");
     }
 
     @PostMapping("update-status")

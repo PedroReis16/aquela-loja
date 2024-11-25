@@ -203,4 +203,8 @@ public class ProductService {
 
         return result;
     }
+
+    public ProductModel findByName(String name) {
+       return productRepository.findByName(name);
+    }
 }
