@@ -15,6 +15,7 @@
 @import url("./page_styles/user_page_styles/meus-pedidos.css");
 @import url("./page_styles/product_page_styles/storage-products.css");
 @import url("./page_styles/index.css");
+@import url("./page_styles/product_page_styles/product-filtered.css");
 
 /* Widgets */
 @import url("./fragment_styles/header.css");

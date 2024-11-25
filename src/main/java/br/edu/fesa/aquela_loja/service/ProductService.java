@@ -53,45 +53,14 @@ public class ProductService {
 
     public List<ProductDto> findAllLimit10() {
         List<ProductModel> products = productRepository.findTop10ByOrderByName();
-        List<ProductDto> result = new ArrayList<>();
-
-        for (ProductModel product : products) {
-            ProductDto productDto = new ProductDto();
-            productDto.setId(product.getId());
-            productDto.setName(product.getName());
-            productDto.setBrand(product.getBrand());
-            productDto.setCategory(product.getCategory());
-            productDto.setPrice(product.getPrice());
-            productDto.setStockCount(product.getStockCount());
-
-            String base64Image = Base64.getEncoder().encodeToString(product.getImg().getData());
-            productDto.setImage("data:image/jpg;base64," + base64Image);
-
-            result.add(productDto);
-        }
-        return result;
+       
+        return convertModelListToDto(products);
     }
 
     public List<ProductDto> find10ByCategory(CategoryEnum category) {
         List<ProductModel> models = productRepository.findTop10ByCategory(category);
-        List<ProductDto> result = new ArrayList<>();
 
-        for (ProductModel product : models) {
-            ProductDto productDto = new ProductDto();
-            productDto.setId(product.getId());
-            productDto.setName(product.getName());
-            productDto.setBrand(product.getBrand());
-            productDto.setCategory(product.getCategory());
-            productDto.setPrice(product.getPrice());
-            productDto.setStockCount(product.getStockCount());
-
-            String base64Image = Base64.getEncoder().encodeToString(product.getImg().getData());
-            productDto.setImage("data:image/jpg;base64," + base64Image);
-
-            result.add(productDto);
-        }
-
-        return result;
+        return convertModelListToDto(models);
     }
 
     public ProductModel findById(final String id) {
@@ -124,14 +93,16 @@ public class ProductService {
         return findByIdIn(cartItems).stream().map(CartItemDto::fromProdutc).collect(Collectors.toList());
     }
 
-    public List<ProductModel> getProductsForCategoryOrDepartament(String filter) {
+    public List<ProductDto> getProductsForCategoryOrDepartament(String filter) {
 
         try {
+            List<ProductModel> products = new ArrayList<>();
+
             CategoryEnum category = getEnumValue(CategoryEnum.class, filter);
+
             if (category != null) {
-                return productRepository.findByCategory(category);
+                products = productRepository.findByCategory(category);
             } else {
-                List<ProductModel> products = new java.util.ArrayList<>(List.of());
                 DepartamentEnum departament = getEnumValue(DepartamentEnum.class, filter);
 
                 if (departament != null) {
@@ -144,8 +115,10 @@ public class ProductService {
                     }
                 }
 
-                return products;
+                // return products;
             }
+            return convertModelListToDto(products);
+
         } catch (Exception e) {
             System.out.println("Erro ao determinar categoria ou departamento");
             return List.of();
@@ -177,7 +150,6 @@ public class ProductService {
     }
 
     public List<ProductDto> getAllItems() {
-        List<ProductDto> result = new ArrayList<>();
         List<ProductModel> products = findAll();
 
         List<ProductModel> sortedProducts = products.stream()
@@ -185,7 +157,13 @@ public class ProductService {
                 .compareTo(product2.getName()))
                 .toList();
 
-        for (ProductModel product : sortedProducts) {
+        return convertModelListToDto(sortedProducts);
+    }
+
+    private List<ProductDto> convertModelListToDto(List<ProductModel> models) {
+        List<ProductDto> result = new ArrayList<>();
+
+        for (ProductModel product : models) {
 
             ProductDto productDto = new ProductDto();
             productDto.setId(product.getId());
