@@ -43,7 +43,7 @@ productCard.forEach(product => {
         const productObj = editBtn.getAttribute('data-product');
 
         const regex = /(\w+)=([^,]*)/g;
-
+        
         const result = {};
         let match;
 
@@ -62,7 +62,7 @@ productCard.forEach(product => {
 
         result.brand = result.brand.replace(' ', '_').toUpperCase();
         result.image = (productObj.match(/image=(.*)/)[1]).slice(0, -1);
-
+       
 
         openEditProductDialog(result);
     });

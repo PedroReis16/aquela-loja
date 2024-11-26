@@ -39,7 +39,7 @@ let formData = {
 }
 
 function canSaveProduct() {
-    if (productDescription.value && productCategory.value && productPrice.value && productBrand.value && productStockCount.value > 0 && productCardImage.src) {
+    if (formData.name && formData.category && formData.price && formData.brand && formData.stockCount > 0 && formData.image) {
         saveProductBtn.disabled = false;
         return;
     }
@@ -197,6 +197,9 @@ productBrand.addEventListener('change', function (e) {
 document.addEventListener('DOMContentLoaded', async function () {
     await populateCategories();
     await populateBrands();
+
+    formData.category = productCategory.value;
+    formData.brand = productBrand.value;
 
     canSaveProduct();
 });
