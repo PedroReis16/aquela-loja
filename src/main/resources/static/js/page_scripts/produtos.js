@@ -1,3 +1,15 @@
+
+import { openEditableDialog } from '../fragments_scripts/dialogs/product-dialog.js';
+
+let data = {
+    name: '',
+    category: '',
+    price: '',
+    brand: '',
+    stockCount: 0,
+    image: ''
+}
+
 const newProductBtn = document.getElementById('newProductBtn');
 const productDialog = document.getElementById('productDialog');
 
@@ -79,32 +91,14 @@ productCard.forEach(product => {
     });
 });
 
-import { openEditableDialog } from '../fragments_scripts/dialogs/product-dialog.js';
-
-let data = {
-    name: '',
-    category: '',
-    price: '',
-    brand: '',
-    stockCount: 0,
-    image: ''
-}
 
 function openEditProductDialog(result) {
 
 
     productDialog.setAttribute('data-id', result.id);
     productDialog.querySelector("#productDialogHeader>h3").textContent = "Editar Produto";
-    productDialog.querySelector("#productForm").action = "/products/update/" + result.id;
+    productDialog.querySelector("#productForm").action = "/product/update/" + result.id;
 
-
-    // productDialog.querySelector("#productDescription").value = result.name;
-    // productDialog.querySelector("#productCategory").value = result.category;
-    // productDialog.querySelector("#productPrice").value = result.price;
-    // productDialog.querySelector("#productBrand").value = result.brand;
-    // productDialog.querySelector("#productStock").value = result.stockCount;
-    // productDialog.querySelector("#previewCardImage").src = result.image;
-    // productDialog.querySelector("#saveNewProduct").disabled = false;
 
     data.name = result.name;
     data.category = result.category;
@@ -114,6 +108,4 @@ function openEditProductDialog(result) {
     data.image = result.image;
 
     openEditableDialog(data);
-
-    // productDialog.showModal();
 }

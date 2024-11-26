@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 
 saveProductBtn.addEventListener('click', async function () {
-    const response = await fetch('/product/new-product', {
+    const response = await fetch(productForm.action, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

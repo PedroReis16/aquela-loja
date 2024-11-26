@@ -5,7 +5,6 @@ import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.edu.fesa.aquela_loja.models.entity.ProductImageModel;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
@@ -21,29 +20,30 @@ public class ImageService {
         if (imgBase64.startsWith("data:image")) {
             imgBase64 = imgBase64.substring(imgBase64.indexOf(",") + 1);
         }
-    
+
         byte[] img = Base64.getDecoder().decode(imgBase64);
-    
+
         return ProductImageModel.builder()
                 .data(img)
                 .build();
     }
 
-    public void update(ProductModel model, MultipartFile img) throws IOException {
-        var pModel = productRepository.findById(model.getId());
+    public void update(Long id, String img) throws IOException {
+        try {
+            var pModel = productRepository.findById(id);
 
-        if (pModel.isPresent()) {
-            if (!"".equals(img.getOriginalFilename())) {
+            if (pModel.isPresent()) {
+                
+                    ProductImageModel imageModel = pModel.get().getImg();
+                    ProductImageModel newImg = generateFileModel(img);
+                    imageModel.setData(newImg.getData());
 
-                ProductImageModel imageModel = pModel.get().getImg();
-
-                imageModel.setData(img.getBytes());
-                // imageModel.setType(img.getContentType());
-                // imageModel.setName(img.getOriginalFilename());
-                model.setImg(imageModel);
-            } else {
-                model.setImg(pModel.get().getImg());
+                    // Salva a entidade ProductModel após atualizar a imagem
+                    productRepository.save(pModel.get());
+                
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -5,12 +5,12 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
 import br.edu.fesa.aquela_loja.models.dto.product.NewProductDto;
@@ -67,9 +67,24 @@ public class ProductService {
         return productRepository.findById(Long.valueOf(id)).orElse(new ProductModel());
     }
 
-    public void update(final ProductModel product, final MultipartFile img) throws IOException {
-        imageService.update(product, img);
-        productRepository.save(product);
+    public void update(Long id, ProductDto product) {
+        try {
+            Optional<ProductModel> originalProduct = productRepository.findById(id);
+
+            if (!originalProduct.isPresent()) {
+                return;
+            }
+            originalProduct.get().setName(product.getName());
+            originalProduct.get().setBrand(product.getBrand());
+            originalProduct.get().setCategory(product.getCategory());
+            originalProduct.get().setPrice(product.getPrice());
+            originalProduct.get().setStockCount(product.getStockCount());
+
+            imageService.update(id, product.getImage());
+            productRepository.save(originalProduct.get());
+        } catch (Exception e) {
+            String teste = "";
+        }
     }
 
     public boolean exists(String pName) {
@@ -185,6 +200,6 @@ public class ProductService {
     }
 
     public ProductModel findByName(String name) {
-       return productRepository.findByName(name);
+        return productRepository.findByName(name);
     }
 }
