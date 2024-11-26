@@ -16,7 +16,7 @@ const productStockError = document.getElementById('productStockCountError');
 
 // Image preview
 const imagePreview = document.getElementById('imagePreview');
-const productCardImage = document.getElementById('productCardImage');
+const productCardImage = document.getElementById('previewCardImage');
 const productTitle = document.getElementById('productTitle');
 const productTitleTooltip = document.getElementById('productTitleTooltip');
 const productPreviewPrice = document.getElementById('productPreviewPrice');
