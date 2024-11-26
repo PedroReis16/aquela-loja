@@ -17,4 +17,6 @@ public interface IProductRepository extends JpaRepository<ProductModel, Long> {
     List<ProductModel> findByNameContainingIgnoreCase(String name);
 
     List<ProductModel> findTop10ByOrderByName();
+
+    ProductModel findByName(String name);
 }

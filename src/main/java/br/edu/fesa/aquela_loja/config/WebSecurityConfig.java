@@ -80,7 +80,8 @@ public class WebSecurityConfig {
                 .logoutSuccessUrl("/").permitAll()
                 .invalidateHttpSession(true) // Garante que a sessão seja invalidada
                 .clearAuthentication(true) // Limpa a autenticação
-                .deleteCookies("JSESSIONID") // Apaga o cookie JSESSIONID
+                .deleteCookies("JSESSIONID")
+                .deleteCookies("CartItems")
                 .permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .build();

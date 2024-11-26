@@ -240,3 +240,7 @@ saveButton.addEventListener('click', async () => {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    saveButton.disabled = true;
+});
