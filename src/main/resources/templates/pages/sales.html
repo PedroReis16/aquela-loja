@@ -7,9 +7,8 @@
   <link rel="stylesheet" th:href="@{/styles/reset.css}">
   <link rel="stylesheet" th:href="@{/styles/style.css}">
   <style>
-    /* Estilo geral para a página */
     body {
-        font-family: Arial, sans-serif;
+        font-family: var(--default-font);
         margin: 0;
         padding: 0;
         background-color: #f4f4f4;
@@ -19,6 +18,7 @@
         text-align: center;
         margin-top: 20px;
         font-size: 2em;
+        font-weight: 700;
     }
 
     h2 {
@@ -27,18 +27,21 @@
         font-size: 1.5em;
     }
 
-    /* Estilo para os gráficos */
     canvas {
         display: block;
         max-width: 100%;
         margin: 0 auto 30px;
     }
 
-    /* Ajuste o tamanho do gráfico */
-    #brandSalesChart,
     #topProductsChart {
-        width: 70% !important;  /* Garantir que os gráficos ocupem 80% da largura da tela */
-        height: 250px;  /* Altura fixa para os gráficos */
+        width: 70% !important;
+        height: 250px;
+    }
+
+    #brandSalesChart {
+        width: 70% !important;
+        height: 300px !important;
+        margin: 0 auto;
     }
   </style>
 </head>
@@ -46,87 +49,189 @@
 <header th:replace="fragments/header :: header"></header>
 <h1>Relatórios de Vendas</h1>
 
-<h2>Vendas por Marca</h2>
-<canvas id="brandSalesChart"></canvas>
+<h2>Porcentagem de Vendas por Marca</h2>
+<div style="width: 50%; margin: 0 auto;">
+  <canvas id="brandSalesChart" style="max-width: 100%; height: auto;"></canvas>
+</div>
+<div id="brandLegend" style="margin: 20px; text-align: center;"></div>
 
-<h2>Top 10 Produtos Mais Vendidos</h2>
+<h2>Produtos Mais Vendidos</h2>
 <canvas id="topProductsChart"></canvas>
+<div id="customLegend" style="margin: 20px; text-align: center;"></div>
 
 <script>
-  // Função para buscar e renderizar o gráfico de vendas por marca
-  function fetchSalesData() {
-      fetch('/chart/sales')  // Endpoint de vendas por marca
-          .then(response => response.json())
-          .then(data => {
-              const labels = data.map(item => item.brand);  // Extrair as marcas
-              const salesData = data.map(item => item.totalSale);  // Extrair total de vendas
+  function generateColors(count) {
+    return Array.from({ length: count }, () =>
+        `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`
+    );
+}
 
-              const ctx = document.getElementById('brandSalesChart').getContext('2d');
-              const brandSalesChart = new Chart(ctx, {
-                  type: 'bar',  // Tipo de gráfico
-                  data: {
-                      labels: labels,  // Marca como rótulo
-                      datasets: [{
-                          label: 'Vendas por Marca',
-                          data: salesData,  // Dados de vendas
-                          backgroundColor: 'rgba(135, 206, 250, 0.4)',  // Cor de fundo das barras
-                          borderColor: 'rgba(135, 206, 250, 1)',
-                          borderWidth: 1
-                      }]
-                  },
-                  options: {
-                      responsive: true,
-                      scales: {
-                          y: {
-                              beginAtZero: true  // Começar o eixo Y do gráfico em 0
-                          }
-                      }
-                  }
-              });
-          })
-          .catch(error => console.error('Erro ao carregar dados de vendas:', error));
-  }
+function renderCustomLegend(chart, containerId) {
+    const legendContainer = document.getElementById(containerId);
+    legendContainer.innerHTML = '';
+    chart.data.labels.forEach((label, index) => {
+        const legendItem = document.createElement('div');
+        legendItem.style.display = 'flex';
+        legendItem.style.alignItems = 'center';
+        legendItem.style.marginBottom = '5px';
 
-  // Função para buscar e renderizar o gráfico de top 10 produtos mais vendidos
-  function fetchTopProductsData() {
-      fetch('/chart/top-products')  // Endpoint de top 10 produtos
-          .then(response => response.json())
-          .then(data => {
-              const productNames = data.map(item => item.productName);  // Nomes dos produtos
-              const productQuantities = data.map(item => item.quantity);  // Quantidades vendidas
+        const colorBox = document.createElement('span');
+        colorBox.style.backgroundColor = chart.data.datasets[0].backgroundColor[index];
+        colorBox.style.width = '15px';
+        colorBox.style.height = '15px';
+        colorBox.style.display = 'inline-block';
+        colorBox.style.marginRight = '10px';
 
-              const ctx = document.getElementById('topProductsChart').getContext('2d');
-              const topProductsChart = new Chart(ctx, {
-                  type: 'bar',  // Tipo de gráfico
-                  data: {
-                      labels: productNames,  // Nome dos produtos como rótulos
-                      datasets: [{
-                          label: 'Top 10 Produtos Mais Vendidos',
-                          data: productQuantities,  // Quantidades dos produtos vendidos
-                          backgroundColor: 'rgba(173, 216, 230, 0.4)',  // Cor das barras
-                          borderColor: 'rgba(173, 216, 230, 1)',
-                          borderWidth: 1
-                      }]
-                  },
-                  options: {
-                      responsive: true,
-                      scales: {
-                          y: {
-                              beginAtZero: true  // Começar o eixo Y do gráfico em 0
-                          }
-                      }
-                  }
-              });
-          })
-          .catch(error => console.error('Erro ao carregar dados de produtos:', error));
-  }
+        const text = document.createElement('span');
+        text.textContent = label;
 
-  // Carregar os dois gráficos ao carregar a página
-  window.onload = function() {
-      fetchSalesData();
-      fetchTopProductsData();
-  };
+        legendItem.appendChild(colorBox);
+        legendItem.appendChild(text);
+        legendContainer.appendChild(legendItem);
+    });
+}
+
+function fetchSalesData() {
+    fetch('/chart/sales')
+        .then(response => response.json())
+        .then(data => {
+            const labels = data.map(item => item.brand);
+            const salesData = data.map(item => item.totalSale);
+
+            const totalSales = salesData.reduce((acc, val) => acc + val, 0);
+
+            const colors = labels.map((_, index) => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.5)`);
+
+            const ctx = document.getElementById('brandSalesChart').getContext('2d');
+            const brandSalesChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: salesData,
+                        backgroundColor: colors,
+                        borderColor: colors.map(color => color.replace('0.5', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const percentage = ((tooltipItem.raw / totalSales) * 100).toFixed(2);
+                                    return `${tooltipItem.label}: ${percentage}%`;
+                                }
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    },
+                    aspectRatio: 1,
+                }
+            });
+
+            const legendContainer = document.getElementById('brandLegend');
+            legendContainer.innerHTML = labels
+                .map((label, index) => {
+                    const percentage = ((salesData[index] / totalSales) * 100).toFixed(2);
+                    return `<span style="display: inline-block; margin-right: 10px;">
+                        <span style="display: inline-block; width: 15px; height: 15px; background-color: ${colors[index]}; margin-right: 5px;"></span>
+                        ${label} (${percentage}%)
+                    </span>`;
+                })
+                .join('');
+        })
+        .catch(error => console.error('Erro ao carregar dados de vendas:', error));
+}
+
+function fetchTopProductsData() {
+    fetch('/chart/top-products')
+        .then(response => response.json())
+        .then(data => {
+            const productNames = data.map(item => item.productName);
+            const productQuantities = data.map(item => item.quantity);
+            const colors = productNames.map(() => `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`);
+
+            const ctx = document.getElementById('topProductsChart').getContext('2d');
+            const topProductsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: productNames,
+                    datasets: [{
+                        label: 'Top 10 Produtos Mais Vendidos',
+                        data: productQuantities,
+                        backgroundColor: colors,
+                        borderColor: colors.map(color => color.replace('0.5', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true
+                        },
+                        customLegend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                },
+                plugins: [
+                    {
+                        id: 'customLegend',
+                        afterDraw(chart) {
+                            const legendContainer = document.getElementById('customLegend');
+                            legendContainer.innerHTML = '';
+                            chart.data.labels.forEach((label, index) => {
+                                const legendItem = document.createElement('div');
+                                legendItem.style.display = 'flex';
+                                legendItem.style.alignItems = 'center';
+                                legendItem.style.marginBottom = '5px';
+
+                                const colorBox = document.createElement('span');
+                                colorBox.style.backgroundColor = chart.data.datasets[0].backgroundColor[index];
+                                colorBox.style.width = '15px';
+                                colorBox.style.height = '15px';
+                                colorBox.style.display = 'inline-block';
+                                colorBox.style.marginRight = '10px';
+
+                                const text = document.createElement('span');
+                                text.textContent = label;
+
+                                legendItem.appendChild(colorBox);
+                                legendItem.appendChild(text);
+                                legendContainer.appendChild(legendItem);
+                            });
+                        }
+                    }
+                ]
+            });
+        })
+        .catch(error => console.error('Erro ao carregar dados de produtos:', error));
+}
+
+window.onload = function() {
+    fetchSalesData();
+    fetchTopProductsData();
+};
 </script>
 </body>
 </html>
-

@@ -19,7 +19,7 @@
     </div>
 
 
-    <div th:if="!${product}" class="centered-container">
+    <div th:if="${products.isEmpty()}" class="centered-container">
       <img th:src="@{/images/notFound.png}" alt="">
     </div>
   </main>
