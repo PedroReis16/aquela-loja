@@ -53,7 +53,7 @@ public class ProductService {
 
     public List<ProductDto> findAllLimit10() {
         List<ProductModel> products = productRepository.findTop10ByOrderByName();
-       
+
         return convertModelListToDto(products);
     }
 
@@ -146,9 +146,9 @@ public class ProductService {
     }
 
     public List<ProductDto> findProductsByNameLike(String searched) {
-       List<ProductModel> models= productRepository.findByNameContainingIgnoreCase(searched);
+        List<ProductModel> models = productRepository.findByNameContainingIgnoreCase(searched);
 
-         return convertModelListToDto(models);
+        return convertModelListToDto(models);
     }
 
     public List<ProductDto> getAllItems() {
@@ -182,5 +182,9 @@ public class ProductService {
         }
 
         return result;
+    }
+
+    public void deleteByName(String pName) {
+        productRepository.deleteByName(pName);
     }
 }

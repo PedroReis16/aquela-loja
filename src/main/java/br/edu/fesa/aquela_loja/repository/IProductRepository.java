@@ -1,10 +1,11 @@
 package br.edu.fesa.aquela_loja.repository;
 
-import br.edu.fesa.aquela_loja.models.entity.ProductModel;
-import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import br.edu.fesa.aquela_loja.models.entity.ProductModel;
+import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
 
 public interface IProductRepository extends JpaRepository<ProductModel, Long> {
 
@@ -17,4 +18,5 @@ public interface IProductRepository extends JpaRepository<ProductModel, Long> {
     List<ProductModel> findByNameContainingIgnoreCase(String name);
 
     List<ProductModel> findTop10ByOrderByName();
+    void deleteByName(String name);
 }

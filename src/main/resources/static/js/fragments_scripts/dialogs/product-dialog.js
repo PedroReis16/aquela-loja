@@ -22,11 +22,12 @@ const productTitleTooltip = document.getElementById('productTitleTooltip');
 const productPreviewPrice = document.getElementById('productPreviewPrice');
 const productInstallment = document.getElementById('productInstallment');
 
-// const Butão salvar
+// const botão salvar
 const saveProductBtn = document.getElementById('saveNewProduct');
 const cancelProductBtn = document.getElementById('cancelNewProduct');
 const dialog = document.getElementById('productDialog');
 const closeDialogBtn = document.getElementById('closeNewProductDialog');
+const deleteBtn = document.getElementById('deleteProductBtn');
 
 let formData = {
     name: '',
@@ -37,9 +38,8 @@ let formData = {
     image: ''
 }
 
-
 function canSaveProduct() {
-    if (formData.name && formData.category && formData.price && formData.brand && formData.stockCount > 0 && formData.image) {
+    if (productDescription.value && productCategory.value && productPrice.value && productBrand.value && productStockCount.value > 0 && productCardImage.src) {
         saveProductBtn.disabled = false;
         return;
     }
@@ -198,9 +198,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     await populateCategories();
     await populateBrands();
 
-    formData.category = productCategory.value;
-    formData.brand = productBrand.value;
-
     canSaveProduct();
 });
 
@@ -227,4 +224,19 @@ cancelProductBtn.addEventListener('click', function () {
 
 closeDialogBtn.addEventListener('click', function () {
     dialog.close();
+});
+
+deleteBtn.addEventListener('click', async function () {
+    let id = dialog.getAttribute('data-id');
+
+    const response = await fetch(`/product/delete/${id}`, {
+        method: 'POST'
+    });
+
+    if (response.ok) {
+        dialog.close();
+        location.reload();
+    } else {
+        console.error('Failed to delete product:', response.statusText);
+    }
 });

@@ -69,6 +69,7 @@ productCard.forEach(product => {
 });
 
 function openEditProductDialog(result) {
+    productDialog.setAttribute('data-id', result.id);
     productDialog.querySelector("#productDialogHeader>h3").textContent = "Editar Produto";
     productDialog.querySelector("#productForm").action = "/products/update/" + result.id;
 
@@ -79,7 +80,6 @@ function openEditProductDialog(result) {
     productDialog.querySelector("#productStock").value = result.stockCount;
     productDialog.querySelector("#previewCardImage").src = result.image;
 
-    console.log(result.image);
 
     productDialog.showModal();
 }
