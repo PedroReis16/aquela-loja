@@ -26,9 +26,8 @@
             </div>
 
             <div class="product-list">
-                <div class="editable-product" th:each="product : ${products}" th:insert="~{/fragments/cards/edit-product-card::editProductCard(
-                        '${product}'
-                        )}">
+                <div class="editable-product" th:each="product : ${products}" 
+                th:insert="~{/fragments/cards/edit-product-card::editProductCard('${product}')}">
                 </div>
             </div>
         </div>

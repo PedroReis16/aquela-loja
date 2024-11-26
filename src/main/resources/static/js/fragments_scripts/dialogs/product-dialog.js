@@ -37,28 +37,6 @@ let formData = {
     image: ''
 }
 
-function resetForm() {
-    productForm.reset();
-    productCardImage.src = '';
-    productTitle.textContent = 'Nome do produto';
-    productTitleTooltip.textContent = 'Nome do produto';
-    productPreviewPrice.textContent = 'R$ 0,00';
-    productInstallment.textContent = 'ou 10x de R$ 0,00 sem juros';
-    descriptionError.textContent = '';
-    productCategoryError.textContent = '';
-    productPriceError.textContent = '';
-    productBrandError.textContent = '';
-    productImageError.textContent = '';
-    productStockError.textContent = '';
-    formData = {
-        name: '',
-        category: '',
-        price: '',
-        brand: '',
-        stockCount: 0,
-        image: ''
-    }
-}
 
 function canSaveProduct() {
     if (formData.name && formData.category && formData.price && formData.brand && formData.stockCount > 0 && formData.image) {
@@ -244,11 +222,9 @@ saveProductBtn.addEventListener('click', async function () {
 });
 
 cancelProductBtn.addEventListener('click', function () {
-    resetForm();
     dialog.close();
 });
 
 closeDialogBtn.addEventListener('click', function () {
-    resetForm();
     dialog.close();
 });

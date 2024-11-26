@@ -10,17 +10,17 @@
 </head>
 
 <body>
-    <div class="product-card editable-product-card" th:fragment="editProductCard(product)" >
+    <div class="product-card editable-product-card" th:fragment="editProductCard(product)">
 
         <div class="product-card-image">
             <img id="productCardImage" th:src="${product.image}" alt="Preview">
         </div>
-        <div class="product-card-content" >
+        <div class="product-card-content">
             <div class="tooltip-container">
                 <h2 id="productTitlte" class="product-name" th:text="${product.name}">Product Name</h2>
                 <div class="tooltip" id="productTitleTooltip" th:text="${product.name}"></div>
             </div>
-            <p th:text="${product.brand}"></p>
+            <p th:text="${product.brand.displayName}"></p>
             <p th:text="${product.category.displayName}"></p>
             <div class="product-statistics">
                 <p>Disponível: <span th:text="${product.stockCount}"></span></p>
