@@ -35,11 +35,11 @@ public class UserCardController {
     }
 
     @PostMapping("/delete-card/{id}")
-    public String deleteUserCard(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUserCard(@PathVariable Long id) {
 
         service.deleteUserCard(id);
 
-        return "redirect:/usuario/meus-cartoes";
+        return ResponseEntity.ok().build();
     }
 
 }

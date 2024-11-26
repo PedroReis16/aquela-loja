@@ -1,7 +1,7 @@
 //Validação de nome de usuário
 export function validateUsername(username) {
     const words = username.trim().split(/\s+/);
-    return words.length === 2 && words[0].length > 0 && words[1].length > 0;
+    return words.length >= 2 && words[0].length > 0 && words[1].length > 0;
 }
 
 //Validação de CPF

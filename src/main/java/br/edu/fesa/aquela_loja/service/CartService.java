@@ -102,4 +102,10 @@ public class CartService {
 
         saveCartItems(response, cartItems);
     }
+
+    public int getCountCart(HttpServletRequest request) {
+        List<String> items = getCartItems(request);
+
+        return items.size();
+    }
 }
