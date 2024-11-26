@@ -38,7 +38,28 @@ let formData = {
     image: ''
 }
 
+export function openEditableDialog(data) {
+    formData = data;
+
+    productDescription.value = data.name;
+    productCategory.value = data.category;
+    productPrice.value = data.price;
+    productBrand.value = data.brand;
+    // productImage.value = data.image;
+    productStockCount.value = data.stockCount;
+    productCardImage.src = data.image;
+    productTitle.value = data.name;
+    productTitleTooltip.value = data.name;
+    productPreviewPrice.value = data.price;
+    productInstallment.value = data.price;
+
+
+    canSaveProduct();
+    dialog.showModal();
+}
+
 function canSaveProduct() {
+    console.log(formData);
     if (formData.name && formData.category && formData.price && formData.brand && formData.stockCount > 0 && formData.image) {
         saveProductBtn.disabled = false;
         return;
@@ -214,19 +235,42 @@ saveProductBtn.addEventListener('click', async function () {
     });
 
     if (response.ok) {
-        dialog.close();
+        closeDialog();
         location.reload();
     } else {
         console.error('Failed to save product:', response.statusText);
     }
 });
 
-cancelProductBtn.addEventListener('click', function () {
+function closeDialog() {
+    productDescription.value = '';
+    productCategory.value = '';
+    productPrice.value = '';
+    productBrand.value = '';
+    productImage.value = '';
+    productStockCount.value = '';
+    productCardImage.src = '';
+    productTitle.value = '';
+    productTitleTooltip.value = '';
+    productPreviewPrice.value = '';
+    productInstallment.value = '';
+    descriptionError.value = '';
+    productCategoryError.value = '';
+    productPriceError.value = '';
+    productBrandError.value = '';
+    productImageError.value = '';
+    productStockError.value = '';
+    saveProductBtn.disabled = true;
+
     dialog.close();
+}
+
+cancelProductBtn.addEventListener('click', function () {
+    closeDialog();
 });
 
 closeDialogBtn.addEventListener('click', function () {
-    dialog.close();
+    closeDialog();
 });
 
 deleteBtn.addEventListener('click', async function () {
@@ -237,7 +281,7 @@ deleteBtn.addEventListener('click', async function () {
     });
 
     if (response.ok) {
-        dialog.close();
+        closeDialog();
         location.reload();
     } else {
         console.error('Failed to delete product:', response.statusText);

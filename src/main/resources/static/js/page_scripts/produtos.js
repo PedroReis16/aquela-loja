@@ -23,6 +23,17 @@ newProductBtn.addEventListener('click', () => {
 
 window.addEventListener('click', function (event) {
     if (event.target === productDialog) {
+        productDialog.querySelector("#productDialogHeader>h3").textContent = "Novo Produto";
+        productDialog.querySelector("#productForm").action = "/products/new-product";
+
+        productDialog.querySelector("#productDescription").value = "";
+        productDialog.querySelector("#productCategory").value = "";
+        productDialog.querySelector("#productPrice").value = "";
+        productDialog.querySelector("#productBrand").value = "";
+        productDialog.querySelector("#productStock").value = "";
+        productDialog.querySelector("#previewCardImage").src = "";
+        productDialog.querySelector("#saveNewProduct").disabled = false;
+
         productDialog.close();
     }
 });
@@ -43,7 +54,7 @@ productCard.forEach(product => {
         const productObj = editBtn.getAttribute('data-product');
 
         const regex = /(\w+)=([^,]*)/g;
-        
+
         const result = {};
         let match;
 
@@ -62,24 +73,47 @@ productCard.forEach(product => {
 
         result.brand = result.brand.replace(' ', '_').toUpperCase();
         result.image = (productObj.match(/image=(.*)/)[1]).slice(0, -1);
-       
+
 
         openEditProductDialog(result);
     });
 });
 
+import { openEditableDialog } from '../fragments_scripts/dialogs/product-dialog.js';
+
+let data = {
+    name: '',
+    category: '',
+    price: '',
+    brand: '',
+    stockCount: 0,
+    image: ''
+}
+
 function openEditProductDialog(result) {
+
+
     productDialog.setAttribute('data-id', result.id);
     productDialog.querySelector("#productDialogHeader>h3").textContent = "Editar Produto";
     productDialog.querySelector("#productForm").action = "/products/update/" + result.id;
 
-    productDialog.querySelector("#productDescription").value = result.name;
-    productDialog.querySelector("#productCategory").value = result.category;
-    productDialog.querySelector("#productPrice").value = result.price;
-    productDialog.querySelector("#productBrand").value = result.brand;
-    productDialog.querySelector("#productStock").value = result.stockCount;
-    productDialog.querySelector("#previewCardImage").src = result.image;
 
+    // productDialog.querySelector("#productDescription").value = result.name;
+    // productDialog.querySelector("#productCategory").value = result.category;
+    // productDialog.querySelector("#productPrice").value = result.price;
+    // productDialog.querySelector("#productBrand").value = result.brand;
+    // productDialog.querySelector("#productStock").value = result.stockCount;
+    // productDialog.querySelector("#previewCardImage").src = result.image;
+    // productDialog.querySelector("#saveNewProduct").disabled = false;
 
-    productDialog.showModal();
+    data.name = result.name;
+    data.category = result.category;
+    data.price = result.price;
+    data.brand = result.brand;
+    data.stockCount = result.stockCount;
+    data.image = result.image;
+
+    openEditableDialog(data);
+
+    // productDialog.showModal();
 }

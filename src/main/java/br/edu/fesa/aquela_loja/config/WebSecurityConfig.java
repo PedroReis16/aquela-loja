@@ -60,20 +60,21 @@ public class WebSecurityConfig {
                 .requestMatchers("/administrador/**").hasRole(ADMIN.name())
                 .requestMatchers("/usuario/**").hasAnyRole(USER.name(), ADMIN.name())
                 //Autenticação das rotas de administrador
-                .requestMatchers("/admin/**").hasRole(ADMIN.name())
+                .requestMatchers("/estoque/**").hasRole(ADMIN.name())
+                .requestMatchers("/product/**").hasRole(ADMIN.name())
                 //Autenticação das rotas de usuário
                 .requestMatchers("/cart-auth").authenticated()
                 .requestMatchers("/user/registration").permitAll()
                 .requestMatchers("/user/delete").permitAll()
                 .requestMatchers("/user/documents").permitAll()
                 .requestMatchers("/user/emails").permitAll()
-                                .requestMatchers("/user/name").permitAll()
+                .requestMatchers("/user/name").permitAll()
                 .requestMatchers("/user/**").hasAnyRole(USER.name(), ADMIN.name())
                 .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                 .loginPage("/login").permitAll()
-                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler()) 
+                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
                 )
                 .logout(logout -> logout
                 .logoutUrl("/logout")
