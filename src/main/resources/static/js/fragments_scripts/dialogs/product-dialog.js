@@ -16,17 +16,18 @@ const productStockError = document.getElementById('productStockCountError');
 
 // Image preview
 const imagePreview = document.getElementById('imagePreview');
-const productCardImage = document.getElementById('productCardImage');
+const productCardImage = document.getElementById('previewCardImage');
 const productTitle = document.getElementById('productTitle');
 const productTitleTooltip = document.getElementById('productTitleTooltip');
 const productPreviewPrice = document.getElementById('productPreviewPrice');
 const productInstallment = document.getElementById('productInstallment');
 
-// const Butão salvar
+// const botão salvar
 const saveProductBtn = document.getElementById('saveNewProduct');
 const cancelProductBtn = document.getElementById('cancelNewProduct');
 const dialog = document.getElementById('productDialog');
 const closeDialogBtn = document.getElementById('closeNewProductDialog');
+const deleteBtn = document.getElementById('deleteProductBtn');
 
 let formData = {
     name: '',
@@ -35,29 +36,6 @@ let formData = {
     brand: '',
     stockCount: 0,
     image: ''
-}
-
-function resetForm() {
-    productForm.reset();
-    productCardImage.src = '';
-    productTitle.textContent = 'Nome do produto';
-    productTitleTooltip.textContent = 'Nome do produto';
-    productPreviewPrice.textContent = 'R$ 0,00';
-    productInstallment.textContent = 'ou 10x de R$ 0,00 sem juros';
-    descriptionError.textContent = '';
-    productCategoryError.textContent = '';
-    productPriceError.textContent = '';
-    productBrandError.textContent = '';
-    productImageError.textContent = '';
-    productStockError.textContent = '';
-    formData = {
-        name: '',
-        category: '',
-        price: '',
-        brand: '',
-        stockCount: 0,
-        image: ''
-    }
 }
 
 function canSaveProduct() {
@@ -244,11 +222,24 @@ saveProductBtn.addEventListener('click', async function () {
 });
 
 cancelProductBtn.addEventListener('click', function () {
-    resetForm();
     dialog.close();
 });
 
 closeDialogBtn.addEventListener('click', function () {
-    resetForm();
     dialog.close();
+});
+
+deleteBtn.addEventListener('click', async function () {
+    let id = dialog.getAttribute('data-id');
+
+    const response = await fetch(`/product/delete/${id}`, {
+        method: 'POST'
+    });
+
+    if (response.ok) {
+        dialog.close();
+        location.reload();
+    } else {
+        console.error('Failed to delete product:', response.statusText);
+    }
 });

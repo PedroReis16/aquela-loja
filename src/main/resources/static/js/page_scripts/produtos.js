@@ -41,9 +41,9 @@ productCard.forEach(product => {
         e.preventDefault();
 
         const productObj = editBtn.getAttribute('data-product');
-        
-        const regex = /(\w+)=([^,]*)/g;
 
+        const regex = /(\w+)=([^,]*)/g;
+        
         const result = {};
         let match;
 
@@ -59,20 +59,27 @@ productCard.forEach(product => {
 
             result[key] = value;
         }
+
+        result.brand = result.brand.replace(' ', '_').toUpperCase();
+        result.image = (productObj.match(/image=(.*)/)[1]).slice(0, -1);
+       
+
         openEditProductDialog(result);
     });
 });
 
 function openEditProductDialog(result) {
+    productDialog.setAttribute('data-id', result.id);
     productDialog.querySelector("#productDialogHeader>h3").textContent = "Editar Produto";
     productDialog.querySelector("#productForm").action = "/products/update/" + result.id;
 
-    productDialog.querySelector("#productDescription").value = result.description;
+    productDialog.querySelector("#productDescription").value = result.name;
     productDialog.querySelector("#productCategory").value = result.category;
     productDialog.querySelector("#productPrice").value = result.price;
     productDialog.querySelector("#productBrand").value = result.brand;
     productDialog.querySelector("#productStock").value = result.stockCount;
-    productDialog.querySelector("#productCardImage").value = result.image;
+    productDialog.querySelector("#previewCardImage").src = result.image;
+
 
     productDialog.showModal();
 }

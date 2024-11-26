@@ -82,7 +82,7 @@
                 <div class="product-card product-dialog-card">
 
                     <div class="product-card-image">
-                        <img id="productCardImage" src="/api/placeholder/400/320" alt="Preview">
+                        <img id="previewCardImage" src="/api/placeholder/400/320" alt="Preview">
                     </div>
                     <div class="product-card-content">
                         <!-- <div class="product-card-title" id="productTitle">Nome do Produto</div> -->
@@ -100,7 +100,11 @@
 
             <div class="new-product-dialog-actions">
                 <button type="button" class="cancel-btn new-product-cancel" id="cancelNewProduct">Cancelar</button>
-                <button type="submit" class="confirm-button" id="saveNewProduct">Salvar</button>
+
+                <div class="confirm-action">
+                    <button type="button" class="cancel-btn" id="deleteProductBtn">Excluir</button>
+                    <button type="submit" class="confirm-button" id="saveNewProduct">Salvar</button>
+                </div>
             </div>
         </dialog>
 
