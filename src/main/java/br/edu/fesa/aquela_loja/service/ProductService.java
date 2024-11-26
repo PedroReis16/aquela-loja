@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.edu.fesa.aquela_loja.models.dto.product.ProductDto;
 import br.edu.fesa.aquela_loja.models.dto.cart.CartItemDto;
 import br.edu.fesa.aquela_loja.models.dto.product.NewProductDto;
+import br.edu.fesa.aquela_loja.models.dto.product.ProductDto;
 import br.edu.fesa.aquela_loja.models.entity.ProductModel;
 import br.edu.fesa.aquela_loja.models.enums.CategoryEnum;
 import br.edu.fesa.aquela_loja.models.enums.DepartamentEnum;
@@ -145,8 +145,10 @@ public class ProductService {
         return normalizedStr1.equalsIgnoreCase(normalizedStr2);
     }
 
-    public List<ProductModel> findProductsByNameLike(String searched) {
-        return productRepository.findByNameContainingIgnoreCase(searched);
+    public List<ProductDto> findProductsByNameLike(String searched) {
+       List<ProductModel> models= productRepository.findByNameContainingIgnoreCase(searched);
+
+         return convertModelListToDto(models);
     }
 
     public List<ProductDto> getAllItems() {

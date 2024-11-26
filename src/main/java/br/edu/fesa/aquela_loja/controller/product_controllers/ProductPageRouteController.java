@@ -38,7 +38,7 @@ public class ProductPageRouteController {
 
     @GetMapping("/search")
     public String getSearchedProducts(@RequestParam String searched, ModelMap model) {
-        List<ProductModel> products = productService.findProductsByNameLike(searched);
+        List<ProductDto> products = productService.findProductsByNameLike(searched);
 
         model.addAttribute("products", products);
 
