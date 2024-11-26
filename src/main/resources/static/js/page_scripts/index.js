@@ -145,10 +145,15 @@ function addToCart(productId) {
         url: '/add-Cart/' + productId,
         type: 'POST',
         success: function (response) {
-            Swal.fire(
-                'Adicionado!',
-                'success'
-            ).then(() => {
+            Swal.fire({
+              title: 'Produto Adicionado!',
+              text: 'Veja no carrinho.',
+              icon: 'success',
+              timer: 2000,
+              showConfirmButton: false,
+              toast: true,
+              position: 'top-end',
+            }).then(() => {
                 location.reload();
             });
         },

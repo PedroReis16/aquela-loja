@@ -1,14 +1,21 @@
 
-   .product-card {
-   width: 100%;
-   max-width: 800px;
-   margin: 20px auto;
-   background: #ffffff;
-   border-radius: 10px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   overflow: hidden;
-   padding: 20px;
- }
+   .order-card {
+      width: 90%; /* Alterado de 100% */
+      max-width: 1200px; /* Alterado de 800px */
+      margin: 20px auto;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 20px;
+   }
+
+.user-orders-view-content {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 20px; /* Espaço entre os cards */
+}
 
  .product-info {
    padding: 20px;
@@ -94,42 +101,40 @@
    background-color: #27ae60;
  }
 
-    .status-filter-form {
+.status-filter-form {
+  width: 100%; /* Ocupa toda a largura do container */
   display: flex;
+  flex-wrap: wrap; /* Torna o layout flexível */
   align-items: center;
-  gap: 10px;
+  gap: 15px; /* Espaço entre os elementos */
   margin-bottom: 20px;
   background-color: #f9f9f9;
-  padding: 10px 15px;
+  padding: 15px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between; /* Espaça bem os itens */
 }
 
-/* Label do filtro */
 .status-filter-label {
+  flex: 1; /* Permite que o label ocupe mais espaço */
   font-size: 1rem;
   font-weight: bold;
   color: #333;
   font-family: var(--secondary-font);
 }
 
-/* Estilo do select */
 .status-filter-select {
+  flex: 2; /* Faz o select ocupar um bom espaço */
   padding: 8px 12px;
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  outline: none;
   background-color: #fff;
   transition: border-color 0.3s ease;
 }
 
-.status-filter-select:focus {
-  border-color: #2ecc71;
-}
-
-/* Botão de submissão */
 .status-filter-button {
+  flex: 1; /* Ajusta o botão proporcionalmente */
   padding: 8px 15px;
   font-size: 1rem;
   background-color: #2ecc71;
@@ -143,3 +148,4 @@
 .status-filter-button:hover {
   background-color: #27ae60;
 }
+
