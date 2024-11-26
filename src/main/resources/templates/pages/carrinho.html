@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="pt-BR" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout</title>
 
-  <link rel="stylesheet" sec:href="@{/styles/reset.css}">
-  <link rel="stylesheet" sec:href="@{/styles/style.css}">
+  <link th:href="@{/styles/reset.css}" rel="stylesheet" />
+  <link th:href="@{/styles/style.css}" rel="stylesheet" />
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: var(--default-font) !important;
     }
 
     body {
@@ -42,7 +42,7 @@
     }
 
     .step.active {
-      background-color: #4CAF50;
+      background-color: var(--primary-color);
       color: white;
     }
 
@@ -79,13 +79,13 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      background-color: #4CAF50;
+      background-color: var(--primary-color);
       color: white;
       font-size: 16px;
     }
 
     .btn:hover {
-      background-color: #45a049;
+      background-color: #10a0a1;
     }
 
     .payment-methods {
@@ -103,7 +103,7 @@
     }
 
     .payment-method.selected {
-      border-color: #4CAF50;
+      border-color: var(--primary-color);
       background-color: #f0f9f0;
     }
 
@@ -120,13 +120,34 @@
     }
 
     .address-card.selected {
-      border-color: #4CAF50;
+      border-color: var(--primary-color);
       background-color: #f0f9f0;
     }
 
-    .order-summary {
-      margin-top: 20px;
-    }
+    .step-content > h2 {
+    text-align: center !important;
+    font-weight: bold !important;
+    font-size: 28px !important; /* Aumentando tamanho */
+    margin-bottom: 20px !important;
+    color: #333 !important;
+  }
+
+  /* Destaque para o total da compra no resumo do pedido */
+  .order-summary > h3 {
+    text-align: center !important; /* Centraliza o texto */
+    font-size: 24px !important; /* Tamanho maior */
+    font-weight: bold !important;
+    color: var(--primary-color) !important; /* Usa cor da variável */
+    margin-top: 10px !important;
+  }
+
+  #order-total {
+    text-align: center !important; /* Centraliza o total */
+    font-size: 26px !important; /* Tamanho grande */
+    font-weight: bold !important;
+    color: #10a0a1 !important; /* Cor personalizada para o total */
+    margin-top: 15px !important;
+  }
 
     .navigation-buttons {
       display: flex;
@@ -138,9 +159,13 @@
       display: none;
     }
   </style>
+
 </head>
 
 <body>
+
+  <header th:replace="~{fragments/header :: header}"></header>
+
   <div class="container">
     <div class="steps">
       <div class="step active" id="step1">1. Carrinho</div>
