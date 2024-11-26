@@ -52,22 +52,6 @@ public class ProductController {
         productService.update(pId,updatedProduct);
 
         return ResponseEntity.ok().build();
-        // try {
-        //     if (productService.exists(product.getName().trim()) && !productService.findById(String.valueOf(product.getId())).getName().equals(product.getName())) {
-        //         productService.fillImage(product);
-        //         model.addAttribute("product", product);
-        //         model.addAttribute("nameError", true);
-
-        //         return "pages/product-edit";
-        //     }
-
-        //     productService.update(product, file);
-        // } catch (IOException e) {
-        //     redirectAttributes.addFlashAttribute("message", "Falha ao atualizar produto");
-        // }
-        // redirectAttributes.addAttribute("showUptNotification", true);
-
-        // return "redirect:/product/list-all";
     }
 
     @PostMapping("/delete/{id}")
