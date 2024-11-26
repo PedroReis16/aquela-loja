@@ -39,3 +39,21 @@ fetch('/user/name', { method: 'GET' })
   .catch(error => {
     console.log('Erro ao buscar dados do usuário:', error);
   });
+
+
+ fetch('/header/cart-count', { method: 'GET' })
+   .then(response => {
+     if (!response.ok) {
+       throw new Error('Erro na resposta da API');
+     }
+     console.log(response);
+     return response.text();
+   })
+   .then(data => {
+     console.log(data);
+     const cartCount = document.querySelectorAll('.count');
+
+     cartCount.forEach(element => {
+            element.textContent = data;
+          });
+   });

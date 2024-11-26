@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -8,11 +8,18 @@
 </head>
 
 <body>
-    <div class="cart-container" th:fragment="shoppingCart">
+    <div class="cart-container" th:fragment="shoppingCart" sec:authorize="!isAuthenticated()">
         <div class="item-count">
-            <p id="count">1</p>
+            <p class="count"></p>
         </div>
         <a href="/carrinho" class="cart-icon"></a>
+    </div>
+
+    <div class="cart-container" th:fragment="shoppingCart" sec:authorize="isAuthenticated()">
+        <div class="item-count">
+            <p class="count"></p>
+        </div>
+        <a href="/carrinho-auth" class="cart-icon"></a>
     </div>
 </body>
 

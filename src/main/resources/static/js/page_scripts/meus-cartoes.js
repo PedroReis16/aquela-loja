@@ -48,17 +48,15 @@ function openEditCardDialog(result) {
         fetch(`/user/delete-card/${result.id}`, {
             method: 'POST'
         }).then(response => {
-            if (response.ok) {
-                card.remove();
-                closeDialog();
-            }
+            window.location.reload();
         });
 
     });
 
     const saveCardBtn = editCardDialog.querySelector('#saveCardBtn');
 
-    saveCardBtn.addEventListener('click', async () => {
+    saveCardBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
         const formData = new FormData(editCardForm);
 
         const data = {
@@ -73,11 +71,7 @@ function openEditCardDialog(result) {
             },
             body: JSON.stringify(data)
         }).then(response => {
-            if (response.ok) {
-                // card.querySelector('.card-holder').textContent = data.holderName;
-                // card.querySelector('.card-expiration').textContent = data.expirationDate;
-                // closeDialog();
-            }
+            window.location.reload();
         });
     });
 

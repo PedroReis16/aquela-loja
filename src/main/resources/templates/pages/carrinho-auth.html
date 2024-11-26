@@ -8,6 +8,8 @@
 
   <link rel="stylesheet" sec:href="@{/styles/reset.css}">
   <link rel="stylesheet" sec:href="@{/styles/style.css}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     * {
       margin: 0;
@@ -146,7 +148,6 @@
       <div class="step active" id="step1">1. Carrinho</div>
       <div class="step" id="step2">2. Pagamento</div>
       <div class="step" id="step3">3. Confirmação</div>
-      <div class="step" id="step4">4. Finalização</div>
     </div>
 
     <!-- Etapa 1: Carrinho -->
@@ -216,14 +217,6 @@
       </div>
     </div>
 
-    <!-- Etapa 4: Finalização -->
-    <div class="step-content hidden" id="success-step">
-      <h2>Pedido Finalizado com Sucesso!</h2>
-      <p>Obrigado pela sua compra!</p>
-      <div class="navigation-buttons">
-        <button class="btn" onclick="goToHome()">Voltar para Home</button>
-      </div>
-    </div>
   </div>
 
   <script>
@@ -231,7 +224,7 @@
     let cartAdds = [];
     let cartPayCards = [];
     let currentStep = 1;
-    const totalSteps = 4;
+    const totalSteps = 3;
 
     let selectedPayment = null;
     let selectedAddress = null;
@@ -446,8 +439,7 @@
       const steps = {
         1: 'cart-step',
         2: 'payment-step',
-        3: 'confirmation-step',
-        4: 'success-step'
+        3: 'confirmation-step'
       };
       return steps[step];
     }
@@ -546,20 +538,43 @@
       };
 
       // Envia os dados via API (supondo que a API esteja esperando um POST)
-      fetch('/orders/new', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),  // Envia os dados como JSON
-      })
-        .then(data => {
-          nextStep();
+        fetch('/orders/new', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data), // Envia os dados como JSON
         })
-        .catch(error => {
-          console.error("Erro ao enviar dados:", error);
-          alert("Ocorreu um erro ao enviar os dados.");
-        });
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw new Error(errorMessage);
+                    });
+                }
+
+                return response.text();
+            })
+            .then(message => {
+                Swal.fire({
+                    title: 'Pedido Criado!',
+                    text: 'Seu pedido foi criado com sucesso!',
+                    icon: 'success',
+                    confirmButtonText: 'Ir para a página inicial',
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/';
+                    }
+                });
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Erro ao criar o pedido',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Tentar novamente',
+                });
+            });
+
     }
   </script>
 </body>

@@ -34,10 +34,9 @@
   height: 16px;
   border-radius: 16px;
   align-content: center;
-  display: none;
 }
 
-#count {
+.count {
   text-align: center;
   font-size: 10px;
 }

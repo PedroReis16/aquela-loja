@@ -184,7 +184,7 @@ public class ProductService {
         return result;
     }
 
-    public void deleteByName(String pName) {
-        productRepository.deleteByName(pName);
+    public ProductModel findByName(String name) {
+       return productRepository.findByName(name);
     }
 }
